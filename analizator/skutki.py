@@ -164,8 +164,11 @@ ROLE_INDICES: dict[str, tuple[list[str], list[str]]] = {
 SAFE_HAVENS = ["złoto (XAU/USD)", "indeks zmienności VIX", "obligacje USA i Niemiec (rentowność w dół)", "frank szwajcarski (CHF)"]
 
 
-def indices(country: str, level: str = "podwyższony") -> dict:
-    """Konkretne indeksy, które przy eskalacji w danym kraju typowo rosną (up) i spadają (down)."""
+def indices(country: str, level: str = "podwyższony", verified: bool = True) -> dict:
+    """Konkretne indeksy, które przy eskalacji w danym kraju typowo rosną (up) i spadają (down).
+
+    verified=True: kierunki sprawdzone na notowaniach po dawnych alarmach (analizator/rynki.json) dostają liczbę
+    trafień, a te, które się nie sprawdzały, są pomijane."""
     up, down = [], []
     for r in COUNTRY_ROLES.get(country, []):
         u, d = ROLE_INDICES.get(r, ([], []))
@@ -177,7 +180,11 @@ def indices(country: str, level: str = "podwyższony") -> dict:
         up += SAFE_HAVENS[:2] if level != "wysoki" else SAFE_HAVENS
     if level == "wysoki":
         down += ["MSCI Emerging Markets (przy szerszej eskalacji)"]
-    return {"up": _uniq(up), "down": _uniq(down)}
+    up, down = _uniq(up), _uniq(down)
+    if verified:
+        from .rynki import annotate
+        up, down = annotate(up, "up"), annotate(down, "down")
+    return {"up": up, "down": down}
 
 
 def _uniq(xs: list[str]) -> list[str]:
@@ -225,7 +232,9 @@ def fronts(results, min_index: float = 25.0) -> list[dict]:
         if len(act) < 2:
             continue
         act.sort(key=lambda r: -r.index)
+        from .rynki import annotate
         up, down = FRONT_INDICES.get(key, ([], []))
+        up, down = annotate(up, "up"), annotate(down, "down")
         out.append({"klucz": key, "nazwa": label, "kraje": [(r.country, round(r.index)) for r in act],
                     "max": max(r.index for r in act), "suma": round(sum(r.index for r in act)),
                     "kategorie": sorted({c for r in act for c in r.categories}),

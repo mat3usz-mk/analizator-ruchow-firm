@@ -135,6 +135,13 @@ def _quality_badge(x: dict) -> str:
 
 
 def _unconfirmed_html(r) -> str:
+    note = getattr(r, "model_note", "")
+    if note == "model nie potwierdza":
+        return ('<p class="muted" style="margin:8px 0 0"><b>Model nie potwierdza.</b> Ręczny indeks przekroczył próg, ale model uczony '
+                'na historii daje zbyt niską szansę wydarzenia, więc to nie jest alarm (w teście takie przypadki były zwykle fałszywe).</p>')
+    if note == "podniesione przez model":
+        return ('<p style="margin:8px 0 0"><b>Alarm z modelu.</b> Ręczny indeks jest niski, ale model uczony na historii daje '
+                'wyjątkowo wysoką szansę wydarzenia.</p>')
     if not r.unconfirmed:
         return ""
     return ('<p class="muted" style="margin:8px 0 0"><b>Niepotwierdzone.</b> Indeks obcięty poniżej progu alarmu, bo ruch widać '

@@ -290,8 +290,6 @@ class TestRzetelnosc(unittest.TestCase):
         on = {r.country: r for r in assess(extract_signals(arts), today=today)}
         self.assertFalse(on["MD"].unconfirmed, "rzeczowa ewakuacja z rzetelnego źródła wystarcza")
 
-if __name__ == "__main__":
-    unittest.main()
 
 
 class TestV04Filters(unittest.TestCase):
@@ -317,3 +315,29 @@ class TestV04Filters(unittest.TestCase):
         self.assertNotIn("a", urls)
         self.assertIn("b", urls)
         self.assertNotIn("c", urls)
+
+
+class TestLaczenieIRynki(unittest.TestCase):
+    def test_gate(self):
+        from analizator.ucz import NEVER, gate
+        rule = {"potwierdzenie": 0.05, "samodzielnie": 0.3}
+        self.assertTrue(gate(45, 0.06, rule))
+        self.assertFalse(gate(45, 0.02, rule))
+        self.assertTrue(gate(10, 0.35, rule))
+        self.assertFalse(gate(10, 0.35, {"potwierdzenie": 0.0, "samodzielnie": NEVER}))
+        self.assertTrue(gate(45, None, rule))
+
+    def test_annotate(self):
+        from analizator import rynki
+        old = rynki._RES
+        try:
+            rynki._RES = {"złoto|up": {"n": 10, "trafne": 7, "symbol": "GC=F"}, "dax|down": {"n": 10, "trafne": 3, "symbol": "^GDAXI"}}
+            up = rynki.annotate(["złoto (XAU/USD)"], "up")
+            self.assertIn("7 z 10", up[0])
+            self.assertEqual(rynki.annotate(["DAX"], "down"), [])
+            self.assertIn("niesprawdzone", rynki.annotate(["TEDPIX (Teheran)"], "down")[0])
+        finally:
+            rynki._RES = old
+
+if __name__ == "__main__":
+    unittest.main()

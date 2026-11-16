@@ -83,18 +83,22 @@ jobs:
         run: |
           # pliki GKG mają tytuły stron dopiero od 2019 r., więc uczenie realnie obejmuje 2019-2024
           python -m analizator.ucz --db historia_gkg.db --train-events wydarzenia_2015_2024.csv --test-events wydarzenia.csv \
-            --train-from 2019-03-01 --train-to 2024-12-31 --test-from 2025-03-01 --out-report raporty/model-wyniki.md
+            --train-from 2019-03-01 --train-to 2024-12-31 --test-from 2025-03-01 --out-report raporty/model-wyniki.md --out-episodes raporty/epizody.json
+      - name: Indeksy giełdowe po dawnych alarmach
+        continue-on-error: true
+        run: python -m analizator.rynki --epizody raporty/epizody.json --out analizator/rynki.json --raport raporty/rynki-wyniki.md
       - name: Zapisz model w repozytorium
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # zapis na najnowszym main (w międzyczasie mogły wejść inne zmiany), bez konfliktów
-          mkdir -p /tmp/wynik && cp analizator/model.json raporty/model-wyniki.md /tmp/wynik/
+          mkdir -p /tmp/wynik && cp analizator/model.json raporty/model-wyniki.md raporty/epizody.json /tmp/wynik/ && cp analizator/rynki.json raporty/rynki-wyniki.md /tmp/wynik/ || true
           for i in 1 2 3; do
             git fetch -q origin main && git checkout -q -B main origin/main
-            cp /tmp/wynik/model.json analizator/model.json && mkdir -p raporty && cp /tmp/wynik/model-wyniki.md raporty/
-            git add analizator/model.json raporty/model-wyniki.md
-            git commit -q -m "Model uczony na historii (test 2025-2026)" || exit 0
+            cp /tmp/wynik/model.json analizator/model.json && mkdir -p raporty && cp /tmp/wynik/model-wyniki.md /tmp/wynik/epizody.json raporty/
+            [ -f /tmp/wynik/rynki.json ] && cp /tmp/wynik/rynki.json analizator/ && cp /tmp/wynik/rynki-wyniki.md raporty/
+            git add analizator/model.json raporty/model-wyniki.md raporty/epizody.json; git add analizator/rynki.json raporty/rynki-wyniki.md 2>/dev/null || true
+            git commit -q -m "Model uczony na historii, reguła łączona i sprawdzenie indeksów giełdowych" || exit 0
             git push -q origin main && break
             sleep 5
           done

@@ -171,8 +171,8 @@ def compare(rows: list[dict], model: dict, events: list[dict], hand_thr: float, 
     fresh = [i for i, r in enumerate(rows) if not r["po_wydarzeniu"]]
     hand_idx = {(r["kraj"], r["t"]): r["indeks"] for r in rows}
     model_idx = {(r["kraj"], r["t"]): 100 * pi for r, pi in zip(rows, p)}
-    ev_h = evaluate(hand_idx, events, threshold=hand_thr, horizon=horizon)
-    ev_m = evaluate(model_idx, events, threshold=100 * model_thr, horizon=horizon)
+    ev_h = _counts(evaluate(hand_idx, events, threshold=hand_thr, horizon=horizon))
+    ev_m = _counts(evaluate(model_idx, events, threshold=100 * model_thr, horizon=horizon))
     base = sum(y) / max(len(y), 1)
     brier = lambda q: sum((a - b) ** 2 for a, b in zip(q, y)) / max(len(y), 1)
     return {
@@ -182,9 +182,17 @@ def compare(rows: list[dict], model: dict, events: list[dict], hand_thr: float, 
         "auc_model_zaskoczenie": auc([p[i] for i in fresh], [y[i] for i in fresh]),
         "brier_model": brier(p), "brier_staly": brier([base] * len(y)),
         "kalibracja": calibration(p, y),
-        "reczny": {k: ev_h[k] for k in ("hit_rate", "hit_rate_fresh", "n_fresh", "n_events", "precision", "median_lead")},
-        "model": {k: ev_m[k] for k in ("hit_rate", "hit_rate_fresh", "n_fresh", "n_events", "precision", "median_lead")},
+        "reczny": {k: ev_h[k] for k in KEYS}, "model": {k: ev_m[k] for k in KEYS},
     }
+
+
+KEYS = ("hit_rate", "hit_rate_fresh", "n_fresh", "n_events", "precision", "median_lead", "prawdziwe", "falszywe")
+
+
+def _counts(ev: dict) -> dict:
+    ev["prawdziwe"] = sum(e["wynik"] == "prawdziwy alarm" for e in ev["episodes"])
+    ev["falszywe"] = sum(e["wynik"] == "fałszywy alarm" for e in ev["episodes"])
+    return ev
 
 
 def _matching_threshold(rows: list[dict], model: dict, hand_thr: float) -> float:
@@ -192,6 +200,67 @@ def _matching_threshold(rows: list[dict], model: dict, hand_thr: float) -> float
     n_alarm = sum(r["indeks"] >= hand_thr for r in rows)
     p = sorted((predict(model, r["x"]) for r in rows), reverse=True)
     return p[min(max(n_alarm - 1, 0), len(p) - 1)] if p else 0.5
+
+
+# --- Połączenie modelu z ręcznym indeksem ------------------------------------------
+# Ręczny indeks lepiej łapie nagłe zwroty, model daje mniej fałszywych alarmów. Reguła łączona:
+#   alarm, gdy ręczny indeks >= progu I model daje co najmniej `potwierdzenie`,
+#   albo gdy sam model daje co najmniej `samodzielnie` (wyjątkowo wysoka szansa).
+# Progi dobierane są WYŁĄCZNIE na latach uczenia; lata testowe tylko sprawdzają wynik.
+NEVER = 2.0
+
+
+def gate(index: float, p: float | None, rule: dict, thr: float = 40.0) -> bool:
+    if p is None:
+        return index >= thr
+    return (index >= thr and p >= rule["potwierdzenie"]) or p >= rule["samodzielnie"]
+
+
+def _gate_eval(rows, p, rule, events, thr, horizon):
+    from .backtest import evaluate
+    idx = {(r["kraj"], r["t"]): 100.0 if gate(r["indeks"], pi, rule, thr) else 0.0 for r, pi in zip(rows, p)}
+    ev = evaluate(idx, events, threshold=50.0, horizon=horizon)
+    ev["alarmy"] = sum(v > 0 for v in idx.values()) / max(len(idx), 1)
+    return ev
+
+
+def fit_gate(rows: list[dict], model: dict, events: list[dict], thr: float, horizon: int) -> dict:
+    """Szuka progów reguły łączonej na danych uczących: najwyższa precyzja × trafienia, bez dużej straty trafień."""
+    p = [predict(model, r["x"]) for r in rows]
+    hot = sorted(pi for r, pi in zip(rows, p) if r["indeks"] >= thr)
+    allp = sorted(p, reverse=True)
+    q1s = sorted({0.0} | {hot[int(len(hot) * q)] for q in (.1, .2, .3, .4, .5, .6, .7) if hot})
+    q2s = [NEVER] + [allp[max(int(len(allp) * q) - 1, 0)] for q in (.002, .005, .01, .02, .04)]
+    base = _gate_eval(rows, p, {"potwierdzenie": 0.0, "samodzielnie": NEVER}, events, thr, horizon)
+    best, best_score = {"potwierdzenie": 0.0, "samodzielnie": NEVER}, -1.0
+    for q1 in q1s:
+        for q2 in q2s:
+            rule = {"potwierdzenie": q1, "samodzielnie": q2}
+            ev = _gate_eval(rows, p, rule, events, thr, horizon)
+            if ev["hit_rate"] is None or ev["precision"] is None:
+                continue
+            if base["hit_rate"] and ev["hit_rate"] < 0.8 * base["hit_rate"]:
+                continue
+            score = ev["precision"] * ev["hit_rate"]
+            if score > best_score + 1e-9:
+                best, best_score = rule, score
+    return {k: round(v, 4) for k, v in best.items()}
+
+
+def episodes(rows: list[dict], flags: list[bool], gap_weeks: int = 4) -> list[dict]:
+    """Początki epizodów alarmowych (kraj, tydzień), np. do sprawdzenia, jak potem zachowały się indeksy giełdowe."""
+    by = defaultdict(list)
+    for r, f in zip(rows, flags):
+        if f:
+            by[r["kraj"]].append(r["t"])
+    out = []
+    for c, ts in by.items():
+        last = None
+        for t in sorted(ts):
+            if last is None or (t - last).days > 7 * gap_weeks:
+                out.append({"kraj": c, "data": t.isoformat()})
+            last = t
+    return sorted(out, key=lambda e: e["data"])
 
 
 def _fmt(x, pct=True):
@@ -219,6 +288,19 @@ def write_report(path: str, model: dict, tr: dict, te: dict, args) -> None:
                    ("precision", "trafne alarmy (precyzja)"), ("median_lead", "mediana wyprzedzenia (dni)")):
         a, b = te["reczny"][k], te["model"][k]
         L.append(f"| {lab} | {a if k == 'median_lead' else _fmt(a)} | {b if k == 'median_lead' else _fmt(b)} |")
+    if te.get("laczenie"):
+        g, rule = te["laczenie"], model["laczenie"]
+        L += ["", "## Alarm z połączenia modelu i ręcznego indeksu (test)", "",
+              f"Reguła (progi dobrane tylko na latach uczenia): alarm, gdy ręczny indeks ≥ {args.threshold:.0f} i model daje co najmniej "
+              f"{rule['potwierdzenie']:.1%}" + ("" if rule["samodzielnie"] >= NEVER else f", albo gdy sam model daje co najmniej {rule['samodzielnie']:.1%}") + ".", "",
+              "| | ręczny | model | połączony |", "|---|---|---|---|"]
+        for k, lab in (("hit_rate", "trafione wydarzenia"), ("hit_rate_fresh", "trafione z zaskoczenia"),
+                       ("precision", "trafne alarmy (precyzja)"), ("median_lead", "mediana wyprzedzenia (dni)"),
+                       ("prawdziwe", "prawdziwe alarmy"), ("falszywe", "fałszywe alarmy")):
+            vals = [te["reczny"].get(k), te["model"].get(k), g.get(k)]
+            L.append(f"| {lab} | " + " | ".join(("brak" if v is None else str(v)) if k in ("median_lead", "prawdziwe", "falszywe") else _fmt(v) for v in vals) + " |")
+        L += ["", "W raporcie na żywo " + ("**używana jest reguła połączona**." if rule.get("aktywne") else
+                                         "reguła połączona **nie jest używana** (na teście nie była lepsza od ręcznego indeksu).")]
     L += ["", "## Kalibracja na teście (czy „20%” znaczy 20%)", "", "| szansa wg modelu | tygodni | średnio przewidziane | naprawdę z wydarzeniem |", "|---|---|---|---|"]
     L += [f"| {b} | {n} | {pp:.1%} | {yy:.1%} |" for b, n, pp, yy in te["kalibracja"]]
     L += ["", "## Czego model się nauczył (wagi po standaryzacji, największe pierwsze)", "",
@@ -247,6 +329,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out-model", default=MODEL_PATH)
     ap.add_argument("--out-report", default="raporty/model-wyniki.md")
     ap.add_argument("--watchlist", default="watchlist.txt")
+    ap.add_argument("--out-episodes", default="", help="plik JSON z początkami epizodów alarmowych (do sprawdzenia rynków)")
     args = ap.parse_args(argv)
     wl = [l.strip() for l in open(args.watchlist, encoding="utf-8") if l.strip() and not l.startswith("#")] if os.path.exists(args.watchlist) else None
     t0 = time.time()
@@ -267,6 +350,22 @@ def main(argv: list[str] | None = None) -> int:
                   "utworzono": date.today().isoformat()})
     r_tr = compare(tr, model, ev_tr, args.threshold, model["prog"], args.horizon)
     r_te = compare(te, model, ev_te, args.threshold, model["prog"], args.horizon)
+    rule = fit_gate(tr, model, ev_tr, args.threshold, args.horizon)
+    p_te = [predict(model, r["x"]) for r in te]
+    g_te = _counts(_gate_eval(te, p_te, rule, ev_te, args.threshold, args.horizon))
+    r_te["laczenie"] = {k: g_te[k] for k in KEYS}
+    h = r_te["reczny"]
+    # Na żywo tylko wtedy, gdy na teście reguła ma wyższą precyzję i nie gubi więcej niż jednego na dziesięć trafień
+    rule["aktywne"] = bool(g_te["precision"] and h["precision"] is not None and g_te["precision"] > h["precision"]
+                           and (g_te["hit_rate"] or 0) >= (h["hit_rate"] or 0) - 0.1)
+    model["laczenie"] = rule
+    model["laczenie_test"] = r_te["laczenie"]
+    if args.out_episodes:
+        p_tr = [predict(model, r["x"]) for r in tr]
+        allr, allp = tr + te, p_tr + p_te
+        flags = [gate(r["indeks"], pi, rule, args.threshold) if rule["aktywne"] else r["indeks"] >= args.threshold for r, pi in zip(allr, allp)]
+        with open(args.out_episodes, "w", encoding="utf-8") as f:
+            json.dump({"regula": "laczona" if rule["aktywne"] else "reczna", "epizody": episodes(allr, flags)}, f, ensure_ascii=False, indent=0)
     model["wyniki_test"] = {k: r_te[k] for k in ("auc_reczny", "auc_model", "auc_model_zaskoczenie", "brier_model", "brier_staly")}
     model["kalibracja_test"] = r_te["kalibracja"]
     os.makedirs(os.path.dirname(os.path.abspath(args.out_report)), exist_ok=True)

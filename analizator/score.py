@@ -52,6 +52,7 @@ class CountryAssessment:
     parts: dict = field(default_factory=dict)  # składowe indeksu (do wyjaśnień i diagnostyki)
     unconfirmed: bool = False      # indeks obcięty poniżej alarmu: brak potwierdzenia w rzetelnych źródłach
     confirmations: int = 0         # liczba niezależnych rzetelnych źródeł + sygnałów pierwotnych
+    model_note: str = ""           # zmiana alarmu przez regułę łączoną (model + ręczny indeks)
     prob: float | None = None      # szansa wydarzenia w horyzoncie wg modelu uczonego na historii (analizator/model.json)
 
 
@@ -394,11 +395,20 @@ def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2
     for r in own.values():
         r.level = "wysoki" if r.index >= 70 else "podwyższony" if r.index >= 40 else "niski"
     if use_model:
-        from .ucz import features, load_model, predict
+        from .ucz import features, gate, load_model, predict
         m = load_model()
         if m:
+            rule = m.get("laczenie") if (m.get("laczenie") or {}).get("aktywne") else None
             for r in own.values():
                 r.prob = round(predict(m, features(r)), 3)
+                if not rule:
+                    continue
+                alarm = gate(r.index, r.prob, rule)
+                if r.index >= 40 and not alarm:
+                    r.index, r.model_note = 39.0, "model nie potwierdza"
+                elif r.index < 40 and alarm:
+                    r.index, r.model_note = 40.0, "podniesione przez model"
+                r.level = "wysoki" if r.index >= 70 else "podwyższony" if r.index >= 40 else "niski"
     return sorted(own.values(), key=lambda r: -r.index)
 
 
