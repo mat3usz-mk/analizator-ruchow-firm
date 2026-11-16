@@ -13,7 +13,7 @@ on:
         default: false
 
 permissions:
-  contents: read
+  contents: write  # tylko zapis archiwum na gałęzi `archiwum`
   issues: write
   pages: write
   id-token: write
@@ -131,6 +131,20 @@ jobs:
               echo "$today" > dane/ostatni_mail_dzienny.txt
             fi
           fi
+
+      # Raz dziennie: własna historia pomiarów (insiderzy, opcje, krótka sprzedaż, statki, loty, kongresmeni) i dziennych wyników
+      # na gałęzi `archiwum`, do przyszłych testów. To dane z publicznych źródeł, bez treści alarmów i bez danych ACLED.
+      - name: Archiwum dzienne
+        continue-on-error: true
+        run: |
+          [ "$(cat dane/ostatnie_archiwum.txt 2>/dev/null)" = "$(date -u +%F)" ] && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          if git fetch -q origin archiwum; then git worktree add -q arch origin/archiwum && git -C arch switch -q -C archiwum
+          else git worktree add -q --orphan -b archiwum arch; fi
+          python -m analizator.archiwum --db dane/analizator.db --stan dane/czuwanie_stan.json --out arch/archiwum
+          cd arch && git add -A archiwum && { git commit -qm "Archiwum $(date -u +%F)" || exit 0; }
+          for i in 1 2 3; do git push -q origin archiwum && break; sleep 5; git pull -q --rebase origin archiwum; done
 
       - name: Zapisz bazę na następny cykl
         if: always()

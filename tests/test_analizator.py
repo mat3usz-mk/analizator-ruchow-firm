@@ -404,3 +404,19 @@ class TestAlarmImpulsu(unittest.TestCase):
         self.assertEqual(len(a), 1)
         self.assertIn("nagły impuls", a[0])
         self.assertEqual(changes([r], new, date(2026, 11, 16))[0], [])
+
+
+class TestArchiwum(unittest.TestCase):
+    def test_eksport_dni_po_dacie(self):
+        import sqlite3, tempfile, os
+        from analizator.archiwum import export
+        d = tempfile.mkdtemp()
+        db = os.path.join(d, "a.db")
+        con = sqlite3.connect(db)
+        con.execute("CREATE TABLE metrics (source TEXT, key TEXT, day TEXT, value REAL)")
+        con.executemany("INSERT INTO metrics VALUES (?,?,?,?)", [("opcje_put", "EWT", "2026-11-14", 5), ("opcje_put", "EWT", "2026-11-16", 9)])
+        con.commit(); con.close()
+        n = export(db, os.path.join(d, "out"), since="2026-11-15", today="2026-11-16")
+        self.assertEqual(n["pomiary"], 1)
+        self.assertTrue(os.path.exists(os.path.join(d, "out", "2026-11-16", "pomiary.csv")))
+        self.assertFalse(os.path.exists(os.path.join(d, "out", "2026-11-14")))

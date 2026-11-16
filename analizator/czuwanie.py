@@ -70,7 +70,8 @@ def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list
     recent = today - timedelta(days=2)
     for r in results:
         p = prev.get(r.country, {"indeks": 0, "poziom": "niski"})
-        new_state[r.country] = {"indeks": round(r.index, 1), "poziom": r.level, "impuls": round(r.impulse, 1)}
+        new_state[r.country] = {"indeks": round(r.index, 1), "poziom": r.level, "impuls": round(r.impulse, 1),
+                             "szansa": None if r.prob is None else round(r.prob, 3)}
         reasons = []
         if r.impulse >= IMPULSE_ALARM and p.get("impuls", 0) < IMPULSE_ALARM and r.impulse_info.get("historii", 0) >= 2:
             info = r.impulse_info
