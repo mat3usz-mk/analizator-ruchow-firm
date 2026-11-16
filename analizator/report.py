@@ -66,6 +66,7 @@ def to_html(results: list[CountryAssessment], n_articles: int, n_signals: int, t
         ev = "".join(
             f'<li><span class="muted">{x["date"]}</span> · <b>{e(category_label(x["category"]))}</b> · '
             f'{"<span class=q>cichy sygnał</span> · " if x.get("quiet") else ""}{"<span class=r>reakcja na zdarzenie</span> · " if x.get("reactive") else ""}'
+            f'{_quality_badge(x)}'
             f'{"<a href=" + chr(34) + e(x["url"]) + chr(34) + " target=_blank rel=noopener>" if x.get("url") else ""}{e(x["title"])}{"</a>" if x.get("url") else ""}</li>'
             for x in r.evidence
         )
@@ -89,6 +90,7 @@ def to_html(results: list[CountryAssessment], n_articles: int, n_signals: int, t
   <div class="stats"><span>ostatnie tygodnie: {r.recent_score}/tydz.</span><span>tło (mediana): {r.baseline}</span>
   <span>odchylenie: {r.zscore:+.1f}σ</span><span>firm: {r.companies}</span><span>państw: {r.states}</span>
   <span>cichych sygnałów: {r.quiet}</span><span>sygnały priorytetowe: {r.priority}</span><span>ruchy wyprzedzające: {r.proactive_share:.0%}</span></div>
+  {_unconfirmed_html(r)}
   {_spark(r.weekly)}
   <div style="margin-top:8px">{"".join(f'<span class="tag">{e(category_label(c))}</span>' for c in r.categories) or '<span class="muted">brak aktywnych sygnałów</span>'}</div>
   {f'<p style="margin:10px 0 0"><b>Ruchy występujące razem:</b></p><ul>{co}</ul>' if co else ''}
@@ -102,12 +104,41 @@ def to_html(results: list[CountryAssessment], n_articles: int, n_signals: int, t
 <div class="warn"><b>Jak to czytać.</b> Indeks 0–100 pokazuje, jak bardzo obecne ruchy firm w danym kraju odbiegają od normy
 i jak szeroko się rozkładają (wiele różnych firm i typów decyzji). To <b>wskazówka, gdzie warto się przyjrzeć</b>, a nie
 prawdopodobieństwo wydarzenia. Przy małej pewności danych wynik może być przypadkowy. Zawsze sprawdź dowody poniżej.
+<br><b>Chłodna ocena.</b> Artykuły z językiem strachu, spekulacją, z tabloidów, źródeł propagandowych, płatnych komunikatów
+i treści sponsorowanych ważą mniej, a raporty „rynkowe” są pomijane. Alarm (indeks od 40) wymaga potwierdzenia w źródle
+pierwotnym albo w dwóch niezależnych, rzeczowych mediach.
 <br><b>Cichy sygnał</b> to ruch wyprzedzający opisany tylko przez 1–2 wiarygodne źródła. <b>Reakcja na zdarzenie</b> opisuje coś, co już
 się dzieje (atak, awaria), więc waży mało. Sekcja skutków to typowe reakcje z podobnych sytuacji w przeszłości, nie rekomendacja inwestycyjna.</div>
 {_fronts_html(results)}
 {''.join(cards) or '<p>Brak sygnałów z przypisanym krajem.</p>'}
 {_insider_html(insiders or [])}
 </main></body></html>"""
+
+
+_CLASS_PL = {"tabloid": "tabloid", "propaganda": "źródło propagandowe", "komunikat_prasowy": "komunikat prasowy (płatny)",
+             "sponsorowany": "treść sponsorowana"}
+
+
+def _quality_badge(x: dict) -> str:
+    """Oznaczenie artykułu, który waży mniej: emocje, spekulacja, tabloid, propaganda, treść sponsorowana."""
+    tags = []
+    if x.get("source_class"):
+        tags.append(_CLASS_PL.get(x["source_class"], x["source_class"]))
+    if x.get("emotion", 0) >= 0.5:
+        tags.append("język emocji")
+    elif x.get("emotion", 0) >= 0.25:
+        tags.append("spekulacja")
+    if not tags:
+        return ""
+    why = html.escape("; ".join(x.get("quality_reasons") or []))
+    return f'<span class=r title="{why}">{html.escape(", ".join(tags))}: waga obniżona</span> · '
+
+
+def _unconfirmed_html(r) -> str:
+    if not r.unconfirmed:
+        return ""
+    return ('<p class="muted" style="margin:8px 0 0"><b>Niepotwierdzone.</b> Indeks obcięty poniżej progu alarmu, bo ruch widać '
+            f'tylko w {r.confirmations} rzetelnym źródle (potrzebne źródło pierwotne albo dwa niezależne, rzeczowe media).</p>')
 
 
 def _prob_html(r) -> str:
@@ -150,11 +181,12 @@ def to_candidates_json(results: list[CountryAssessment], path: str, top: int = 8
     for r in results[:top]:
         out.append({
             "kraj": r.country, "nazwa": country_name(r.country), "indeks": r.index, "poziom": r.level, "pewnosc": r.confidence,
-            "kategorie": r.categories, "szansa_model": r.prob, "indeksy_w_gore": indices(r.country, r.level)["up"],
+            "kategorie": r.categories, "niepotwierdzone": r.unconfirmed, "potwierdzenia": r.confirmations, "szansa_model": r.prob, "indeksy_w_gore": indices(r.country, r.level)["up"],
             "indeksy_w_dol": indices(r.country, r.level)["down"], "ciche_sygnaly": r.quiet, "udzial_wyprzedzajacych": r.proactive_share,
             "dowody": [{"data": x["date"].isoformat(), "kategoria": x["category"], "tytul": x["title"], "url": x.get("url"),
                         "firma": x.get("company"), "aktor": x.get("actor"), "cichy": x.get("quiet"), "reakcja": x.get("reactive"),
-                        "zrodlo": x.get("domain")} for x in r.evidence],
+                        "zrodlo": x.get("domain"), "emocje": x.get("emotion"),
+                        "klasa_zrodla": x.get("source_class")} for x in r.evidence],
         })
     fr = [{k: v for k, v in f.items() if k != "klucz"} for f in fronts(results)]
     with open(path, "w", encoding="utf-8") as f:

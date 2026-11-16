@@ -21,6 +21,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 
+from .rzetelnosc import AUTHORITATIVE, assess_article, is_credible
 from .signals import CATEGORIES, COUNTRIES, classify
 
 
@@ -49,6 +50,8 @@ class CountryAssessment:
     spill_from: str | None = None  # kraje, z których przeniesiono ryzyko
     co_occurring: list[tuple[str, str, int]] = field(default_factory=list)
     parts: dict = field(default_factory=dict)  # składowe indeksu (do wyjaśnień i diagnostyki)
+    unconfirmed: bool = False      # indeks obcięty poniżej alarmu: brak potwierdzenia w rzetelnych źródłach
+    confirmations: int = 0         # liczba niezależnych rzetelnych źródeł + sygnałów pierwotnych
     prob: float | None = None      # szansa wydarzenia w horyzoncie wg modelu uczonego na historii (analizator/model.json)
 
 
@@ -112,10 +115,14 @@ def extract_signals(articles: list[dict], watchlist: list[str] | None = None) ->
             if any(len(tok & old) / max(len(tok | old), 1) >= 0.6 for old in sec_seen[company.lower()]):
                 continue
             sec_seen[company.lower()].append(tok)
+        official = a.get("source") in PRIORITY_SOURCES or a.get("source") in ("sec", "ofac", "espi", "ted", "insiders")
+        q = {"mult": 1.0, "emotion": 0.0, "class": None, "reasons": []} if official else assess_article(a["title"], a.get("domain"))
+        if q["mult"] <= 0:
+            continue  # raport rynkowy / reklama: pomijamy w całości
         for s in classify(a["title"], watchlist):
             if not s.country:
                 continue
-            rows.append({
+            rows.append({"emotion": q["emotion"], "source_class": q["class"], "quality": q["mult"], "quality_reasons": q["reasons"],
                 "date": date.fromisoformat(a["date"][:10]), "country": s.country, "category": s.category,
                 "base_weight": s.weight, "company": s.company, "actor": s.actor, "negated": s.negated, "reactive": s.reactive,
                 "title": a["title"], "url": a.get("url"), "matched": s.matched, "source": a.get("source"),
@@ -125,8 +132,8 @@ def extract_signals(articles: list[dict], watchlist: list[str] | None = None) ->
     for r in rows:
         # cichy sygnał: wyprzedzający ruch, opisany przez 1-2 źródła, z wiarygodnego miejsca
         r["quiet"] = (r["coverage"] <= 2 and not r["reactive"] and not r["negated"] and r["actor"] != "nieznany"
-                      and r["base_weight"] >= 2.0 and r["credibility"] >= 0.9)
-        r["weight"] = round(r["base_weight"] * r["credibility"] * (1.25 if r["quiet"] else 1.0), 2)
+                      and r["base_weight"] >= 2.0 and r["credibility"] >= 0.9 and r["quality"] >= 0.9)
+        r["weight"] = round(r["base_weight"] * r["credibility"] * r["quality"] * (1.25 if r["quiet"] else 1.0), 2)
     return rows
 
 
@@ -190,7 +197,15 @@ LINKS: dict[str, list[str]] = {
 PARAMS: dict[str, float] = {
     "w_z": 0.6, "w_actors": 0.5, "w_priority": 2.0, "prio_offset": 0.0, "priority_cap": 3.0, "w_quiet": 0.25, "w_cats": 0.3,
     "bias": -3.0, "spill": 0.0, "spill_min": 40.0, "sec_cap": 3.0, "baseline_weeks": 26.0,
+    "confirm": 1.0, "confirm_domains": 2.0,  # alarm wymaga potwierdzenia (źródło pierwotne albo 2 niezależne rzetelne media)
 }
+
+
+def _dom(e: dict) -> str:
+    d = (e.get("domain") or "").lower().removeprefix("www.")
+    if not d and e.get("url"):
+        d = re.sub(r"^https?://(?:www\.)?", "", e["url"]).split("/")[0].lower()
+    return d or (e.get("source") or "?")
 
 
 def _robust(base: list[float], floor: float) -> tuple[float, float]:
@@ -319,6 +334,21 @@ def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2
                    + P["w_cats"] * max(cats_now - max(cats_base, 1.0), 0) * (1 if z > 0 else 0) + P["w_quiet"] * min(quiet_excess, 3))
         raw = anomaly * (0.5 + 0.5 * proactive_share) + P["w_priority"] * min(prio_excess, P["priority_cap"]) + P["bias"]
         index = round(100 / (1 + math.exp(-raw)), 1)
+        # Potwierdzenie: alarm tylko wtedy, gdy ruch widać w źródle pierwotnym albo w co najmniej dwóch niezależnych,
+        # rzeczowych źródłach (nie tabloid, nie propaganda, nie komunikat sponsorowany, nie straszący nagłówek).
+        # Rzeczowy sygnał priorytetowy (ewakuacja, ostrzeżenie rządu, lotnictwo) z rzetelnego źródła, oparty na oficjalnym
+        # ostrzeżeniu albo o wielu firmach naraz, liczy się jak źródło pierwotne: w teście historycznym takie sygnały dawały
+        # prawdziwe wyprzedzenie (np. Wenezuela: „Six airlines suspend flights … amid FAA warning”, 40 dni).
+        primary = [e for e in live if (e.get("source") in PRIORITY_SOURCES or e.get("source") in ("sec", "ofac", "espi")
+                                       or (e["credibility"] >= 1.2 and is_credible(e))
+                                       or (e["category"] in PRIORITY_CATS and is_credible(e) and e.get("emotion", 0) == 0
+                                           and e["actor"] != "nieznany" and AUTHORITATIVE.search(e["title"])))
+                   and not e["reactive"]]
+        cred_domains = {_dom(e) for e in live if is_credible(e) and not e["reactive"]}
+        confirmed = bool(primary) or len(cred_domains) >= int(P["confirm_domains"])
+        unconfirmed = False
+        if P["confirm"] and not confirmed and index >= 40:
+            index, unconfirmed = 39.0, True
         n_base = len(base_wks)
         confidence = "duża" if n_base >= 26 and len(live) >= 10 else "średnia" if n_base >= min_baseline_weeks and len(live) >= 4 else "mała"
 
@@ -339,7 +369,8 @@ def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2
             baseline=round(med, 1), zscore=round(z, 2), companies=len(companies), states=len(states),
             quiet=len({e["story"] for e in quiet}), proactive_share=round(proactive_share, 2), categories=cats,
             weekly=[(wk.isoformat(), round(values[wk], 1)) for wk in span[-26:]],
-            evidence=evidence[:15], co_occurring=co, priority=prio_now, own_index=index,
+            evidence=evidence[:15], co_occurring=co, priority=prio_now, own_index=index, unconfirmed=unconfirmed,
+            confirmations=len(cred_domains) + len(primary),
             parts={"z": round(z, 2), "z_act": round(z_act, 2), "cats": len(cats), "cats_base": cats_base, "quiet": len(quiet), "quiet_excess": round(quiet_excess, 2), "prio_now": prio_now,
                    "prio_base": round(prio_base, 2), "prio_excess": round(prio_excess, 2), "proactive": round(proactive_share, 2),
                    "dominance": round(dominance, 2), "anomaly": round(anomaly, 2), "raw": round(raw, 2)},

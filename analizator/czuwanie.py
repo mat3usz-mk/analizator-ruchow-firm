@@ -30,7 +30,8 @@ def _ascii(s: str) -> str:
 
 def notify(title: str, body: str, topic: str | None, log_path: str) -> None:
     stamp = datetime.now().strftime("%Y-%m-%d %H:%M")
-    print(f"\n[ALARM {stamp}] {title}\n{body}")
+    # W publicznym repozytorium logi są jawne: z CICHO=1 treść alarmu nie trafia do logu (tylko do e-maila i strony z hasłem)
+    print(f"\n[ALARM {stamp}]" + ("" if os.environ.get("CICHO") else f" {title}\n{body}"))
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(f"[{stamp}] {title}\n{body}\n\n")
     if topic:
@@ -113,7 +114,7 @@ def summary(results, n_articles: int, top: int = 10) -> str:
     if fr:
         L += ["", "Fronty (jeden kryzys w kilku krajach):"]
         L += [f"- {f['nazwa']}: " + ", ".join(f"{c} {i}" for c, i in f["kraje"]) for f in fr]
-    L += ["", "Pełny raport w załączniku (otwórz w przeglądarce).",
+    L += ["", "Pełny raport: na stronie z hasłem albo w załączniku.",
           "To wskazówki z wiadomości, a nie prognoza ani rekomendacja inwestycyjna."]
     return "\n".join(L)
 

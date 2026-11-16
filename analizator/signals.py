@@ -135,8 +135,12 @@ CATEGORIES: dict[str, dict] = {
 
 # Zaprzeczenia osłabiają sygnał (firma dementuje, "nie planuje", wznawia).
 NEGATION = re.compile(
-    r"\b(?:denies|denied|no plans? to|rules? out|not (?:exit|leav|withdraw|sell)\w*|won't|will not|resum\w*|returns? to|reopen\w*|back in|lifts?)\b"
-    r"|\bdementuje|\bnie (?:planuje|wycofuj\w*|zawiesz\w*|sprzeda\w*|zamierza)|\bnie ma (?:planów|sygnałów)|\bwznawia|\bwraca",
+    r"\b(?:denies|denied|no plans? to|rules? out|not (?:exit|leav|withdraw|sell)\w*|won't|will not|resum\w*|returns? to|reopen\w*|back in|lift\w*|"
+    # deeskalacja: zniesienie ryzyka, koniec force majeure, przywrócenie lotów (to sygnał uspokojenia, nie alarmu)
+    r"remov\w+ (?:of )?(?:the )?(?:war risk|sanctions|restrictions|ban|curbs)|eliminat\w+ [^.]{0,40}war risk|"
+    r"force majeure (?:is |was |has been )?(?:lifted|ended|over|ends)|end\w* (?:of )?(?:the )?(?:'?force majeure'?|suspension|ban)|"
+    r"restor\w+ (?:flights|service|operations|ties)|eas\w+ (?:sanctions|restrictions))\b"
+    r"|\bdementuje|\bnie (?:planuje|wycofuj\w*|zawiesz\w*|sprzeda\w*|zamierza)|\bnie ma (?:planów|sygnałów)|\bwznawia|\bwraca|\bznosi|\bzniesieni\w+|\bprzywraca",
     re.I,
 )
 
@@ -161,6 +165,7 @@ NOISE = re.compile(
 DISASTER = re.compile(
     r"\b(?:wildfires?|bushfires?|forest fires?|floods?|flooding|flash flood\w*|torrential|heavy rain\w*|rainfall|monsoon|hurricane|typhoon|cyclone|"
     r"tornado\w*|earthquake|quake|tsunami|volcan\w*|eruption|landslides?|mudslides?|heatwave|snowstorm|blizzard|tropical storm|winter storm|"
+    r"snow\w*|fog|bad weather|weather conditions|ice storm|coronavirus|covid\w*|sars|"
     r"unexploded|(?:WWII|WW2|World War (?:II|2)|wartime) (?:bomb|shell|ordnance)|bomb (?:found|discovered|disposal)|gas leak|chemical leak|"
     r"ebola|cholera|measles|mpox|disease outbreak|pandemic|epidemic|screwworm|livestock|cattle|bird flu|avian|swine fever|foot-and-mouth|"
     r"pożar\w* (?:lasu|lasów)|powód\w*|trzęsieni\w* ziemi|huragan\w*|tajfun\w*|niewybuch\w*|epidemi\w*)\b",
@@ -249,7 +254,7 @@ COUNTRIES: dict[str, list[str]] = {
     "BF": ["Burkina Faso"],
     "CD": ["Congo", "DRC", "Kongo"],
     "MZ": ["Mozambique", "Mozambik"],
-    "MM": ["Myanmar", "Burma", "Birm"],
+    "MM": ["Myanmar", "Burma", "Birm(?:a|ie|ą|y|ańsk\\w*)\\b"],
     "PL": ["Poland", "Polish", "Polsk", "Polsce", "Warsaw", "Warszaw"],
     "DE": ["Germany", "German", "Niemc", "Niemiec", "Berlin"],
     "LT": ["Lithuania", "Litw", "Vilnius", "Wilno", "Wilni"],

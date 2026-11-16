@@ -39,8 +39,9 @@ def generate(today: date | None = None, weeks: int = 26, seed: int = 7) -> list[
     arts = []
 
     def add(d: date, title: str):
-        arts.append({"url": f"https://example.invalid/{len(arts)}", "title": title, "date": d.isoformat(),
-                     "source": "demo", "domain": "example.invalid", "lang": "en"})
+        dom = f"demo{len(arts) % 5}.example"  # kilka niezależnych serwisów, jak w prawdziwych danych
+        arts.append({"url": f"https://{dom}/{len(arts)}", "title": title, "date": d.isoformat(),
+                     "source": "demo", "domain": dom, "lang": "en"})
 
     d = start
     while d <= today:

@@ -254,6 +254,42 @@ class TestUczenie(unittest.TestCase):
         self.assertEqual(len(features(r)), len(FEATURES))
 
 
+class TestRzetelnosc(unittest.TestCase):
+    def test_fear_and_speculation_weigh_less(self):
+        from analizator.rzetelnosc import assess_article
+        calm = assess_article("Maersk suspends Red Sea transits", "reuters.com")
+        scary = assess_article("SHOCKING: World War 3 could start TONIGHT as PANIC grips Europe!!", "reuters.com")
+        pl = assess_article("Czy grozi nam III wojna światowa? Eksperci biją na alarm", "fakt.pl")
+        self.assertEqual(calm["mult"], 1.0)
+        self.assertLess(scary["mult"], 0.4)
+        self.assertLess(pl["mult"], 0.2)
+
+    def test_sponsored_pr_and_market_spam(self):
+        from analizator.rzetelnosc import assess_article
+        self.assertEqual(assess_article("Defense Drone Market Size to reach $40B by 2032, CAGR 12%", "x.com")["mult"], 0.0)
+        self.assertLess(assess_article("Acme exits Russia", "prnewswire.com")["mult"], 0.2)
+        self.assertLess(assess_article("Artykuł sponsorowany: firma wycofuje się z Ukrainy", "onet.pl")["mult"], 0.2)
+        self.assertEqual(assess_article("SADC withdrawal from DRC causes alarm - CHANNELAFRICA", "x.com")["emotion"], 0.0)
+
+    def test_single_source_cannot_raise_alarm(self):
+        today = date(2026, 11, 14)
+        arts = demo.generate(today)
+        for a in arts:  # wszystko z jednego serwisu i bez sygnałów priorytetowych o Mołdawii
+            a["domain"] = "onesite.example"
+        arts = [a for a in arts if not ("Moldova" in a["title"] and any(c.category in ("ewakuacja_personelu", "ostrzezenia_panstw", "lotnictwo_przestrzen") for c in classify(a["title"])))]
+        off = {r.country: r for r in assess(extract_signals(arts), today=today, params={"confirm": 0})}
+        on = {r.country: r for r in assess(extract_signals(arts), today=today)}
+        self.assertGreaterEqual(off["MD"].index, 40, "bez wymogu potwierdzenia byłby alarm")
+        self.assertTrue(on["MD"].index < 40 and on["MD"].unconfirmed, "jedno źródło nie może samo wywołać alarmu")
+
+    def test_calm_priority_signal_confirms_itself(self):
+        today = date(2026, 11, 14)
+        arts = demo.generate(today)
+        for a in arts:
+            a["domain"] = "onesite.example"
+        on = {r.country: r for r in assess(extract_signals(arts), today=today)}
+        self.assertFalse(on["MD"].unconfirmed, "rzeczowa ewakuacja z rzetelnego źródła wystarcza")
+
 if __name__ == "__main__":
     unittest.main()
 

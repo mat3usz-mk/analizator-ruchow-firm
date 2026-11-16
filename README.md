@@ -207,6 +207,31 @@ czyli o 3:00 w Polsce zimą) z podsumowaniem i pełnym raportem HTML w załączn
 Inny serwer pocztowy: zmienne repozytorium `SMTP_HOST` i `SMTP_PORT` (465 = SSL, 587 = STARTTLS).
 Test: Actions → „Czuwanie analizatora” → Run workflow → zaznacz „wyślij teraz raport e-mailem”.
 
+## Chłodna ocena wiadomości (mniej fałszywych alarmów)
+
+`analizator/rzetelnosc.py` ocenia każdy artykuł regułami, bez AI:
+- **język strachu i clickbait** (EN i PL: „shocking”, „World War 3”, „panic”, „nie uwierzysz”, „eksperci biją na alarm”, wykrzykniki,
+  WIELKIE LITERY): waga ×0,35; **spekulacja** („could”, „czy grozi”, pytanie w tytule): ×0,7;
+- **treści sponsorowane i płatne komunikaty prasowe** (PR Newswire, GlobeNewswire, „artykuł sponsorowany”…): ×0,15;
+  **raporty „rynkowe” i reklamy** („Market Size… CAGR”, „stocks to buy”): pomijane;
+- **tabloidy** ×0,5, **źródła propagandowe i dezinformacyjne** ×0,25;
+- **deeskalacja** („force majeure lifted”, „removal of war risk”, „resumes flights”) liczy się jak zaprzeczenie, a pogoda i epidemie są pomijane.
+
+**Alarm wymaga potwierdzenia**: źródło pierwotne (ostrzeżenia rządów, FAA/EASA, OFAC, SEC, ESPI) albo dwa niezależne, rzeczowe
+media, albo jeden rzeczowy artykuł oparty na oficjalnym ostrzeżeniu lub o wielu firmach naraz („Six airlines suspend flights…
+amid FAA warning”). Bez tego indeks jest obcinany do 39 i oznaczony w raporcie jako „niepotwierdzone”.
+Test historyczny 2025–2026: fałszywych alarmów mniej o 16% (89 → 75) na pełniejszych danych i o 11% (18 → 16) na danych jak
+w codziennym zadaniu, przy tej samej liczbie prawdziwych alarmów; odpadły dwa „trafienia”, które były przypadkowe
+(np. Pakistan: zamknięte przejście z Afganistanem, nie konflikt z Indiami).
+
+## Strona z raportem (hasło)
+
+Workflow czuwania publikuje raport na GitHub Pages (`https://<użytkownik>.github.io/analizator-ruchow-firm/`): bieżący raport,
+archiwum dzienne i alarmy. Każda podstrona jest **zaszyfrowana** (AES-256-GCM, klucz z hasła przez PBKDF2), odszyfrowanie dzieje się
+w przeglądarce po wpisaniu hasła. Hasło to sekret repozytorium `PAGE_PASSWORD`; bez niego nic nie jest publikowane.
+Pages trzeba raz włączyć: Settings → Pages → Source: **GitHub Actions**. Repozytorium jest publiczne, więc treść alarmów nie trafia
+do logów (`CICHO=1`), zgłoszenia na GitHubie są wyłączone (zmienna `ALARMY_ISSUES = tak` je włącza), a raportu nie ma w artefaktach.
+
 ## Ograniczenia (ważne)
 - **Indeks to nie prawdopodobieństwo.** Żeby mówić "X% szans na konflikt w 30 dni",
   trzeba skalibrować model na wielu historycznych przypadkach (i przypadkach, w których

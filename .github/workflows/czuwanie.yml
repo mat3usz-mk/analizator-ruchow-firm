@@ -15,6 +15,8 @@ on:
 permissions:
   contents: read
   issues: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: czuwanie
@@ -24,6 +26,11 @@ jobs:
   cykl:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    environment:
+      name: github-pages
+    env:
+      CICHO: "1"  # repozytorium jest publiczne: treść alarmów nie trafia do logów
+      PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
     steps:
       - uses: actions/checkout@v4
 
@@ -52,8 +59,29 @@ jobs:
           python -m analizator watch --once --db dane/analizator.db \
             --out dane/raport_biezacy.html --alerts-out dane/nowe_alerty.txt
 
-      - name: Zgłoszenie na GitHubie przy alarmie (powiadomienie e-mail)
-        if: hashFiles('dane/nowe_alerty.txt') != ''
+      # Strona z raportem pod stałym adresem, zaszyfrowana hasłem (sekret PAGE_PASSWORD). Bez hasła nic nie jest publikowane.
+      - name: Strona z raportem (zaszyfrowana)
+        id: strona
+        env:
+          PAGE_PASSWORD: ${{ secrets.PAGE_PASSWORD }}
+        run: |
+          pip install -q cryptography
+          if python -m analizator.strona --dane dane --out strona; then echo "ok=1" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Przygotuj stronę do publikacji
+        if: steps.strona.outputs.ok == '1'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: strona
+
+      - name: Opublikuj stronę (GitHub Pages)
+        if: steps.strona.outputs.ok == '1'
+        continue-on-error: true  # działa po włączeniu Pages w ustawieniach (Source: GitHub Actions)
+        uses: actions/deploy-pages@v4
+
+      # Zgłoszenia są publiczne, więc domyślnie wyłączone. Włącza je zmienna repozytorium ALARMY_ISSUES = tak.
+      - name: Zgłoszenie na GitHubie przy alarmie
+        if: hashFiles('dane/nowe_alerty.txt') != '' && vars.ALARMY_ISSUES == 'tak'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -74,8 +102,11 @@ jobs:
           SMTP_PORT: ${{ vars.SMTP_PORT }}
         run: |
           if [ -s dane/nowe_alerty.txt ]; then
+            cp dane/nowe_alerty.txt mail.txt
+            if [ "${{ steps.strona.outputs.ok }}" = "1" ]; then att=""; printf '\n\nPełny raport (hasło jak zwykle): %s\n' "$PAGE_URL" >> mail.txt
+            else att="--attach dane/raport_biezacy.html"; fi
             python -m analizator.poczta --subject "Alarm analizatora: $(head -n1 dane/nowe_alerty.txt | cut -d: -f1 | cut -c1-100)" \
-              --body-file dane/nowe_alerty.txt --attach dane/raport_biezacy.html || true
+              --body-file mail.txt $att || true
           fi
 
       # Raz dziennie, w pierwszym cyklu po 2:00 UTC (3:00 w Polsce zimą, 4:00 latem): podsumowanie i pełny raport.
@@ -90,8 +121,10 @@ jobs:
         run: |
           today=$(date -u +%F)
           if [ "$TERAZ" = "true" ] || { [ "$(date -u +%H)" -ge 2 ] && [ "$(cat dane/ostatni_mail_dzienny.txt 2>/dev/null)" != "$today" ]; }; then
-            if python -m analizator.poczta --subject "Analizator ruchów firm: raport $today" \
-                 --body-file dane/podsumowanie.txt --attach dane/raport_biezacy.html; then
+            cp dane/podsumowanie.txt mail.txt
+            if [ "${{ steps.strona.outputs.ok }}" = "1" ]; then att=""; printf '\nRaport online (hasło jak zwykle): %s\n' "$PAGE_URL" >> mail.txt
+            else att="--attach dane/raport_biezacy.html"; fi
+            if python -m analizator.poczta --subject "Analizator ruchów firm: raport $today" --body-file mail.txt $att; then
               echo "$today" > dane/ostatni_mail_dzienny.txt
             fi
           fi
@@ -102,16 +135,3 @@ jobs:
         with:
           path: dane
           key: dane-${{ github.run_id }}
-
-      - name: Raport do pobrania
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: raport
-          path: |
-            dane/raport_biezacy.html
-            dane/alerty.log
-            dane/fronty.json
-            dane/kandydaci.json
-          retention-days: 3
-          if-no-files-found: ignore
