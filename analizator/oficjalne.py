@@ -310,10 +310,13 @@ def acled_counts(start: date, end: date) -> dict[tuple[str, date], int]:
     t = start
     while t <= end:
         t2 = min(t + timedelta(days=30), end)
-        page = 1
+        cursor = None
         while True:
-            q = urllib.parse.urlencode({"event_date": f"{t.isoformat()}|{t2.isoformat()}", "event_date_where": "BETWEEN",
-                                        "fields": "event_date|country|event_type", "limit": 5000, "page": page})
+            params = {"event_date": f"{t.isoformat()}|{t2.isoformat()}", "event_date_where": "BETWEEN",
+                      "fields": "event_date|country|event_type", "limit": 5000}
+            if cursor:
+                params["cursor"] = cursor  # ACLED stronicuje kursorem (next_cursor z poprzedniej odpowiedzi)
+            q = urllib.parse.urlencode(params)
             req = urllib.request.Request(f"https://acleddata.com/api/acled/read?{q}",
                                          headers={**UA, "Authorization": f"Bearer {_acled_token()}"})
             try:
@@ -332,9 +335,9 @@ def acled_counts(start: date, end: date) -> dict[tuple[str, date], int]:
                     names[c] = found[0] if found else None
                 if names[c]:
                     counts[(names[c], date.fromisoformat(r["event_date"][:10]))] += 1
-            if len(rows) < 5000:
+            cursor = js.get("next_cursor")
+            if not cursor or not rows:
                 break
-            page += 1
         t = t2 + timedelta(days=1)
     return counts
 
