@@ -12,7 +12,25 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - uses: actions/checkout@v4
+      - name: ACLED i AGSI (tylko liczby, bez danych)
+        env:
+          ACLED_EMAIL: ${{ secrets.ACLED_EMAIL }}
+          ACLED_PASSWORD: ${{ secrets.ACLED_PASSWORD }}
+          AGSI_KEY: ${{ secrets.AGSI_KEY }}
+        run: |
+          python - <<'PY'
+          from datetime import date, timedelta
+          from analizator import oficjalne as o
+          for d0 in (date.today() - timedelta(days=20), date(2023, 6, 1)):
+              try:
+                  c = o.acled_counts(d0, d0 + timedelta(days=6))
+                  print("ACLED", d0, "zdarzeń:", sum(c.values()), "krajów:", len({k for k, _ in c}), "ostatni dzień:", max((d for _, d in c), default=None))
+              except Exception as e:
+                  print("ACLED", d0, "błąd:", e)
+          PY
       - name: Próbki formatów
+        if: false
         run: |
           now=$(date -u +%s); y=$((now-400*86400))
           echo "== IODA"; curl -s -m 60 "https://api.ioda.inetintel.cc.gatech.edu/v2/outages/events?from=$y&until=$now&entityType=country&limit=3" | head -c 1500; echo

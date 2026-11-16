@@ -19,6 +19,7 @@ import math
 import re
 import statistics
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -282,7 +283,7 @@ def fx_shocks(start: date, end: date) -> list[dict]:
 # --- ACLED: zdarzenia konfliktowe (konto: sekrety ACLED_EMAIL i ACLED_PASSWORD) -----------------------
 # Dane ACLED nie mogą być publikowane: zapisujemy tylko wnioski (skok liczby zdarzeń w kraju), nie same zdarzenia.
 _ACLED_TOKEN: str | None = None
-ACLED_TYPES = "Battles:OR:event_type=Explosions/Remote violence:OR:event_type=Violence against civilians"
+VIOLENCE = {"Battles", "Explosions/Remote violence", "Violence against civilians"}
 
 
 def _acled_token() -> str:
@@ -312,13 +313,19 @@ def acled_counts(start: date, end: date) -> dict[tuple[str, date], int]:
         page = 1
         while True:
             q = urllib.parse.urlencode({"event_date": f"{t.isoformat()}|{t2.isoformat()}", "event_date_where": "BETWEEN",
-                                        "fields": "event_date|country", "limit": 5000, "page": page})
-            q += "&event_type=" + urllib.parse.quote(ACLED_TYPES, safe=":=/")
+                                        "fields": "event_date|country|event_type", "limit": 5000, "page": page})
             req = urllib.request.Request(f"https://acleddata.com/api/acled/read?{q}",
                                          headers={**UA, "Authorization": f"Bearer {_acled_token()}"})
-            js = json.loads(urllib.request.urlopen(req, timeout=180).read())
+            try:
+                js = json.loads(urllib.request.urlopen(req, timeout=180).read())
+            except urllib.error.HTTPError as e:  # treść błędu (bez danych) pomaga ustalić, czego API nie przyjmuje
+                raise RuntimeError(f"ACLED {e.code}: {e.read()[:300].decode('utf-8', 'ignore')}")
             rows = js.get("data") or []
+            if js.get("success") is False or (not rows and js.get("error")):
+                raise RuntimeError(f"ACLED: {str(js.get('error') or js.get('messages'))[:300]}")
             for r in rows:
+                if r.get("event_type") not in VIOLENCE:
+                    continue
                 c = r.get("country") or ""
                 if c not in names:
                     found = detect_countries(c)
