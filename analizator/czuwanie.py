@@ -43,6 +43,7 @@ def notify(title: str, body: str, topic: str | None, log_path: str) -> None:
 
 
 def _fetch(con, days: int, srcs: list[str]) -> None:
+    sources.RETRIES = 2
     for src in srcs:
         try:
             if src == "pierwotne":

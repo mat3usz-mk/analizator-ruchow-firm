@@ -48,12 +48,16 @@ LAST_ERRORS = {"n": 0}
 BLOCKED_HOSTS: set[str] = set()
 
 
-def _get(url: str, headers: dict | None = None, timeout: int = 30, tries: int = 4) -> bytes:
+RETRIES = 4  # tryb ciągły zmniejsza: kolejny cykl i tak przyjdzie za kilkanaście minut
+
+
+def _get(url: str, headers: dict | None = None, timeout: int = 30, tries: int | None = None) -> bytes:
     """GET z ponawianiem przy 429/5xx/zerwanym połączeniu (przerwa rośnie: 5, 15, 45 s)."""
     import urllib.error
     host = urllib.parse.urlsplit(url).hostname or ""
     if host in BLOCKED_HOSTS:
         raise urllib.error.URLError(f"host zablokowany przez sieć środowiska: {host}")
+    tries = tries or RETRIES
     delay = 5.0
     for attempt in range(tries):
         req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
