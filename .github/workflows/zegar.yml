@@ -31,5 +31,5 @@ jobs:
             [ "$i" -lt 11 ] && sleep 1800
           done
       - name: Następna zmiana zegara
-        if: always()
+        if: success() || failure()  # po ręcznym anulowaniu (Cancel run) zegar się nie odnawia
         run: gh api -X POST "repos/$REPO/actions/workflows/zegar.yml/dispatches" -f ref=main
