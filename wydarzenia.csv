@@ -1,0 +1,36 @@
+data,kraj,opis,typ,zrodlo
+# Lista rzeczywistych "większych wydarzeń" do testu historycznego. Jeden wiersz = jedno wydarzenie.
+# data: RRRR-MM-DD, kraj: kod ISO-2 (jak w analizator/signals.py), typ: konflikt / kryzys_energetyczny / sankcje / blokada / kryzys_finansowy / inne
+# zrodlo: link potwierdzający datę. Wiersze bez źródła nie powinny trafiać do testu.
+# Wypełnione 2026-11-15 wyszukiwarką, przed obejrzeniem wyników analizatora. Okres 2025-03-01..2026-11-15.
+2025-04-24,PK,"Pakistan zamyka przestrzeń powietrzną dla indyjskich linii i wstrzymuje handel z Indiami po zamachu w Pahalgam (22.04)",blokada,https://businesstoday.in/india/story/pakistan-shuts-airspace-for-indian-airlines-and-halts-all-trade-with-india-as-ties-nosedive-after-pahalgam-473476-2025-04-24
+2025-05-07,PK,"Operacja Sindoor: indyjskie uderzenia na 9 celów w Pakistanie, zamknięcie przestrzeni powietrznej Pakistanu",konflikt,https://www.tribuneindia.com/news/pakistan/pakistan-closes-airspace-for-48-hours-after-indias-operation-sindoor
+2025-05-07,IN,"Operacja Sindoor: Indie zamykają 18 lotnisk i ok. 25 tras lotniczych, starcia z Pakistanem",konflikt,https://gulfnews.com/world/asia/india/india-strikes-on-pakistan-over-200-flights-cancelled-18-airports-shut-after-operation-sindoor-1.500118904
+2025-06-13,IR,"Izrael rozpoczyna naloty na Iran (Natanz, Fordow, dowódcy IRGC), wojna 12-dniowa",konflikt,https://www.criticalthreats.org/analysis/iran-update-special-edition-israeli-strikes-on-iran-june-13-2025-200pm-et
+2025-06-13,IL,"Wojna 12-dniowa Izrael–Iran, irańskie rakiety na Izrael",konflikt,https://www.fdd.org/analysis/op-eds/2025/06/13/israel-targets-irans-nuclear-sites-and-senior-military-figures/
+2025-06-22,IR,"USA bombardują irańskie obiekty jądrowe (Fordow, Natanz, Isfahan), operacja Midnight Hammer",konflikt,https://www.pbs.org/newshour/world/what-to-know-about-the-u-s-militarys-intervention-in-the-israel-iran-war
+2025-06-23,QA,"Iran atakuje rakietami bazę Al Udeid w Katarze, zamknięcie przestrzeni powietrznej Kataru i sąsiadów",konflikt,https://www.crisis24.com/articles/flash-alert-iran-fires-missiles-targeting-us-military-bases-in-qatar-and-iraq-bahrain-and-kuwait-close-airspace
+2025-07-06,YE,"Huti zatapiają statki Magic Seas i Eternity C na Morzu Czerwonym",blokada,https://www.navalnews.com/?p=75247
+2025-07-16,SY,"Izrael bombarduje ministerstwo obrony w Damaszku w czasie walk w Suwajdzie",konflikt,https://www.pbs.org/newshour/world/israel-launches-airstrike-on-syrian-defense-ministry-in-heart-of-damascus
+2025-09-02,VE,"Pierwszy amerykański atak na łódź z Wenezueli na Karaibach (11 zabitych), początek kampanii",konflikt,https://www.semafor.com/article/09/02/2025/us-conducts-deadly-strike-on-venezuelan-drug-vessel-rubio-says
+2025-09-09,QA,"Izraelski nalot na przywódców Hamasu w Dosze",konflikt,https://www.opb.org/article/2025/09/09/israel-says-it-struck-qatar-targeting-hamas-office/
+2025-09-10,PL,"Rosyjskie drony nad Polską zestrzelone, Polska uruchamia art. 4 NATO",konflikt,https://aljazeera.com/news/2025/9/10/poland-shoots-down-russian-drones-will-nato-enter-war-in-ukraine
+2025-09-19,EE,"Trzy rosyjskie MiG-31 przez 12 minut w przestrzeni powietrznej Estonii, wniosek o art. 4",konflikt,https://theaviationist.com/2025/09/19/russian-mig-31s-estonia/
+2025-09-22,DK,"Drony zamykają lotnisko w Kopenhadze (i Oslo) na kilka godzin",blokada,https://www.aljazeera.com/amp/news/2025/9/22/copenhagen-airport-shut-after-sighting-of-unidentified-drones
+2025-09-28,IR,"ONZ przywraca sankcje na Iran (snapback), za nimi UE i Wielka Brytania",sankcje,https://www.semafor.com/article/09/28/2025/un-reimposes-sanctions-on-iran-deepening-economic-pressure
+2025-10-09,CN,"Chiny rozszerzają kontrolę eksportu metali ziem rzadkich (także eksterytorialnie)",sankcje,https://www.jonesday.com/en/insights/2025/10/china-imposes-extraterritorial-export-control-measures-over-rare-earth-items
+2025-10-12,AF,"Walki na granicy Afganistan–Pakistan po pakistańskich nalotach na Kabul, zamknięcie przejścia Torkham",konflikt,https://www.pbs.org/newshour/world/afghanistan-kills-dozens-of-pakistani-soldiers-in-cross-border-attack-taliban-government-says
+2025-10-22,RU,"USA nakładają sankcje na Rosnieft i Łukoil",sankcje,https://gcaptain.com/u-s-treasury-sanctions-russias-largest-oil-companies-over-ukraine
+2025-10-23,RU,"UE przyjmuje 19. pakiet sankcji (zakaz importu rosyjskiego LNG)",sankcje,https://www.eeas.europa.eu/delegations/ukraine/19th-package-sanctions-against-russia-eu-targets-russian-energy-third-country-banks-and-crypto_en
+2025-11-19,JP,"Chiny wstrzymują import japońskich owoców morza i ostrzegają przed podróżami do Japonii (spór o Tajwan)",sankcje,https://www.arabnews.com/node/2623172/world
+2026-01-03,VE,"USA atakują Wenezuelę i pojmują Nicolása Maduro",konflikt,https://www.aljazeera.com/news/2026/1/3/explosions-heard-over-venezuelan-capital-caracas-amid-us-tensions
+2026-01-29,CU,"Dekret USA: cła na kraje dostarczające ropę na Kubę, kryzys paliwowy na Kubie",kryzys_energetyczny,https://www.aljazeera.com/news/2026/1/30/trump-threatens-tariffs-on-countries-supplying-cuba-with-much-needed-oil
+2026-02-26,AF,"Pakistan ogłasza 'otwartą wojnę' z Afganistanem, naloty na Kabul",konflikt,https://www.npr.org/2026/02/26/g-s1-111783/airstrikes-afghanistan-pakistan-war
+2026-02-28,IR,"USA i Izrael rozpoczynają wojnę z Iranem, zabity Chamenei",konflikt,https://www.britannica.com/event/2026-Iran-war
+2026-02-28,AE,"Irańskie odwetowe ataki na państwa Zatoki, zamknięte przestrzenie powietrzne (ZEA, Katar, Bahrajn, Irak)",konflikt,https://aerospaceglobalnews.com/news/airspaces-close-middle-east-iran-israel-strikes/
+2026-03-01,IR,"Faktyczne zamknięcie cieśniny Ormuz (początek marca wg IEA)",blokada,https://www.iea.org/reports/gas-market-report-q2-2026/executive-summary
+2026-03-02,QA,"Irańskie drony uderzają w Ras Laffan, Katar wstrzymuje produkcję LNG (force majeure 4.03)",kryzys_energetyczny,https://worldoil.com/news/2026/3/2/qatar-shuts-ras-laffan-lng-plant-after-iranian-drone-strike/
+2026-03-02,LB,"Hezbollah ostrzeliwuje Izrael, izraelska ofensywa w Libanie, koniec rozejmu z 2024",konflikt,https://www.longwarjournal.org/archives/2026/03/analysis-israel-strikes-over-500-targets-in-lebanon-issues-evac-orders-in-new-war-with-hezbollah-march-2-6-updates.php
+2026-03-16,AE,"Atak dronem przy lotnisku w Dubaju, przekierowane loty",konflikt,https://www.aljazeera.com/news/2026/3/16/drone-strike-disrupts-dubai-flights-as-iran-continues-gulf-attacks
+2026-03-18,QA,"Irańskie rakiety niszczą 17% mocy LNG w Ras Laffan, ceny gazu w Europie +52%",kryzys_energetyczny,https://gcaptain.com/iran-attack-wipes-out-17-of-qatars-lng-capacity-for-up-to-five-years
+2026-07-08,IR,"Upadek rozejmu USA–Iran po atakach na statki w cieśninie Ormuz, nowe uderzenia USA",konflikt,https://abcnews.com/Politics/us-iran-ceasefire-mou-broke-timeline/story?id=134622392

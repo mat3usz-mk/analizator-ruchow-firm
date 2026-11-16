@@ -1,0 +1,17 @@
+# Firmy do śledzenia (po jednej w wierszu). Przykłady, edytuj wedle uznania.
+Gazprom
+Naftogaz
+Shell
+BP
+TotalEnergies
+Equinor
+Uniper
+OMV
+Orlen
+Maersk
+MSC
+Lufthansa
+KLM
+Siemens
+Raiffeisen
+UniCredit

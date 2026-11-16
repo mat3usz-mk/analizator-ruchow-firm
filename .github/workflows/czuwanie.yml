@@ -1,0 +1,80 @@
+name: Czuwanie analizatora
+
+# Co 30 minut: pobierz najnowsze wiadomości i ostrzeżenia, policz indeksy, powiadom tylko o istotnych zmianach.
+# GitHub uruchamia harmonogram z opóźnieniem do kilkunastu minut, gdy ma duże obciążenie.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: czuwanie
+  cancel-in-progress: false
+
+jobs:
+  cykl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Baza i stan czuwania przechodzą z uruchomienia na uruchomienie przez pamięć podręczną GitHuba.
+      - name: Odtwórz bazę z poprzedniego cyklu
+        uses: actions/cache/restore@v4
+        with:
+          path: dane
+          key: dane-${{ github.run_id }}
+          restore-keys: dane-
+
+      - name: Baza startowa (pierwsze uruchomienie)
+        run: |
+          mkdir -p dane
+          [ -f dane/analizator.db ] || cp dane_start/analizator.db dane/analizator.db
+
+      - name: Cykl analizatora
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          python -m analizator watch --once --db dane/analizator.db \
+            --out dane/raport_biezacy.html --alerts-out dane/nowe_alerty.txt
+
+      - name: Zgłoszenie na GitHubie przy alarmie (powiadomienie e-mail)
+        if: hashFiles('dane/nowe_alerty.txt') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s dane/nowe_alerty.txt ]; then
+            head -c 60000 dane/nowe_alerty.txt > body.txt
+            printf '\n\nRaport: %s/%s/actions/runs/%s\nTo wskazówka, nie prawdopodobieństwo ani rekomendacja inwestycyjna.\n' \
+              "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" >> body.txt
+            gh issue create --title "Alarm analizatora $(date -u +'%Y-%m-%d %H:%M') UTC: $(head -n1 dane/nowe_alerty.txt | cut -c1-120)" --body-file body.txt
+          fi
+
+      - name: Zapisz bazę na następny cykl
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: dane
+          key: dane-${{ github.run_id }}
+
+      - name: Raport do pobrania
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: raport
+          path: |
+            dane/raport_biezacy.html
+            dane/alerty.log
+            dane/fronty.json
+            dane/kandydaci.json
+          retention-days: 3
+          if-no-files-found: ignore

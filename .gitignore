@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.db.nowy
+/dane/
+/*.db
+!/dane_start/*.db
+raport*.html
+raport*.csv
+kandydaci.json
+fronty.json
+alerty.log
+czuwanie_stan.json
+config.json
