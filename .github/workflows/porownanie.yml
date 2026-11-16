@@ -50,13 +50,20 @@ jobs:
           name: pierwotne_historia
           path: pierwotne_historia.db
           retention-days: 30
+      # Źródła z kontem (ACLED, AGSI): dane tylko w tym zadaniu, bez artefaktu (warunki ACLED zabraniają publikacji danych)
+      - name: Historia źródeł z kontem
+        env:
+          ACLED_EMAIL: ${{ secrets.ACLED_EMAIL }}
+          ACLED_PASSWORD: ${{ secrets.ACLED_PASSWORD }}
+          AGSI_KEY: ${{ secrets.AGSI_KEY }}
+        run: python -m analizator.oficjalne --od 2021-09-01 --zrodla acled,agsi --db pierwotne_klucze.db
       - name: Porównanie wariantów
         run: |
           if [ -z "${{ github.event.inputs.zrodla }}" ]; then
-            python -m analizator.porownanie --db historia_gkg.db --pierwotne pierwotne_historia.db --out raporty/pierwotne-porownanie.md
+            python -m analizator.porownanie --db historia_gkg.db --pierwotne pierwotne_historia.db pierwotne_klucze.db --out raporty/pierwotne-porownanie.md
           else
             echo "${{ github.event.inputs.zrodla }}" | tr ';' '\n' | while read -r z; do
-              python -m analizator.porownanie --db historia_gkg.db --pierwotne pierwotne_historia.db --zrodla "$z" --out "raporty/pierwotne-$(echo $z | tr ',' '-').md"
+              python -m analizator.porownanie --db historia_gkg.db --pierwotne pierwotne_historia.db pierwotne_klucze.db --zrodla "$z" --out "raporty/pierwotne-$(echo $z | tr ',' '-').md"
             done
           fi
       - name: Zapisz wynik w repozytorium

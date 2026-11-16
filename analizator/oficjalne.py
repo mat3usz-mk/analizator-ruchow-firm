@@ -34,6 +34,8 @@ STRUCTURED: dict[str, tuple[str, float, str]] = {
     "ioda": ("ostrzezenia_panstw", 2.5, "panstwo"),
     "kursy": ("przeplywy_finansowe", 2.5, "firma"),
     "portwatch": ("lancuch_dostaw", 3.0, "firma"),
+    "acled": ("ostrzezenia_panstw", 2.5, "panstwo"),
+    "agsi": ("energia_surowce", 2.5, "firma"),
 }
 OFFICIAL_RSS = {"rada_ue": ("https://www.consilium.europa.eu/en/rss/pressreleases.ashx", "consilium.europa.eu"),
                 "onz": ("https://press.un.org/en/rss.xml", "press.un.org"),
@@ -277,6 +279,121 @@ def fx_shocks(start: date, end: date) -> list[dict]:
     return out
 
 
+# --- ACLED: zdarzenia konfliktowe (konto: sekrety ACLED_EMAIL i ACLED_PASSWORD) -----------------------
+# Dane ACLED nie mogą być publikowane: zapisujemy tylko wnioski (skok liczby zdarzeń w kraju), nie same zdarzenia.
+_ACLED_TOKEN: str | None = None
+ACLED_TYPES = "Battles:OR:event_type=Explosions/Remote violence:OR:event_type=Violence against civilians"
+
+
+def _acled_token() -> str:
+    global _ACLED_TOKEN
+    if _ACLED_TOKEN:
+        return _ACLED_TOKEN
+    import os
+    user, pw = os.environ.get("ACLED_EMAIL"), os.environ.get("ACLED_PASSWORD")
+    if not user or not pw:
+        raise RuntimeError("brak ACLED_EMAIL / ACLED_PASSWORD")
+    body = urllib.parse.urlencode({"username": user, "password": pw, "grant_type": "password", "client_id": "acled",
+                                   "scope": "authenticated"}).encode()
+    req = urllib.request.Request("https://acleddata.com/oauth/token", data=body,
+                                 headers={**UA, "Content-Type": "application/x-www-form-urlencoded"})
+    _ACLED_TOKEN = json.loads(urllib.request.urlopen(req, timeout=60).read())["access_token"]
+    return _ACLED_TOKEN
+
+
+def acled_counts(start: date, end: date) -> dict[tuple[str, date], int]:
+    """Liczba zdarzeń przemocy politycznej na kraj i dzień (bitwy, ostrzał/eksplozje, przemoc wobec cywilów)."""
+    from .signals import detect_countries
+    counts: dict[tuple[str, date], int] = defaultdict(int)
+    names: dict[str, str | None] = {}
+    t = start
+    while t <= end:
+        t2 = min(t + timedelta(days=30), end)
+        page = 1
+        while True:
+            q = urllib.parse.urlencode({"event_date": f"{t.isoformat()}|{t2.isoformat()}", "event_date_where": "BETWEEN",
+                                        "fields": "event_date|country", "limit": 5000, "page": page})
+            q += "&event_type=" + urllib.parse.quote(ACLED_TYPES, safe=":=/")
+            req = urllib.request.Request(f"https://acleddata.com/api/acled/read?{q}",
+                                         headers={**UA, "Authorization": f"Bearer {_acled_token()}"})
+            js = json.loads(urllib.request.urlopen(req, timeout=180).read())
+            rows = js.get("data") or []
+            for r in rows:
+                c = r.get("country") or ""
+                if c not in names:
+                    found = detect_countries(c)
+                    names[c] = found[0] if found else None
+                if names[c]:
+                    counts[(names[c], date.fromisoformat(r["event_date"][:10]))] += 1
+            if len(rows) < 5000:
+                break
+            page += 1
+        t = t2 + timedelta(days=1)
+    return counts
+
+
+def acled(start: date, end: date) -> list[dict]:
+    """Sygnał: w ostatnich 7 dniach co najmniej 2 razy więcej zdarzeń niż mediana tygodniowa z 12 poprzednich tygodni (min. 10)."""
+    counts = acled_counts(start - timedelta(days=100), end)
+    if not counts:
+        print("  [acled] brak danych (konto może mieć dostęp tylko do starszych danych)")
+        return []
+    print(f"  [acled] dane do {max(d for _, d in counts)}")
+    by_c: dict[str, dict[date, int]] = defaultdict(dict)
+    for (c, d), n in counts.items():
+        by_c[c][d] = n
+    out = []
+    for c, days in by_c.items():
+        last = None
+        d = start
+        while d <= end:
+            week = sum(days.get(d - timedelta(days=i), 0) for i in range(7))
+            prev = [sum(days.get(d - timedelta(days=7 * w + i), 0) for i in range(7)) for w in range(1, 13)]
+            med = statistics.median(prev)
+            if week >= 10 and week >= 2 * max(med, 1) and (last is None or (d - last).days >= 14):
+                last = d
+                out.append(_item("https://acleddata.com/", f"Political violence events in {_name(c)} up to {week} in 7 days "
+                                 f"from a usual {med:.0f} a week: battles, explosions, attacks on civilians (ACLED)", d, "acled", "acleddata.com", c))
+            d += timedelta(days=1)
+    return out
+
+
+# --- Magazyny gazu w UE (GIE AGSI+, sekret AGSI_KEY) -------------------------------------------------
+def agsi(start: date, end: date) -> list[dict]:
+    """Sygnał (dla Rosji jako dostawcy): zapełnienie magazynów UE co najmniej 10 pkt proc. poniżej średniej z 5 lat dla tego dnia."""
+    import os
+    key = os.environ.get("AGSI_KEY")
+    if not key:
+        raise RuntimeError("brak AGSI_KEY")
+    rows, page = {}, 1
+    while True:
+        q = urllib.parse.urlencode({"type": "eu", "from": (start - timedelta(days=5 * 366 + 10)).isoformat(), "to": end.isoformat(),
+                                    "size": 300, "page": page})
+        req = urllib.request.Request(f"https://agsi.gie.eu/api?{q}", headers={**UA, "x-key": key})
+        js = json.loads(urllib.request.urlopen(req, timeout=60).read())
+        for r in js.get("data") or []:
+            try:
+                rows[date.fromisoformat(r["gasDayStart"])] = float(r["full"])
+            except (KeyError, TypeError, ValueError):
+                continue
+        if page >= int(js.get("last_page") or 1):
+            break
+        page += 1
+        time.sleep(0.3)
+    out, last = [], None
+    for d in sorted(x for x in rows if start <= x <= end):
+        past = [rows.get(d.replace(year=d.year - k)) for k in range(1, 6) if not (d.month == 2 and d.day == 29)]
+        past = [p for p in past if p is not None]
+        if len(past) < 3:
+            continue
+        avg = statistics.mean(past)
+        if rows[d] <= avg - 10 and (last is None or (d - last).days >= 30):
+            last = d
+            out.append(_item("https://agsi.gie.eu/", f"EU gas storage only {rows[d]:.0f}% full vs {avg:.0f}% 5-year average for this day; "
+                             "supply risk from Russia (GIE AGSI)", d, "agsi", "agsi.gie.eu", "RU"))
+    return out
+
+
 # --- Na żywo (pierwotne.FETCHERS) i historia -----------------------------------------------------------
 def live_sanctions(con, days: int = 7) -> list[dict]:
     """Raz dziennie (pliki mają kilkadziesiąt MB): wpisy z ostatnich `days` dni z list UE i Wielkiej Brytanii."""
@@ -324,6 +441,18 @@ def live_fx(con, days: int = 5) -> list[dict]:
     return fx_shocks(date.today() - timedelta(days=days), date.today())
 
 
+def live_acled(con, days: int = 7) -> list[dict]:
+    if not _once_a_day(con, "acled"):
+        return []
+    return acled(date.today() - timedelta(days=days), date.today())
+
+
+def live_agsi(con, days: int = 7) -> list[dict]:
+    if not _once_a_day(con, "agsi"):
+        return []
+    return agsi(date.today() - timedelta(days=days), date.today())
+
+
 def live_rss(con, days: int = 7) -> list[dict]:
     return official_rss(days)
 
@@ -344,6 +473,12 @@ def history(start: date, end: date, which: set[str] | None = None) -> list[dict]
         out += portwatch(start, end)
     if "kursy" in which:
         out += fx_shocks(start, end)
+    for name, fn in (("acled", acled), ("agsi", agsi)):
+        if name in which:
+            try:
+                out += fn(start, end)
+            except Exception as e:
+                print(f"  [{name}] {e}")
     return out
 
 

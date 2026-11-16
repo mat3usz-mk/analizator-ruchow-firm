@@ -72,7 +72,7 @@ def main(argv=None) -> int:
     from .score import extract_signals
     ap = argparse.ArgumentParser(prog="analizator.porownanie")
     ap.add_argument("--db", required=True)
-    ap.add_argument("--pierwotne", required=True)
+    ap.add_argument("--pierwotne", required=True, nargs="+")
     ap.add_argument("--out", default="raporty/pierwotne-porownanie.md")
     ap.add_argument("--test-from", default="2025-03-01")
     ap.add_argument("--train-from", default="2022-03-01")
@@ -81,7 +81,7 @@ def main(argv=None) -> int:
     a = ap.parse_args(argv)
     t0 = time.time()
     art = extract_signals(store.load(store.connect(a.db)))
-    prim_items = store.load(store.connect(a.pierwotne))
+    prim_items = [x for p in a.pierwotne for x in store.load(store.connect(p))]
     if a.zrodla:
         prim_items = [x for x in prim_items if x["source"] in set(a.zrodla.split(","))]
     prim = extract_signals(prim_items)

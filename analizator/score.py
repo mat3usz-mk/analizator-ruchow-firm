@@ -63,7 +63,7 @@ SOURCE_TIERS: dict[str, float] = {
     # oficjalne i źródła pierwotne
     "sec.gov": 1.3, "travel.state.gov": 1.3, "gov.uk": 1.3, "easa.europa.eu": 1.3, "faa.gov": 1.3, "ofac.treasury.gov": 1.2,
     "ted.europa.eu": 1.1, "consilium.europa.eu": 1.3, "press.un.org": 1.25, "iaea.org": 1.3, "webgate.ec.europa.eu": 1.3,
-    "sanctionslist.fcdo.gov.uk": 1.3, "ioda.inetintel.cc.gatech.edu": 1.2, "portwatch.imf.org": 1.3, "finance.yahoo.com": 1.2, "opensky-network.org": 1.2, "aisstream.io": 1.2, "stockwatch.pl": 1.1, "bankier.pl": 1.1,
+    "sanctionslist.fcdo.gov.uk": 1.3, "ioda.inetintel.cc.gatech.edu": 1.2, "portwatch.imf.org": 1.3, "finance.yahoo.com": 1.2, "acleddata.com": 1.25, "agsi.gie.eu": 1.25, "opensky-network.org": 1.2, "aisstream.io": 1.2, "stockwatch.pl": 1.1, "bankier.pl": 1.1,
     # agencje i duża prasa biznesowa
     "reuters.com": 1.15, "bloomberg.com": 1.15, "ft.com": 1.15, "wsj.com": 1.15, "nikkei.com": 1.1, "asia.nikkei.com": 1.1,
     "apnews.com": 1.05, "cnbc.com": 1.0, "economist.com": 1.05, "handelsblatt.com": 1.05, "lesechos.fr": 1.05,
