@@ -1,0 +1,35 @@
+name: Zegar czuwania
+
+# Harmonogram GitHuba (cron) w tym repozytorium nie uruchamia się, więc ten workflow pełni rolę zegara:
+# co 30 minut wywołuje „Czuwanie analizatora”, a po ok. 5,5 godziny uruchamia sam siebie od nowa.
+# Wystarczy raz uruchomić go ręcznie (Actions -> Zegar czuwania -> Run workflow). Zatrzymanie: Cancel run.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 */6 * * *"  # zapas, gdyby łańcuch się przerwał (o ile harmonogram zacznie działać)
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: zegar
+  cancel-in-progress: false
+
+jobs:
+  tik:
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Co 30 minut cykl czuwania
+        run: |
+          for i in $(seq 1 11); do
+            gh api -X POST "repos/$REPO/actions/workflows/czuwanie.yml/dispatches" -f ref=main && echo "$(date -u +%H:%M) cykl $i wywołany" || echo "nie wywołano cyklu $i"
+            [ "$i" -lt 11 ] && sleep 1800
+          done
+      - name: Następna zmiana zegara
+        if: always()
+        run: gh api -X POST "repos/$REPO/actions/workflows/zegar.yml/dispatches" -f ref=main
