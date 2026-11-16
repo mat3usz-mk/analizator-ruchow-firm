@@ -397,7 +397,7 @@ class TestAlarmImpulsu(unittest.TestCase):
         from datetime import date
         from types import SimpleNamespace
         from analizator.czuwanie import changes
-        r = SimpleNamespace(country="EE", index=10.0, level="niski", evidence=[], impulse=12.0,
+        r = SimpleNamespace(country="EE", index=10.0, level="niski", evidence=[], impulse=12.0, prob=None,
                             impulse_info={"historii": 3, "teraz": 9.0, "norma": 0.2})
         st = {"kraje": {"EE": {"indeks": 10, "poziom": "niski", "impuls": 0}}}
         a, new = changes([r], st, date(2026, 11, 16))
