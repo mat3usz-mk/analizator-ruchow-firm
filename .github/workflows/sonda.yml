@@ -12,54 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Sprawdź źródła
+      - name: Próbki formatów
         run: |
-          now=$(date -u +%s); wk=$((now-7*86400))
-          while read -r name url; do
-            [ -z "$name" ] && continue
-            r=$(curl -s -L -m 40 -A "Mozilla/5.0 (analizator ruchow firm)" -o /tmp/b -w '%{http_code} %{size_download}' "$url")
-            echo "$name $r $(head -c 160 /tmp/b | tr -d '\n\r' | tr -c '[:print:]' ' ')"
-          done <<LIST
-          portwatch https://services9.arcgis.com/weJ1QsnbMYJlCHdG/arcgis/rest/services/Daily_Chokepoints_Data/FeatureServer/0/query?where=1%3D1&outFields=*&resultRecordCount=2&orderByFields=date+DESC&f=json
-          portwatch_porty https://services9.arcgis.com/weJ1QsnbMYJlCHdG/arcgis/rest/services/Daily_Ports_Data/FeatureServer/0/query?where=1%3D1&outFields=*&resultRecordCount=1&f=json
-          ioda_zdarzenia https://api.ioda.inetintel.cc.gatech.edu/v2/outages/events?from=$wk&until=$now&limit=3
-          ioda_sygnal https://api.ioda.inetintel.cc.gatech.edu/v2/signals/raw/country/IR?from=$wk&until=$now
-          entsog https://transparency.entsog.eu/api/v1/operationalData?limit=2&indicator=Physical%20Flow
-          gie_agsi https://agsi.gie.eu/api?country=de&size=1
-          ecb https://data-api.ecb.europa.eu/service/data/EXR/D.TRY.EUR.SP00.A?lastNObservations=2&format=csvdata
-          yahoo_fx https://query1.finance.yahoo.com/v8/finance/chart/TRY=X?range=5d&interval=1d
-          nga_msi https://msi.nga.mil/api/publications/broadcast-warn?output=json&status=A
-          ukmto https://www.ukmto.org/recent-incidents
-          marad https://www.maritime.dot.gov/msci-advisories
-          un_sankcje https://scsanctions.un.org/resources/xml/en/consolidated.xml
-          uk_sankcje https://ofsistorage.blob.core.windows.net/publishing/documents/ConList.csv
-          uk_sankcje2 https://sanctionslist.fcdo.gov.uk/docs/UK-Sanctions-List.csv
-          eu_sankcje https://webgate.ec.europa.eu/fsd/fsf/public/files/xmlFullSanctionsList_1_1/content?token=dG9rZW4tMjAxNw
-          reliefweb https://api.reliefweb.int/v2/reports?appname=analizator-ruchow-firm&limit=1
-          polymarket https://gamma-api.polymarket.com/events?limit=2&tag_slug=geopolitics&closed=false
-          ucdp https://ucdpapi.pcr.uu.se/api/gedevents/25.1?pagesize=1
-          acled https://acleddata.com/api/acled/read?limit=1
-          cloudflare https://api.cloudflare.com/client/v4/radar/annotations/outages?limit=1
-          firms https://firms.modaps.eosdis.nasa.gov/api/area/
-          fred https://api.stlouisfed.org/fred/series/observations?series_id=DGS10
-          safeairspace https://safeairspace.net/
-          gdacs https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=EQ&alertlevel=red
-          metaculus https://www.metaculus.com/api/posts/?limit=1
-          iaea https://www.iaea.org/feeds/topnews
-          nato https://www.nato.int/cps/rss/en/natohq/rssFeed.xsl/rssFeed.xml
-          eu_rada https://www.consilium.europa.eu/en/rss/pressreleases.ashx
-          un_rb https://press.un.org/en/rss.xml
-          ofac_ostatnie https://ofac.treasury.gov/recent-actions
-          stooq https://stooq.com/q/d/l/?s=wig20&i=d
-          gpw https://www.gpw.pl/indeks?isin=PL9999999987
-          eia https://www.eia.gov/
-          cboe_vix https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv
-          gpsjam https://gpsjam.org/
-          iaea_pris https://pris.iaea.org/
-          imf_portwatch_dis https://services9.arcgis.com/weJ1QsnbMYJlCHdG/arcgis/rest/services/portwatch_disruptions_database/FeatureServer/0/query?where=1%3D1&outFields=*&resultRecordCount=1&f=json
-          ais_ws https://stream.aisstream.io/v0/stream
-          bankier https://www.bankier.pl/rss/espi.xml
-          knf https://www.knf.gov.pl/
-          bis https://stats.bis.org/api/v1/data/WS_XRU/all/all?lastNObservations=1
-          wb https://api.worldbank.org/v2/country/IR/indicator/NY.GDP.MKTP.CD?format=json&per_page=1
-          LIST
+          now=$(date -u +%s); y=$((now-400*86400))
+          echo "== IODA"; curl -s -m 60 "https://api.ioda.inetintel.cc.gatech.edu/v2/outages/events?from=$y&until=$now&entityType=country&limit=3" | head -c 1500; echo
+          echo "== IODA 2019"; curl -s -m 60 "https://api.ioda.inetintel.cc.gatech.edu/v2/outages/events?from=1546300800&until=1549000000&entityType=country&limit=2" | head -c 600; echo
+          echo "== PORTWATCH"; curl -s -m 60 "https://services9.arcgis.com/weJ1QsnbMYJlCHdG/arcgis/rest/services/Daily_Chokepoints_Data/FeatureServer/0/query?where=1%3D1&outFields=*&resultRecordCount=2&f=json" | head -c 1500; echo
+          echo "== UK"; curl -s -m 120 https://sanctionslist.fcdo.gov.uk/docs/UK-Sanctions-List.csv | head -n 4 | cut -c1-1500
+          echo "== EU"; curl -s -m 120 "https://webgate.ec.europa.eu/fsd/fsf/public/files/xmlFullSanctionsList_1_1/content?token=dG9rZW4tMjAxNw" | head -c 4000; echo
+          echo "== UN"; curl -s -m 120 https://scsanctions.un.org/resources/xml/en/consolidated.xml | head -c 2500; echo
+          echo "== RADA"; curl -s -m 60 https://www.consilium.europa.eu/en/rss/pressreleases.ashx | grep -o "<title>[^<]*" | head -8
+          echo "== ONZ"; curl -s -m 60 https://press.un.org/en/rss.xml | grep -o "<title>[^<]*" | head -8
+          echo "== UKMTO"; curl -s -m 60 https://www.ukmto.org/recent-incidents | grep -o '__NEXT_DATA__[^<]\{0,1500\}' | head -c 1500; echo
