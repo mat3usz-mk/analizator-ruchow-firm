@@ -20,7 +20,8 @@ from . import report, sources, store
 from .score import PRIORITY_CATS, PRIORITY_SOURCES, assess, country_name, extract_signals
 from .skutki import indices
 
-FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "kursy", "agsi", "finra_short", "opcje", "dsca", "kongres", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
+FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "kursy", "agsi", "finra_short", "opcje", "kongres", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
+# DSCA (sprzedaż broni USA) wyłączone: w teście 2025–2026 +1 trafienie przy +17 fałszywych alarmach (raporty/pierwotne-dsca.md)
 LEVELS = {"niski": 0, "podwyższony": 1, "wysoki": 2}
 IMPULSE_ALARM = 10.0  # test 2019–2026 (raporty/impuls-wyniki.md): precyzja 12–17%, ok. 4× lepiej niż losowo
 
