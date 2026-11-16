@@ -153,8 +153,20 @@ def basket(label_key: str, start: date) -> tuple[list[tuple[Series, int, float]]
 
 
 # --- Ocena -----------------------------------------------------------------------
-def evaluate(episodes: list[dict], days: int = 30) -> dict:
-    """episodes: [{"kraj", "data"}], gdzie data to początek pomiaru zmiany notowań."""
+# Okresy pokazywane w raporcie: liczba dni od początku pomiaru (przy wydarzeniach: tydzień przed nim)
+HORIZONS = {14: "ciągu tygodnia", 37: "ciągu miesiąca", 67: "ciągu 2 miesięcy"}
+
+
+def _q(xs: list[float], p: float) -> float:
+    xs = sorted(xs)
+    k = (len(xs) - 1) * p
+    i = int(k)
+    return xs[i] + (xs[min(i + 1, len(xs) - 1)] - xs[i]) * (k - i)
+
+
+def evaluate(episodes: list[dict], days: int = 30, horizons: tuple[int, ...] = tuple(HORIZONS)) -> dict:
+    """episodes: [{"kraj", "data"}], gdzie data to początek pomiaru zmiany notowań.
+    Ocena kierunku: zmiana po `days` dniach. Dodatkowo dla każdego okresu z `horizons`: typowa skala ruchu (mediana i kwartyle)."""
     from .skutki import FRONTS, FRONT_INDICES, indices
     if not episodes:
         return {}
@@ -177,21 +189,33 @@ def evaluate(episodes: list[dict], days: int = 30) -> dict:
                 b = basket(k, start)
                 if b:
                     for i, (s, sign, _) in enumerate(b[0]):
-                        b[0][i] = (s, sign, s.drift(days))
+                        b[0][i] = (s, sign, {h: s.drift(h) for h in set(horizons) | {days}})
                 baskets[k] = b
             st = stats.setdefault(f"{k}|{direction}", {"key_dir": direction, "n": 0, "trafne": 0, "nadwyzka": 0.0, "kraje": defaultdict(int),
                                                       "symbol": baskets[k][1] if baskets[k] else None})
             if not baskets[k]:
                 continue
-            rs = [(r - dr) * sign for s, sign, dr in baskets[k][0] if (r := s.ret(t, days)) is not None]
+            rs = [(r - dr[days]) * sign for s, sign, dr in baskets[k][0] if (r := s.ret(t, days)) is not None]
             if not rs:
                 continue
+            for h in horizons:
+                rh = [(r - dr[h]) * sign for s, sign, dr in baskets[k][0] if (r := s.ret(t, h)) is not None]
+                if rh:
+                    st.setdefault("_ruchy", defaultdict(list))[h].append(sum(rh) / len(rh))
             ex = sum(rs) / len(rs)
             st["n"] += 1
             st["trafne"] += (ex > 0) if direction == "up" else (ex < 0)
             st["nadwyzka"] += ex
             st["kraje"][c] += 1
     for st in stats.values():
+        ruchy = st.pop("_ruchy", {})
+        up = st["key_dir"] == "up"
+        st["okresy"] = {str(h): {"n": len(v), "mediana": round(_q(v, .5), 4), "q25": round(_q(v, .25), 4), "q75": round(_q(v, .75), 4),
+                                 "trafne": sum((x > 0) if up else (x < 0) for x in v)} for h, v in sorted(ruchy.items()) if len(v) >= 3}
+        # okres z najwyraźniejszym ruchem we właściwą stronę: najwyższy odsetek trafień, przy remisie większa mediana
+        ok = [(o["trafne"] / o["n"], abs(o["mediana"]), h) for h, o in st["okresy"].items()
+              if (o["mediana"] > 0) == up and o["n"] >= MIN_N]
+        st["najlepszy_okres"] = max(ok)[2] if ok else None
         st["nadwyzka"] = round(st["nadwyzka"] / st["n"], 4) if st["n"] else None
         st["kraje"] = dict(sorted(st["kraje"].items(), key=lambda t: -t[1])[:8])
     return stats
@@ -209,14 +233,21 @@ def verdict(st: dict | None) -> str:
 
 def _table(stats: dict) -> list[str]:
     rows = sorted(stats.items(), key=lambda kv: (-(kv[1]["n"] >= MIN_N), -(kv[1]["trafne"] / kv[1]["n"] if kv[1]["n"] else 0)))
-    L = ["| indeks | kierunek | przypadki | trafne | średnia nadwyżka | ocena | notowania |", "|---|---|---|---|---|---|---|"]
+    hz = " | ".join(f"w {v}: mediana (połowa przypadków)" for v in HORIZONS.values())
+    L = [f"| indeks | kierunek | przypadki | trafne | średnia nadwyżka | {hz} | ocena | notowania |",
+         "|---|---|---|---|---|" + "---|" * len(HORIZONS) + "---|---|"]
     for k, st in rows:
         if not st["n"]:
             continue
         lab, d = k.split("|")
         hit = f"{st['trafne']}/{st['n']} ({st['trafne'] / st['n']:.0%})" if st["n"] else "-"
         ex = f"{st['nadwyzka']:+.1%}" if st["nadwyzka"] is not None else "-"
-        L.append(f"| {lab} | {'▲ w górę' if d == 'up' else '▼ w dół'} | {st['n']} | {hit} | {ex} | {verdict(st)} | {st['symbol'] or 'brak'} |")
+        cells = []
+        for h in HORIZONS:
+            o = (st.get("okresy") or {}).get(str(h))
+            mark = " ★" if st.get("najlepszy_okres") == str(h) else ""
+            cells.append(f"{_pct(o['mediana'])} ({_pct(o['q25'])} do {_pct(o['q75'])}){mark}" if o else "-")
+        L.append(f"| {lab} | {'▲ w górę' if d == 'up' else '▼ w dół'} | {st['n']} | {hit} | {ex} | {' | '.join(cells)} | {verdict(st)} | {st['symbol'] or 'brak'} |")
     missing = sorted({k.split("|")[0] for k, st in stats.items() if not st["n"]})
     if missing:
         L += ["", "Bez darmowych notowań (nie da się sprawdzić): " + ", ".join(missing) + "."]
@@ -228,7 +259,9 @@ def write_report(path: str, stats: dict, meta: dict, alarm_stats: dict | None = 
          f"**Podstawa oceny: prawdziwe wydarzenia** ({meta['n_wydarzen']} wydarzeń z list 2015–2026). Dla każdego liczona jest zmiana "
          f"notowań od {PRE} dni przed wydarzeniem do {meta['dni']} dni po nim, pomniejszona o przeciętną zmianę tego indeksu w okresie tej samej długości. "
          f"Kierunek uznajemy za sprawdzony, gdy był trafny w co najmniej {MIN_HIT:.0%} z co najmniej {MIN_N} przypadków i średnio szedł we właściwą stronę. "
-         "Raport pokazuje sprawdzone kierunki z liczbą trafień, ukrywa niesprawdzające się, a te bez notowań oznacza jako niesprawdzone.", ""]
+         "Raport pokazuje sprawdzone kierunki z liczbą trafień, ukrywa niesprawdzające się, a te bez notowań oznacza jako niesprawdzone.",
+         "Skala ruchu: zmiana ponad przeciętną dla tego indeksu, liczona od tygodnia przed wydarzeniem przez 1 tydzień, 1 miesiąc i 2 miesiące. "
+         "Mediana to typowy ruch, w nawiasie przedział, w którym mieściła się połowa przypadków. ★ = okres z najwyraźniejszym ruchem we właściwą stronę (ten pokazuje raport).", ""]
     L += _table(stats)
     if alarm_stats:
         L += ["", f"## Dla porównania: po wszystkich alarmach analizatora ({meta.get('n_epizodow', 0)} epizodów, reguła: {meta.get('regula', '?')})", "",
@@ -255,6 +288,19 @@ def results(path: str = RESULTS_PATH) -> dict:
     return _RES
 
 
+def _pct(x: float) -> str:
+    return f"{100 * x:+.1f}%".replace(".", ",").replace("-", "−")
+
+
+def scale(st: dict) -> str:
+    """Np. „; typowo −5,8% w 1 mies. (połowa przypadków od −9,1% do −2,0%)” dla okresu z najwyraźniejszym ruchem."""
+    h = st.get("najlepszy_okres")
+    o = (st.get("okresy") or {}).get(h) if h else None
+    if not o:
+        return ""
+    return f"; typowo {_pct(o['mediana'])} w {HORIZONS.get(int(h), h + ' dni')} (połowa przypadków od {_pct(o['q25'])} do {_pct(o['q75'])})"
+
+
 def annotate(labels: list[str], direction: str) -> list[str]:
     """Zostawia kierunki sprawdzone na danych (z liczbą trafień) i te, których nie da się sprawdzić; ukrywa niesprawdzające się."""
     res = results()
@@ -267,7 +313,7 @@ def annotate(labels: list[str], direction: str) -> list[str]:
         if v == "nie sprawdza się":
             continue
         if v == "sprawdza się":
-            out.append(f"{lab} [sprawdziło się {st['trafne']} z {st['n']} razy]")
+            out.append(f"{lab} [sprawdziło się {st['trafne']} z {st['n']} razy{scale(st)}]")
         elif v == "za mało danych":
             out.append(f"{lab} [za mało przypadków do sprawdzenia]")
         else:
