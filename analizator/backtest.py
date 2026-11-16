@@ -80,7 +80,7 @@ def replay(signals: list[dict], start: date, end: date, params: dict | None = No
     t = week_start(start) + timedelta(days=6) if step_days == 7 else start
     while t <= end:
         known = [s for s in signals if s["date"] <= t]
-        for r in assess(known, today=t, params=params):
+        for r in assess(known, today=t, params=params, use_model=False):
             out[(r.country, t)] = r.index
         t += timedelta(days=step_days)
     return out

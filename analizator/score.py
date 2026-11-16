@@ -49,6 +49,7 @@ class CountryAssessment:
     spill_from: str | None = None  # kraje, z których przeniesiono ryzyko
     co_occurring: list[tuple[str, str, int]] = field(default_factory=list)
     parts: dict = field(default_factory=dict)  # składowe indeksu (do wyjaśnień i diagnostyki)
+    prob: float | None = None      # szansa wydarzenia w horyzoncie wg modelu uczonego na historii (analizator/model.json)
 
 
 # Wiarygodność źródeł: oficjalne raporty > agencje i prasa branżowa > reszta.
@@ -136,12 +137,12 @@ def _cluster_stories(rows: list[dict]) -> None:
         groups[(r["country"], r["category"])].append(r)
     for (c, cat), items in groups.items():
         clusters: list[dict] = []
+        active: list[dict] = []  # tylko historie z ostatnich 10 dni (przy wieloletniej historii pełna lista byłaby kwadratowa)
         for r in sorted(items, key=lambda r: r["date"]):
             tok = _tokens(r["title"])
             hit = None
-            for cl in clusters:
-                if (r["date"] - cl["last"]).days > 10:
-                    continue
+            active = [cl for cl in active if (r["date"] - cl["last"]).days <= 10]
+            for cl in active:
                 same_company = r["company"] and cl["company"] and r["company"].split()[0].lower() == cl["company"].split()[0].lower()
                 jac = len(tok & cl["tok"]) / max(len(tok | cl["tok"]), 1)
                 # przedruki tej samej wiadomości w ciągu kilku dni mają różne tytuły, więc próg dla bliskich dat jest niższy
@@ -152,6 +153,7 @@ def _cluster_stories(rows: list[dict]) -> None:
             if not hit:
                 hit = {"id": f"{c}-{cat}-{len(clusters)}", "tok": set(tok), "company": r["company"], "last": r["date"], "rows": []}
                 clusters.append(hit)
+                active.append(hit)
             hit["rows"].append(r)
             hit["tok"] |= tok
             hit["last"] = r["date"]
@@ -232,7 +234,7 @@ def _damp_sec(signals: list[dict], baseline_weeks: int, cap: float) -> list[dict
 
 
 def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2,
-           min_baseline_weeks: int = 8, params: dict | None = None) -> list[CountryAssessment]:
+           min_baseline_weeks: int = 8, params: dict | None = None, use_model: bool = True) -> list[CountryAssessment]:
     P = {**PARAMS, **(params or {})}
     bw = int(P["baseline_weeks"])
     today = today or max((s["date"] for s in signals), default=date.today())
@@ -360,6 +362,12 @@ def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2
                 own[t].spill_from = src if not own[t].spill_from else own[t].spill_from + "," + src
     for r in own.values():
         r.level = "wysoki" if r.index >= 70 else "podwyższony" if r.index >= 40 else "niski"
+    if use_model:
+        from .ucz import features, load_model, predict
+        m = load_model()
+        if m:
+            for r in own.values():
+                r.prob = round(predict(m, features(r)), 3)
     return sorted(own.values(), key=lambda r: -r.index)
 
 

@@ -91,11 +91,12 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--to", dest="end", default=date.today().isoformat())
     p.add_argument("--db", default="historia_gdelt_pliki.db")
     p.add_argument("--workers", type=int, default=6)
+    p.add_argument("--stride", type=int, default=1, help="co który plik brać (4 = jeden na godzinę; próbka do wieloletniej historii)")
     a = p.parse_args(argv)
     con = store.connect(a.db)
     con.execute("CREATE TABLE IF NOT EXISTS gdelt_files_done (file TEXT PRIMARY KEY, n_all INTEGER, n_saved INTEGER)")
     done = {r[0] for r in con.execute("SELECT file FROM gdelt_files_done")}
-    todo = [u for u in file_list(date.fromisoformat(a.start), date.fromisoformat(a.end)) if u not in done]
+    todo = [u for u in file_list(date.fromisoformat(a.start), date.fromisoformat(a.end))[::a.stride] if u not in done]
     print(f"plików do pobrania: {len(todo)} (zrobione wcześniej: {len(done)})", flush=True)
     t0, k, failed = time.time(), 0, 0
     with ProcessPoolExecutor(a.workers) as ex:

@@ -1,0 +1,91 @@
+name: Historia i uczenie modelu
+
+# Ręcznie (zakładka Actions -> "Historia i uczenie modelu" -> Run workflow).
+# 1) Dla każdego roku osobno (równolegle) pobiera pliki GDELT GKG (próbka: jeden plik na godzinę)
+#    i zapisuje tylko nagłówki, w których klasyfikator widzi sygnał.
+# 2) Łączy lata w jedną bazę, uczy model na 2015-2024 i sprawdza go na 2025-2026.
+# 3) Zapisuje do repozytorium analizator/model.json i raporty/model-wyniki.md (raport porównuje model z ręcznym indeksem).
+on:
+  workflow_dispatch:
+    inputs:
+      stride:
+        description: "co który plik GDELT brać (4 = jeden na godzinę)"
+        default: "4"
+
+permissions:
+  contents: write
+
+jobs:
+  rok:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        rok: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pobierz rok ${{ matrix.rok }}
+        run: |
+          start="${{ matrix.rok }}-01-01"; [ "${{ matrix.rok }}" = "2015" ] && start="2015-02-18"
+          end="${{ matrix.rok }}-12-31"
+          # dwa przebiegi: drugi dobiera pliki, które za pierwszym razem dały błąd
+          for i in 1 2; do
+            python -m analizator.gdelt_pliki --from "$start" --to "$end" --db "h_${{ matrix.rok }}.db" \
+              --stride ${{ github.event.inputs.stride || 4 }} --workers 10 | (grep -v "^  błąd" || true) | tail -n 40
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h_${{ matrix.rok }}
+          path: h_${{ matrix.rok }}.db
+          retention-days: 30
+
+  ucz:
+    needs: rok
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          path: lata
+          pattern: h_*
+          merge-multiple: true
+      - name: Połącz lata w jedną bazę
+        run: |
+          python - <<'EOF'
+          import glob, sqlite3
+          from analizator import store
+          con = store.connect("historia_gkg.db")
+          for f in sorted(glob.glob("lata/*.db")):
+              con.execute("ATTACH ? AS s", (f,))
+              con.execute("INSERT OR IGNORE INTO articles(url,title,date,source,domain,lang) SELECT url,title,date,source,domain,lang FROM s.articles")
+              con.commit(); con.execute("DETACH s")
+              print(f, con.execute("SELECT COUNT(*) FROM articles").fetchone()[0])
+          for y, n in con.execute("SELECT substr(date,1,4), COUNT(*) FROM articles GROUP BY 1"):
+              print(y, n)
+          EOF
+      - name: Uczenie i test
+        run: |
+          python -m analizator.ucz --db historia_gkg.db --train-events wydarzenia_2015_2024.csv --test-events wydarzenia.csv \
+            --train-from 2015-05-01 --train-to 2024-12-31 --test-from 2025-03-01 --out-report raporty/model-wyniki.md
+      - name: Zapisz model w repozytorium
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add analizator/model.json raporty/model-wyniki.md
+          git commit -m "Model uczony na historii 2015-2024 (test 2025-2026)" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: historia_gkg
+          path: historia_gkg.db
+          retention-days: 30

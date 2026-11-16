@@ -236,6 +236,24 @@ class TestV05(unittest.TestCase):
         self.assertEqual(again, [], "bez zmian nie ma powtórnych powiadomień")
 
 
+class TestUczenie(unittest.TestCase):
+    def test_fit_learns_signal_and_auc(self):
+        import random
+        from analizator.ucz import auc, fit, predict
+        rnd = random.Random(1)
+        X = [[rnd.random(), rnd.random()] for _ in range(600)]
+        y = [int(x[0] + 0.1 * rnd.random() > 0.8) for x in X]
+        m = fit(X, y, iters=300)
+        self.assertGreater(m["w"][0], abs(m["w"][1]) * 3, "model powinien nauczyć się, że liczy się pierwsza cecha")
+        self.assertGreater(auc([predict(m, x) for x in X], y), 0.9)
+        self.assertEqual(auc([0.1, 0.2, 0.3], [0, 0, 1]), 1.0)
+
+    def test_features_match_names(self):
+        from analizator.ucz import FEATURES, features
+        r = assess(extract_signals(demo.generate(date(2026, 11, 14))), today=date(2026, 11, 14), use_model=False)[0]
+        self.assertEqual(len(features(r)), len(FEATURES))
+
+
 if __name__ == "__main__":
     unittest.main()
 

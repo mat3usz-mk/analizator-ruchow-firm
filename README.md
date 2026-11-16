@@ -179,6 +179,19 @@ Jest też w pliku `fronty.json`. Indeksy krajów liczone są osobno, bo przenosz
 potem stockwatch.pl, który odrzuca automaty (403). **Sieć:** host zablokowany przez sieć środowiska nie jest już ponawiany.
 **Baza:** zawsze praca na lokalnej kopii, ścieżki bezwzględne liczone na starcie (poprawka błędu `kandydaci.json` z 16.11).
 
+## Model uczony na historii (v0.6)
+
+Zamiast samych ręcznie dobranych wag analizator może używać modelu (regresja logistyczna w czystym Pythonie, `analizator/ucz.py`),
+który uczy się na latach 2015–2024, które składowe oceny kraju naprawdę poprzedzały wydarzenia. Daje **szansę wydarzenia w kraju
+w ciągu 60 dni** z kalibracją sprawdzoną na latach 2025–2026, których model nie widzi przy uczeniu.
+
+- Wydarzenia do uczenia: `wydarzenia_2015_2024.csv` (ok. 150, spisane z wiedzy ogólnej z linkami do Wikipedii). Test: `wydarzenia.csv`.
+- Historia wiadomości: pliki GDELT GKG (próbka: jeden plik na godzinę), pobierane równolegle rok po roku przez workflow
+  „Historia i uczenie modelu” (GitHub Actions, uruchamiany ręcznie). Wynik trafia do `analizator/model.json`
+  i `raporty/model-wyniki.md` (AUC, trafienia, precyzja i kalibracja: model kontra ręczny indeks na tych samych danych).
+- Gdy `analizator/model.json` istnieje, raport pokazuje przy kraju „szansa wydarzenia w 60 dni wg modelu”. Bez pliku działa jak dotąd.
+- Ręcznie: `python -m analizator.ucz --db historia_gkg.db` (opcje: `--train-to`, `--test-from`, `--horizon`).
+
 ## Ograniczenia (ważne)
 - **Indeks to nie prawdopodobieństwo.** Żeby mówić "X% szans na konflikt w 30 dni",
   trzeba skalibrować model na wielu historycznych przypadkach (i przypadkach, w których

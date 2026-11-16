@@ -1,0 +1,161 @@
+data,kraj,opis,typ,zrodlo
+# Wydarzenia 2015-2024 do UCZENIA modelu (wydarzenia.csv z 2025-2026 zostaje jako zbiór TESTOWY, którego model nie widzi).
+# Spisane 2026-11-16 z wiedzy ogólnej (Wikipedia), przed obejrzeniem wyników modelu. Daty to dzień rozpoczęcia lub kulminacji.
+# Kryterium: wydarzenie, które realnie zmieniło sytuację kraju (wojna, eskalacja, zamach stanu, blokada, duże sankcje, krach).
+# Pominięte: katastrofy naturalne i pandemia (nie da się ich przewidzieć z ruchów firm). Kraje tylko z listy signals.COUNTRIES.
+2015-03-26,YE,"Interwencja koalicji saudyjskiej w Jemenie (operacja Decisive Storm)",konflikt,https://en.wikipedia.org/wiki/Saudi_Arabian-led_intervention_in_Yemen
+2015-03-26,SA,"Arabia Saudyjska rozpoczyna wojnę w Jemenie",konflikt,https://en.wikipedia.org/wiki/Saudi_Arabian-led_intervention_in_Yemen
+2015-08-11,CN,"Dewaluacja juana i krach na giełdach w Chinach",kryzys_finansowy,https://en.wikipedia.org/wiki/2015%E2%80%932016_Chinese_stock_market_turbulence
+2015-08-20,KP,"Kryzys koreański: wymiana ognia artyleryjskiego na granicy",konflikt,https://en.wikipedia.org/wiki/2015_Korean_crisis
+2015-08-20,KR,"Kryzys koreański: wymiana ognia artyleryjskiego na granicy",konflikt,https://en.wikipedia.org/wiki/2015_Korean_crisis
+2015-09-30,SY,"Rosja rozpoczyna interwencję wojskową w Syrii",konflikt,https://en.wikipedia.org/wiki/Russian_intervention_in_the_Syrian_civil_war
+2015-10-31,EG,"Zamach na samolot Metrojet nad Synajem, zawieszenie lotów do Szarm el-Szejk",blokada,https://en.wikipedia.org/wiki/Metrojet_Flight_9268
+2015-11-24,TR,"Turcja zestrzeliwuje rosyjskiego Su-24, rosyjskie sankcje wobec Turcji",sankcje,https://en.wikipedia.org/wiki/2015_Russian_Sukhoi_Su-24_shootdown
+2015-12-23,UA,"Cyberatak na ukraińską sieć energetyczną",inne,https://en.wikipedia.org/wiki/2015_Ukraine_power_grid_hack
+2016-01-03,SA,"Arabia Saudyjska zrywa stosunki z Iranem po ataku na ambasadę",inne,https://en.wikipedia.org/wiki/2016_Iran%E2%80%93Saudi_Arabia_diplomatic_crisis
+2016-01-03,IR,"Zerwanie stosunków saudyjsko-irańskich",inne,https://en.wikipedia.org/wiki/2016_Iran%E2%80%93Saudi_Arabia_diplomatic_crisis
+2016-01-06,KP,"Czwarta próba jądrowa Korei Północnej",inne,https://en.wikipedia.org/wiki/January_2016_North_Korean_nuclear_test
+2016-01-07,CN,"Wyłączniki giełdowe w Chinach, druga fala krachu",kryzys_finansowy,https://en.wikipedia.org/wiki/2015%E2%80%932016_Chinese_stock_market_turbulence
+2016-02-10,KP,"Korea Płd. zamyka strefę przemysłową Kaesong",blokada,https://en.wikipedia.org/wiki/Kaesong_Industrial_Region
+2016-04-02,AZ,"Czterodniowa wojna o Górski Karabach",konflikt,https://en.wikipedia.org/wiki/2016_Armenian%E2%80%93Azerbaijani_clashes
+2016-04-02,AM,"Czterodniowa wojna o Górski Karabach",konflikt,https://en.wikipedia.org/wiki/2016_Armenian%E2%80%93Azerbaijani_clashes
+2016-07-15,TR,"Próba zamachu stanu w Turcji",inne,https://en.wikipedia.org/wiki/2016_Turkish_coup_attempt
+2016-08-24,SY,"Turecka operacja Tarcza Eufratu w Syrii",konflikt,https://en.wikipedia.org/wiki/Operation_Euphrates_Shield
+2016-09-09,KP,"Piąta próba jądrowa Korei Północnej",inne,https://en.wikipedia.org/wiki/September_2016_North_Korean_nuclear_test
+2016-09-29,PK,"Indie przeprowadzają 'surgical strikes' w Kaszmirze po zamachu w Uri",konflikt,https://en.wikipedia.org/wiki/2016_Indian_Line_of_Control_strike
+2016-09-29,IN,"Indyjskie uderzenia za linią kontroli w Kaszmirze",konflikt,https://en.wikipedia.org/wiki/2016_Indian_Line_of_Control_strike
+2016-10-17,IQ,"Początek bitwy o Mosul",konflikt,https://en.wikipedia.org/wiki/Battle_of_Mosul_(2016%E2%80%932017)
+2016-11-08,IN,"Demonetyzacja banknotów w Indiach",kryzys_finansowy,https://en.wikipedia.org/wiki/2016_Indian_banknote_demonetisation
+2017-04-07,SY,"Amerykański atak rakietowy na bazę Szajrat",konflikt,https://en.wikipedia.org/wiki/2017_Shayrat_missile_strike
+2017-06-05,QA,"Blokada Kataru przez Arabię Saudyjską, ZEA, Bahrajn i Egipt",blokada,https://en.wikipedia.org/wiki/2017%E2%80%932018_Qatar_diplomatic_crisis
+2017-06-05,SA,"Arabia Saudyjska zamyka granicę i przestrzeń dla Kataru",blokada,https://en.wikipedia.org/wiki/2017%E2%80%932018_Qatar_diplomatic_crisis
+2017-06-05,AE,"ZEA zrywają stosunki z Katarem i zamykają przestrzeń powietrzną",blokada,https://en.wikipedia.org/wiki/2017%E2%80%932018_Qatar_diplomatic_crisis
+2017-06-16,IN,"Konflikt graniczny Indie–Chiny na płaskowyżu Doklam",konflikt,https://en.wikipedia.org/wiki/2017_China%E2%80%93India_border_standoff
+2017-06-27,UA,"Cyberatak NotPetya na Ukrainę i firmy na świecie",inne,https://en.wikipedia.org/wiki/2017_Ukraine_ransomware_attacks
+2017-07-04,KP,"Pierwszy test międzykontynentalnej rakiety Hwasong-14",inne,https://en.wikipedia.org/wiki/Hwasong-14
+2017-08-02,RU,"Ustawa CAATSA: nowe sankcje USA wobec Rosji",sankcje,https://en.wikipedia.org/wiki/Countering_America%27s_Adversaries_Through_Sanctions_Act
+2017-08-25,MM,"Ofensywa wojska w Arakanie i masowa ucieczka Rohingjów",konflikt,https://en.wikipedia.org/wiki/Rohingya_genocide
+2017-08-25,VE,"Sankcje finansowe USA wobec Wenezueli",sankcje,https://en.wikipedia.org/wiki/International_sanctions_during_the_Venezuelan_crisis
+2017-08-29,JP,"Rakieta Korei Północnej przelatuje nad Japonią",inne,https://en.wikipedia.org/wiki/2017_North_Korea_crisis
+2017-09-03,KP,"Szósta próba jądrowa Korei Północnej",inne,https://en.wikipedia.org/wiki/2017_North_Korean_nuclear_test
+2017-10-16,IQ,"Irak odbija Kirkuk po referendum w Kurdystanie",konflikt,https://en.wikipedia.org/wiki/2017_Iraqi%E2%80%93Kurdish_conflict
+2017-11-04,SA,"Czystka w Rijadzie (Ritz-Carlton) i rakieta Huti nad Rijadem",inne,https://en.wikipedia.org/wiki/2017%E2%80%932019_Saudi_Arabian_purge
+2017-11-04,LB,"Premier Hariri ogłasza dymisję w Rijadzie, kryzys w Libanie",inne,https://en.wikipedia.org/wiki/2017_Lebanon%E2%80%93Saudi_Arabia_dispute
+2017-12-28,IR,"Fala protestów w Iranie",inne,https://en.wikipedia.org/wiki/2017%E2%80%932018_Iranian_protests
+2018-01-20,SY,"Turecka operacja Gałązka Oliwna (Afrin)",konflikt,https://en.wikipedia.org/wiki/Operation_Olive_Branch
+2018-01-20,TR,"Turcja wkracza do Afrinu w Syrii",konflikt,https://en.wikipedia.org/wiki/Operation_Olive_Branch
+2018-04-06,RU,"Sankcje USA wobec oligarchów i Rusalu",sankcje,https://en.wikipedia.org/wiki/Rusal
+2018-04-14,SY,"Ataki USA, Wielkiej Brytanii i Francji na Syrię",konflikt,https://en.wikipedia.org/wiki/April_2018_missile_strikes_against_Syria
+2018-05-08,IR,"USA wychodzą z porozumienia jądrowego JCPOA",sankcje,https://en.wikipedia.org/wiki/United_States_withdrawal_from_the_Joint_Comprehensive_Plan_of_Action
+2018-05-08,AR,"Kryzys peso, Argentyna prosi MFW o pomoc",kryzys_finansowy,https://en.wikipedia.org/wiki/2018_Argentine_monetary_crisis
+2018-06-13,YE,"Bitwa o Al-Hudajdę",konflikt,https://en.wikipedia.org/wiki/Battle_of_Al_Hudaydah
+2018-07-06,CN,"Pierwsze cła USA na chiński import, wojna handlowa",sankcje,https://en.wikipedia.org/wiki/China%E2%80%93United_States_trade_war
+2018-08-10,TR,"Krach liry tureckiej po cłach USA",kryzys_finansowy,https://en.wikipedia.org/wiki/2018%E2%80%93present_Turkish_currency_and_debt_crisis
+2018-10-02,SA,"Zabójstwo Dżamala Chaszukdżiego",inne,https://en.wikipedia.org/wiki/Assassination_of_Jamal_Khashoggi
+2018-11-05,IR,"Sankcje USA na irańską ropę",sankcje,https://en.wikipedia.org/wiki/United_States_withdrawal_from_the_Joint_Comprehensive_Plan_of_Action
+2018-11-25,UA,"Incydent w Cieśninie Kerczeńskiej, stan wojenny na Ukrainie",konflikt,https://en.wikipedia.org/wiki/Kerch_Strait_incident
+2018-11-25,RU,"Rosja ostrzeliwuje i przejmuje ukraińskie okręty",konflikt,https://en.wikipedia.org/wiki/Kerch_Strait_incident
+2019-01-23,VE,"Kryzys prezydencki: Guaidó ogłasza się prezydentem",inne,https://en.wikipedia.org/wiki/2019_Venezuelan_presidential_crisis
+2019-01-28,VE,"Sankcje USA na PDVSA",sankcje,https://en.wikipedia.org/wiki/2019_Venezuelan_presidential_crisis
+2019-02-26,PK,"Indyjski nalot na Balakot, Pakistan zamyka przestrzeń powietrzną",konflikt,https://en.wikipedia.org/wiki/2019_Balakot_airstrike
+2019-02-26,IN,"Nalot na Balakot i walki powietrzne z Pakistanem",konflikt,https://en.wikipedia.org/wiki/2019_Balakot_airstrike
+2019-03-07,VE,"Ogólnokrajowy blackout w Wenezueli",inne,https://en.wikipedia.org/wiki/2019_Venezuelan_blackouts
+2019-04-04,LY,"Ofensywa Haftara na Trypolis",konflikt,https://en.wikipedia.org/wiki/2019%E2%80%932020_Western_Libya_campaign
+2019-04-11,SD,"Obalenie Omara al-Baszira",inne,https://en.wikipedia.org/wiki/2019_Sudanese_coup_d%27%C3%A9tat
+2019-05-12,AE,"Sabotaż tankowców u wybrzeży Fudżajry",konflikt,https://en.wikipedia.org/wiki/May_2019_Gulf_of_Oman_incident
+2019-06-13,OM,"Ataki na tankowce w Zatoce Omańskiej",konflikt,https://en.wikipedia.org/wiki/June_2019_Gulf_of_Oman_incident
+2019-06-20,IR,"Iran zestrzeliwuje amerykańskiego drona, FAA zakazuje lotów nad Ormuzem",konflikt,https://en.wikipedia.org/wiki/2019_Iranian_shootdown_of_American_drone
+2019-07-04,KR,"Japonia ogranicza eksport materiałów do chipów do Korei Płd.",sankcje,https://en.wikipedia.org/wiki/2019%E2%80%932020_Japan%E2%80%93South_Korea_trade_dispute
+2019-07-19,IR,"Iran zajmuje tankowiec Stena Impero",konflikt,https://en.wikipedia.org/wiki/Stena_Impero
+2019-08-05,IN,"Indie znoszą autonomię Kaszmiru (art. 370)",inne,https://en.wikipedia.org/wiki/Revocation_of_the_special_status_of_Jammu_and_Kashmir
+2019-08-07,PK,"Pakistan obniża stosunki z Indiami i wstrzymuje handel",blokada,https://en.wikipedia.org/wiki/Revocation_of_the_special_status_of_Jammu_and_Kashmir
+2019-09-14,SA,"Atak na rafinerie Abqaiq i Churajs, połowa saudyjskiej produkcji ropy",kryzys_energetyczny,https://en.wikipedia.org/wiki/Abqaiq%E2%80%93Khurais_attack
+2019-10-09,SY,"Turecka ofensywa w północno-wschodniej Syrii",konflikt,https://en.wikipedia.org/wiki/2019_Turkish_offensive_into_north-eastern_Syria
+2019-10-09,TR,"Turcja wkracza do północnej Syrii, sankcje USA",konflikt,https://en.wikipedia.org/wiki/2019_Turkish_offensive_into_north-eastern_Syria
+2019-10-01,IQ,"Masowe protesty w Iraku (Tiszrin)",inne,https://en.wikipedia.org/wiki/2019%E2%80%932021_Iraqi_protests
+2019-10-17,LB,"Protesty i początek załamania bankowego w Libanie",kryzys_finansowy,https://en.wikipedia.org/wiki/2019%E2%80%932021_Lebanese_protests
+2019-11-15,IR,"Protesty paliwowe i wyłączenie internetu w Iranie",inne,https://en.wikipedia.org/wiki/2019%E2%80%932020_Iranian_protests
+2020-01-03,IQ,"Zabicie Kasema Sulejmaniego w Bagdadzie",konflikt,https://en.wikipedia.org/wiki/Assassination_of_Qasem_Soleimani
+2020-01-03,IR,"Zabicie Kasema Sulejmaniego",konflikt,https://en.wikipedia.org/wiki/Assassination_of_Qasem_Soleimani
+2020-01-08,IR,"Atak rakietowy na bazy USA w Iraku i zestrzelenie lotu PS752",konflikt,https://en.wikipedia.org/wiki/Ukraine_International_Airlines_Flight_752
+2020-02-27,SY,"Nalot w Idlibie, turecka operacja Wiosenna Tarcza",konflikt,https://en.wikipedia.org/wiki/Operation_Spring_Shield
+2020-02-27,TR,"Turcja rozpoczyna operację przeciw siłom syryjskim w Idlibie",konflikt,https://en.wikipedia.org/wiki/Operation_Spring_Shield
+2020-03-08,SA,"Wojna cenowa Arabia Saudyjska–Rosja na rynku ropy",kryzys_energetyczny,https://en.wikipedia.org/wiki/2020_Russia%E2%80%93Saudi_Arabia_oil_price_war
+2020-03-08,RU,"Wojna cenowa na rynku ropy, krach rubla",kryzys_energetyczny,https://en.wikipedia.org/wiki/2020_Russia%E2%80%93Saudi_Arabia_oil_price_war
+2020-06-15,IN,"Starcie w dolinie Galwan z Chinami",konflikt,https://en.wikipedia.org/wiki/2020%E2%80%932021_China%E2%80%93India_skirmishes
+2020-06-15,CN,"Starcie w dolinie Galwan z Indiami, bojkot chińskich aplikacji",konflikt,https://en.wikipedia.org/wiki/2020%E2%80%932021_China%E2%80%93India_skirmishes
+2020-06-16,KP,"Korea Północna wysadza biuro łącznikowe w Kaesong",inne,https://en.wikipedia.org/wiki/Inter-Korean_Liaison_Office
+2020-08-04,LB,"Eksplozja w porcie w Bejrucie",inne,https://en.wikipedia.org/wiki/2020_Beirut_explosion
+2020-08-09,BY,"Sfałszowane wybory i masowe protesty na Białorusi",inne,https://en.wikipedia.org/wiki/2020%E2%80%932021_Belarusian_protests
+2020-08-18,ML,"Zamach stanu w Mali",inne,https://en.wikipedia.org/wiki/2020_Malian_coup_d%27%C3%A9tat
+2020-09-27,AZ,"Druga wojna o Górski Karabach",konflikt,https://en.wikipedia.org/wiki/Second_Nagorno-Karabakh_War
+2020-09-27,AM,"Druga wojna o Górski Karabach",konflikt,https://en.wikipedia.org/wiki/Second_Nagorno-Karabakh_War
+2020-11-04,ET,"Początek wojny w Tigraju",konflikt,https://en.wikipedia.org/wiki/Tigray_war
+2021-02-01,MM,"Zamach stanu w Mjanmie",inne,https://en.wikipedia.org/wiki/2021_Myanmar_coup_d%27%C3%A9tat
+2021-03-23,EG,"Ever Given blokuje Kanał Sueski",blokada,https://en.wikipedia.org/wiki/2021_Suez_Canal_obstruction
+2021-05-10,IL,"Wojna w Gazie (maj 2021), rakiety na Izrael",konflikt,https://en.wikipedia.org/wiki/2021_Israel%E2%80%93Palestine_crisis
+2021-05-10,PS,"Wojna w Gazie (maj 2021)",konflikt,https://en.wikipedia.org/wiki/2021_Israel%E2%80%93Palestine_crisis
+2021-05-24,BY,"Przechwycenie lotu Ryanair, UE zamyka niebo dla białoruskich linii",blokada,https://en.wikipedia.org/wiki/Ryanair_Flight_4978
+2021-05-24,ML,"Drugi zamach stanu w Mali",inne,https://en.wikipedia.org/wiki/2021_Malian_coup_d%27%C3%A9tat
+2021-08-15,AF,"Talibowie zajmują Kabul, ewakuacje ambasad",konflikt,https://en.wikipedia.org/wiki/Fall_of_Kabul_(2021)
+2021-10-25,SD,"Zamach stanu w Sudanie",inne,https://en.wikipedia.org/wiki/2021_Sudanese_coup_d%27%C3%A9tat
+2021-11-06,ET,"Ofensywa TPLF na Addis Abebę, USA nakazują wyjazd personelu ambasady",konflikt,https://en.wikipedia.org/wiki/Tigray_war
+2021-11-08,PL,"Kryzys na granicy z Białorusią (Kuźnica)",blokada,https://en.wikipedia.org/wiki/2021%E2%80%932022_Belarus%E2%80%93European_Union_border_crisis
+2021-11-08,BY,"Kryzys migracyjny na granicy z Polską",blokada,https://en.wikipedia.org/wiki/2021%E2%80%932022_Belarus%E2%80%93European_Union_border_crisis
+2021-11-23,TR,"Krach liry tureckiej",kryzys_finansowy,https://en.wikipedia.org/wiki/2018%E2%80%93present_Turkish_currency_and_debt_crisis
+2022-01-02,KZ,"Zamieszki w Kazachstanie, interwencja OUBZ",inne,https://en.wikipedia.org/wiki/2022_Kazakh_unrest
+2022-01-17,AE,"Atak dronów Huti na Abu Zabi",konflikt,https://en.wikipedia.org/wiki/2022_Abu_Dhabi_attack
+2022-01-24,BF,"Zamach stanu w Burkinie Faso",inne,https://en.wikipedia.org/wiki/January_2022_Burkina_Faso_coup_d%27%C3%A9tat
+2022-02-24,UA,"Rosyjska inwazja na Ukrainę",konflikt,https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine
+2022-02-24,RU,"Inwazja na Ukrainę, sankcje i odcięcie od SWIFT",konflikt,https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine
+2022-02-24,BY,"Białoruś udostępnia terytorium do inwazji",konflikt,https://en.wikipedia.org/wiki/Russian_invasion_of_Ukraine
+2022-02-27,RU,"UE zamyka przestrzeń powietrzną dla rosyjskich linii",blokada,https://en.wikipedia.org/wiki/International_sanctions_during_the_Russian_invasion_of_Ukraine
+2022-04-10,PK,"Odwołanie premiera Imrana Chana, kryzys polityczny",inne,https://en.wikipedia.org/wiki/2022_Pakistani_constitutional_crisis
+2022-06-18,LT,"Litwa ogranicza tranzyt towarów objętych sankcjami do Kaliningradu",blokada,https://en.wikipedia.org/wiki/Kaliningrad_Oblast
+2022-08-04,TW,"Chińskie manewry wokół Tajwanu po wizycie Pelosi",konflikt,https://en.wikipedia.org/wiki/2022_Chinese_military_exercises_around_Taiwan
+2022-08-04,CN,"Manewry wokół Tajwanu, sankcje wobec Tajwanu",konflikt,https://en.wikipedia.org/wiki/2022_Chinese_military_exercises_around_Taiwan
+2022-09-02,DE,"Gazprom wstrzymuje przesył Nord Stream 1, szczyt kryzysu gazowego",kryzys_energetyczny,https://en.wikipedia.org/wiki/2022%E2%80%932023_Russia%E2%80%93European_Union_gas_dispute
+2022-09-13,AM,"Azerbejdżańskie ataki na terytorium Armenii",konflikt,https://en.wikipedia.org/wiki/2022_Armenia%E2%80%93Azerbaijan_clashes
+2022-09-13,AZ,"Starcia na granicy armeńsko-azerbejdżańskiej",konflikt,https://en.wikipedia.org/wiki/2022_Armenia%E2%80%93Azerbaijan_clashes
+2022-09-16,IR,"Protesty po śmierci Mahsy Amini",inne,https://en.wikipedia.org/wiki/Mahsa_Amini_protests
+2022-09-21,RU,"Częściowa mobilizacja w Rosji",konflikt,https://en.wikipedia.org/wiki/2022_Russian_mobilization
+2022-09-26,DK,"Sabotaż gazociągów Nord Stream koło Bornholmu",kryzys_energetyczny,https://en.wikipedia.org/wiki/2022_Nord_Stream_pipeline_sabotage
+2022-09-30,BF,"Drugi zamach stanu w Burkinie Faso",inne,https://en.wikipedia.org/wiki/September_2022_Burkina_Faso_coup_d%27%C3%A9tat
+2022-10-07,CN,"Amerykańskie kontrole eksportu chipów do Chin",sankcje,https://en.wikipedia.org/wiki/United_States_New_Export_Controls_on_Advanced_Computing_and_Semiconductors_to_China
+2022-11-15,PL,"Rakieta spada w Przewodowie",konflikt,https://en.wikipedia.org/wiki/2022_missile_explosion_in_Poland
+2022-12-12,AM,"Blokada korytarza laczyńskiego",blokada,https://en.wikipedia.org/wiki/Blockade_of_the_Republic_of_Artsakh
+2023-04-08,TW,"Chińskie manewry Joint Sword wokół Tajwanu",konflikt,https://en.wikipedia.org/wiki/Joint_Sword
+2023-04-15,SD,"Wybuch wojny w Sudanie, ewakuacje ambasad",konflikt,https://en.wikipedia.org/wiki/War_in_Sudan_(2023%E2%80%93present)
+2023-06-24,RU,"Bunt Grupy Wagnera",inne,https://en.wikipedia.org/wiki/Wagner_Group_rebellion
+2023-07-17,UA,"Rosja zrywa umowę zbożową i atakuje porty w Odessie",blokada,https://en.wikipedia.org/wiki/Black_Sea_Grain_Initiative
+2023-07-26,NE,"Zamach stanu w Nigrze",inne,https://en.wikipedia.org/wiki/2023_Nigerien_coup_d%27%C3%A9tat
+2023-09-19,AZ,"Ofensywa Azerbejdżanu w Górskim Karabachu",konflikt,https://en.wikipedia.org/wiki/2023_Azerbaijani_offensive_in_Nagorno-Karabakh
+2023-09-19,AM,"Upadek Górskiego Karabachu, exodus Ormian",konflikt,https://en.wikipedia.org/wiki/2023_Azerbaijani_offensive_in_Nagorno-Karabakh
+2023-10-07,IL,"Atak Hamasu na Izrael, początek wojny",konflikt,https://en.wikipedia.org/wiki/October_7_attacks
+2023-10-07,PS,"Wojna w Gazie",konflikt,https://en.wikipedia.org/wiki/Gaza_war
+2023-10-08,LB,"Hezbollah otwiera front z Izraelem",konflikt,https://en.wikipedia.org/wiki/Israel%E2%80%93Hezbollah_conflict_(2023%E2%80%93present)
+2023-10-27,MM,"Operacja 1027 rebeliantów w Mjanmie",konflikt,https://en.wikipedia.org/wiki/Operation_1027
+2023-11-19,YE,"Huti porywają Galaxy Leader, kryzys na Morzu Czerwonym",blokada,https://en.wikipedia.org/wiki/Red_Sea_crisis
+2023-11-30,FI,"Finlandia zamyka granicę z Rosją",blokada,https://en.wikipedia.org/wiki/Finland%E2%80%93Russia_border
+2023-12-03,GY,"Referendum w Wenezueli o aneksji Essequibo",konflikt,https://en.wikipedia.org/wiki/2023_Venezuelan_referendum
+2024-01-12,YE,"Naloty USA i Wielkiej Brytanii na Huti",konflikt,https://en.wikipedia.org/wiki/American-led_intervention_in_Yemen
+2024-01-16,PK,"Iran atakuje Pakistan, Pakistan odpowiada",konflikt,https://en.wikipedia.org/wiki/2024_Iran%E2%80%93Pakistan_border_skirmishes
+2024-01-16,IR,"Wymiana uderzeń z Pakistanem",konflikt,https://en.wikipedia.org/wiki/2024_Iran%E2%80%93Pakistan_border_skirmishes
+2024-02-02,IQ,"Odwetowe naloty USA w Iraku i Syrii po ataku na Tower 22",konflikt,https://en.wikipedia.org/wiki/Tower_22_drone_attack
+2024-02-23,RU,"Nowe sankcje USA i UE po śmierci Nawalnego",sankcje,https://en.wikipedia.org/wiki/Death_of_Alexei_Navalny
+2024-03-22,RU,"Zamach w Crocus City Hall",inne,https://en.wikipedia.org/wiki/Crocus_City_Hall_attack
+2024-04-13,IR,"Pierwszy bezpośredni atak Iranu na Izrael",konflikt,https://en.wikipedia.org/wiki/April_2024_Iranian_strikes_against_Israel
+2024-04-13,IL,"Iran atakuje Izrael dronami i rakietami",konflikt,https://en.wikipedia.org/wiki/April_2024_Iranian_strikes_against_Israel
+2024-05-23,TW,"Manewry Joint Sword-2024A wokół Tajwanu",konflikt,https://en.wikipedia.org/wiki/Joint_Sword-2024A
+2024-07-28,VE,"Sfałszowane wybory prezydenckie i represje",inne,https://en.wikipedia.org/wiki/2024_Venezuelan_presidential_election
+2024-07-31,IR,"Zabójstwo Isma'ila Haniji w Teheranie",konflikt,https://en.wikipedia.org/wiki/Assassination_of_Ismail_Haniyeh
+2024-08-06,RU,"Ukraińska ofensywa w obwodzie kurskim",konflikt,https://en.wikipedia.org/wiki/2024_Kursk_offensive
+2024-09-17,LB,"Wybuchy pagerów Hezbollahu, potem izraelska ofensywa",konflikt,https://en.wikipedia.org/wiki/2024_Lebanon_electronic_device_attacks
+2024-10-01,IL,"Drugi atak rakietowy Iranu na Izrael",konflikt,https://en.wikipedia.org/wiki/October_2024_Iranian_strikes_against_Israel
+2024-10-01,LB,"Izraelska inwazja lądowa w Libanie",konflikt,https://en.wikipedia.org/wiki/2024_Israeli_invasion_of_Lebanon
+2024-10-14,TW,"Manewry Joint Sword-2024B wokół Tajwanu",konflikt,https://en.wikipedia.org/wiki/Joint_Sword-2024B
+2024-10-26,IR,"Izraelskie naloty na Iran",konflikt,https://en.wikipedia.org/wiki/October_2024_Israeli_strikes_on_Iran
+2024-11-27,SY,"Ofensywa rebeliantów i upadek Asada (8.12)",konflikt,https://en.wikipedia.org/wiki/Fall_of_the_Assad_regime
+2024-11-28,GE,"Gruzja zawiesza rozmowy z UE, masowe protesty",inne,https://en.wikipedia.org/wiki/2024%E2%80%932025_Georgian_protests
+2024-12-03,KR,"Stan wojenny w Korei Południowej",inne,https://en.wikipedia.org/wiki/2024_South_Korean_martial_law_crisis
+2024-12-25,FI,"Uszkodzenie kabla Estlink 2 przez tankowiec floty cieni",inne,https://en.wikipedia.org/wiki/Estlink

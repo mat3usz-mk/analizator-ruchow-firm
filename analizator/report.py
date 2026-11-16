@@ -85,7 +85,7 @@ def to_html(results: list[CountryAssessment], n_articles: int, n_signals: int, t
 <section class="card">
   <div class="head"><h2 style="margin:0;font-size:19px">{e(country_name(r.country))} <span class="muted" style="font-size:13px">{r.country}</span></h2>
   <div><span class="idx">{r.index:.0f}</span><span class="muted">/100</span> · <span class="lvl {r.level}">{r.level}</span>
-  · <span class="muted">pewność danych: {r.confidence}</span></div></div>
+  · <span class="muted">pewność danych: {r.confidence}</span>{_prob_html(r)}</div></div>
   <div class="stats"><span>ostatnie tygodnie: {r.recent_score}/tydz.</span><span>tło (mediana): {r.baseline}</span>
   <span>odchylenie: {r.zscore:+.1f}σ</span><span>firm: {r.companies}</span><span>państw: {r.states}</span>
   <span>cichych sygnałów: {r.quiet}</span><span>sygnały priorytetowe: {r.priority}</span><span>ruchy wyprzedzające: {r.proactive_share:.0%}</span></div>
@@ -110,6 +110,15 @@ się dzieje (atak, awaria), więc waży mało. Sekcja skutków to typowe reakcje
 </main></body></html>"""
 
 
+def _prob_html(r) -> str:
+    if r.prob is None:
+        return ""
+    from .ucz import load_model
+    h = (load_model() or {}).get("horyzont_dni", 60)
+    return (f' · <b title="Regresja logistyczna uczona na wydarzeniach 2015–2024, sprawdzona na 2025–2026. To nadal przybliżenie.">'
+            f'szansa wydarzenia w {h} dni wg modelu: {r.prob:.0%}</b>')
+
+
 def _fronts_html(results) -> str:
     fr = fronts(results)
     if not fr:
@@ -128,11 +137,11 @@ def _fronts_html(results) -> str:
 def to_csv(results: list[CountryAssessment], path: str) -> None:
     with open(path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["kraj", "indeks", "poziom", "pewnosc", "wynik_ostatni", "tlo", "z", "firmy", "kategorie", "indeksy_w_gore", "indeksy_w_dol"])
+        w.writerow(["kraj", "indeks", "poziom", "pewnosc", "wynik_ostatni", "tlo", "z", "firmy", "kategorie", "indeksy_w_gore", "indeksy_w_dol", "szansa_model"])
         for r in results:
             ix = indices(r.country, r.level)
             w.writerow([r.country, r.index, r.level, r.confidence, r.recent_score, r.baseline, r.zscore, r.companies, ";".join(r.categories),
-                        ";".join(ix["up"]), ";".join(ix["down"])])
+                        ";".join(ix["up"]), ";".join(ix["down"]), "" if r.prob is None else r.prob])
 
 
 def to_candidates_json(results: list[CountryAssessment], path: str, top: int = 8) -> None:
@@ -141,7 +150,7 @@ def to_candidates_json(results: list[CountryAssessment], path: str, top: int = 8
     for r in results[:top]:
         out.append({
             "kraj": r.country, "nazwa": country_name(r.country), "indeks": r.index, "poziom": r.level, "pewnosc": r.confidence,
-            "kategorie": r.categories, "indeksy_w_gore": indices(r.country, r.level)["up"],
+            "kategorie": r.categories, "szansa_model": r.prob, "indeksy_w_gore": indices(r.country, r.level)["up"],
             "indeksy_w_dol": indices(r.country, r.level)["down"], "ciche_sygnaly": r.quiet, "udzial_wyprzedzajacych": r.proactive_share,
             "dowody": [{"data": x["date"].isoformat(), "kategoria": x["category"], "tytul": x["title"], "url": x.get("url"),
                         "firma": x.get("company"), "aktor": x.get("actor"), "cichy": x.get("quiet"), "reakcja": x.get("reactive"),
