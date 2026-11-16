@@ -230,7 +230,9 @@ def fetch(con: sqlite3.Connection, days: int = 7, seconds: int = 180, force: boo
     con.executescript("CREATE TABLE IF NOT EXISTS metrics (source TEXT, key TEXT, day TEXT, value REAL, PRIMARY KEY (source, key, day));")
     today = date.today().isoformat()
     # jeden pomiar dziennie (o podobnej porze), żeby porównanie z medianą było uczciwe; czuwanie wywołuje to co 30 min
-    if not force and con.execute("SELECT 1 FROM metrics WHERE source='ais_ships' AND day=? LIMIT 1", (today,)).fetchone():
+    done = con.execute("SELECT COUNT(*), COALESCE(SUM(value), 0) FROM metrics WHERE source='ais_ships' AND day=?", (today,)).fetchone()
+    if not force and done[0] and done[1] > 0:
+        print(f"  [ais] dzisiejszy pomiar już jest ({done[1]:.0f} statków), następny jutro")
         return []
     counts = sample(seconds)
     out = []
