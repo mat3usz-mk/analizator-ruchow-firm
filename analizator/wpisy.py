@@ -15,6 +15,7 @@ import json
 import os
 import re
 import time
+import urllib.parse
 import urllib.request
 from collections import defaultdict
 from datetime import date, datetime, timedelta
@@ -57,6 +58,19 @@ def parse_truth(page: str) -> list[tuple[str, str, str]]:
     return out
 
 
+def next_cursor(page: str) -> str | None:
+    """Kursor „następna strona” podany przez samą stronę (pewniejszy niż własny: strona może zawierać starsze, przypięte wpisy)."""
+    for c in re.findall(r'cursor=([A-Za-z0-9_\-=%]+)', page):
+        c = urllib.parse.unquote(c)
+        try:
+            d = json.loads(base64.b64decode(c + "=" * (-len(c) % 4)))
+        except Exception:
+            continue
+        if d.get("_pointsToNextItems"):
+            return c
+    return None
+
+
 def _cursor(ts: str) -> str:
     return base64.b64encode(json.dumps({"status_created_at": ts.replace("T", " "), "_pointsToNextItems": True},
                                        separators=(",", ":")).encode()).decode()
@@ -74,7 +88,8 @@ def fetch_truth(path: str, since: str = TRUTH_FROM, delay: float = 1.5) -> int:
     url = TRUTH_URL + (f"&cursor={_cursor(oldest)}" if oldest else "")
     pages = 0
     while True:
-        items = parse_truth(_get(url))
+        page = _get(url)
+        items = parse_truth(page)
         new = [x for x in items if x[0] not in seen]
         for x in new:
             seen.add(x[0])
@@ -86,10 +101,13 @@ def fetch_truth(path: str, since: str = TRUTH_FROM, delay: float = 1.5) -> int:
         if pages % 20 == 0:
             f.flush()
             print(f"  strona {pages}: do {low}, wpisów {len(seen)}", flush=True)
-        if low < since or (not new and oldest is not None and low >= oldest):
+        if low < since or not new:
             break
         oldest = low
-        url = TRUTH_URL + f"&cursor={_cursor(low)}"
+        nxt = next_cursor(page)
+        if not nxt:
+            break
+        url = TRUTH_URL + f"&cursor={urllib.parse.quote(nxt)}"
         time.sleep(delay)
     f.close()
     return len(seen)
