@@ -348,5 +348,33 @@ class TestLaczenieIRynki(unittest.TestCase):
         finally:
             rynki._RES = old
 
+
+class TestOficjalne(unittest.TestCase):
+    def test_structured_sources(self):
+        from analizator import oficjalne as o
+        items = o.sanctions_items([(date(2026, 5, 1), "RU")] * 12 + [(date(2026, 5, 2), "IR")], "sankcje_ue", "EU",
+                                  "webgate.ec.europa.eu", "https://www.sanctionsmap.eu/")
+        items.append(o._item("https://finance.yahoo.com/quote/TRY%3DX", "Turkey currency (TRY) weakens 6% (market data)",
+                             date(2026, 5, 3), "kursy", "finance.yahoo.com", "TR"))
+        self.assertEqual(len({i["url"] for i in items}), 3, "adresy muszą być unikalne")
+        sig = {s["country"]: s for s in extract_signals(items)}
+        self.assertEqual(sig["RU"]["category"], "sankcje")
+        self.assertEqual(sig["TR"]["category"], "przeplywy_finansowe")
+        self.assertEqual(sig["RU"]["emotion"], 0.0)
+        self.assertGreaterEqual(sig["RU"]["credibility"], 1.2)
+
+    def test_article_weight_param(self):
+        from analizator import score
+        arts = [{"url": "https://reuters.com/a", "title": "Shell suspends operations in Iran", "date": "2026-05-01",
+                 "source": "gdelt", "domain": "reuters.com"}]
+        w1 = extract_signals(arts)[0]["weight"]
+        old = score.PARAMS["artykuly"]
+        try:
+            score.PARAMS["artykuly"] = 0.5
+            self.assertAlmostEqual(extract_signals(arts)[0]["weight"], round(w1 * 0.5, 2), places=1)
+        finally:
+            score.PARAMS["artykuly"] = old
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -21,6 +21,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 
+from .oficjalne import ALL_SOURCES as ALL_OFFICIAL, STRUCTURED, country_of
 from .rzetelnosc import AUTHORITATIVE, assess_article, is_credible
 from .signals import CATEGORIES, COUNTRIES, classify
 
@@ -61,7 +62,8 @@ class CountryAssessment:
 SOURCE_TIERS: dict[str, float] = {
     # oficjalne i źródła pierwotne
     "sec.gov": 1.3, "travel.state.gov": 1.3, "gov.uk": 1.3, "easa.europa.eu": 1.3, "faa.gov": 1.3, "ofac.treasury.gov": 1.2,
-    "ted.europa.eu": 1.1, "opensky-network.org": 1.2, "aisstream.io": 1.2, "stockwatch.pl": 1.1, "bankier.pl": 1.1,
+    "ted.europa.eu": 1.1, "consilium.europa.eu": 1.3, "press.un.org": 1.25, "iaea.org": 1.3, "webgate.ec.europa.eu": 1.3,
+    "sanctionslist.fcdo.gov.uk": 1.3, "ioda.inetintel.cc.gatech.edu": 1.2, "portwatch.imf.org": 1.3, "finance.yahoo.com": 1.2, "opensky-network.org": 1.2, "aisstream.io": 1.2, "stockwatch.pl": 1.1, "bankier.pl": 1.1,
     # agencje i duża prasa biznesowa
     "reuters.com": 1.15, "bloomberg.com": 1.15, "ft.com": 1.15, "wsj.com": 1.15, "nikkei.com": 1.1, "asia.nikkei.com": 1.1,
     "apnews.com": 1.05, "cnbc.com": 1.0, "economist.com": 1.05, "handelsblatt.com": 1.05, "lesechos.fr": 1.05,
@@ -116,7 +118,17 @@ def extract_signals(articles: list[dict], watchlist: list[str] | None = None) ->
             if any(len(tok & old) / max(len(tok | old), 1) >= 0.6 for old in sec_seen[company.lower()]):
                 continue
             sec_seen[company.lower()].append(tok)
-        official = a.get("source") in PRIORITY_SOURCES or a.get("source") in ("sec", "ofac", "espi", "ted", "insiders")
+        official = a.get("source") in PRIMARY_SOURCES
+        if a.get("source") in STRUCTURED:  # pomiar albo oficjalna lista: kraj i kategoria podane wprost, bez zgadywania z tytułu
+            cat, w, actor = STRUCTURED[a["source"]]
+            c = country_of(a)
+            if c in COUNTRIES:
+                rows.append({"emotion": 0.0, "source_class": None, "quality": 1.0, "quality_reasons": [],
+                             "date": date.fromisoformat(a["date"][:10]), "country": c, "category": cat, "base_weight": w,
+                             "company": a["source"], "actor": actor, "negated": False, "reactive": False, "title": a["title"],
+                             "url": a.get("url"), "matched": a["source"], "source": a["source"], "domain": a.get("domain"),
+                             "credibility": source_weight(a.get("domain"))})
+            continue
         q = {"mult": 1.0, "emotion": 0.0, "class": None, "reasons": []} if official else assess_article(a["title"], a.get("domain"))
         if q["mult"] <= 0:
             continue  # raport rynkowy / reklama: pomijamy w całości
@@ -134,7 +146,8 @@ def extract_signals(articles: list[dict], watchlist: list[str] | None = None) ->
         # cichy sygnał: wyprzedzający ruch, opisany przez 1-2 źródła, z wiarygodnego miejsca
         r["quiet"] = (r["coverage"] <= 2 and not r["reactive"] and not r["negated"] and r["actor"] != "nieznany"
                       and r["base_weight"] >= 2.0 and r["credibility"] >= 0.9 and r["quality"] >= 0.9)
-        r["weight"] = round(r["base_weight"] * r["credibility"] * r["quality"] * (1.25 if r["quiet"] else 1.0), 2)
+        art = 1.0 if r.get("source") in PRIMARY_SOURCES else PARAMS.get("artykuly", 1.0)
+        r["weight"] = round(r["base_weight"] * r["credibility"] * r["quality"] * (1.25 if r["quiet"] else 1.0) * art, 2)
     return rows
 
 
@@ -176,6 +189,7 @@ def _cluster_stories(rows: list[dict]) -> None:
 
 # Źródła pierwotne, które same w sobie są sygnałem priorytetowym (pomiar ruchu, ostrzeżenia urzędów)
 PRIORITY_SOURCES = {"ais", "opensky", "travel_us", "travel_uk", "easa", "faa"}
+PRIMARY_SOURCES = PRIORITY_SOURCES | {"sec", "ofac", "espi", "ted", "insiders"} | ALL_OFFICIAL
 PRIORITY_CATS = {"ewakuacja_personelu", "ostrzezenia_panstw", "lotnictwo_przestrzen"}
 
 # Powiązania ryzyka: alarm w kraju źródłowym podnosi część indeksu krajów powiązanych
@@ -199,6 +213,7 @@ PARAMS: dict[str, float] = {
     "w_z": 0.6, "w_actors": 0.5, "w_priority": 2.0, "prio_offset": 0.0, "priority_cap": 3.0, "w_quiet": 0.25, "w_cats": 0.3,
     "bias": -3.0, "spill": 0.0, "spill_min": 40.0, "sec_cap": 3.0, "baseline_weeks": 26.0,
     "confirm": 1.0, "confirm_domains": 2.0,  # alarm wymaga potwierdzenia (źródło pierwotne albo 2 niezależne rzetelne media)
+    "artykuly": 1.0,  # mnożnik wagi artykułów prasowych względem źródeł pierwotnych i pomiarów (sprawdzany w teście historycznym)
 }
 
 

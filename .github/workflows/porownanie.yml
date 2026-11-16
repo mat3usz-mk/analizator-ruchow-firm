@@ -1,0 +1,52 @@
+name: Test źródeł pierwotnych
+
+# Ręcznie: pobiera historię źródeł pierwotnych (sankcje UE/UK, IODA, PortWatch, kursy walut) i porównuje na teście
+# historycznym warianty: tylko artykuły / artykuły + źródła pierwotne / mniejsza waga artykułów.
+on:
+  workflow_dispatch:
+    inputs:
+      z_przebiegu:
+        description: "numer przebiegu z bazą historia_gkg (artefakt)"
+        default: "43880895708"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: historia_gkg
+          path: .
+          run-id: ${{ github.event.inputs.z_przebiegu }}
+          github-token: ${{ github.token }}
+      - name: Historia źródeł pierwotnych
+        run: python -m analizator.oficjalne --od 2018-09-01 --db pierwotne_historia.db
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pierwotne_historia
+          path: pierwotne_historia.db
+          retention-days: 30
+      - name: Porównanie wariantów
+        run: python -m analizator.porownanie --db historia_gkg.db --pierwotne pierwotne_historia.db --out raporty/pierwotne-porownanie.md
+      - name: Zapisz wynik w repozytorium
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp raporty/pierwotne-porownanie.md /tmp/
+          for i in 1 2 3; do
+            git fetch -q origin main && git checkout -q -B main origin/main
+            cp /tmp/pierwotne-porownanie.md raporty/
+            git add raporty/pierwotne-porownanie.md
+            git commit -q -m "Test historyczny: źródła pierwotne kontra artykuły" || exit 0
+            git push -q origin main && break
+            sleep 5
+          done

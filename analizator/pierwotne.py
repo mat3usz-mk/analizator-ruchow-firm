@@ -360,6 +360,11 @@ def insider_panel(con: sqlite3.Connection) -> list[dict]:
 FETCHERS = {
     "espi": espi, "travel_us": travel_us, "travel_uk": travel_uk, "easa": easa_czib, "faa": faa_restrictions,
     "ofac": ofac, "ted": ted_defence, "opensky": opensky, "insiders": insiders,
+    "sankcje_ue_uk": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_sanctions(con, days),
+    "oficjalne_rss": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_rss(con, days),
+    "ioda": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_ioda(con, min(days, 3)),
+    "portwatch": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_portwatch(con, days),
+    "kursy": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_fx(con, min(days, 5)),
     "ais": lambda con, days=7: __import__("analizator.ais", fromlist=["fetch"]).fetch(con, days),
 }
 
