@@ -19,40 +19,16 @@ jobs:
             r=$(curl -s -L -m 60 -A "Mozilla/5.0 (analizator ruchow firm; kontakt w repozytorium)" -o /tmp/b -w '%{http_code} %{size_download}' "$url")
             echo "$name $r $(head -c 220 /tmp/b | tr -d '\n\r' | tr -c '[:print:]' ' ')"
           done <<LIST
-          house_zip https://disclosures-clerk.house.gov/public_disc/financial-pdfs/2026FD.zip
-          house_watcher https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json
-          senate_watcher https://senate-stock-watcher-data.s3-us-west-2.amazonaws.com/aggregate/all_transactions.json
-          senate_efd https://efdsearch.senate.gov/search/
-          capitoltrades https://www.capitoltrades.com/trades?pageSize=12
-          capitoltrades_api https://bff.capitoltrades.com/trades?pageSize=2
-          quiver https://api.quiverquant.com/beta/live/congresstrading
-          finra_regsho https://cdn.finra.org/equity/regsho/daily/CNMSshvol20261113.txt
-          finra_regsho_2019 https://cdn.finra.org/equity/regsho/daily/CNMSshvol20190614.txt
-          finra_si https://api.finra.org/data/group/otcMarket/name/consolidatedShortInterest?limit=2
-          finra_si2 https://api.finra.org/data/group/OTCMarket/name/ConsolidatedShortInterest
-          cboe_pc https://cdn.cboe.com/resources/options/volume_and_call_put_ratios/totalpc.csv
-          cboe_stats https://www.cboe.com/us/options/market_statistics/daily/
-          cboe_mkt https://cdn.cboe.com/data/us/options/market_statistics/daily/2026-11-13_daily_options
-          yahoo_opt https://query2.finance.yahoo.com/v7/finance/options/EWT
-          nasdaq_opt https://api.nasdaq.com/api/quote/EWT/option-chain?assetclass=etf&limit=5
-          sec_13f https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=13F-HR&count=10&output=atom
-          sec_13f_ds https://www.sec.gov/files/structureddata/data/form-13f-data-sets/
-          lda https://lda.senate.gov/api/v1/filings/?filing_year=2026&page_size=1
-          usaspending https://api.usaspending.gov/api/v2/references/toptier_agencies/
-          dsca https://www.dsca.mil/Press-Media/Major-Arms-Sales/
-          dsca_rss https://www.dsca.mil/DesktopModules/ArticleCS/RSS.ashx?ContentType=700&Site=1509&max=10
-          dod_contracts https://www.defense.gov/News/Contracts/
-          dod_rss https://www.defense.gov/DesktopModules/ArticleCS/RSS.ashx?ContentType=400&Site=945&max=10
-          whale_alert https://api.whale-alert.io/v1/status
-          mempool https://mempool.space/api/v1/fees/recommended
-          blockchain_info https://api.blockchain.info/charts/estimated-transaction-volume-usd?timespan=30days&format=json
-          defillama_stable https://stablecoins.llama.fi/stablecoincharts/all?stablecoin=1
-          coingecko https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd
-          binance_p2p https://p2p.binance.com/
-          openinsider https://openinsider.com/latest-cluster-buys
-          sec_form4_feed https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&count=10&output=atom
-          fara https://efile.fara.gov/api/v1/RegDocs/json/2026-11-01
-          ofac_sdn_changes https://ofac.treasury.gov/recent-actions
+          trumpstruth https://trumpstruth.org/
+          trumpstruth_feed https://trumpstruth.org/feed
+          trumparchive https://www.thetrumparchive.com/
+          truth_api https://truthsocial.com/api/v1/accounts/107780257626128497/statuses?limit=2
+          ttarchive_gh https://raw.githubusercontent.com/MarkHershey/CompleteTrumpTweetsArchive/master/data/realDonaldTrump_in_office.csv
+          whitehouse_rss https://www.whitehouse.gov/feed/
+          federalregister https://www.federalregister.gov/api/v1/documents.json?per_page=2&conditions[presidential_document_type]=executive_order
+          kremlin_rss http://en.kremlin.ru/events/president/news/rss
+          xinhua_rss http://www.xinhuanet.com/english/rss/worldrss.xml
+          bluesky https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=whitehouse.gov&limit=2
           LIST
       - name: Próbki formatów
         if: false
