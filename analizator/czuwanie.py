@@ -49,7 +49,9 @@ def _fetch(con, days: int, srcs: list[str]) -> None:
         try:
             if src == "pierwotne":
                 from . import pierwotne
-                arts = pierwotne.fetch_all(con, days, names=FAST_PRIMARY)
+                # AIS (statki w cieśninach) tylko z kluczem; słucha strumienia ok. 3 min
+                names = FAST_PRIMARY + (["ais"] if os.environ.get("AISSTREAM_API_KEY") else [])
+                arts = pierwotne.fetch_all(con, days, names=names)
             else:
                 arts = sources.FETCHERS[src](days=days)
             print(f"  [{src}] nowych: {store.save(con, arts)}")

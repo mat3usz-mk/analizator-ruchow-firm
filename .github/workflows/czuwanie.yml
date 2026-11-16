@@ -55,6 +55,7 @@ jobs:
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+          AISSTREAM_API_KEY: ${{ secrets.AISSTREAM_API_KEY }}
         run: |
           python -m analizator watch --once --db dane/analizator.db \
             --out dane/raport_biezacy.html --alerts-out dane/nowe_alerty.txt
