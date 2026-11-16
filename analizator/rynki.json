@@ -20,7 +20,31 @@
     "EG": 2,
     "OM": 1
    },
-   "symbol": "MAERSK-B.CO+HLAG.DE+ZIM"
+   "symbol": "MAERSK-B.CO+HLAG.DE+ZIM",
+   "okresy": {
+    "14": {
+     "n": 49,
+     "mediana": 0.0021,
+     "q25": -0.0514,
+     "q75": 0.0451,
+     "trafne": 25
+    },
+    "37": {
+     "n": 49,
+     "mediana": -0.0496,
+     "q25": -0.1363,
+     "q75": 0.0576,
+     "trafne": 19
+    },
+    "67": {
+     "n": 49,
+     "mediana": -0.075,
+     "q25": -0.1686,
+     "q75": 0.0987,
+     "trafne": 19
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "ropa brent|up": {
    "key_dir": "up",
@@ -37,7 +61,31 @@
     "LB": 7,
     "YE": 5
    },
-   "symbol": "BZ=F"
+   "symbol": "BZ=F",
+   "okresy": {
+    "14": {
+     "n": 111,
+     "mediana": 0.002,
+     "q25": -0.0408,
+     "q75": 0.0337,
+     "trafne": 58
+    },
+    "37": {
+     "n": 111,
+     "mediana": -0.0159,
+     "q25": -0.077,
+     "q75": 0.0589,
+     "trafne": 52
+    },
+    "67": {
+     "n": 111,
+     "mediana": -0.0135,
+     "q25": -0.0866,
+     "q75": 0.0879,
+     "trafne": 47
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "baltic dirty tanker index|up": {
    "key_dir": "up",
@@ -54,7 +102,31 @@
     "AE": 5,
     "TW": 4
    },
-   "symbol": "FRO+DHT"
+   "symbol": "FRO+DHT",
+   "okresy": {
+    "14": {
+     "n": 61,
+     "mediana": -0.0082,
+     "q25": -0.0413,
+     "q75": 0.0393,
+     "trafne": 26
+    },
+    "37": {
+     "n": 61,
+     "mediana": -0.005,
+     "q25": -0.0776,
+     "q75": 0.0451,
+     "trafne": 28
+    },
+    "67": {
+     "n": 61,
+     "mediana": -0.0036,
+     "q25": -0.123,
+     "q75": 0.0882,
+     "trafne": 30
+    }
+   },
+   "najlepszy_okres": null
   },
   "złoto|up": {
    "key_dir": "up",
@@ -71,13 +143,37 @@
     "TR": 7,
     "PK": 7
    },
-   "symbol": "GC=F"
+   "symbol": "GC=F",
+   "okresy": {
+    "14": {
+     "n": 187,
+     "mediana": 0.0009,
+     "q25": -0.0155,
+     "q75": 0.0232,
+     "trafne": 94
+    },
+    "37": {
+     "n": 187,
+     "mediana": -0.0026,
+     "q25": -0.0281,
+     "q75": 0.0314,
+     "trafne": 86
+    },
+    "67": {
+     "n": 187,
+     "mediana": 0.0008,
+     "q25": -0.0405,
+     "q75": 0.0522,
+     "trafne": 94
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "indeks zmienności vix|up": {
    "key_dir": "up",
    "n": 187,
    "trafne": 93,
-   "nadwyzka": 0.0384,
+   "nadwyzka": 0.0381,
    "kraje": {
     "IR": 20,
     "RU": 13,
@@ -88,7 +184,31 @@
     "TR": 7,
     "PK": 7
    },
-   "symbol": "^VIX"
+   "symbol": "^VIX",
+   "okresy": {
+    "14": {
+     "n": 187,
+     "mediana": -0.0117,
+     "q25": -0.1057,
+     "q75": 0.1214,
+     "trafne": 89
+    },
+    "37": {
+     "n": 187,
+     "mediana": -0.0024,
+     "q25": -0.1954,
+     "q75": 0.177,
+     "trafne": 93
+    },
+    "67": {
+     "n": 187,
+     "mediana": -0.123,
+     "q25": -0.2442,
+     "q75": 0.0451,
+     "trafne": 64
+    }
+   },
+   "najlepszy_okres": null
   },
   "stoxx europe 600 retail|down": {
    "key_dir": "down",
@@ -105,7 +225,31 @@
     "EG": 2,
     "OM": 1
    },
-   "symbol": "EXH8.DE"
+   "symbol": "EXH8.DE",
+   "okresy": {
+    "14": {
+     "n": 49,
+     "mediana": -0.0087,
+     "q25": -0.0345,
+     "q75": 0.0122,
+     "trafne": 28
+    },
+    "37": {
+     "n": 49,
+     "mediana": -0.023,
+     "q25": -0.0587,
+     "q75": 0.0181,
+     "trafne": 29
+    },
+    "67": {
+     "n": 49,
+     "mediana": -0.026,
+     "q25": -0.0774,
+     "q75": 0.0172,
+     "trafne": 35
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "stoxx europe 600 automobiles & parts|down": {
    "key_dir": "down",
@@ -122,7 +266,31 @@
     "EG": 2,
     "OM": 1
    },
-   "symbol": "EXV5.DE"
+   "symbol": "EXV5.DE",
+   "okresy": {
+    "14": {
+     "n": 60,
+     "mediana": -0.0082,
+     "q25": -0.0531,
+     "q75": 0.0277,
+     "trafne": 34
+    },
+    "37": {
+     "n": 60,
+     "mediana": -0.0347,
+     "q25": -0.0621,
+     "q75": 0.0161,
+     "trafne": 40
+    },
+    "67": {
+     "n": 60,
+     "mediana": -0.0544,
+     "q25": -0.0981,
+     "q75": 0.029,
+     "trafne": 38
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "obligacje usa i niemiec|up": {
    "key_dir": "up",
@@ -139,7 +307,31 @@
     "TR": 7,
     "PK": 7
    },
-   "symbol": "^TNX"
+   "symbol": "^TNX",
+   "okresy": {
+    "14": {
+     "n": 187,
+     "mediana": -0.0016,
+     "q25": -0.0404,
+     "q75": 0.0401,
+     "trafne": 92
+    },
+    "37": {
+     "n": 187,
+     "mediana": 0.0003,
+     "q25": -0.0655,
+     "q75": 0.0538,
+     "trafne": 94
+    },
+    "67": {
+     "n": 187,
+     "mediana": 0.0024,
+     "q25": -0.0863,
+     "q75": 0.1056,
+     "trafne": 95
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "frank szwajcarski|up": {
    "key_dir": "up",
@@ -156,7 +348,31 @@
     "TR": 7,
     "PK": 7
    },
-   "symbol": "EURCHF=X"
+   "symbol": "EURCHF=X",
+   "okresy": {
+    "14": {
+     "n": 187,
+     "mediana": 0.0011,
+     "q25": -0.0043,
+     "q75": 0.0078,
+     "trafne": 107
+    },
+    "37": {
+     "n": 187,
+     "mediana": -0.0014,
+     "q25": -0.0108,
+     "q75": 0.0077,
+     "trafne": 81
+    },
+    "67": {
+     "n": 187,
+     "mediana": -0.0015,
+     "q25": -0.0134,
+     "q75": 0.0098,
+     "trafne": 90
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "msci emerging markets|down": {
    "key_dir": "down",
@@ -173,24 +389,41 @@
     "TR": 7,
     "PK": 7
    },
-   "symbol": "EEM"
+   "symbol": "EEM",
+   "okresy": {
+    "14": {
+     "n": 187,
+     "mediana": -0.0039,
+     "q25": -0.027,
+     "q75": 0.0137,
+     "trafne": 98
+    },
+    "37": {
+     "n": 187,
+     "mediana": -0.0034,
+     "q25": -0.0511,
+     "q75": 0.0264,
+     "trafne": 100
+    },
+    "67": {
+     "n": 187,
+     "mediana": 0.0057,
+     "q25": -0.0366,
+     "q75": 0.0417,
+     "trafne": 88
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "gaz ttf|up": {
    "key_dir": "up",
-   "n": 79,
-   "trafne": 35,
-   "nadwyzka": 0.0128,
-   "kraje": {
-    "IR": 19,
-    "RU": 12,
-    "VE": 6,
-    "TR": 5,
-    "SA": 4,
-    "AE": 4,
-    "BY": 4,
-    "QA": 4
-   },
-   "symbol": "TTF=F"
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 oil & gas|up": {
    "key_dir": "up",
@@ -207,7 +440,31 @@
     "AE": 5,
     "AZ": 4
    },
-   "symbol": "EXH1.DE"
+   "symbol": "EXH1.DE",
+   "okresy": {
+    "14": {
+     "n": 69,
+     "mediana": -0.0047,
+     "q25": -0.0191,
+     "q75": 0.0266,
+     "trafne": 34
+    },
+    "37": {
+     "n": 69,
+     "mediana": 0.0011,
+     "q25": -0.0402,
+     "q75": 0.0426,
+     "trafne": 35
+    },
+    "67": {
+     "n": 69,
+     "mediana": 0.0135,
+     "q25": -0.038,
+     "q75": 0.0583,
+     "trafne": 39
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "s&p 500 energy|up": {
    "key_dir": "up",
@@ -224,7 +481,31 @@
     "AE": 5,
     "AZ": 4
    },
-   "symbol": "XLE"
+   "symbol": "XLE",
+   "okresy": {
+    "14": {
+     "n": 69,
+     "mediana": 0.0113,
+     "q25": -0.0303,
+     "q75": 0.0225,
+     "trafne": 38
+    },
+    "37": {
+     "n": 69,
+     "mediana": -0.0012,
+     "q25": -0.0427,
+     "q75": 0.0524,
+     "trafne": 34
+    },
+    "67": {
+     "n": 69,
+     "mediana": 0.002,
+     "q25": -0.0368,
+     "q75": 0.0687,
+     "trafne": 35
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "obx oslo|up": {
    "key_dir": "up",
@@ -232,7 +513,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "tadawul all share|down": {
    "key_dir": "down",
@@ -240,7 +523,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 travel & leisure|down": {
    "key_dir": "down",
@@ -257,7 +542,31 @@
     "AE": 5,
     "AZ": 4
    },
-   "symbol": "EXV9.DE"
+   "symbol": "EXV9.DE",
+   "okresy": {
+    "14": {
+     "n": 70,
+     "mediana": -0.0135,
+     "q25": -0.0385,
+     "q75": 0.0086,
+     "trafne": 47
+    },
+    "37": {
+     "n": 70,
+     "mediana": -0.005,
+     "q25": -0.0427,
+     "q75": 0.0224,
+     "trafne": 37
+    },
+    "67": {
+     "n": 70,
+     "mediana": -0.0138,
+     "q25": -0.0659,
+     "q75": 0.0397,
+     "trafne": 44
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "stoxx europe 600 chemicals|down": {
    "key_dir": "down",
@@ -274,7 +583,31 @@
     "IQ": 5,
     "QA": 5
    },
-   "symbol": "EXV7.DE"
+   "symbol": "EXV7.DE",
+   "okresy": {
+    "14": {
+     "n": 86,
+     "mediana": -0.0123,
+     "q25": -0.0409,
+     "q75": 0.0085,
+     "trafne": 57
+    },
+    "37": {
+     "n": 86,
+     "mediana": -0.0144,
+     "q25": -0.0459,
+     "q75": 0.0155,
+     "trafne": 56
+    },
+    "67": {
+     "n": 86,
+     "mediana": -0.0093,
+     "q25": -0.0664,
+     "q75": 0.03,
+     "trafne": 48
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "dax|down": {
    "key_dir": "down",
@@ -291,7 +624,31 @@
     "IQ": 5,
     "QA": 5
    },
-   "symbol": "^GDAXI"
+   "symbol": "^GDAXI",
+   "okresy": {
+    "14": {
+     "n": 107,
+     "mediana": -0.0059,
+     "q25": -0.0357,
+     "q75": 0.0095,
+     "trafne": 63
+    },
+    "37": {
+     "n": 107,
+     "mediana": -0.0135,
+     "q25": -0.0519,
+     "q75": 0.0141,
+     "trafne": 66
+    },
+    "67": {
+     "n": 107,
+     "mediana": -0.0077,
+     "q25": -0.0581,
+     "q75": 0.028,
+     "trafne": 60
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "nikkei 225 i kospi|down": {
    "key_dir": "down",
@@ -299,7 +656,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe total market aerospace & defense|up": {
    "key_dir": "up",
@@ -316,7 +675,31 @@
     "KR": 3,
     "PL": 3
    },
-   "symbol": "RHM.DE+BA.L+SAAB-B.ST+LDO.MI"
+   "symbol": "RHM.DE+BA.L+SAAB-B.ST+LDO.MI",
+   "okresy": {
+    "14": {
+     "n": 50,
+     "mediana": 0.0026,
+     "q25": -0.0344,
+     "q75": 0.0283,
+     "trafne": 27
+    },
+    "37": {
+     "n": 50,
+     "mediana": -0.0313,
+     "q25": -0.0723,
+     "q75": 0.038,
+     "trafne": 17
+    },
+    "67": {
+     "n": 50,
+     "mediana": -0.033,
+     "q25": -0.0776,
+     "q75": 0.065,
+     "trafne": 19
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "s&p aerospace & defense select|up": {
    "key_dir": "up",
@@ -330,7 +713,31 @@
     "KR": 3,
     "JP": 2
    },
-   "symbol": "XAR"
+   "symbol": "XAR",
+   "okresy": {
+    "14": {
+     "n": 21,
+     "mediana": -0.0039,
+     "q25": -0.0352,
+     "q75": 0.0201,
+     "trafne": 10
+    },
+    "37": {
+     "n": 21,
+     "mediana": -0.0242,
+     "q25": -0.0624,
+     "q75": 0.0583,
+     "trafne": 9
+    },
+    "67": {
+     "n": 21,
+     "mediana": 0.0039,
+     "q25": -0.0621,
+     "q75": 0.0744,
+     "trafne": 11
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "miedź, aluminium, nikiel|up": {
    "key_dir": "up",
@@ -342,7 +749,31 @@
     "CN": 7,
     "KZ": 1
    },
-   "symbol": "HG=F"
+   "symbol": "HG=F",
+   "okresy": {
+    "14": {
+     "n": 21,
+     "mediana": -0.0001,
+     "q25": -0.0296,
+     "q75": 0.0216,
+     "trafne": 10
+    },
+    "37": {
+     "n": 21,
+     "mediana": -0.0019,
+     "q25": -0.0162,
+     "q75": 0.0359,
+     "trafne": 9
+    },
+    "67": {
+     "n": 21,
+     "mediana": 0.0346,
+     "q25": -0.0317,
+     "q75": 0.0818,
+     "trafne": 13
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "stoxx europe 600 basic resources|up": {
    "key_dir": "up",
@@ -354,17 +785,65 @@
     "CN": 7,
     "KZ": 1
    },
-   "symbol": "EXV6.DE"
+   "symbol": "EXV6.DE",
+   "okresy": {
+    "14": {
+     "n": 21,
+     "mediana": 0.0045,
+     "q25": -0.0401,
+     "q75": 0.0284,
+     "trafne": 11
+    },
+    "37": {
+     "n": 21,
+     "mediana": -0.0089,
+     "q25": -0.0584,
+     "q75": 0.0468,
+     "trafne": 9
+    },
+    "67": {
+     "n": 21,
+     "mediana": 0.0368,
+     "q25": -0.0188,
+     "q75": 0.0993,
+     "trafne": 13
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "csi 300 i hang seng|down": {
    "key_dir": "down",
    "n": 7,
    "trafne": 6,
-   "nadwyzka": -0.0606,
+   "nadwyzka": -0.0607,
    "kraje": {
     "CN": 7
    },
-   "symbol": "000300.SS+^HSI"
+   "symbol": "000300.SS+^HSI",
+   "okresy": {
+    "14": {
+     "n": 7,
+     "mediana": -0.0376,
+     "q25": -0.0454,
+     "q75": -0.0212,
+     "trafne": 7
+    },
+    "37": {
+     "n": 7,
+     "mediana": -0.0415,
+     "q25": -0.0944,
+     "q75": -0.0322,
+     "trafne": 6
+    },
+    "67": {
+     "n": 7,
+     "mediana": -0.0602,
+     "q25": -0.0788,
+     "q75": -0.0132,
+     "trafne": 5
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "phlx semiconductor|down": {
    "key_dir": "down",
@@ -378,7 +857,31 @@
     "KR": 3,
     "JP": 2
    },
-   "symbol": "^SOX"
+   "symbol": "^SOX",
+   "okresy": {
+    "14": {
+     "n": 21,
+     "mediana": -0.0074,
+     "q25": -0.0495,
+     "q75": 0.0094,
+     "trafne": 11
+    },
+    "37": {
+     "n": 21,
+     "mediana": -0.0294,
+     "q25": -0.0649,
+     "q75": 0.0292,
+     "trafne": 14
+    },
+    "67": {
+     "n": 21,
+     "mediana": 0.0138,
+     "q25": -0.06,
+     "q75": 0.0483,
+     "trafne": 9
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "nasdaq 100|down": {
    "key_dir": "down",
@@ -392,7 +895,31 @@
     "KR": 3,
     "JP": 2
    },
-   "symbol": "^NDX"
+   "symbol": "^NDX",
+   "okresy": {
+    "14": {
+     "n": 21,
+     "mediana": -0.0081,
+     "q25": -0.0181,
+     "q75": 0.016,
+     "trafne": 11
+    },
+    "37": {
+     "n": 21,
+     "mediana": -0.0161,
+     "q25": -0.0501,
+     "q75": 0.0103,
+     "trafne": 14
+    },
+    "67": {
+     "n": 21,
+     "mediana": 0.0263,
+     "q25": -0.0467,
+     "q75": 0.0414,
+     "trafne": 9
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "taiex|down": {
    "key_dir": "down",
@@ -406,13 +933,37 @@
     "IL": 5,
     "JP": 4
    },
-   "symbol": "^TWII"
+   "symbol": "^TWII",
+   "okresy": {
+    "14": {
+     "n": 37,
+     "mediana": 0.0003,
+     "q25": -0.0275,
+     "q75": 0.0151,
+     "trafne": 18
+    },
+    "37": {
+     "n": 37,
+     "mediana": -0.0223,
+     "q25": -0.0307,
+     "q75": 0.002,
+     "trafne": 26
+    },
+    "67": {
+     "n": 37,
+     "mediana": 0.0106,
+     "q25": -0.0205,
+     "q75": 0.0451,
+     "trafne": 16
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "kospi|down": {
    "key_dir": "down",
    "n": 21,
    "trafne": 15,
-   "nadwyzka": -0.0064,
+   "nadwyzka": -0.0068,
    "kraje": {
     "CN": 7,
     "IL": 5,
@@ -420,7 +971,31 @@
     "KR": 3,
     "JP": 2
    },
-   "symbol": "^KS11"
+   "symbol": "^KS11",
+   "okresy": {
+    "14": {
+     "n": 21,
+     "mediana": -0.0131,
+     "q25": -0.0358,
+     "q75": 0.0231,
+     "trafne": 14
+    },
+    "37": {
+     "n": 21,
+     "mediana": -0.0205,
+     "q25": -0.0408,
+     "q75": 0.0055,
+     "trafne": 15
+    },
+    "67": {
+     "n": 21,
+     "mediana": -0.0003,
+     "q25": -0.047,
+     "q75": 0.0373,
+     "trafne": 11
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "nikkei 225|down": {
    "key_dir": "down",
@@ -434,7 +1009,31 @@
     "KR": 3,
     "JP": 2
    },
-   "symbol": "^N225"
+   "symbol": "^N225",
+   "okresy": {
+    "14": {
+     "n": 21,
+     "mediana": -0.0034,
+     "q25": -0.0346,
+     "q75": 0.019,
+     "trafne": 11
+    },
+    "37": {
+     "n": 21,
+     "mediana": -0.02,
+     "q25": -0.042,
+     "q75": 0.0169,
+     "trafne": 13
+    },
+    "67": {
+     "n": 21,
+     "mediana": -0.0195,
+     "q25": -0.0717,
+     "q75": 0.0288,
+     "trafne": 14
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "hang seng|down": {
    "key_dir": "down",
@@ -447,7 +1046,31 @@
     "KR": 3,
     "JP": 2
    },
-   "symbol": "^HSI"
+   "symbol": "^HSI",
+   "okresy": {
+    "14": {
+     "n": 16,
+     "mediana": -0.0322,
+     "q25": -0.0539,
+     "q75": -0.0104,
+     "trafne": 13
+    },
+    "37": {
+     "n": 16,
+     "mediana": -0.0591,
+     "q25": -0.0906,
+     "q75": -0.0212,
+     "trafne": 14
+    },
+    "67": {
+     "n": 16,
+     "mediana": -0.0606,
+     "q25": -0.0979,
+     "q75": -0.0103,
+     "trafne": 12
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "ta-35|down": {
    "key_dir": "down",
@@ -461,7 +1084,31 @@
     "LB": 7,
     "PS": 2
    },
-   "symbol": "TA35.TA"
+   "symbol": "TA35.TA",
+   "okresy": {
+    "14": {
+     "n": 48,
+     "mediana": 0.0027,
+     "q25": -0.0197,
+     "q75": 0.0205,
+     "trafne": 23
+    },
+    "37": {
+     "n": 48,
+     "mediana": 0.007,
+     "q25": -0.0258,
+     "q75": 0.0371,
+     "trafne": 21
+    },
+    "67": {
+     "n": 48,
+     "mediana": 0.0021,
+     "q25": -0.0373,
+     "q75": 0.0424,
+     "trafne": 23
+    }
+   },
+   "najlepszy_okres": null
   },
   "egx 30|down": {
    "key_dir": "down",
@@ -469,7 +1116,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 utilities|up": {
    "key_dir": "up",
@@ -483,7 +1132,31 @@
     "BY": 4,
     "GE": 1
    },
-   "symbol": "EXH9.DE"
+   "symbol": "EXH9.DE",
+   "okresy": {
+    "14": {
+     "n": 21,
+     "mediana": -0.0087,
+     "q25": -0.0199,
+     "q75": 0.0123,
+     "trafne": 8
+    },
+    "37": {
+     "n": 21,
+     "mediana": -0.026,
+     "q25": -0.0499,
+     "q75": -0.0047,
+     "trafne": 3
+    },
+    "67": {
+     "n": 21,
+     "mediana": -0.0112,
+     "q25": -0.0411,
+     "q75": -0.0014,
+     "trafne": 4
+    }
+   },
+   "najlepszy_okres": null
   },
   "bist 100|down": {
    "key_dir": "down",
@@ -493,7 +1166,31 @@
    "kraje": {
     "TR": 7
    },
-   "symbol": "XU100.IS"
+   "symbol": "XU100.IS",
+   "okresy": {
+    "14": {
+     "n": 7,
+     "mediana": -0.0635,
+     "q25": -0.0859,
+     "q75": 0.0106,
+     "trafne": 5
+    },
+    "37": {
+     "n": 7,
+     "mediana": -0.0305,
+     "q25": -0.0912,
+     "q75": -0.0075,
+     "trafne": 5
+    },
+    "67": {
+     "n": 7,
+     "mediana": -0.0396,
+     "q25": -0.1263,
+     "q75": -0.0014,
+     "trafne": 6
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "wig20|down": {
    "key_dir": "down",
@@ -501,7 +1198,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "pszenica i kukurydza|up": {
    "key_dir": "up",
@@ -513,7 +1212,31 @@
     "UA": 5,
     "AR": 1
    },
-   "symbol": "ZW=F+ZC=F"
+   "symbol": "ZW=F+ZC=F",
+   "okresy": {
+    "14": {
+     "n": 19,
+     "mediana": 0.0267,
+     "q25": -0.0161,
+     "q75": 0.0689,
+     "trafne": 12
+    },
+    "37": {
+     "n": 19,
+     "mediana": 0.0186,
+     "q25": -0.0231,
+     "q75": 0.0375,
+     "trafne": 12
+    },
+    "67": {
+     "n": 19,
+     "mediana": 0.0366,
+     "q25": -0.0782,
+     "q75": 0.0832,
+     "trafne": 11
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "nawozy|up": {
    "key_dir": "up",
@@ -525,7 +1248,31 @@
     "UA": 5,
     "AR": 1
    },
-   "symbol": "NTR+CF"
+   "symbol": "NTR+CF",
+   "okresy": {
+    "14": {
+     "n": 19,
+     "mediana": 0.0052,
+     "q25": -0.0222,
+     "q75": 0.0987,
+     "trafne": 10
+    },
+    "37": {
+     "n": 19,
+     "mediana": 0.0082,
+     "q25": -0.0606,
+     "q75": 0.0832,
+     "trafne": 10
+    },
+    "67": {
+     "n": 19,
+     "mediana": 0.0116,
+     "q25": -0.0547,
+     "q75": 0.1157,
+     "trafne": 12
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "pfts|down": {
    "key_dir": "down",
@@ -533,7 +1280,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 food & beverage|down": {
    "key_dir": "down",
@@ -545,7 +1294,31 @@
     "UA": 5,
     "AR": 1
    },
-   "symbol": "EXH3.DE"
+   "symbol": "EXH3.DE",
+   "okresy": {
+    "14": {
+     "n": 19,
+     "mediana": 0.0029,
+     "q25": -0.0317,
+     "q75": 0.0108,
+     "trafne": 9
+    },
+    "37": {
+     "n": 19,
+     "mediana": -0.013,
+     "q25": -0.0439,
+     "q75": 0.0018,
+     "trafne": 13
+    },
+    "67": {
+     "n": 19,
+     "mediana": -0.0081,
+     "q25": -0.0348,
+     "q75": 0.0217,
+     "trafne": 10
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "pszenica|up": {
    "key_dir": "up",
@@ -553,7 +1326,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "kurs pln|down": {
    "key_dir": "down",
@@ -561,7 +1336,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "tedpix|down": {
    "key_dir": "down",
@@ -569,7 +1346,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "kse-100|down": {
    "key_dir": "down",
@@ -577,7 +1356,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "nifty 50 i sensex|down": {
    "key_dir": "down",
@@ -589,7 +1370,31 @@
     "PK": 7,
     "AF": 3
    },
-   "symbol": "^NSEI"
+   "symbol": "^NSEI",
+   "okresy": {
+    "14": {
+     "n": 24,
+     "mediana": -0.0132,
+     "q25": -0.0236,
+     "q75": 0.0099,
+     "trafne": 13
+    },
+    "37": {
+     "n": 24,
+     "mediana": 0.013,
+     "q25": -0.0402,
+     "q75": 0.0322,
+     "trafne": 10
+    },
+    "67": {
+     "n": 24,
+     "mediana": 0.0025,
+     "q25": -0.0665,
+     "q75": 0.0389,
+     "trafne": 10
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "qe index|down": {
    "key_dir": "down",
@@ -597,7 +1402,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "dfm general i ftse adx general|down": {
    "key_dir": "down",
@@ -605,7 +1412,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 banks|down": {
    "key_dir": "down",
@@ -615,7 +1424,31 @@
    "kraje": {
     "AE": 5
    },
-   "symbol": "EXV1.DE"
+   "symbol": "EXV1.DE",
+   "okresy": {
+    "14": {
+     "n": 5,
+     "mediana": -0.0642,
+     "q25": -0.0703,
+     "q75": -0.0241,
+     "trafne": 5
+    },
+    "37": {
+     "n": 5,
+     "mediana": 0.0062,
+     "q25": -0.0828,
+     "q75": 0.0126,
+     "trafne": 2
+    },
+    "67": {
+     "n": 5,
+     "mediana": -0.0303,
+     "q25": -0.0669,
+     "q75": 0.0054,
+     "trafne": 3
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "moex russia|down": {
    "key_dir": "down",
@@ -623,7 +1456,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "ibc|down": {
    "key_dir": "down",
@@ -631,7 +1466,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "ropa ciężka i rafinerie usa|up": {
    "key_dir": "up",
@@ -639,7 +1476,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "blom stock index|down": {
    "key_dir": "down",
@@ -647,7 +1486,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "s&p merval|down": {
    "key_dir": "down",
@@ -655,7 +1496,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "rheinmetall, saab, kongsberg|up": {
    "key_dir": "up",
@@ -669,7 +1512,31 @@
     "LT": 1,
     "EE": 1
    },
-   "symbol": "RHM.DE+SAAB-B.ST+KOG.OL"
+   "symbol": "RHM.DE+SAAB-B.ST+KOG.OL",
+   "okresy": {
+    "14": {
+     "n": 11,
+     "mediana": 0.0191,
+     "q25": -0.0157,
+     "q75": 0.0335,
+     "trafne": 7
+    },
+    "37": {
+     "n": 11,
+     "mediana": -0.025,
+     "q25": -0.0547,
+     "q75": 0.0419,
+     "trafne": 4
+    },
+    "67": {
+     "n": 11,
+     "mediana": -0.019,
+     "q25": -0.0734,
+     "q75": 0.1004,
+     "trafne": 4
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "brak płynnego indeksu|down": {
    "key_dir": "down",
@@ -677,7 +1544,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "mwig40|down": {
    "key_dir": "down",
@@ -685,7 +1554,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "omx baltic benchmark|down": {
    "key_dir": "down",
@@ -693,7 +1564,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "kurs pln i walut regionu|down": {
    "key_dir": "down",
@@ -707,7 +1580,31 @@
     "LT": 1,
     "EE": 1
    },
-   "symbol": "EURPLN=X"
+   "symbol": "EURPLN=X",
+   "okresy": {
+    "14": {
+     "n": 11,
+     "mediana": -0.0025,
+     "q25": -0.0065,
+     "q75": 0.003,
+     "trafne": 8
+    },
+    "37": {
+     "n": 11,
+     "mediana": 0.0004,
+     "q25": -0.0037,
+     "q75": 0.0061,
+     "trafne": 5
+    },
+    "67": {
+     "n": 11,
+     "mediana": -0.0001,
+     "q25": -0.0114,
+     "q75": 0.009,
+     "trafne": 6
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "kase index|down": {
    "key_dir": "down",
@@ -715,7 +1612,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "omx vilnius|down": {
    "key_dir": "down",
@@ -723,7 +1622,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "omx helsinki 25|down": {
    "key_dir": "down",
@@ -733,7 +1634,9 @@
    "kraje": {
     "FI": 2
    },
-   "symbol": "^OMXH25"
+   "symbol": "^OMXH25",
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "omx tallinn|down": {
    "key_dir": "down",
@@ -741,7 +1644,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   }
  },
  "wyniki_po_alarmach": {
@@ -760,13 +1665,37 @@
     "SD": 21,
     "CU": 20
    },
-   "symbol": "GC=F"
+   "symbol": "GC=F",
+   "okresy": {
+    "14": {
+     "n": 818,
+     "mediana": 0.0019,
+     "q25": -0.0181,
+     "q75": 0.0252,
+     "trafne": 427
+    },
+    "37": {
+     "n": 818,
+     "mediana": -0.0011,
+     "q25": -0.0305,
+     "q75": 0.0443,
+     "trafne": 399
+    },
+    "67": {
+     "n": 817,
+     "mediana": -0.0023,
+     "q25": -0.0434,
+     "q75": 0.0606,
+     "trafne": 394
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "indeks zmienności vix|up": {
    "key_dir": "up",
    "n": 818,
    "trafne": 342,
-   "nadwyzka": 0.0054,
+   "nadwyzka": 0.0052,
    "kraje": {
     "JP": 26,
     "NG": 24,
@@ -777,7 +1706,31 @@
     "SD": 21,
     "CU": 20
    },
-   "symbol": "^VIX"
+   "symbol": "^VIX",
+   "okresy": {
+    "14": {
+     "n": 818,
+     "mediana": -0.0228,
+     "q25": -0.1402,
+     "q75": 0.0766,
+     "trafne": 360
+    },
+    "37": {
+     "n": 818,
+     "mediana": -0.0538,
+     "q25": -0.21,
+     "q75": 0.1095,
+     "trafne": 326
+    },
+    "67": {
+     "n": 817,
+     "mediana": -0.1058,
+     "q25": -0.2461,
+     "q75": 0.0364,
+     "trafne": 242
+    }
+   },
+   "najlepszy_okres": null
   },
   "kse-100|down": {
    "key_dir": "down",
@@ -785,7 +1738,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "obligacje usa i niemiec|up": {
    "key_dir": "up",
@@ -802,7 +1757,31 @@
     "SD": 21,
     "CU": 20
    },
-   "symbol": "^TNX"
+   "symbol": "^TNX",
+   "okresy": {
+    "14": {
+     "n": 818,
+     "mediana": -0.0041,
+     "q25": -0.0414,
+     "q75": 0.0383,
+     "trafne": 376
+    },
+    "37": {
+     "n": 818,
+     "mediana": -0.0074,
+     "q25": -0.0804,
+     "q75": 0.0513,
+     "trafne": 373
+    },
+    "67": {
+     "n": 817,
+     "mediana": -0.0021,
+     "q25": -0.1178,
+     "q75": 0.0792,
+     "trafne": 402
+    }
+   },
+   "najlepszy_okres": null
   },
   "frank szwajcarski|up": {
    "key_dir": "up",
@@ -819,7 +1798,31 @@
     "SD": 21,
     "CU": 20
    },
-   "symbol": "EURCHF=X"
+   "symbol": "EURCHF=X",
+   "okresy": {
+    "14": {
+     "n": 818,
+     "mediana": -0.0004,
+     "q25": -0.0064,
+     "q75": 0.0055,
+     "trafne": 398
+    },
+    "37": {
+     "n": 818,
+     "mediana": 0.001,
+     "q25": -0.0086,
+     "q75": 0.0089,
+     "trafne": 421
+    },
+    "67": {
+     "n": 817,
+     "mediana": 0.0,
+     "q25": -0.0108,
+     "q75": 0.0099,
+     "trafne": 411
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "msci emerging markets|down": {
    "key_dir": "down",
@@ -836,7 +1839,31 @@
     "SD": 21,
     "CU": 20
    },
-   "symbol": "EEM"
+   "symbol": "EEM",
+   "okresy": {
+    "14": {
+     "n": 818,
+     "mediana": 0.0032,
+     "q25": -0.0237,
+     "q75": 0.0264,
+     "trafne": 376
+    },
+    "37": {
+     "n": 818,
+     "mediana": 0.0053,
+     "q25": -0.0383,
+     "q75": 0.0413,
+     "trafne": 378
+    },
+    "67": {
+     "n": 817,
+     "mediana": 0.0069,
+     "q25": -0.042,
+     "q75": 0.0553,
+     "trafne": 358
+    }
+   },
+   "najlepszy_okres": null
   },
   "nifty 50 i sensex|down": {
    "key_dir": "down",
@@ -848,7 +1875,31 @@
     "AF": 16,
     "PK": 15
    },
-   "symbol": "^NSEI"
+   "symbol": "^NSEI",
+   "okresy": {
+    "14": {
+     "n": 71,
+     "mediana": 0.0021,
+     "q25": -0.0224,
+     "q75": 0.0153,
+     "trafne": 35
+    },
+    "37": {
+     "n": 71,
+     "mediana": 0.0038,
+     "q25": -0.0172,
+     "q75": 0.0343,
+     "trafne": 33
+    },
+    "67": {
+     "n": 71,
+     "mediana": 0.014,
+     "q25": -0.0227,
+     "q75": 0.0556,
+     "trafne": 30
+    }
+   },
+   "najlepszy_okres": null
   },
   "stoxx europe total market aerospace & defense|up": {
    "key_dir": "up",
@@ -865,7 +1916,31 @@
     "LT": 15,
     "KR": 14
    },
-   "symbol": "RHM.DE+BA.L+SAAB-B.ST+LDO.MI"
+   "symbol": "RHM.DE+BA.L+SAAB-B.ST+LDO.MI",
+   "okresy": {
+    "14": {
+     "n": 232,
+     "mediana": 0.0034,
+     "q25": -0.0303,
+     "q75": 0.0383,
+     "trafne": 120
+    },
+    "37": {
+     "n": 232,
+     "mediana": -0.0077,
+     "q25": -0.053,
+     "q75": 0.0612,
+     "trafne": 108
+    },
+    "67": {
+     "n": 231,
+     "mediana": -0.0167,
+     "q25": -0.0732,
+     "q75": 0.0754,
+     "trafne": 102
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "s&p aerospace & defense select|up": {
    "key_dir": "up",
@@ -879,7 +1954,31 @@
     "TW": 19,
     "KR": 14
    },
-   "symbol": "XAR"
+   "symbol": "XAR",
+   "okresy": {
+    "14": {
+     "n": 100,
+     "mediana": 0.0087,
+     "q25": -0.0229,
+     "q75": 0.0351,
+     "trafne": 54
+    },
+    "37": {
+     "n": 100,
+     "mediana": 0.0005,
+     "q25": -0.0365,
+     "q75": 0.0581,
+     "trafne": 51
+    },
+    "67": {
+     "n": 99,
+     "mediana": 0.0041,
+     "q25": -0.0547,
+     "q75": 0.0576,
+     "trafne": 52
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "miedź, aluminium, nikiel|up": {
    "key_dir": "up",
@@ -893,7 +1992,31 @@
     "CD": 9,
     "RU": 6
    },
-   "symbol": "HG=F"
+   "symbol": "HG=F",
+   "okresy": {
+    "14": {
+     "n": 62,
+     "mediana": 0.0083,
+     "q25": -0.019,
+     "q75": 0.0291,
+     "trafne": 39
+    },
+    "37": {
+     "n": 62,
+     "mediana": 0.004,
+     "q25": -0.0346,
+     "q75": 0.0295,
+     "trafne": 33
+    },
+    "67": {
+     "n": 62,
+     "mediana": 0.0034,
+     "q25": -0.0523,
+     "q75": 0.0489,
+     "trafne": 33
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "stoxx europe 600 basic resources|up": {
    "key_dir": "up",
@@ -907,7 +2030,31 @@
     "CD": 9,
     "RU": 6
    },
-   "symbol": "EXV6.DE"
+   "symbol": "EXV6.DE",
+   "okresy": {
+    "14": {
+     "n": 62,
+     "mediana": 0.0122,
+     "q25": -0.0224,
+     "q75": 0.039,
+     "trafne": 39
+    },
+    "37": {
+     "n": 62,
+     "mediana": 0.0239,
+     "q25": -0.0642,
+     "q75": 0.0728,
+     "trafne": 36
+    },
+    "67": {
+     "n": 62,
+     "mediana": 0.0112,
+     "q25": -0.0759,
+     "q75": 0.0756,
+     "trafne": 36
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "csi 300 i hang seng|down": {
    "key_dir": "down",
@@ -917,7 +2064,31 @@
    "kraje": {
     "CN": 22
    },
-   "symbol": "000300.SS+^HSI"
+   "symbol": "000300.SS+^HSI",
+   "okresy": {
+    "14": {
+     "n": 22,
+     "mediana": -0.0024,
+     "q25": -0.0217,
+     "q75": 0.0127,
+     "trafne": 12
+    },
+    "37": {
+     "n": 22,
+     "mediana": -0.0056,
+     "q25": -0.0699,
+     "q75": 0.0604,
+     "trafne": 13
+    },
+    "67": {
+     "n": 22,
+     "mediana": -0.025,
+     "q25": -0.069,
+     "q75": 0.0535,
+     "trafne": 12
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "phlx semiconductor|down": {
    "key_dir": "down",
@@ -932,7 +2103,31 @@
     "KR": 14,
     "PH": 8
    },
-   "symbol": "^SOX"
+   "symbol": "^SOX",
+   "okresy": {
+    "14": {
+     "n": 108,
+     "mediana": 0.0183,
+     "q25": -0.0223,
+     "q75": 0.0503,
+     "trafne": 40
+    },
+    "37": {
+     "n": 108,
+     "mediana": 0.0189,
+     "q25": -0.0482,
+     "q75": 0.0717,
+     "trafne": 42
+    },
+    "67": {
+     "n": 107,
+     "mediana": 0.0131,
+     "q25": -0.0661,
+     "q75": 0.1067,
+     "trafne": 48
+    }
+   },
+   "najlepszy_okres": null
   },
   "nasdaq 100|down": {
    "key_dir": "down",
@@ -947,7 +2142,31 @@
     "KR": 14,
     "PH": 8
    },
-   "symbol": "^NDX"
+   "symbol": "^NDX",
+   "okresy": {
+    "14": {
+     "n": 108,
+     "mediana": 0.0131,
+     "q25": -0.0053,
+     "q75": 0.0266,
+     "trafne": 38
+    },
+    "37": {
+     "n": 108,
+     "mediana": 0.0153,
+     "q25": -0.0277,
+     "q75": 0.0466,
+     "trafne": 45
+    },
+    "67": {
+     "n": 107,
+     "mediana": 0.0259,
+     "q25": -0.0382,
+     "q75": 0.066,
+     "trafne": 40
+    }
+   },
+   "najlepszy_okres": null
   },
   "taiex|down": {
    "key_dir": "down",
@@ -962,13 +2181,37 @@
     "IL": 19,
     "PH": 8
    },
-   "symbol": "^TWII"
+   "symbol": "^TWII",
+   "okresy": {
+    "14": {
+     "n": 187,
+     "mediana": 0.0136,
+     "q25": -0.0084,
+     "q75": 0.0303,
+     "trafne": 61
+    },
+    "37": {
+     "n": 187,
+     "mediana": 0.0129,
+     "q25": -0.0298,
+     "q75": 0.0629,
+     "trafne": 71
+    },
+    "67": {
+     "n": 186,
+     "mediana": 0.0222,
+     "q25": -0.0332,
+     "q75": 0.0796,
+     "trafne": 76
+    }
+   },
+   "najlepszy_okres": null
   },
   "kospi|down": {
    "key_dir": "down",
    "n": 100,
    "trafne": 43,
-   "nadwyzka": 0.0112,
+   "nadwyzka": 0.011,
    "kraje": {
     "JP": 26,
     "CN": 22,
@@ -976,7 +2219,31 @@
     "TW": 19,
     "KR": 14
    },
-   "symbol": "^KS11"
+   "symbol": "^KS11",
+   "okresy": {
+    "14": {
+     "n": 100,
+     "mediana": 0.012,
+     "q25": -0.0164,
+     "q75": 0.0294,
+     "trafne": 40
+    },
+    "37": {
+     "n": 100,
+     "mediana": 0.0063,
+     "q25": -0.0302,
+     "q75": 0.0545,
+     "trafne": 43
+    },
+    "67": {
+     "n": 99,
+     "mediana": 0.0051,
+     "q25": -0.0563,
+     "q75": 0.0619,
+     "trafne": 48
+    }
+   },
+   "najlepszy_okres": null
   },
   "nikkei 225|down": {
    "key_dir": "down",
@@ -990,7 +2257,31 @@
     "TW": 19,
     "KR": 14
    },
-   "symbol": "^N225"
+   "symbol": "^N225",
+   "okresy": {
+    "14": {
+     "n": 100,
+     "mediana": 0.0133,
+     "q25": -0.0138,
+     "q75": 0.0347,
+     "trafne": 44
+    },
+    "37": {
+     "n": 100,
+     "mediana": 0.0153,
+     "q25": -0.0337,
+     "q75": 0.0519,
+     "trafne": 43
+    },
+    "67": {
+     "n": 99,
+     "mediana": 0.0114,
+     "q25": -0.047,
+     "q75": 0.0612,
+     "trafne": 42
+    }
+   },
+   "najlepszy_okres": null
   },
   "stoxx europe 600 automobiles & parts|down": {
    "key_dir": "down",
@@ -1007,7 +2298,31 @@
     "YE": 12,
     "SO": 11
    },
-   "symbol": "EXV5.DE"
+   "symbol": "EXV5.DE",
+   "okresy": {
+    "14": {
+     "n": 175,
+     "mediana": 0.0064,
+     "q25": -0.0266,
+     "q75": 0.0375,
+     "trafne": 77
+    },
+    "37": {
+     "n": 175,
+     "mediana": -0.0014,
+     "q25": -0.0398,
+     "q75": 0.059,
+     "trafne": 89
+    },
+    "67": {
+     "n": 175,
+     "mediana": 0.0117,
+     "q25": -0.0498,
+     "q75": 0.0694,
+     "trafne": 80
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "hang seng|down": {
    "key_dir": "down",
@@ -1021,7 +2336,31 @@
     "KR": 14,
     "PH": 8
    },
-   "symbol": "^HSI"
+   "symbol": "^HSI",
+   "okresy": {
+    "14": {
+     "n": 89,
+     "mediana": 0.0065,
+     "q25": -0.0245,
+     "q75": 0.0312,
+     "trafne": 40
+    },
+    "37": {
+     "n": 89,
+     "mediana": -0.0025,
+     "q25": -0.0395,
+     "q75": 0.0379,
+     "trafne": 49
+    },
+    "67": {
+     "n": 89,
+     "mediana": -0.0165,
+     "q25": -0.0515,
+     "q75": 0.0618,
+     "trafne": 53
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "ropa brent|up": {
    "key_dir": "up",
@@ -1038,24 +2377,41 @@
     "SY": 17,
     "IQ": 16
    },
-   "symbol": "BZ=F"
+   "symbol": "BZ=F",
+   "okresy": {
+    "14": {
+     "n": 346,
+     "mediana": 0.0034,
+     "q25": -0.033,
+     "q75": 0.0427,
+     "trafne": 180
+    },
+    "37": {
+     "n": 346,
+     "mediana": 0.0016,
+     "q25": -0.0746,
+     "q75": 0.0787,
+     "trafne": 176
+    },
+    "67": {
+     "n": 345,
+     "mediana": -0.0077,
+     "q25": -0.086,
+     "q75": 0.1065,
+     "trafne": 166
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "gaz ttf|up": {
    "key_dir": "up",
-   "n": 332,
-   "trafne": 145,
-   "nadwyzka": 0.0177,
-   "kraje": {
-    "NG": 24,
-    "TR": 21,
-    "BY": 20,
-    "VE": 19,
-    "IR": 18,
-    "UA": 18,
-    "IQ": 16,
-    "LY": 15
-   },
-   "symbol": "TTF=F"
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 oil & gas|up": {
    "key_dir": "up",
@@ -1072,7 +2428,31 @@
     "AE": 15,
     "AZ": 13
    },
-   "symbol": "EXH1.DE"
+   "symbol": "EXH1.DE",
+   "okresy": {
+    "14": {
+     "n": 183,
+     "mediana": -0.0021,
+     "q25": -0.0237,
+     "q75": 0.0345,
+     "trafne": 91
+    },
+    "37": {
+     "n": 183,
+     "mediana": 0.0005,
+     "q25": -0.0399,
+     "q75": 0.0463,
+     "trafne": 92
+    },
+    "67": {
+     "n": 183,
+     "mediana": 0.0137,
+     "q25": -0.0509,
+     "q75": 0.0719,
+     "trafne": 103
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "s&p 500 energy|up": {
    "key_dir": "up",
@@ -1089,7 +2469,31 @@
     "AE": 15,
     "AZ": 13
    },
-   "symbol": "XLE"
+   "symbol": "XLE",
+   "okresy": {
+    "14": {
+     "n": 183,
+     "mediana": 0.0027,
+     "q25": -0.0288,
+     "q75": 0.0281,
+     "trafne": 93
+    },
+    "37": {
+     "n": 183,
+     "mediana": 0.0156,
+     "q25": -0.0398,
+     "q75": 0.0592,
+     "trafne": 103
+    },
+    "67": {
+     "n": 183,
+     "mediana": 0.0013,
+     "q25": -0.0583,
+     "q75": 0.1058,
+     "trafne": 94
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "obx oslo|up": {
    "key_dir": "up",
@@ -1097,13 +2501,15 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "frachty kontenerowe|up": {
    "key_dir": "up",
    "n": 144,
    "trafne": 77,
-   "nadwyzka": 0.0104,
+   "nadwyzka": 0.0105,
    "kraje": {
     "TR": 21,
     "SD": 21,
@@ -1114,7 +2520,31 @@
     "SO": 11,
     "SA": 10
    },
-   "symbol": "MAERSK-B.CO+HLAG.DE+ZIM"
+   "symbol": "MAERSK-B.CO+HLAG.DE+ZIM",
+   "okresy": {
+    "14": {
+     "n": 144,
+     "mediana": 0.0074,
+     "q25": -0.0513,
+     "q75": 0.0633,
+     "trafne": 76
+    },
+    "37": {
+     "n": 144,
+     "mediana": 0.0084,
+     "q25": -0.1067,
+     "q75": 0.1227,
+     "trafne": 74
+    },
+    "67": {
+     "n": 144,
+     "mediana": 0.0272,
+     "q25": -0.1034,
+     "q75": 0.1796,
+     "trafne": 78
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "baltic dirty tanker index|up": {
    "key_dir": "up",
@@ -1131,7 +2561,31 @@
     "AE": 15,
     "YE": 12
    },
-   "symbol": "FRO+DHT"
+   "symbol": "FRO+DHT",
+   "okresy": {
+    "14": {
+     "n": 178,
+     "mediana": 0.0015,
+     "q25": -0.0621,
+     "q75": 0.0635,
+     "trafne": 92
+    },
+    "37": {
+     "n": 178,
+     "mediana": -0.0068,
+     "q25": -0.0868,
+     "q75": 0.098,
+     "trafne": 83
+    },
+    "67": {
+     "n": 178,
+     "mediana": 0.0096,
+     "q25": -0.0782,
+     "q75": 0.1213,
+     "trafne": 102
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "tedpix|down": {
    "key_dir": "down",
@@ -1139,7 +2593,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 travel & leisure|down": {
    "key_dir": "down",
@@ -1156,7 +2612,31 @@
     "AE": 15,
     "AZ": 13
    },
-   "symbol": "EXV9.DE"
+   "symbol": "EXV9.DE",
+   "okresy": {
+    "14": {
+     "n": 189,
+     "mediana": 0.0036,
+     "q25": -0.0279,
+     "q75": 0.0306,
+     "trafne": 92
+    },
+    "37": {
+     "n": 189,
+     "mediana": 0.0076,
+     "q25": -0.0377,
+     "q75": 0.0493,
+     "trafne": 89
+    },
+    "67": {
+     "n": 189,
+     "mediana": 0.0174,
+     "q25": -0.0435,
+     "q75": 0.079,
+     "trafne": 89
+    }
+   },
+   "najlepszy_okres": null
   },
   "stoxx europe 600 chemicals|down": {
    "key_dir": "down",
@@ -1173,7 +2653,31 @@
     "IQ": 16,
     "LY": 15
    },
-   "symbol": "EXV7.DE"
+   "symbol": "EXV7.DE",
+   "okresy": {
+    "14": {
+     "n": 253,
+     "mediana": 0.0013,
+     "q25": -0.0222,
+     "q75": 0.023,
+     "trafne": 124
+    },
+    "37": {
+     "n": 253,
+     "mediana": -0.0009,
+     "q25": -0.0366,
+     "q75": 0.0303,
+     "trafne": 128
+    },
+    "67": {
+     "n": 253,
+     "mediana": -0.0046,
+     "q25": -0.045,
+     "q75": 0.0318,
+     "trafne": 131
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "dax|down": {
    "key_dir": "down",
@@ -1190,7 +2694,31 @@
     "UA": 18,
     "IQ": 16
    },
-   "symbol": "^GDAXI"
+   "symbol": "^GDAXI",
+   "okresy": {
+    "14": {
+     "n": 362,
+     "mediana": 0.0016,
+     "q25": -0.0161,
+     "q75": 0.0205,
+     "trafne": 172
+    },
+    "37": {
+     "n": 362,
+     "mediana": -0.0008,
+     "q25": -0.0265,
+     "q75": 0.0311,
+     "trafne": 192
+    },
+    "67": {
+     "n": 362,
+     "mediana": 0.0026,
+     "q25": -0.0283,
+     "q75": 0.0329,
+     "trafne": 168
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "stoxx europe 600 retail|down": {
    "key_dir": "down",
@@ -1207,7 +2735,31 @@
     "SO": 11,
     "SA": 10
    },
-   "symbol": "EXH8.DE"
+   "symbol": "EXH8.DE",
+   "okresy": {
+    "14": {
+     "n": 144,
+     "mediana": 0.0065,
+     "q25": -0.0218,
+     "q75": 0.032,
+     "trafne": 64
+    },
+    "37": {
+     "n": 144,
+     "mediana": 0.0045,
+     "q25": -0.0395,
+     "q75": 0.0453,
+     "trafne": 70
+    },
+    "67": {
+     "n": 144,
+     "mediana": 0.0197,
+     "q25": -0.0482,
+     "q75": 0.0741,
+     "trafne": 57
+    }
+   },
+   "najlepszy_okres": null
   },
   "nikkei 225 i kospi|down": {
    "key_dir": "down",
@@ -1215,7 +2767,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "ta-35|down": {
    "key_dir": "down",
@@ -1229,7 +2783,31 @@
     "PS": 16,
     "LB": 15
    },
-   "symbol": "TA35.TA"
+   "symbol": "TA35.TA",
+   "okresy": {
+    "14": {
+     "n": 104,
+     "mediana": -0.0007,
+     "q25": -0.0225,
+     "q75": 0.0154,
+     "trafne": 54
+    },
+    "37": {
+     "n": 104,
+     "mediana": 0.0051,
+     "q25": -0.0254,
+     "q75": 0.0314,
+     "trafne": 46
+    },
+    "67": {
+     "n": 102,
+     "mediana": 0.0168,
+     "q25": -0.0359,
+     "q75": 0.0454,
+     "trafne": 40
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "ibc|down": {
    "key_dir": "down",
@@ -1237,7 +2815,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "ropa ciężka i rafinerie usa|up": {
    "key_dir": "up",
@@ -1245,7 +2825,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 utilities|up": {
    "key_dir": "up",
@@ -1259,7 +2841,31 @@
     "AZ": 13,
     "GE": 11
    },
-   "symbol": "EXH9.DE"
+   "symbol": "EXH9.DE",
+   "okresy": {
+    "14": {
+     "n": 83,
+     "mediana": -0.001,
+     "q25": -0.0156,
+     "q75": 0.0153,
+     "trafne": 38
+    },
+    "37": {
+     "n": 83,
+     "mediana": -0.0038,
+     "q25": -0.0287,
+     "q75": 0.0343,
+     "trafne": 39
+    },
+    "67": {
+     "n": 83,
+     "mediana": 0.0051,
+     "q25": -0.0337,
+     "q75": 0.0429,
+     "trafne": 44
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "bist 100|down": {
    "key_dir": "down",
@@ -1269,7 +2875,31 @@
    "kraje": {
     "TR": 21
    },
-   "symbol": "XU100.IS"
+   "symbol": "XU100.IS",
+   "okresy": {
+    "14": {
+     "n": 21,
+     "mediana": -0.006,
+     "q25": -0.0363,
+     "q75": 0.0103,
+     "trafne": 14
+    },
+    "37": {
+     "n": 21,
+     "mediana": -0.0438,
+     "q25": -0.0753,
+     "q75": 0.0485,
+     "trafne": 12
+    },
+    "67": {
+     "n": 21,
+     "mediana": 0.0301,
+     "q25": -0.0788,
+     "q75": 0.0742,
+     "trafne": 8
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "wig20|down": {
    "key_dir": "down",
@@ -1277,7 +2907,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "pszenica i kukurydza|up": {
    "key_dir": "up",
@@ -1290,7 +2922,31 @@
     "RU": 6,
     "AR": 5
    },
-   "symbol": "ZW=F+ZC=F"
+   "symbol": "ZW=F+ZC=F",
+   "okresy": {
+    "14": {
+     "n": 38,
+     "mediana": 0.0203,
+     "q25": -0.0172,
+     "q75": 0.0417,
+     "trafne": 26
+    },
+    "37": {
+     "n": 38,
+     "mediana": 0.0004,
+     "q25": -0.0577,
+     "q75": 0.0337,
+     "trafne": 20
+    },
+    "67": {
+     "n": 38,
+     "mediana": 0.0118,
+     "q25": -0.0634,
+     "q75": 0.0407,
+     "trafne": 20
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "nawozy|up": {
    "key_dir": "up",
@@ -1303,7 +2959,31 @@
     "RU": 6,
     "AR": 5
    },
-   "symbol": "NTR+CF"
+   "symbol": "NTR+CF",
+   "okresy": {
+    "14": {
+     "n": 38,
+     "mediana": 0.0193,
+     "q25": -0.0315,
+     "q75": 0.0481,
+     "trafne": 24
+    },
+    "37": {
+     "n": 38,
+     "mediana": -0.0022,
+     "q25": -0.0696,
+     "q75": 0.0894,
+     "trafne": 19
+    },
+    "67": {
+     "n": 38,
+     "mediana": 0.0129,
+     "q25": -0.0617,
+     "q75": 0.068,
+     "trafne": 23
+    }
+   },
+   "najlepszy_okres": "14"
   },
   "moex russia|down": {
    "key_dir": "down",
@@ -1311,7 +2991,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 food & beverage|down": {
    "key_dir": "down",
@@ -1324,7 +3006,31 @@
     "RU": 6,
     "AR": 5
    },
-   "symbol": "EXH3.DE"
+   "symbol": "EXH3.DE",
+   "okresy": {
+    "14": {
+     "n": 38,
+     "mediana": 0.0086,
+     "q25": -0.0186,
+     "q75": 0.0173,
+     "trafne": 18
+    },
+    "37": {
+     "n": 38,
+     "mediana": -0.0042,
+     "q25": -0.0334,
+     "q75": 0.0271,
+     "trafne": 21
+    },
+    "67": {
+     "n": 38,
+     "mediana": 0.0042,
+     "q25": -0.0486,
+     "q75": 0.0413,
+     "trafne": 18
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "pszenica|up": {
    "key_dir": "up",
@@ -1332,7 +3038,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "kurs pln|down": {
    "key_dir": "down",
@@ -1340,7 +3048,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "pfts|down": {
    "key_dir": "down",
@@ -1348,7 +3058,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "ngx all-share|down": {
    "key_dir": "down",
@@ -1356,7 +3068,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "brak płynnego indeksu|down": {
    "key_dir": "down",
@@ -1364,7 +3078,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "egx 30|down": {
    "key_dir": "down",
@@ -1372,13 +3088,15 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "rheinmetall, saab, kongsberg|up": {
    "key_dir": "up",
    "n": 93,
    "trafne": 43,
-   "nadwyzka": 0.033,
+   "nadwyzka": 0.0331,
    "kraje": {
     "BY": 20,
     "LT": 15,
@@ -1389,7 +3107,31 @@
     "MD": 6,
     "FI": 5
    },
-   "symbol": "RHM.DE+SAAB-B.ST+KOG.OL"
+   "symbol": "RHM.DE+SAAB-B.ST+KOG.OL",
+   "okresy": {
+    "14": {
+     "n": 93,
+     "mediana": 0.0001,
+     "q25": -0.0273,
+     "q75": 0.0405,
+     "trafne": 47
+    },
+    "37": {
+     "n": 93,
+     "mediana": 0.0019,
+     "q25": -0.0484,
+     "q75": 0.1039,
+     "trafne": 48
+    },
+    "67": {
+     "n": 93,
+     "mediana": -0.0037,
+     "q25": -0.0648,
+     "q75": 0.1299,
+     "trafne": 46
+    }
+   },
+   "najlepszy_okres": "37"
   },
   "omx stockholm 30|down": {
    "key_dir": "down",
@@ -1399,7 +3141,31 @@
    "kraje": {
     "SE": 8
    },
-   "symbol": "^OMX"
+   "symbol": "^OMX",
+   "okresy": {
+    "14": {
+     "n": 8,
+     "mediana": 0.0069,
+     "q25": -0.0134,
+     "q75": 0.0164,
+     "trafne": 3
+    },
+    "37": {
+     "n": 8,
+     "mediana": 0.0053,
+     "q25": -0.0108,
+     "q75": 0.0186,
+     "trafne": 3
+    },
+    "67": {
+     "n": 8,
+     "mediana": 0.0054,
+     "q25": -0.0541,
+     "q75": 0.0318,
+     "trafne": 4
+    }
+   },
+   "najlepszy_okres": null
   },
   "mwig40|down": {
    "key_dir": "down",
@@ -1407,7 +3173,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "omx baltic benchmark|down": {
    "key_dir": "down",
@@ -1415,7 +3183,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "kurs pln i walut regionu|down": {
    "key_dir": "down",
@@ -1432,7 +3202,31 @@
     "MD": 6,
     "FI": 5
    },
-   "symbol": "EURPLN=X"
+   "symbol": "EURPLN=X",
+   "okresy": {
+    "14": {
+     "n": 93,
+     "mediana": 0.0007,
+     "q25": -0.0061,
+     "q75": 0.0064,
+     "trafne": 42
+    },
+    "37": {
+     "n": 93,
+     "mediana": 0.0012,
+     "q25": -0.007,
+     "q75": 0.0095,
+     "trafne": 42
+    },
+    "67": {
+     "n": 93,
+     "mediana": 0.0012,
+     "q25": -0.0115,
+     "q75": 0.0189,
+     "trafne": 46
+    }
+   },
+   "najlepszy_okres": null
   },
   "blom stock index|down": {
    "key_dir": "down",
@@ -1440,7 +3234,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "ftse/jse top 40|down": {
    "key_dir": "down",
@@ -1450,7 +3246,31 @@
    "kraje": {
     "ZA": 15
    },
-   "symbol": "^J200.JO"
+   "symbol": "^J200.JO",
+   "okresy": {
+    "14": {
+     "n": 15,
+     "mediana": 0.0007,
+     "q25": -0.0152,
+     "q75": 0.018,
+     "trafne": 7
+    },
+    "37": {
+     "n": 15,
+     "mediana": 0.0072,
+     "q25": -0.0136,
+     "q75": 0.05,
+     "trafne": 6
+    },
+    "67": {
+     "n": 15,
+     "mediana": -0.0128,
+     "q25": -0.0386,
+     "q75": 0.0565,
+     "trafne": 9
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "tadawul all share|down": {
    "key_dir": "down",
@@ -1458,7 +3278,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "qe index|down": {
    "key_dir": "down",
@@ -1466,7 +3288,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "dfm general i ftse adx general|down": {
    "key_dir": "down",
@@ -1474,7 +3298,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "stoxx europe 600 banks|down": {
    "key_dir": "down",
@@ -1484,7 +3310,31 @@
    "kraje": {
     "AE": 15
    },
-   "symbol": "EXV1.DE"
+   "symbol": "EXV1.DE",
+   "okresy": {
+    "14": {
+     "n": 15,
+     "mediana": 0.0202,
+     "q25": 0.0015,
+     "q75": 0.0544,
+     "trafne": 4
+    },
+    "37": {
+     "n": 15,
+     "mediana": 0.0357,
+     "q25": -0.0011,
+     "q75": 0.0765,
+     "trafne": 4
+    },
+    "67": {
+     "n": 15,
+     "mediana": 0.0095,
+     "q25": -0.0264,
+     "q75": 0.1113,
+     "trafne": 6
+    }
+   },
+   "najlepszy_okres": null
   },
   "s&p/bmv ipc|down": {
    "key_dir": "down",
@@ -1494,7 +3344,31 @@
    "kraje": {
     "MX": 20
    },
-   "symbol": "^MXX"
+   "symbol": "^MXX",
+   "okresy": {
+    "14": {
+     "n": 20,
+     "mediana": -0.0092,
+     "q25": -0.0274,
+     "q75": 0.0119,
+     "trafne": 12
+    },
+    "37": {
+     "n": 20,
+     "mediana": 0.0037,
+     "q25": -0.023,
+     "q75": 0.0165,
+     "trafne": 9
+    },
+    "67": {
+     "n": 20,
+     "mediana": -0.0133,
+     "q25": -0.043,
+     "q75": 0.0598,
+     "trafne": 12
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "psei|down": {
    "key_dir": "down",
@@ -1502,7 +3376,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "boursa kuwait premier|down": {
    "key_dir": "down",
@@ -1510,7 +3386,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "kase index|down": {
    "key_dir": "down",
@@ -1518,7 +3396,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "obx|down": {
    "key_dir": "down",
@@ -1526,7 +3406,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "omx vilnius|down": {
    "key_dir": "down",
@@ -1534,7 +3416,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "omx riga|down": {
    "key_dir": "down",
@@ -1542,7 +3426,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "bux|down": {
    "key_dir": "down",
@@ -1550,7 +3436,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "ibovespa|down": {
    "key_dir": "down",
@@ -1560,7 +3448,31 @@
    "kraje": {
     "BR": 9
    },
-   "symbol": "^BVSP"
+   "symbol": "^BVSP",
+   "okresy": {
+    "14": {
+     "n": 9,
+     "mediana": -0.009,
+     "q25": -0.031,
+     "q75": 0.0202,
+     "trafne": 5
+    },
+    "37": {
+     "n": 9,
+     "mediana": -0.0308,
+     "q25": -0.0397,
+     "q75": 0.0531,
+     "trafne": 5
+    },
+    "67": {
+     "n": 9,
+     "mediana": -0.0315,
+     "q25": -0.0838,
+     "q75": 0.0453,
+     "trafne": 5
+    }
+   },
+   "najlepszy_okres": "67"
   },
   "bet|down": {
    "key_dir": "down",
@@ -1568,7 +3480,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "px|down": {
    "key_dir": "down",
@@ -1576,7 +3490,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "s&p merval|down": {
    "key_dir": "down",
@@ -1584,7 +3500,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "omx tallinn|down": {
    "key_dir": "down",
@@ -1592,7 +3510,9 @@
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "okresy": {},
+   "najlepszy_okres": null
   },
   "omx helsinki 25|down": {
    "key_dir": "down",
@@ -1602,7 +3522,31 @@
    "kraje": {
     "FI": 5
    },
-   "symbol": "^OMXH25"
+   "symbol": "^OMXH25",
+   "okresy": {
+    "14": {
+     "n": 5,
+     "mediana": 0.006,
+     "q25": -0.0023,
+     "q75": 0.0085,
+     "trafne": 2
+    },
+    "37": {
+     "n": 5,
+     "mediana": 0.0334,
+     "q25": 0.0038,
+     "q75": 0.0397,
+     "trafne": 1
+    },
+    "67": {
+     "n": 5,
+     "mediana": 0.0047,
+     "q25": 0.0031,
+     "q75": 0.044,
+     "trafne": 1
+    }
+   },
+   "najlepszy_okres": null
   }
  }
 }
