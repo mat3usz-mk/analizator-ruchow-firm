@@ -20,7 +20,7 @@ from . import report, sources, store
 from .score import PRIORITY_CATS, PRIORITY_SOURCES, assess, country_name, extract_signals
 from .skutki import indices
 
-FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "kursy", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
+FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "kursy", "agsi", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
 LEVELS = {"niski": 0, "podwyższony": 1, "wysoki": 2}
 
 
@@ -50,7 +50,8 @@ def _fetch(con, days: int, srcs: list[str]) -> None:
             if src == "pierwotne":
                 from . import pierwotne
                 # AIS (statki w cieśninach) tylko z kluczem; słucha strumienia ok. 3 min
-                names = FAST_PRIMARY + (["ais"] if os.environ.get("AISSTREAM_API_KEY") else [])
+                names = [n for n in FAST_PRIMARY if n != "agsi" or os.environ.get("AGSI_KEY")]
+                names += ["ais"] if os.environ.get("AISSTREAM_API_KEY") else []
                 arts = pierwotne.fetch_all(con, days, names=names)
             else:
                 arts = sources.FETCHERS[src](days=days)

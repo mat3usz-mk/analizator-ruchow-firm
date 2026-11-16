@@ -364,6 +364,8 @@ FETCHERS = {
     "oficjalne_rss": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_rss(con, days),
     # IODA (awarie internetu) wyłączone: w teście historycznym dawało ok. 60 fałszywych alarmów więcej bez żadnego trafienia
     "portwatch": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_portwatch(con, days),
+    "agsi": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_agsi(con, days),
+    # ACLED pominięte na żywo: darmowe konto daje dane opóźnione o 12 miesięcy (funkcja oficjalne.live_acled jest gotowa)
     "kursy": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_fx(con, min(days, 5)),
     "ais": lambda con, days=7: __import__("analizator.ais", fromlist=["fetch"]).fetch(con, days),
 }

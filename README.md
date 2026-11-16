@@ -266,3 +266,5 @@ do logów (`CICHO=1`), zgłoszenia na GitHubie są wyłączone (zmienna `ALARMY_
 - IODA dodawało ok. 60 fałszywych alarmów bez trafień, więc jest wyłączone;
 - mniejsza waga artykułów (0,5 i 0,25) obniżała liczbę trafionych wydarzeń, więc waga artykułów zostaje 1,0 (parametr `PARAMS["artykuly"]`).
 Zegar czuwania (`.github/workflows/zegar.yml`) wywołuje cykl co 30 minut, bo harmonogram GitHuba w tym repozytorium nie ruszał.
+
+ACLED i GIE AGSI (16.11): logowanie do ACLED e-mailem i hasłem (sekrety `ACLED_EMAIL`, `ACLED_PASSWORD`), magazyny gazu z kluczem `AGSI_KEY`. W teście: ACLED dodało 1 trafione wydarzenie w 2025–2026 i 6 prawdziwych alarmów w 2022–2024 przy kilku fałszywych więcej, ale darmowe konto daje dane opóźnione o 12 miesięcy, więc na żywo nie jest używane. AGSI nie zmienia wyniku; działa w czuwaniu raz dziennie jako rzetelne potwierdzenie przy Rosji.
