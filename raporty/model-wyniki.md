@@ -23,6 +23,21 @@ AUC: 0,5 = losowo, 1,0 = idealnie. Mówi, czy kraje przed wydarzeniem dostają w
 | trafne alarmy (precyzja) | 11% | 17% |
 | mediana wyprzedzenia (dni) | 44 | 54 |
 
+## Alarm z połączenia modelu i ręcznego indeksu (test)
+
+Reguła (progi dobrane tylko na latach uczenia): alarm, gdy ręczny indeks ≥ 40 i model daje co najmniej 4.0%, albo gdy sam model daje co najmniej 13.9%.
+
+| | ręczny | model | połączony |
+|---|---|---|---|
+| trafione wydarzenia | 68% | 61% | 61% |
+| trafione z zaskoczenia | 67% | 35% | 53% |
+| trafne alarmy (precyzja) | 11% | 17% | 15% |
+| mediana wyprzedzenia (dni) | 44 | 54 | 49 |
+| prawdziwe alarmy | 29 | 18 | 23 |
+| fałszywe alarmy | 229 | 91 | 131 |
+
+W raporcie na żywo **używana jest reguła połączona**.
+
 ## Kalibracja na teście (czy „20%” znaczy 20%)
 
 | szansa wg modelu | tygodni | średnio przewidziane | naprawdę z wydarzeniem |

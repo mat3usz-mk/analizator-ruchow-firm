@@ -115,6 +115,21 @@
   "2026-11-16"
  ],
  "utworzono": "2026-11-16",
+ "laczenie": {
+  "potwierdzenie": 0.0396,
+  "samodzielnie": 0.1393,
+  "aktywne": true
+ },
+ "laczenie_test": {
+  "hit_rate": 0.6129032258064516,
+  "hit_rate_fresh": 0.5294117647058824,
+  "n_fresh": 17,
+  "n_events": 31,
+  "precision": 0.14935064935064934,
+  "median_lead": 49,
+  "prawdziwe": 23,
+  "falszywe": 131
+ },
  "wyniki_test": {
   "auc_reczny": 0.6365267200416586,
   "auc_model": 0.725872116991039,

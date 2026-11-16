@@ -1,0 +1,739 @@
+{
+ "n_epizodow": 500,
+ "okres": "2019-09-27..2026-09-12",
+ "regula": "laczona",
+ "dni": 30,
+ "utworzono": "2026-11-16",
+ "wyniki": {
+  "ropa brent|up": {
+   "n": 219,
+   "trafne": 106,
+   "nadwyzka": -0.0028,
+   "kraje": {
+    "TR": 21,
+    "NG": 20,
+    "IR": 18,
+    "IL": 18,
+    "VE": 15,
+    "SY": 15,
+    "AE": 13,
+    "TW": 13
+   },
+   "symbol": "BZ=F"
+  },
+  "gaz ttf|up": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "stoxx europe 600 oil & gas|up": {
+   "n": 111,
+   "trafne": 57,
+   "nadwyzka": -0.0007,
+   "kraje": {
+    "NG": 20,
+    "IR": 18,
+    "VE": 15,
+    "AE": 13,
+    "IQ": 11,
+    "LY": 7,
+    "AZ": 7,
+    "RU": 6
+   },
+   "symbol": "EXH1.DE"
+  },
+  "s&p 500 energy|up": {
+   "n": 111,
+   "trafne": 62,
+   "nadwyzka": 0.0047,
+   "kraje": {
+    "NG": 20,
+    "IR": 18,
+    "VE": 15,
+    "AE": 13,
+    "IQ": 11,
+    "LY": 7,
+    "AZ": 7,
+    "RU": 6
+   },
+   "symbol": "XLE"
+  },
+  "obx oslo|up": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "frachty kontenerowe|up": {
+   "n": 87,
+   "trafne": 41,
+   "nadwyzka": -0.0142,
+   "kraje": {
+    "TR": 21,
+    "IR": 18,
+    "SD": 13,
+    "TW": 13,
+    "YE": 7,
+    "SA": 6,
+    "EG": 4,
+    "SO": 2
+   },
+   "symbol": "MAERSK-B.CO+HLAG.DE+ZIM"
+  },
+  "baltic dirty tanker index|up": {
+   "n": 103,
+   "trafne": 51,
+   "nadwyzka": 0.0099,
+   "kraje": {
+    "TR": 21,
+    "IR": 18,
+    "AE": 13,
+    "TW": 13,
+    "IQ": 11,
+    "YE": 7,
+    "SA": 6,
+    "EG": 4
+   },
+   "symbol": "FRO+DHT"
+  },
+  "złoto|up": {
+   "n": 500,
+   "trafne": 224,
+   "nadwyzka": -0.0016,
+   "kraje": {
+    "JP": 22,
+    "DE": 22,
+    "CN": 22,
+    "TR": 21,
+    "NG": 20,
+    "IN": 20,
+    "CU": 19,
+    "IR": 18
+   },
+   "symbol": "GC=F"
+  },
+  "indeks zmienności vix|up": {
+   "n": 500,
+   "trafne": 210,
+   "nadwyzka": 0.0047,
+   "kraje": {
+    "JP": 22,
+    "DE": 22,
+    "CN": 22,
+    "TR": 21,
+    "NG": 20,
+    "IN": 20,
+    "CU": 19,
+    "IR": 18
+   },
+   "symbol": "^VIX"
+  },
+  "tedpix|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "stoxx europe 600 travel & leisure|down": {
+   "n": 113,
+   "trafne": 53,
+   "nadwyzka": -0.002,
+   "kraje": {
+    "NG": 20,
+    "IR": 18,
+    "VE": 15,
+    "AE": 13,
+    "IQ": 11,
+    "LY": 7,
+    "AZ": 7,
+    "RU": 6
+   },
+   "symbol": "EXV9.DE"
+  },
+  "stoxx europe 600 chemicals|down": {
+   "n": 169,
+   "trafne": 80,
+   "nadwyzka": -0.0028,
+   "kraje": {
+    "TR": 21,
+    "NG": 20,
+    "IR": 18,
+    "UA": 18,
+    "BY": 18,
+    "VE": 15,
+    "AE": 13,
+    "IQ": 11
+   },
+   "symbol": "EXV7.DE"
+  },
+  "dax|down": {
+   "n": 222,
+   "trafne": 124,
+   "nadwyzka": -0.0028,
+   "kraje": {
+    "DE": 22,
+    "TR": 21,
+    "NG": 20,
+    "IR": 18,
+    "UA": 18,
+    "BY": 18,
+    "VE": 15,
+    "AE": 13
+   },
+   "symbol": "^GDAXI"
+  },
+  "stoxx europe 600 retail|down": {
+   "n": 87,
+   "trafne": 45,
+   "nadwyzka": -0.0083,
+   "kraje": {
+    "TR": 21,
+    "IR": 18,
+    "SD": 13,
+    "TW": 13,
+    "YE": 7,
+    "SA": 6,
+    "EG": 4,
+    "SO": 2
+   },
+   "symbol": "EXH8.DE"
+  },
+  "stoxx europe 600 automobiles & parts|down": {
+   "n": 107,
+   "trafne": 63,
+   "nadwyzka": -0.0121,
+   "kraje": {
+    "CN": 22,
+    "TR": 21,
+    "IR": 18,
+    "TW": 13,
+    "ZA": 7,
+    "YE": 7,
+    "RU": 6,
+    "EG": 4
+   },
+   "symbol": "EXV5.DE"
+  },
+  "obligacje usa i niemiec|up": {
+   "n": 500,
+   "trafne": 228,
+   "nadwyzka": -0.0095,
+   "kraje": {
+    "JP": 22,
+    "DE": 22,
+    "CN": 22,
+    "TR": 21,
+    "NG": 20,
+    "IN": 20,
+    "CU": 19,
+    "IR": 18
+   },
+   "symbol": "^TNX"
+  },
+  "frank szwajcarski|up": {
+   "n": 500,
+   "trafne": 241,
+   "nadwyzka": -0.001,
+   "kraje": {
+    "JP": 22,
+    "DE": 22,
+    "CN": 22,
+    "TR": 21,
+    "NG": 20,
+    "IN": 20,
+    "CU": 19,
+    "IR": 18
+   },
+   "symbol": "EURCHF=X"
+  },
+  "msci emerging markets|down": {
+   "n": 500,
+   "trafne": 236,
+   "nadwyzka": -0.0021,
+   "kraje": {
+    "JP": 22,
+    "DE": 22,
+    "CN": 22,
+    "TR": 21,
+    "NG": 20,
+    "IN": 20,
+    "CU": 19,
+    "IR": 18
+   },
+   "symbol": "EEM"
+  },
+  "nikkei 225 i kospi|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "ta-35|down": {
+   "n": 93,
+   "trafne": 44,
+   "nadwyzka": -0.0096,
+   "kraje": {
+    "IL": 36,
+    "IR": 18,
+    "SY": 15,
+    "LB": 12,
+    "PS": 12
+   },
+   "symbol": "TA35.TA"
+  },
+  "ibc|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "ropa ciężka i rafinerie usa|up": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "stoxx europe 600 utilities|up": {
+   "n": 65,
+   "trafne": 29,
+   "nadwyzka": -0.0006,
+   "kraje": {
+    "TR": 21,
+    "UA": 18,
+    "BY": 18,
+    "AZ": 7,
+    "GE": 1
+   },
+   "symbol": "EXH9.DE"
+  },
+  "bist 100|down": {
+   "n": 21,
+   "trafne": 14,
+   "nadwyzka": -0.0185,
+   "kraje": {
+    "TR": 21
+   },
+   "symbol": "XU100.IS"
+  },
+  "wig20|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "pszenica i kukurydza|up": {
+   "n": 24,
+   "trafne": 14,
+   "nadwyzka": -0.0112,
+   "kraje": {
+    "UA": 18,
+    "RU": 6
+   },
+   "symbol": "ZW=F+ZC=F"
+  },
+  "nawozy|up": {
+   "n": 24,
+   "trafne": 12,
+   "nadwyzka": 0.0194,
+   "kraje": {
+    "UA": 18,
+    "RU": 6
+   },
+   "symbol": "NTR+CF"
+  },
+  "miedź, aluminium, nikiel|up": {
+   "n": 39,
+   "trafne": 22,
+   "nadwyzka": 0.0115,
+   "kraje": {
+    "CN": 22,
+    "ZA": 7,
+    "RU": 6,
+    "CD": 2,
+    "KZ": 2
+   },
+   "symbol": "HG=F"
+  },
+  "stoxx europe 600 basic resources|up": {
+   "n": 39,
+   "trafne": 25,
+   "nadwyzka": 0.0128,
+   "kraje": {
+    "CN": 22,
+    "ZA": 7,
+    "RU": 6,
+    "CD": 2,
+    "KZ": 2
+   },
+   "symbol": "EXV6.DE"
+  },
+  "moex russia|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "stoxx europe 600 food & beverage|down": {
+   "n": 24,
+   "trafne": 14,
+   "nadwyzka": -0.0045,
+   "kraje": {
+    "UA": 18,
+    "RU": 6
+   },
+   "symbol": "EXH3.DE"
+  },
+  "stoxx europe total market aerospace & defense|up": {
+   "n": 152,
+   "trafne": 71,
+   "nadwyzka": 0.0006,
+   "kraje": {
+    "JP": 22,
+    "CN": 22,
+    "UA": 18,
+    "IL": 18,
+    "BY": 18,
+    "TW": 13,
+    "PL": 10,
+    "KR": 9
+   },
+   "symbol": "RHM.DE+BA.L+SAAB-B.ST+LDO.MI"
+  },
+  "pszenica|up": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "kurs pln|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "ngx all-share|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "pfts|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "ftse/jse top 40|down": {
+   "n": 7,
+   "trafne": 2,
+   "nadwyzka": 0.0351,
+   "kraje": {
+    "ZA": 7
+   },
+   "symbol": "^J200.JO"
+  },
+  "s&p aerospace & defense select|up": {
+   "n": 84,
+   "trafne": 44,
+   "nadwyzka": 0.002,
+   "kraje": {
+    "JP": 22,
+    "CN": 22,
+    "IL": 18,
+    "TW": 13,
+    "KR": 9
+   },
+   "symbol": "XAR"
+  },
+  "nikkei 225|down": {
+   "n": 84,
+   "trafne": 44,
+   "nadwyzka": -0.0007,
+   "kraje": {
+    "JP": 22,
+    "CN": 22,
+    "IL": 18,
+    "TW": 13,
+    "KR": 9
+   },
+   "symbol": "^N225"
+  },
+  "phlx semiconductor|down": {
+   "n": 85,
+   "trafne": 36,
+   "nadwyzka": 0.0108,
+   "kraje": {
+    "JP": 22,
+    "CN": 22,
+    "IL": 18,
+    "TW": 13,
+    "KR": 9,
+    "PH": 1
+   },
+   "symbol": "^SOX"
+  },
+  "nasdaq 100|down": {
+   "n": 85,
+   "trafne": 30,
+   "nadwyzka": 0.006,
+   "kraje": {
+    "JP": 22,
+    "CN": 22,
+    "IL": 18,
+    "TW": 13,
+    "KR": 9,
+    "PH": 1
+   },
+   "symbol": "^NDX"
+  },
+  "taiex|down": {
+   "n": 149,
+   "trafne": 57,
+   "nadwyzka": 0.0021,
+   "kraje": {
+    "CN": 44,
+    "JP": 42,
+    "TW": 26,
+    "IL": 18,
+    "KR": 18,
+    "PH": 1
+   },
+   "symbol": "^TWII"
+  },
+  "kospi|down": {
+   "n": 84,
+   "trafne": 42,
+   "nadwyzka": -0.0007,
+   "kraje": {
+    "JP": 22,
+    "CN": 22,
+    "IL": 18,
+    "TW": 13,
+    "KR": 9
+   },
+   "symbol": "^KS11"
+  },
+  "hang seng|down": {
+   "n": 67,
+   "trafne": 36,
+   "nadwyzka": -0.0007,
+   "kraje": {
+    "JP": 22,
+    "CN": 22,
+    "TW": 13,
+    "KR": 9,
+    "PH": 1
+   },
+   "symbol": "^HSI"
+  },
+  "csi 300 i hang seng|down": {
+   "n": 22,
+   "trafne": 10,
+   "nadwyzka": -0.0041,
+   "kraje": {
+    "CN": 22
+   },
+   "symbol": "000300.SS+^HSI"
+  },
+  "egx 30|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "nifty 50 i sensex|down": {
+   "n": 63,
+   "trafne": 26,
+   "nadwyzka": 0.0016,
+   "kraje": {
+    "IN": 40,
+    "PK": 14,
+    "AF": 9
+   },
+   "symbol": "^NSEI"
+  },
+  "kse-100|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "dfm general i ftse adx general|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "stoxx europe 600 banks|down": {
+   "n": 13,
+   "trafne": 5,
+   "nadwyzka": 0.0251,
+   "kraje": {
+    "AE": 13
+   },
+   "symbol": "EXV1.DE"
+  },
+  "s&p/bmv ipc|down": {
+   "n": 15,
+   "trafne": 9,
+   "nadwyzka": -0.0178,
+   "kraje": {
+    "MX": 15
+   },
+   "symbol": "^MXX"
+  },
+  "rheinmetall, saab, kongsberg|up": {
+   "n": 42,
+   "trafne": 19,
+   "nadwyzka": 0.0199,
+   "kraje": {
+    "BY": 18,
+    "PL": 10,
+    "LT": 9,
+    "MD": 2,
+    "RO": 1,
+    "EE": 1,
+    "FI": 1
+   },
+   "symbol": "RHM.DE+SAAB-B.ST+KOG.OL"
+  },
+  "brak płynnego indeksu|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "mwig40|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "omx baltic benchmark|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "kurs pln i walut regionu|down": {
+   "n": 42,
+   "trafne": 20,
+   "nadwyzka": 0.002,
+   "kraje": {
+    "BY": 18,
+    "PL": 10,
+    "LT": 9,
+    "MD": 2,
+    "RO": 1,
+    "EE": 1,
+    "FI": 1
+   },
+   "symbol": "EURPLN=X"
+  },
+  "psei|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "tadawul all share|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "blom stock index|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "omx vilnius|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "kase index|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "qe index|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "bux|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "bet|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "omx tallinn|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "omx helsinki 25|down": {
+   "n": 1,
+   "trafne": 0,
+   "nadwyzka": 0.022,
+   "kraje": {
+    "FI": 1
+   },
+   "symbol": "^OMXH25"
+  },
+  "obx|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  },
+  "boursa kuwait premier|down": {
+   "n": 0,
+   "trafne": 0,
+   "nadwyzka": null,
+   "kraje": {},
+   "symbol": null
+  }
+ }
+}
