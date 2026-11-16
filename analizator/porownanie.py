@@ -77,10 +77,13 @@ def main(argv=None) -> int:
     ap.add_argument("--test-from", default="2025-03-01")
     ap.add_argument("--train-from", default="2022-03-01")
     ap.add_argument("--train-to", default="2024-12-31")
+    ap.add_argument("--zrodla", default="", help="tylko te źródła pierwotne, np. sankcje_ue,sankcje_uk,kursy")
     a = ap.parse_args(argv)
     t0 = time.time()
     art = extract_signals(store.load(store.connect(a.db)))
     prim_items = store.load(store.connect(a.pierwotne))
+    if a.zrodla:
+        prim_items = [x for x in prim_items if x["source"] in set(a.zrodla.split(","))]
     prim = extract_signals(prim_items)
     src = Counter(x["source"] for x in prim)
     print(f"sygnały: artykuły {len(art)}, pierwotne {len(prim)} {dict(src)} ({time.time() - t0:.0f} s)", flush=True)

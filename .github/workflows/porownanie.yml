@@ -8,6 +8,12 @@ on:
       z_przebiegu:
         description: "numer przebiegu z bazą historia_gkg (artefakt)"
         default: "43880895708"
+      pierwotne_z_przebiegu:
+        description: "numer przebiegu z gotową historią źródeł pierwotnych (pomija pobieranie)"
+        default: ""
+      zrodla:
+        description: "warianty źródeł pierwotnych oddzielone średnikiem, np. sankcje_ue,sankcje_uk,kursy;ioda"
+        default: ""
 
 permissions:
   contents: write
@@ -28,24 +34,40 @@ jobs:
           path: .
           run-id: ${{ github.event.inputs.z_przebiegu }}
           github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        if: github.event.inputs.pierwotne_z_przebiegu != ''
+        with:
+          name: pierwotne_historia
+          path: .
+          run-id: ${{ github.event.inputs.pierwotne_z_przebiegu }}
+          github-token: ${{ github.token }}
       - name: Historia źródeł pierwotnych
+        if: github.event.inputs.pierwotne_z_przebiegu == ''
         run: python -m analizator.oficjalne --od 2018-09-01 --db pierwotne_historia.db
       - uses: actions/upload-artifact@v4
+        if: github.event.inputs.pierwotne_z_przebiegu == ''
         with:
           name: pierwotne_historia
           path: pierwotne_historia.db
           retention-days: 30
       - name: Porównanie wariantów
-        run: python -m analizator.porownanie --db historia_gkg.db --pierwotne pierwotne_historia.db --out raporty/pierwotne-porownanie.md
+        run: |
+          if [ -z "${{ github.event.inputs.zrodla }}" ]; then
+            python -m analizator.porownanie --db historia_gkg.db --pierwotne pierwotne_historia.db --out raporty/pierwotne-porownanie.md
+          else
+            echo "${{ github.event.inputs.zrodla }}" | tr ';' '\n' | while read -r z; do
+              python -m analizator.porownanie --db historia_gkg.db --pierwotne pierwotne_historia.db --zrodla "$z" --out "raporty/pierwotne-$(echo $z | tr ',' '-').md"
+            done
+          fi
       - name: Zapisz wynik w repozytorium
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          cp raporty/pierwotne-porownanie.md /tmp/
+          mkdir -p /tmp/por && cp raporty/pierwotne-*.md /tmp/por/
           for i in 1 2 3; do
             git fetch -q origin main && git checkout -q -B main origin/main
-            cp /tmp/pierwotne-porownanie.md raporty/
-            git add raporty/pierwotne-porownanie.md
+            cp /tmp/por/*.md raporty/
+            git add raporty/pierwotne-*.md
             git commit -q -m "Test historyczny: źródła pierwotne kontra artykuły" || exit 0
             git push -q origin main && break
             sleep 5
