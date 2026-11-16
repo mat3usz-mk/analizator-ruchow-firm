@@ -350,3 +350,25 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def forecasts(labels: list[str], direction: str, n: int = 3) -> list[str]:
+    """Tylko sprawdzone kierunki, w krótkiej, liczbowej formie, np.
+    „Hang Seng: −5,9% w ciągu miesiąca (połowa przypadków od −9,1% do −2,1%; sprawdziło się 14 z 16)”."""
+    res = results()
+    out = []
+    for lab in labels:
+        st = res.get(f"{key(lab)}|{direction}")
+        if verdict(st) != "sprawdza się":
+            continue
+        h = st.get("najlepszy_okres")
+        o = (st.get("okresy") or {}).get(h) if h else None
+        name = lab.split(" (")[0].split(":")[0].strip()
+        if o:
+            out.append(f"{name}: {_pct(o['mediana'])} w {HORIZONS.get(int(h), str(h) + ' dni')} "
+                       f"(połowa przypadków od {_pct(o['q25'])} do {_pct(o['q75'])}; sprawdziło się {st['trafne']} z {st['n']})")
+        else:
+            out.append(f"{name}: {'wzrost' if direction == 'up' else 'spadek'} (sprawdziło się {st['trafne']} z {st['n']})")
+        if len(out) >= n:
+            break
+    return out

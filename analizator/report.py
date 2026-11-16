@@ -9,7 +9,7 @@ import json
 import os
 
 from .score import CountryAssessment, category_label, country_name
-from .skutki import fronts, implications, indices
+from .skutki import forecast_lines, fronts, implications, indices
 
 CSS = """
 :root{--bg:#fafaf8;--fg:#1d1d1b;--muted:#6b6b66;--card:#fff;--line:#e4e3de;--low:#5b8a5b;--mid:#c08a1e;--high:#b4442f;--bar:#7a8fa6}
@@ -203,9 +203,11 @@ def _country_block(r, causes: list[dict], head_note: str) -> str:
   <div><span class="idx">{r.index:.0f}</span><span class="muted">/100</span> · <span class="lvl {r.level}">{r.level}</span></div></div>
   <p style="margin:4px 0 6px">{head_note}</p>
   {prob}{_unconfirmed_html(r)}
-  <h3>Przyczyny (co nowego się pojawiło)</h3><ul>{"".join(_ev_li(x) for x in causes) or '<li class="muted">brak</li>'}</ul>
-  <h3>Możliwe skutki</h3>{li(imp["effects"][:3])}
-  <div class="imp"><div><h4>Może spaść ▼</h4>{li(ix["down"][:3])}</div><div><h4>Może wzrosnąć ▲</h4>{li(ix["up"][:3])}</div></div>
+  <h3>Prognoza</h3><ul>{"".join(f"<li>{e(x)}</li>" for x in forecast_lines(r))}</ul>
+  <h3>Fakty (co nowego się pojawiło)</h3><ul>{"".join(_ev_li(x) for x in causes) or '<li class="muted">brak</li>'}</ul>
+  <h3>Możliwe decyzje państw</h3>{li(imp["effects"][:3])}
+  <details><summary>Wszystkie indeksy z oceną (także niesprawdzone)</summary>
+  <div class="imp"><div><h4>Może spaść ▼</h4>{li(ix["down"])}</div><div><h4>Może wzrosnąć ▲</h4>{li(ix["up"])}</div></div></details>
 </section>"""
 
 
@@ -221,7 +223,7 @@ def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
         info = r.impulse_info
         nc = info.get("nowe_kategorie") or []
         times = f'{info["teraz"] / max(info["norma"], 0.1):.0f}× więcej niż zwykle' if info["norma"] >= 0.05 else "zwykle prawie nic"
-        strong = "Bardzo silny impuls (alarm)" if r.impulse >= 10 else "Nagły impuls"
+        strong = "Impuls 48 h powyżej progu alarmu" if r.impulse >= 10 else "Impuls 48 h"
         note = (f'<b class="q">{strong}</b> · w 48 h {info["historii"]} nowe sprawy, siła {info["teraz"]:.1f} '
                 f'wobec zwykłych {info["norma"]:.1f} ({times})'
                 + (f' · nowe rodzaje ruchów: {e(", ".join(category_label(c) for c in nc))}' if nc else ""))
@@ -246,15 +248,15 @@ def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
         rows.append(_ev_li(x, c))
         if len(rows) >= 15:
             break
-    return (f"""<div class="warn" style="margin-top:12px"><b>W skrócie.</b> Na górze kraje, w których w ostatnich 48 godzinach nagle pojawiło się
+    return (f"""<div class="warn" style="margin-top:12px"><b>W skrócie.</b> Na górze kraje, w których w ostatnich 48 godzinach pojawiło się
 dużo nowych sygnałów w porównaniu z ich zwykłym tłem z 4 tygodni (impuls). W teście 2019–2026 bardzo silny impuls
 poprzedzał wydarzenie w ciągu 30 dni w 12–17% przypadków, ok. 4 razy częściej niż przypadek; zwykły impuls ok. 2 razy częściej. Kryzysy, które trwają od dawna, są niżej, w krótkiej liście.
 Przy każdym kraju: przyczyny, możliwe skutki, indeksy giełdowe z typową skalą i czasem ruchu oraz szansa wydarzenia według modelu
 (w teście 2025–2026 tylko ok. 12–17% alarmów kończyło się wydarzeniem w 60 dni). To nie jest rekomendacja inwestycyjna.</div>
-<h2 style="font-size:17px;margin:18px 0 4px">Nagłe impulsy (ostatnie 48 godzin)</h2>
-{"".join(blocks) or '<p class="muted">Brak nagłych impulsów: w żadnym kraju nie pojawiło się w 48 h wyraźnie więcej nowych sygnałów niż zwykle.</p>'}
+<h2 style="font-size:17px;margin:18px 0 4px">Impulsy (ostatnie 48 godzin)</h2>
+{"".join(blocks) or '<p class="muted">Brak impulsów: w żadnym kraju nie pojawiło się w 48 h wyraźnie więcej nowych sygnałów niż zwykle.</p>'}
 <section class="card ov"><h2 style="margin:0;font-size:19px">Trwające napięcia</h2>
-<p class="muted" style="margin:4px 0">Wysoki poziom, ale bez nagłej zmiany. Szczegóły w zakładce „Wszystkie kraje”.</p>
+<p class="muted" style="margin:4px 0">Wysoki poziom bez zmiany w ostatnich 48 h. Szczegóły w zakładce „Wszystkie kraje”.</p>
 <ul>{rows_on or '<li class="muted">brak</li>'}</ul></section>
 <section class="card ov"><h2 style="margin:0;font-size:19px">Najnowsze sygnały (ostatnie {fresh_days} dni)</h2>
 <ul>{"".join(rows) or '<li class="muted">brak nowych sygnałów</li>'}</ul></section>""")

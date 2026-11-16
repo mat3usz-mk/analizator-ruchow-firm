@@ -17,7 +17,7 @@ import urllib.request
 from datetime import date, datetime, timedelta
 
 from . import report, sources, store
-from .score import PRIORITY_CATS, PRIORITY_SOURCES, assess, country_name, extract_signals
+from .score import PRIORITY_CATS, PRIORITY_SOURCES, assess, category_label, country_name, extract_signals
 from .skutki import indices
 
 FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "kursy", "agsi", "finra_short", "opcje", "kongres", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
@@ -92,13 +92,11 @@ def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list
         if fresh:
             reasons.append(f"nowe sygnały priorytetowe: {len(fresh)}")
         if reasons and state:  # pierwszy cykl tylko ustala punkt odniesienia
-            ix = indices(r.country, r.level)
-            lines = [f"{country_name(r.country)} ({r.country}): indeks {r.index:.0f}/100, {r.level}. " + "; ".join(reasons)]
-            lines += [f"- {x['title'][:160]}" for x in (fresh or r.evidence)[:3]]
-            if ix["down"]:
-                lines.append("W dół: " + "; ".join(ix["down"][:3]))
-            if ix["up"]:
-                lines.append("W górę: " + "; ".join(ix["up"][:3]))
+            from .skutki import forecast_lines
+            lines = [f"{country_name(r.country)} ({r.country}): indeks {r.index:.0f}/100, poziom {r.level}.",
+                     "Zmiana: " + "; ".join(reasons) + ".", "Fakty:"]
+            lines += [f"- {x['date']} {x['title'][:160]}" for x in (fresh or r.evidence)[:3]]
+            lines += ["Prognoza:"] + [f"- {x}" for x in forecast_lines(r)]
             alerts.append("\n".join(lines))
     return alerts, {"kraje": new_state, "widziane": sorted(new_seen)[-5000:], "czas": datetime.now().isoformat()}
 
@@ -110,13 +108,10 @@ def summary(results, n_articles: int, top: int = 10) -> str:
          "Najwyższe wskazania (indeks 0-100 to skala uwagi, nie prawdopodobieństwo):"]
     for r in results[:top]:
         prob = f", szansa wydarzenia w 60 dni wg modelu {r.prob:.0%}" if r.prob is not None else ""
-        L.append(f"- {country_name(r.country)} ({r.country}): {r.index:.0f}, {r.level}{prob}. {', '.join(r.categories)}")
-        if r.level != "niski":
-            ix = indices(r.country, r.level)
-            if ix["down"]:
-                L.append("    w dół: " + "; ".join(ix["down"][:3]))
-            if ix["up"]:
-                L.append("    w górę: " + "; ".join(ix["up"][:3]))
+        L.append(f"- {country_name(r.country)} ({r.country}): {r.index:.0f}, {r.level}{prob}. {', '.join(category_label(c) for c in r.categories)}")
+        if r.level != "niski" or r.impulse >= 6:
+            from .skutki import forecast_lines
+            L += [f"    {x}" for x in forecast_lines(r)[1:]]
             for x in r.evidence[:2]:
                 L.append(f"    · {x['title'][:150]}")
     fr = fronts(results)

@@ -240,3 +240,24 @@ def fronts(results, min_index: float = 25.0) -> list[dict]:
                     "kategorie": sorted({c for r in act for c in r.categories}),
                     "idx_up": up, "idx_down": down})
     return sorted(out, key=lambda f: -f["suma"])
+
+
+def forecast(r) -> dict:
+    """Chłodna prognoza dla kraju: szansa wg modelu i sprawdzone ruchy indeksów z typową skalą i czasem."""
+    from .rynki import forecasts
+    raw = indices(r.country, r.level if r.level != "niski" else "podwyższony", verified=False)
+    return {"szansa": r.prob, "w_dol": forecasts(raw["down"], "down"), "w_gore": forecasts(raw["up"], "up")}
+
+
+def forecast_lines(r) -> list[str]:
+    f = forecast(r)
+    L = []
+    if f["szansa"] is not None:
+        L.append(f"Szansa poważnego wydarzenia w ciągu 60 dni (model): {f['szansa']:.0%}.")
+    if f["w_dol"]:
+        L.append("Jeśli dojdzie do eskalacji, typowo spadają: " + "; ".join(f["w_dol"]) + ".")
+    if f["w_gore"]:
+        L.append("Typowo rosną: " + "; ".join(f["w_gore"]) + ".")
+    if not f["w_dol"] and not f["w_gore"]:
+        L.append("Brak indeksów, których kierunek sprawdził się w historii dla tego kraju.")
+    return L
