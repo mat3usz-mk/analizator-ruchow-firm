@@ -1,0 +1,48 @@
+name: Test impulsu 48 h
+
+# Ręcznie: czy nagły przyrost nowych sygnałów w 48 h wyprzedza wydarzenia (pełna historia GDELT + źródła pierwotne).
+on:
+  workflow_dispatch:
+    inputs:
+      z_przebiegu:
+        description: "numer przebiegu z bazą historia_gkg (artefakt)"
+        default: "43880895708"
+      pierwotne_z_przebiegu:
+        description: "numer przebiegu z historią źródeł pierwotnych (puste = bez nich)"
+        default: ""
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: historia_gkg
+          path: .
+          run-id: ${{ github.event.inputs.z_przebiegu }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        if: github.event.inputs.pierwotne_z_przebiegu != ''
+        with:
+          name: pierwotne_historia
+          path: .
+          run-id: ${{ github.event.inputs.pierwotne_z_przebiegu }}
+          github-token: ${{ github.token }}
+      - name: Test
+        run: python -m analizator.impuls --db historia_gkg.db --pierwotne pierwotne_historia.db --out raporty/impuls-wyniki.md
+      - name: Zapis wyniku
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add raporty/impuls-wyniki.md
+          git commit -m "Test impulsu 48 h: wyniki" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done
