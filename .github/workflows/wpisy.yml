@@ -1,0 +1,48 @@
+name: Test wpisów Trumpa
+
+# Ręcznie: pobiera tweety 2017–2021 i wpisy z Truth Social (archiwum trumpstruth.org, za zgodą osoby z 16.11.2026)
+# i sprawdza, czy wyprzedzają wydarzenia oraz czy notowania ruszały się przed wpisami, czy po nich.
+on:
+  workflow_dispatch:
+    inputs:
+      z_przebiegu:
+        description: "numer przebiegu z gotowym plikiem wpisów (pomija pobieranie)"
+        default: ""
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        if: github.event.inputs.z_przebiegu != ''
+        with:
+          name: wpisy_trump
+          path: .
+          run-id: ${{ github.event.inputs.z_przebiegu }}
+          github-token: ${{ github.token }}
+      - name: Pobranie i test
+        run: python -m analizator.wpisy --pobierz --out raporty/wpisy-wyniki.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wpisy_trump
+          path: |
+            trump_tweety.csv
+            trump_truth.csv
+          retention-days: 90
+      - name: Zapis wyniku
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add raporty/wpisy-wyniki.md
+          git commit -m "Test wpisów Trumpa: wyniki" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done
