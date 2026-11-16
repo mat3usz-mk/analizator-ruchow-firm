@@ -101,30 +101,55 @@ class WebSocket:
             head += bytes([0x80 | 127]) + struct.pack(">Q", n)
         self.sock.sendall(head + mask + bytes(b ^ mask[i % 4] for i, b in enumerate(data)))
 
+    def _frame(self):
+        """Jedna pełna ramka z bufora albo None, gdy jeszcze niepełna (bufor zostaje nietknięty)."""
+        buf = self.buf
+        if len(buf) < 2:
+            return None
+        b1, b2 = buf[0], buf[1]
+        n, i = b2 & 0x7F, 2
+        if n == 126:
+            if len(buf) < 4:
+                return None
+            n, i = struct.unpack(">H", buf[2:4])[0], 4
+        elif n == 127:
+            if len(buf) < 10:
+                return None
+            n, i = struct.unpack(">Q", buf[2:10])[0], 10
+        mask = None
+        if b2 & 0x80:
+            if len(buf) < i + 4:
+                return None
+            mask, i = buf[i:i + 4], i + 4
+        if len(buf) < i + n:
+            return None
+        payload, self.buf = buf[i:i + n], buf[i + n:]
+        if mask:
+            payload = bytes(c ^ mask[k % 4] for k, c in enumerate(payload))
+        return b1 & 0x0F, b1 & 0x80, payload
+
     def recv(self) -> str | None:
-        """Zwraca kolejną wiadomość tekstową (sklejając fragmenty) albo None przy zamknięciu."""
-        parts = b""
+        """Zwraca kolejną wiadomość tekstową (sklejając fragmenty) albo None przy zamknięciu.
+        Przekroczenie czasu (socket.timeout) nie psuje bufora: można po prostu wywołać recv ponownie."""
         while True:
-            b1, b2 = self._read(2)
-            opcode, fin = b1 & 0x0F, b1 & 0x80
-            n = b2 & 0x7F
-            if n == 126:
-                n = struct.unpack(">H", self._read(2))[0]
-            elif n == 127:
-                n = struct.unpack(">Q", self._read(8))[0]
-            mask = self._read(4) if b2 & 0x80 else None
-            payload = self._read(n)
-            if mask:
-                payload = bytes(b ^ mask[i % 4] for i, b in enumerate(payload))
+            fr = self._frame()
+            if fr is None:
+                chunk = self.sock.recv(65536)
+                if not chunk:
+                    raise ConnectionError("połączenie zamknięte")
+                self.buf += chunk
+                continue
+            opcode, fin, payload = fr
             if opcode == 8:
                 return None
             if opcode == 9:
                 self.send(payload, opcode=10)
                 continue
             if opcode in (0, 1, 2):
-                parts += payload
+                self.parts = getattr(self, "parts", b"") + payload
                 if fin:
-                    return parts.decode("utf-8", "ignore")
+                    out, self.parts = self.parts, b""
+                    return out.decode("utf-8", "ignore")
 
     def close(self) -> None:
         try:
@@ -149,7 +174,17 @@ def sample(seconds: int = 180, key: str | None = None) -> dict[str, dict]:
         raise RuntimeError("brak AISSTREAM_API_KEY")
     names = list(CHOKEPOINTS)
     boxes = [CHOKEPOINTS[n][2] for n in names]
-    ws = WebSocket("wss://stream.aisstream.io/v0/stream")
+    err = None
+    for attempt in range(3):  # serwer bywa wolny przy uzgadnianiu połączenia
+        try:
+            ws = WebSocket("wss://stream.aisstream.io/v0/stream", timeout=45.0)
+            break
+        except (OSError, ConnectionError) as e:
+            err = e
+            print(f"  [ais] próba {attempt + 1}: {e}", flush=True)
+            time.sleep(5)
+    else:
+        raise RuntimeError(f"aisstream niedostępny: {err}")
     ws.send(json.dumps({"APIKey": key, "BoundingBoxes": boxes, "FilterMessageTypes": ["PositionReport", "ShipStaticData"]}))
     ws.sock.settimeout(15)
     ships: dict[str, set] = {n: set() for n in names}
@@ -190,10 +225,13 @@ def sample(seconds: int = 180, key: str | None = None) -> dict[str, dict]:
     return {n: {"ships": len(s), "tankers": sum(1 for m in s if 80 <= types.get(m, 0) <= 89)} for n, s in ships.items()}
 
 
-def fetch(con: sqlite3.Connection, days: int = 7, seconds: int = 180) -> list[dict]:
+def fetch(con: sqlite3.Connection, days: int = 7, seconds: int = 180, force: bool = False) -> list[dict]:
     """Zapisuje dzisiejszy pomiar i zwraca sygnały przy spadku o połowę względem mediany z 14 dni."""
     con.executescript("CREATE TABLE IF NOT EXISTS metrics (source TEXT, key TEXT, day TEXT, value REAL, PRIMARY KEY (source, key, day));")
     today = date.today().isoformat()
+    # jeden pomiar dziennie (o podobnej porze), żeby porównanie z medianą było uczciwe; czuwanie wywołuje to co 30 min
+    if not force and con.execute("SELECT 1 FROM metrics WHERE source='ais_ships' AND day=? LIMIT 1", (today,)).fetchone():
+        return []
     counts = sample(seconds)
     out = []
     for n, v in counts.items():
