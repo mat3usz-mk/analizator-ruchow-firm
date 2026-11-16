@@ -362,7 +362,7 @@ FETCHERS = {
     "ofac": ofac, "ted": ted_defence, "opensky": opensky, "insiders": insiders,
     "sankcje_ue_uk": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_sanctions(con, days),
     "oficjalne_rss": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_rss(con, days),
-    "ioda": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_ioda(con, min(days, 3)),
+    # IODA (awarie internetu) wyłączone: w teście historycznym dawało ok. 60 fałszywych alarmów więcej bez żadnego trafienia
     "portwatch": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_portwatch(con, days),
     "kursy": lambda con, days=7: __import__("analizator.oficjalne", fromlist=["x"]).live_fx(con, min(days, 5)),
     "ais": lambda con, days=7: __import__("analizator.ais", fromlist=["fetch"]).fetch(con, days),

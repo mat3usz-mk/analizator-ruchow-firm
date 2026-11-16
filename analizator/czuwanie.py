@@ -20,7 +20,7 @@ from . import report, sources, store
 from .score import PRIORITY_CATS, PRIORITY_SOURCES, assess, country_name, extract_signals
 from .skutki import indices
 
-FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "ioda", "kursy", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
+FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "kursy", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
 LEVELS = {"niski": 0, "podwyższony": 1, "wysoki": 2}
 
 

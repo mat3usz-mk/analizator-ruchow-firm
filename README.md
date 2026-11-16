@@ -258,3 +258,11 @@ do logów (`CICHO=1`), zgłoszenia na GitHubie są wyłączone (zmienna `ALARMY_
 
 - **Reguła łączona** (`analizator/ucz.py`, `model.json` → `laczenie`): alarm, gdy ręczny indeks ≥ 40 i model daje co najmniej kilka procent szansy, albo gdy sam model daje wyjątkowo wysoką szansę. Bardzo silnego wskazania (indeks ≥ 70) model nie może zablokować. Progi dobierane są tylko na latach 2019–2024. Na teście 2025–2026 fałszywych alarmów było 197 zamiast 229, a liczba trafień się nie zmieniła. Karta kraju pokazuje „Model nie potwierdza” albo „Alarm z modelu”.
 - **Sprawdzone indeksy** (`analizator/rynki.py`, workflow „Sprawdzenie indeksów giełdowych”, co miesiąc): dla 187 prawdziwych wydarzeń z lat 2015–2026 liczona jest zmiana notowań od tygodnia przed do 30 dni po, ponad przeciętną zmianę. Raport pokazuje kierunki sprawdzone w ≥ 55% przypadków (z liczbą trafień), ukrywa niesprawdzające się, a te bez darmowych notowań oznacza jako niesprawdzone. Wyniki: `raporty/rynki-wyniki.md`.
+
+## v0.9: źródła pierwotne bez artykułów
+
+`analizator/oficjalne.py`: sankcje UE i Wielkiej Brytanii (pełne listy z datą wpisania), komunikaty Rady UE, ONZ i MAEA (RSS), przejścia statków przez cieśniny (IMF PortWatch, raz dziennie), gwałtowne spadki walut (raz dziennie), awarie internetu (IODA). Kraj i kategoria są podane wprost, bez zgadywania z tytułu. Test historyczny (`analizator/porownanie.py`, workflow „Test źródeł pierwotnych”, wyniki w `raporty/pierwotne-*.md`):
+- sankcje i kursy walut nie zmieniają wyniku (mało sygnałów), zostają jako rzetelne potwierdzenia;
+- IODA dodawało ok. 60 fałszywych alarmów bez trafień, więc jest wyłączone;
+- mniejsza waga artykułów (0,5 i 0,25) obniżała liczbę trafionych wydarzeń, więc waga artykułów zostaje 1,0 (parametr `PARAMS["artykuly"]`).
+Zegar czuwania (`.github/workflows/zegar.yml`) wywołuje cykl co 30 minut, bo harmonogram GitHuba w tym repozytorium nie ruszał.
