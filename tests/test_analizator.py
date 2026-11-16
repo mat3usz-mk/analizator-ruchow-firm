@@ -390,3 +390,17 @@ class TestImpuls(unittest.TestCase):
                 **{f"n{i}": (t - timedelta(days=i % 2), 2.0, "lotnictwo_przestrzen", {}) for i in range(3)}}
         self.assertGreater(_impulse(calm, t)[0], 2.5)
         self.assertLess(_impulse(long, t)[0], 2.5)
+
+
+class TestAlarmImpulsu(unittest.TestCase):
+    def test_alarm_tylko_przy_nowym_silnym_impulsie(self):
+        from datetime import date
+        from types import SimpleNamespace
+        from analizator.czuwanie import changes
+        r = SimpleNamespace(country="EE", index=10.0, level="niski", evidence=[], impulse=12.0,
+                            impulse_info={"historii": 3, "teraz": 9.0, "norma": 0.2})
+        st = {"kraje": {"EE": {"indeks": 10, "poziom": "niski", "impuls": 0}}}
+        a, new = changes([r], st, date(2026, 11, 16))
+        self.assertEqual(len(a), 1)
+        self.assertIn("nagły impuls", a[0])
+        self.assertEqual(changes([r], new, date(2026, 11, 16))[0], [])

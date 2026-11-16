@@ -186,7 +186,7 @@ def _ev_li(x: dict, country: str | None = None) -> str:
     return f'<li><span class="muted">{x["date"]}</span> · {who}{tag}{e(category_label(x["category"]))}{react}: {link}</li>'
 
 
-IMPULSE_MIN = 2.5
+IMPULSE_MIN = 6.0  # test 2019–2026: od 6 ok. 2× lepiej niż losowo, od 10 ok. 4× (raporty/impuls-wyniki.md)
 
 
 def _country_block(r, causes: list[dict], head_note: str) -> str:
@@ -221,7 +221,8 @@ def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
         info = r.impulse_info
         nc = info.get("nowe_kategorie") or []
         times = f'{info["teraz"] / max(info["norma"], 0.1):.0f}× więcej niż zwykle' if info["norma"] >= 0.05 else "zwykle prawie nic"
-        note = (f'<b class="q">Nagły impuls</b> · w 48 h {info["historii"]} nowe sprawy, siła {info["teraz"]:.1f} '
+        strong = "Bardzo silny impuls (alarm)" if r.impulse >= 10 else "Nagły impuls"
+        note = (f'<b class="q">{strong}</b> · w 48 h {info["historii"]} nowe sprawy, siła {info["teraz"]:.1f} '
                 f'wobec zwykłych {info["norma"]:.1f} ({times})'
                 + (f' · nowe rodzaje ruchów: {e(", ".join(category_label(c) for c in nc))}' if nc else ""))
         blocks.append(_country_block(r, info.get("dowody") or _causes(r), note))
@@ -246,7 +247,8 @@ def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
         if len(rows) >= 15:
             break
     return (f"""<div class="warn" style="margin-top:12px"><b>W skrócie.</b> Na górze kraje, w których w ostatnich 48 godzinach nagle pojawiło się
-dużo nowych sygnałów w porównaniu z ich zwykłym tłem z 4 tygodni (impuls). Kryzysy, które trwają od dawna, są niżej, w krótkiej liście.
+dużo nowych sygnałów w porównaniu z ich zwykłym tłem z 4 tygodni (impuls). W teście 2019–2026 bardzo silny impuls
+poprzedzał wydarzenie w ciągu 30 dni w 12–17% przypadków, ok. 4 razy częściej niż przypadek; zwykły impuls ok. 2 razy częściej. Kryzysy, które trwają od dawna, są niżej, w krótkiej liście.
 Przy każdym kraju: przyczyny, możliwe skutki, indeksy giełdowe z typową skalą i czasem ruchu oraz szansa wydarzenia według modelu
 (w teście 2025–2026 tylko ok. 12–17% alarmów kończyło się wydarzeniem w 60 dni). To nie jest rekomendacja inwestycyjna.</div>
 <h2 style="font-size:17px;margin:18px 0 4px">Nagłe impulsy (ostatnie 48 godzin)</h2>

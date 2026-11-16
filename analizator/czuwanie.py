@@ -22,6 +22,7 @@ from .skutki import indices
 
 FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "kursy", "agsi", "finra_short", "opcje", "dsca", "kongres", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
 LEVELS = {"niski": 0, "podwyższony": 1, "wysoki": 2}
+IMPULSE_ALARM = 10.0  # test 2019–2026 (raporty/impuls-wyniki.md): precyzja 12–17%, ok. 4× lepiej niż losowo
 
 
 def _ascii(s: str) -> str:
@@ -68,8 +69,11 @@ def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list
     recent = today - timedelta(days=2)
     for r in results:
         p = prev.get(r.country, {"indeks": 0, "poziom": "niski"})
-        new_state[r.country] = {"indeks": round(r.index, 1), "poziom": r.level}
+        new_state[r.country] = {"indeks": round(r.index, 1), "poziom": r.level, "impuls": round(r.impulse, 1)}
         reasons = []
+        if r.impulse >= IMPULSE_ALARM and p.get("impuls", 0) < IMPULSE_ALARM and r.impulse_info.get("historii", 0) >= 2:
+            info = r.impulse_info
+            reasons.append(f"nagły impuls: w 48 h {info['historii']} nowe sprawy, siła {info['teraz']:.1f} wobec zwykłych {info['norma']:.1f}")
         if LEVELS[r.level] > LEVELS.get(p["poziom"], 0):
             reasons.append(f"poziom {p['poziom']} -> {r.level}")
         elif r.index >= 40 and r.index - p["indeks"] >= jump:
