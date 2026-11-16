@@ -372,7 +372,7 @@ def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2
 
 
 def country_name(code: str) -> str:
-    return COUNTRIES.get(code, [code])[0]
+    return re.sub(r"\\[bB]|[()?\\]", "", COUNTRIES.get(code, [code])[0])
 
 
 def category_label(key: str) -> str:

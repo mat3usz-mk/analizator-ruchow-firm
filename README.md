@@ -192,6 +192,21 @@ w ciągu 60 dni** z kalibracją sprawdzoną na latach 2025–2026, których mode
 - Gdy `analizator/model.json` istnieje, raport pokazuje przy kraju „szansa wydarzenia w 60 dni wg modelu”. Bez pliku działa jak dotąd.
 - Ręcznie: `python -m analizator.ucz --db historia_gkg.db` (opcje: `--train-to`, `--test-from`, `--horizon`).
 
+## Raporty e-mailem
+
+Workflow „Czuwanie analizatora” wysyła e-maile: **alarm** (gdy coś się istotnie zmieni) i **codzienny raport** (pierwszy cykl po 2:00 UTC,
+czyli o 3:00 w Polsce zimą) z podsumowaniem i pełnym raportem HTML w załączniku. Ustawienia są w sekretach repozytorium
+(Settings → Secrets and variables → Actions), nigdy w kodzie:
+
+| sekret | co wpisać |
+|---|---|
+| `MAIL_TO` | adresy odbiorców oddzielone przecinkami |
+| `SMTP_USER` | adres Gmail, z którego idą wiadomości |
+| `SMTP_PASSWORD` | 16-znakowe hasło aplikacji Google (myaccount.google.com/apppasswords, wymaga weryfikacji dwuetapowej) |
+
+Inny serwer pocztowy: zmienne repozytorium `SMTP_HOST` i `SMTP_PORT` (465 = SSL, 587 = STARTTLS).
+Test: Actions → „Czuwanie analizatora” → Run workflow → zaznacz „wyślij teraz raport e-mailem”.
+
 ## Ograniczenia (ważne)
 - **Indeks to nie prawdopodobieństwo.** Żeby mówić "X% szans na konflikt w 30 dni",
   trzeba skalibrować model na wielu historycznych przypadkach (i przypadkach, w których

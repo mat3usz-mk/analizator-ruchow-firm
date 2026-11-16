@@ -5,7 +5,12 @@ name: Czuwanie analizatora
 on:
   schedule:
     - cron: "*/30 * * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      mail_teraz:
+        description: "wyślij teraz raport e-mailem (test wysyłki)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -57,6 +62,38 @@ jobs:
             printf '\n\nRaport: %s/%s/actions/runs/%s\nTo wskazówka, nie prawdopodobieństwo ani rekomendacja inwestycyjna.\n' \
               "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" >> body.txt
             gh issue create --title "Alarm analizatora $(date -u +'%Y-%m-%d %H:%M') UTC: $(head -n1 dane/nowe_alerty.txt | cut -c1-120)" --body-file body.txt
+          fi
+
+      - name: E-mail z alarmem
+        if: hashFiles('dane/nowe_alerty.txt') != ''
+        env:
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+        run: |
+          if [ -s dane/nowe_alerty.txt ]; then
+            python -m analizator.poczta --subject "Alarm analizatora: $(head -n1 dane/nowe_alerty.txt | cut -d: -f1 | cut -c1-100)" \
+              --body-file dane/nowe_alerty.txt --attach dane/raport_biezacy.html || true
+          fi
+
+      # Raz dziennie, w pierwszym cyklu po 2:00 UTC (3:00 w Polsce zimą, 4:00 latem): podsumowanie i pełny raport.
+      - name: Codzienny raport e-mailem
+        env:
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          TERAZ: ${{ github.event.inputs.mail_teraz }}
+        run: |
+          today=$(date -u +%F)
+          if [ "$TERAZ" = "true" ] || { [ "$(date -u +%H)" -ge 2 ] && [ "$(cat dane/ostatni_mail_dzienny.txt 2>/dev/null)" != "$today" ]; }; then
+            if python -m analizator.poczta --subject "Analizator ruchów firm: raport $today" \
+                 --body-file dane/podsumowanie.txt --attach dane/raport_biezacy.html; then
+              echo "$today" > dane/ostatni_mail_dzienny.txt
+            fi
           fi
 
       - name: Zapisz bazę na następny cykl

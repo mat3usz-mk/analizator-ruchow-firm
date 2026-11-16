@@ -93,6 +93,31 @@ def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list
     return alerts, {"kraje": new_state, "widziane": sorted(new_seen)[-5000:], "czas": datetime.now().isoformat()}
 
 
+def summary(results, n_articles: int, top: int = 10) -> str:
+    """Krótki tekst do e-maila z codziennym raportem."""
+    from .skutki import fronts
+    L = [f"Analizator ruchów firm, {datetime.now():%Y-%m-%d %H:%M} UTC. {n_articles} artykułów z ostatniego roku.", "",
+         "Najwyższe wskazania (indeks 0-100 to skala uwagi, nie prawdopodobieństwo):"]
+    for r in results[:top]:
+        prob = f", szansa wydarzenia w 60 dni wg modelu {r.prob:.0%}" if r.prob is not None else ""
+        L.append(f"- {country_name(r.country)} ({r.country}): {r.index:.0f}, {r.level}{prob}. {', '.join(r.categories)}")
+        if r.level != "niski":
+            ix = indices(r.country, r.level)
+            if ix["down"]:
+                L.append("    w dół: " + "; ".join(ix["down"][:3]))
+            if ix["up"]:
+                L.append("    w górę: " + "; ".join(ix["up"][:3]))
+            for x in r.evidence[:2]:
+                L.append(f"    · {x['title'][:150]}")
+    fr = fronts(results)
+    if fr:
+        L += ["", "Fronty (jeden kryzys w kilku krajach):"]
+        L += [f"- {f['nazwa']}: " + ", ".join(f"{c} {i}" for c, i in f["kraje"]) for f in fr]
+    L += ["", "Pełny raport w załączniku (otwórz w przeglądarce).",
+          "To wskazówki z wiadomości, a nie prognoza ani rekomendacja inwestycyjna."]
+    return "\n".join(L)
+
+
 def cycle(db: str, out: str, srcs: list[str], days: int, topic: str | None, watchlist=None, alerts_out: str | None = None) -> int:
     base = os.path.dirname(os.path.abspath(db))
     state_path = os.path.join(base, "czuwanie_stan.json")
@@ -117,6 +142,8 @@ def cycle(db: str, out: str, srcs: list[str], days: int, topic: str | None, watc
             f.write("\n\n".join(alerts))
     with open(state_path, "w", encoding="utf-8") as f:
         json.dump(new_state, f, ensure_ascii=False)
+    with open(os.path.join(base, "podsumowanie.txt"), "w", encoding="utf-8") as f:
+        f.write(summary(results, len(arts)))
     print(f"{datetime.now():%H:%M} cykl: {len(arts)} artykułów, {len(results)} krajów, alarmów: {len(alerts)}")
     return len(alerts)
 
