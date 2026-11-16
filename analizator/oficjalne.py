@@ -309,7 +309,7 @@ def acled_counts(start: date, end: date) -> dict[tuple[str, date], int]:
     names: dict[str, str | None] = {}
     t = start
     while t <= end:
-        t2 = min(t + timedelta(days=30), end)
+        t2 = min(t + timedelta(days=13), end)
         cursor = None
         while True:
             params = {"event_date": f"{t.isoformat()}|{t2.isoformat()}", "event_date_where": "BETWEEN",
@@ -319,10 +319,17 @@ def acled_counts(start: date, end: date) -> dict[tuple[str, date], int]:
             q = urllib.parse.urlencode(params)
             req = urllib.request.Request(f"https://acleddata.com/api/acled/read?{q}",
                                          headers={**UA, "Authorization": f"Bearer {_acled_token()}"})
-            try:
-                js = json.loads(urllib.request.urlopen(req, timeout=180).read())
-            except urllib.error.HTTPError as e:  # treść błędu (bez danych) pomaga ustalić, czego API nie przyjmuje
-                raise RuntimeError(f"ACLED {e.code}: {e.read()[:300].decode('utf-8', 'ignore')}")
+            for attempt in range(4):  # duże odpowiedzi bywają ucinane w połowie: ponawiamy
+                try:
+                    js = json.loads(urllib.request.urlopen(req, timeout=180).read())
+                    break
+                except urllib.error.HTTPError as e:  # treść błędu (bez danych) pomaga ustalić, czego API nie przyjmuje
+                    raise RuntimeError(f"ACLED {e.code}: {e.read()[:300].decode('utf-8', 'ignore')}")
+                except Exception as e:
+                    if attempt == 3:
+                        raise
+                    print(f"  [acled] ponawiam po błędzie: {type(e).__name__}", flush=True)
+                    time.sleep(10 * (attempt + 1))
             rows = js.get("data") or []
             if js.get("success") is False or (not rows and js.get("error")):
                 raise RuntimeError(f"ACLED: {str(js.get('error') or js.get('messages'))[:300]}")
