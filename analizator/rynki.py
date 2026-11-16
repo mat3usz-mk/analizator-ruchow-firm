@@ -177,7 +177,7 @@ def evaluate(episodes: list[dict], days: int = 30) -> dict:
                     for i, (s, sign, _) in enumerate(b[0]):
                         b[0][i] = (s, sign, s.drift(days))
                 baskets[k] = b
-            st = stats.setdefault(f"{k}|{direction}", {"n": 0, "trafne": 0, "nadwyzka": 0.0, "kraje": defaultdict(int),
+            st = stats.setdefault(f"{k}|{direction}", {"key_dir": direction, "n": 0, "trafne": 0, "nadwyzka": 0.0, "kraje": defaultdict(int),
                                                       "symbol": baskets[k][1] if baskets[k] else None})
             if not baskets[k]:
                 continue
@@ -200,7 +200,9 @@ def verdict(st: dict | None) -> str:
         return "brak notowań"
     if st["n"] < MIN_N:
         return "za mało danych"
-    return "sprawdza się" if st["trafne"] / st["n"] >= MIN_HIT else "nie sprawdza się"
+    # trafny kierunek w większości przypadków I średnio we właściwą stronę (inaczej to przypadek)
+    sign_ok = st.get("nadwyzka") is not None and (st["nadwyzka"] > 0) == (st["key_dir"] == "up") if "key_dir" in st else True
+    return "sprawdza się" if st["trafne"] / st["n"] >= MIN_HIT and sign_ok else "nie sprawdza się"
 
 
 def write_report(path: str, stats: dict, meta: dict) -> None:

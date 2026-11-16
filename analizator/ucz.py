@@ -206,12 +206,15 @@ def _matching_threshold(rows: list[dict], model: dict, hand_thr: float) -> float
 # Ręczny indeks lepiej łapie nagłe zwroty, model daje mniej fałszywych alarmów. Reguła łączona:
 #   alarm, gdy ręczny indeks >= progu I model daje co najmniej `potwierdzenie`,
 #   albo gdy sam model daje co najmniej `samodzielnie` (wyjątkowo wysoka szansa).
+# Model nie może zablokować bardzo silnego wskazania (ręczny indeks >= 70): przy nagłej, nietypowej eskalacji
+# model bywa poza swoim doświadczeniem (np. przykładowa eskalacja z indeksem 99,8 dostawała od modelu 2%).
+STRONG = 70.0
 # Progi dobierane są WYŁĄCZNIE na latach uczenia; lata testowe tylko sprawdzają wynik.
 NEVER = 2.0
 
 
 def gate(index: float, p: float | None, rule: dict, thr: float = 40.0) -> bool:
-    if p is None:
+    if p is None or index >= STRONG:
         return index >= thr
     return (index >= thr and p >= rule["potwierdzenie"]) or p >= rule["samodzielnie"]
 

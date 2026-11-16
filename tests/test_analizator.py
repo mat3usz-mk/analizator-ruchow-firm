@@ -1,7 +1,11 @@
 import unittest
 from datetime import date, timedelta
 
-from analizator import demo
+from analizator import demo, rynki, ucz
+
+# Testy logiki niezależne od wyuczonego modelu i wyników rynkowych zapisanych w repozytorium
+ucz._MODEL = {}
+rynki._RES = {}
 from analizator.score import assess, extract_signals
 from analizator.signals import classify, detect_company, detect_countries
 
@@ -326,6 +330,11 @@ class TestLaczenieIRynki(unittest.TestCase):
         self.assertTrue(gate(10, 0.35, rule))
         self.assertFalse(gate(10, 0.35, {"potwierdzenie": 0.0, "samodzielnie": NEVER}))
         self.assertTrue(gate(45, None, rule))
+
+    def test_model_cannot_veto_strong_signal(self):
+        rule = {"potwierdzenie": 0.5, "samodzielnie": ucz.NEVER}
+        self.assertTrue(ucz.gate(99.8, 0.02, rule))
+        self.assertFalse(ucz.gate(55, 0.02, rule))
 
     def test_annotate(self):
         from analizator import rynki

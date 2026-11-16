@@ -19,14 +19,16 @@
     "AE": 13,
     "TW": 13
    },
-   "symbol": "BZ=F"
+   "symbol": "BZ=F",
+   "key_dir": "up"
   },
   "gaz ttf|up": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "up"
   },
   "stoxx europe 600 oil & gas|up": {
    "n": 111,
@@ -42,7 +44,8 @@
     "AZ": 7,
     "RU": 6
    },
-   "symbol": "EXH1.DE"
+   "symbol": "EXH1.DE",
+   "key_dir": "up"
   },
   "s&p 500 energy|up": {
    "n": 111,
@@ -58,14 +61,16 @@
     "AZ": 7,
     "RU": 6
    },
-   "symbol": "XLE"
+   "symbol": "XLE",
+   "key_dir": "up"
   },
   "obx oslo|up": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "up"
   },
   "frachty kontenerowe|up": {
    "n": 87,
@@ -81,7 +86,8 @@
     "EG": 4,
     "SO": 2
    },
-   "symbol": "MAERSK-B.CO+HLAG.DE+ZIM"
+   "symbol": "MAERSK-B.CO+HLAG.DE+ZIM",
+   "key_dir": "up"
   },
   "baltic dirty tanker index|up": {
    "n": 103,
@@ -97,7 +103,8 @@
     "SA": 6,
     "EG": 4
    },
-   "symbol": "FRO+DHT"
+   "symbol": "FRO+DHT",
+   "key_dir": "up"
   },
   "złoto|up": {
    "n": 500,
@@ -113,7 +120,8 @@
     "CU": 19,
     "IR": 18
    },
-   "symbol": "GC=F"
+   "symbol": "GC=F",
+   "key_dir": "up"
   },
   "indeks zmienności vix|up": {
    "n": 500,
@@ -129,14 +137,16 @@
     "CU": 19,
     "IR": 18
    },
-   "symbol": "^VIX"
+   "symbol": "^VIX",
+   "key_dir": "up"
   },
   "tedpix|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "stoxx europe 600 travel & leisure|down": {
    "n": 113,
@@ -152,7 +162,8 @@
     "AZ": 7,
     "RU": 6
    },
-   "symbol": "EXV9.DE"
+   "symbol": "EXV9.DE",
+   "key_dir": "down"
   },
   "stoxx europe 600 chemicals|down": {
    "n": 169,
@@ -168,7 +179,8 @@
     "AE": 13,
     "IQ": 11
    },
-   "symbol": "EXV7.DE"
+   "symbol": "EXV7.DE",
+   "key_dir": "down"
   },
   "dax|down": {
    "n": 222,
@@ -184,7 +196,8 @@
     "VE": 15,
     "AE": 13
    },
-   "symbol": "^GDAXI"
+   "symbol": "^GDAXI",
+   "key_dir": "down"
   },
   "stoxx europe 600 retail|down": {
    "n": 87,
@@ -200,7 +213,8 @@
     "EG": 4,
     "SO": 2
    },
-   "symbol": "EXH8.DE"
+   "symbol": "EXH8.DE",
+   "key_dir": "down"
   },
   "stoxx europe 600 automobiles & parts|down": {
    "n": 107,
@@ -216,7 +230,8 @@
     "RU": 6,
     "EG": 4
    },
-   "symbol": "EXV5.DE"
+   "symbol": "EXV5.DE",
+   "key_dir": "down"
   },
   "obligacje usa i niemiec|up": {
    "n": 500,
@@ -232,7 +247,8 @@
     "CU": 19,
     "IR": 18
    },
-   "symbol": "^TNX"
+   "symbol": "^TNX",
+   "key_dir": "up"
   },
   "frank szwajcarski|up": {
    "n": 500,
@@ -248,7 +264,8 @@
     "CU": 19,
     "IR": 18
    },
-   "symbol": "EURCHF=X"
+   "symbol": "EURCHF=X",
+   "key_dir": "up"
   },
   "msci emerging markets|down": {
    "n": 500,
@@ -264,14 +281,16 @@
     "CU": 19,
     "IR": 18
    },
-   "symbol": "EEM"
+   "symbol": "EEM",
+   "key_dir": "down"
   },
   "nikkei 225 i kospi|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "ta-35|down": {
    "n": 93,
@@ -284,21 +303,24 @@
     "LB": 12,
     "PS": 12
    },
-   "symbol": "TA35.TA"
+   "symbol": "TA35.TA",
+   "key_dir": "down"
   },
   "ibc|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "ropa ciężka i rafinerie usa|up": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "up"
   },
   "stoxx europe 600 utilities|up": {
    "n": 65,
@@ -311,7 +333,8 @@
     "AZ": 7,
     "GE": 1
    },
-   "symbol": "EXH9.DE"
+   "symbol": "EXH9.DE",
+   "key_dir": "up"
   },
   "bist 100|down": {
    "n": 21,
@@ -320,14 +343,16 @@
    "kraje": {
     "TR": 21
    },
-   "symbol": "XU100.IS"
+   "symbol": "XU100.IS",
+   "key_dir": "down"
   },
   "wig20|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "pszenica i kukurydza|up": {
    "n": 24,
@@ -337,7 +362,8 @@
     "UA": 18,
     "RU": 6
    },
-   "symbol": "ZW=F+ZC=F"
+   "symbol": "ZW=F+ZC=F",
+   "key_dir": "up"
   },
   "nawozy|up": {
    "n": 24,
@@ -347,7 +373,8 @@
     "UA": 18,
     "RU": 6
    },
-   "symbol": "NTR+CF"
+   "symbol": "NTR+CF",
+   "key_dir": "up"
   },
   "miedź, aluminium, nikiel|up": {
    "n": 39,
@@ -360,7 +387,8 @@
     "CD": 2,
     "KZ": 2
    },
-   "symbol": "HG=F"
+   "symbol": "HG=F",
+   "key_dir": "up"
   },
   "stoxx europe 600 basic resources|up": {
    "n": 39,
@@ -373,14 +401,16 @@
     "CD": 2,
     "KZ": 2
    },
-   "symbol": "EXV6.DE"
+   "symbol": "EXV6.DE",
+   "key_dir": "up"
   },
   "moex russia|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "stoxx europe 600 food & beverage|down": {
    "n": 24,
@@ -390,7 +420,8 @@
     "UA": 18,
     "RU": 6
    },
-   "symbol": "EXH3.DE"
+   "symbol": "EXH3.DE",
+   "key_dir": "down"
   },
   "stoxx europe total market aerospace & defense|up": {
    "n": 152,
@@ -406,35 +437,40 @@
     "PL": 10,
     "KR": 9
    },
-   "symbol": "RHM.DE+BA.L+SAAB-B.ST+LDO.MI"
+   "symbol": "RHM.DE+BA.L+SAAB-B.ST+LDO.MI",
+   "key_dir": "up"
   },
   "pszenica|up": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "up"
   },
   "kurs pln|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "ngx all-share|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "pfts|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "ftse/jse top 40|down": {
    "n": 7,
@@ -443,7 +479,8 @@
    "kraje": {
     "ZA": 7
    },
-   "symbol": "^J200.JO"
+   "symbol": "^J200.JO",
+   "key_dir": "down"
   },
   "s&p aerospace & defense select|up": {
    "n": 84,
@@ -456,7 +493,8 @@
     "TW": 13,
     "KR": 9
    },
-   "symbol": "XAR"
+   "symbol": "XAR",
+   "key_dir": "up"
   },
   "nikkei 225|down": {
    "n": 84,
@@ -469,7 +507,8 @@
     "TW": 13,
     "KR": 9
    },
-   "symbol": "^N225"
+   "symbol": "^N225",
+   "key_dir": "down"
   },
   "phlx semiconductor|down": {
    "n": 85,
@@ -483,7 +522,8 @@
     "KR": 9,
     "PH": 1
    },
-   "symbol": "^SOX"
+   "symbol": "^SOX",
+   "key_dir": "down"
   },
   "nasdaq 100|down": {
    "n": 85,
@@ -497,7 +537,8 @@
     "KR": 9,
     "PH": 1
    },
-   "symbol": "^NDX"
+   "symbol": "^NDX",
+   "key_dir": "down"
   },
   "taiex|down": {
    "n": 149,
@@ -511,7 +552,8 @@
     "KR": 18,
     "PH": 1
    },
-   "symbol": "^TWII"
+   "symbol": "^TWII",
+   "key_dir": "down"
   },
   "kospi|down": {
    "n": 84,
@@ -524,7 +566,8 @@
     "TW": 13,
     "KR": 9
    },
-   "symbol": "^KS11"
+   "symbol": "^KS11",
+   "key_dir": "down"
   },
   "hang seng|down": {
    "n": 67,
@@ -537,7 +580,8 @@
     "KR": 9,
     "PH": 1
    },
-   "symbol": "^HSI"
+   "symbol": "^HSI",
+   "key_dir": "down"
   },
   "csi 300 i hang seng|down": {
    "n": 22,
@@ -546,14 +590,16 @@
    "kraje": {
     "CN": 22
    },
-   "symbol": "000300.SS+^HSI"
+   "symbol": "000300.SS+^HSI",
+   "key_dir": "down"
   },
   "egx 30|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "nifty 50 i sensex|down": {
    "n": 63,
@@ -564,21 +610,24 @@
     "PK": 14,
     "AF": 9
    },
-   "symbol": "^NSEI"
+   "symbol": "^NSEI",
+   "key_dir": "down"
   },
   "kse-100|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "dfm general i ftse adx general|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "stoxx europe 600 banks|down": {
    "n": 13,
@@ -587,7 +636,8 @@
    "kraje": {
     "AE": 13
    },
-   "symbol": "EXV1.DE"
+   "symbol": "EXV1.DE",
+   "key_dir": "down"
   },
   "s&p/bmv ipc|down": {
    "n": 15,
@@ -596,7 +646,8 @@
    "kraje": {
     "MX": 15
    },
-   "symbol": "^MXX"
+   "symbol": "^MXX",
+   "key_dir": "down"
   },
   "rheinmetall, saab, kongsberg|up": {
    "n": 42,
@@ -611,28 +662,32 @@
     "EE": 1,
     "FI": 1
    },
-   "symbol": "RHM.DE+SAAB-B.ST+KOG.OL"
+   "symbol": "RHM.DE+SAAB-B.ST+KOG.OL",
+   "key_dir": "up"
   },
   "brak płynnego indeksu|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "mwig40|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "omx baltic benchmark|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "kurs pln i walut regionu|down": {
    "n": 42,
@@ -647,70 +702,80 @@
     "EE": 1,
     "FI": 1
    },
-   "symbol": "EURPLN=X"
+   "symbol": "EURPLN=X",
+   "key_dir": "down"
   },
   "psei|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "tadawul all share|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "blom stock index|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "omx vilnius|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "kase index|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "qe index|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "bux|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "bet|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "omx tallinn|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "omx helsinki 25|down": {
    "n": 1,
@@ -719,21 +784,24 @@
    "kraje": {
     "FI": 1
    },
-   "symbol": "^OMXH25"
+   "symbol": "^OMXH25",
+   "key_dir": "down"
   },
   "obx|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   },
   "boursa kuwait premier|down": {
    "n": 0,
    "trafne": 0,
    "nadwyzka": null,
    "kraje": {},
-   "symbol": null
+   "symbol": null,
+   "key_dir": "down"
   }
  }
 }
