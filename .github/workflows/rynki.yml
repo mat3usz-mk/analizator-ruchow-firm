@@ -1,0 +1,36 @@
+name: Sprawdzenie indeksów giełdowych
+
+# Ręcznie albo raz w miesiącu: sprawdza na notowaniach, czy indeksy wskazywane w raporcie (w górę / w dół)
+# naprawdę tak się zachowywały wokół prawdziwych wydarzeń. Zapisuje analizator/rynki.json i raporty/rynki-wyniki.md.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 4 1 * *"
+
+permissions:
+  contents: write
+
+jobs:
+  rynki:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Notowania i ocena kierunków
+        run: python -m analizator.rynki --epizody raporty/epizody.json --out analizator/rynki.json --raport raporty/rynki-wyniki.md
+      - name: Zapisz wyniki w repozytorium
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/wynik && cp analizator/rynki.json raporty/rynki-wyniki.md /tmp/wynik/
+          for i in 1 2 3; do
+            git fetch -q origin main && git checkout -q -B main origin/main
+            cp /tmp/wynik/rynki.json analizator/ && cp /tmp/wynik/rynki-wyniki.md raporty/
+            git add analizator/rynki.json raporty/rynki-wyniki.md
+            git commit -q -m "Sprawdzenie indeksów giełdowych na notowaniach" || exit 0
+            git push -q origin main && break
+            sleep 5
+          done

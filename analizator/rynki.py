@@ -74,6 +74,7 @@ TICKERS: dict[str, list[list[tuple[str, int]]]] = {
 
 MIN_N = 5        # mniej przypadków: „za mało danych”, pokazujemy bez oceny
 MIN_HIT = 0.55   # kierunek pokazujemy jako sprawdzony od tego odsetka trafień
+PRE = 7          # przy wydarzeniach zmiana liczona od tygodnia przed (wtedy analizator mógł już alarmować)
 
 
 def key(label: str) -> str:
@@ -153,6 +154,7 @@ def basket(label_key: str, start: date) -> tuple[list[tuple[Series, int, float]]
 
 # --- Ocena -----------------------------------------------------------------------
 def evaluate(episodes: list[dict], days: int = 30) -> dict:
+    """episodes: [{"kraj", "data"}], gdzie data to początek pomiaru zmiany notowań."""
     from .skutki import FRONTS, FRONT_INDICES, indices
     if not episodes:
         return {}
@@ -205,19 +207,33 @@ def verdict(st: dict | None) -> str:
     return "sprawdza się" if st["trafne"] / st["n"] >= MIN_HIT and sign_ok else "nie sprawdza się"
 
 
-def write_report(path: str, stats: dict, meta: dict) -> None:
+def _table(stats: dict) -> list[str]:
     rows = sorted(stats.items(), key=lambda kv: (-(kv[1]["n"] >= MIN_N), -(kv[1]["trafne"] / kv[1]["n"] if kv[1]["n"] else 0)))
-    L = [f"# Indeksy giełdowe po dawnych alarmach ({date.today().isoformat()})", "",
-         f"Epizody alarmowe: {meta['n_epizodow']} ({meta['okres']}, reguła alarmu: {meta['regula']}). Dla każdego epizodu liczona jest "
-         f"zmiana notowań w {meta['dni']} dniach od początku alarmu, pomniejszona o przeciętną zmianę tego indeksu w dowolnych {meta['dni']} dniach.",
-         f"Kierunek uznajemy za sprawdzony, gdy był trafny w co najmniej {MIN_HIT:.0%} z co najmniej {MIN_N} przypadków. "
-         "Takie kierunki raport pokazuje z liczbą trafień, a niesprawdzające się ukrywa.", "",
-         "| indeks | kierunek | przypadki | trafne | średnia nadwyżka | ocena | notowania |", "|---|---|---|---|---|---|---|"]
+    L = ["| indeks | kierunek | przypadki | trafne | średnia nadwyżka | ocena | notowania |", "|---|---|---|---|---|---|---|"]
     for k, st in rows:
+        if not st["n"]:
+            continue
         lab, d = k.split("|")
         hit = f"{st['trafne']}/{st['n']} ({st['trafne'] / st['n']:.0%})" if st["n"] else "-"
         ex = f"{st['nadwyzka']:+.1%}" if st["nadwyzka"] is not None else "-"
         L.append(f"| {lab} | {'▲ w górę' if d == 'up' else '▼ w dół'} | {st['n']} | {hit} | {ex} | {verdict(st)} | {st['symbol'] or 'brak'} |")
+    missing = sorted({k.split("|")[0] for k, st in stats.items() if not st["n"]})
+    if missing:
+        L += ["", "Bez darmowych notowań (nie da się sprawdzić): " + ", ".join(missing) + "."]
+    return L
+
+
+def write_report(path: str, stats: dict, meta: dict, alarm_stats: dict | None = None) -> None:
+    L = [f"# Czy wskazywane indeksy giełdowe szły w podanym kierunku ({date.today().isoformat()})", "",
+         f"**Podstawa oceny: prawdziwe wydarzenia** ({meta['n_wydarzen']} wydarzeń z list 2015–2026). Dla każdego liczona jest zmiana "
+         f"notowań od {PRE} dni przed wydarzeniem do {meta['dni']} dni po nim, pomniejszona o przeciętną zmianę tego indeksu w okresie tej samej długości. "
+         f"Kierunek uznajemy za sprawdzony, gdy był trafny w co najmniej {MIN_HIT:.0%} z co najmniej {MIN_N} przypadków i średnio szedł we właściwą stronę. "
+         "Raport pokazuje sprawdzone kierunki z liczbą trafień, ukrywa niesprawdzające się, a te bez notowań oznacza jako niesprawdzone.", ""]
+    L += _table(stats)
+    if alarm_stats:
+        L += ["", f"## Dla porównania: po wszystkich alarmach analizatora ({meta.get('n_epizodow', 0)} epizodów, reguła: {meta.get('regula', '?')})", "",
+              "Większość alarmów okazała się fałszywa, więc tu rynek zwykle nie reaguje. Ta tabela nie decyduje o tym, co widać w raporcie.", ""]
+        L += _table(alarm_stats)
     L += ["", "Uwagi: epizody w tym samym czasie (np. kilka krajów Bliskiego Wschodu naraz) nie są od siebie niezależne, więc liczba "
           "przypadków zawyża pewność. Koszyki akcji (armatorzy, zbrojeniówka, nawozy) zastępują indeksy, których notowań nie ma za darmo.",
           "To sprawdzenie typowych reakcji w przeszłości, nie prognoza cen. Nie jest to rekomendacja inwestycyjna."]
@@ -261,20 +277,27 @@ def annotate(labels: list[str], direction: str) -> list[str]:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="analizator.rynki")
-    ap.add_argument("--epizody", required=True)
+    ap.add_argument("--epizody", default="", help="JSON z epizodami alarmowymi (z analizator.ucz --out-episodes)")
+    ap.add_argument("--wydarzenia", nargs="*", default=["wydarzenia_2015_2024.csv", "wydarzenia.csv"])
     ap.add_argument("--dni", type=int, default=30)
     ap.add_argument("--out", default=RESULTS_PATH)
     ap.add_argument("--raport", default="raporty/rynki-wyniki.md")
     a = ap.parse_args(argv)
-    ep = json.load(open(a.epizody, encoding="utf-8"))
-    eps = ep["epizody"]
-    stats = evaluate(eps, a.dni)
-    meta = {"n_epizodow": len(eps), "okres": f"{eps[0]['data']}..{eps[-1]['data']}" if eps else "-", "regula": ep.get("regula", "?"),
-            "dni": a.dni, "utworzono": date.today().isoformat()}
+    from .backtest import load_events
+    evs = [e for p in a.wydarzenia if os.path.exists(p) for e in load_events(p)]
+    ev_eps = [{"kraj": e["kraj"], "data": (e["data"] - timedelta(days=PRE)).isoformat()} for e in evs
+              if e["data"] + timedelta(days=a.dni) <= date.today()]
+    stats = evaluate(ev_eps, a.dni + PRE)
+    meta = {"n_wydarzen": len(ev_eps), "dni": a.dni, "utworzono": date.today().isoformat()}
+    alarm_stats = None
+    if a.epizody and os.path.exists(a.epizody):
+        ep = json.load(open(a.epizody, encoding="utf-8"))
+        alarm_stats = evaluate(ep["epizody"], a.dni)
+        meta.update({"n_epizodow": len(ep["epizody"]), "regula": ep.get("regula", "?")})
     with open(a.out, "w", encoding="utf-8") as f:
-        json.dump({**meta, "wyniki": stats}, f, ensure_ascii=False, indent=1)
+        json.dump({**meta, "wyniki": stats, "wyniki_po_alarmach": alarm_stats or {}}, f, ensure_ascii=False, indent=1)
     os.makedirs(os.path.dirname(os.path.abspath(a.raport)), exist_ok=True)
-    write_report(a.raport, stats, meta)
+    write_report(a.raport, stats, meta, alarm_stats)
     print(open(a.raport, encoding="utf-8").read())
     return 0
 
