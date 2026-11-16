@@ -11,12 +11,17 @@ on:
       stride:
         description: "co który plik GDELT brać (4 = jeden na godzinę)"
         default: "4"
+      z_przebiegu:
+        description: "numer wcześniejszego przebiegu: tylko uczenie na już pobranych latach (bez pobierania)"
+        default: ""
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   rok:
+    if: github.event.inputs.z_przebiegu == ''
     runs-on: ubuntu-latest
     timeout-minutes: 340
     strategy:
@@ -45,7 +50,7 @@ jobs:
 
   ucz:
     needs: rok
-    if: always()
+    if: always() && (needs.rok.result == 'success' || github.event.inputs.z_przebiegu != '')
     runs-on: ubuntu-latest
     timeout-minutes: 340
     steps:
@@ -58,6 +63,8 @@ jobs:
           path: lata
           pattern: h_*
           merge-multiple: true
+          run-id: ${{ github.event.inputs.z_przebiegu || github.run_id }}
+          github-token: ${{ github.token }}
       - name: Połącz lata w jedną bazę
         run: |
           python - <<'EOF'
@@ -74,15 +81,23 @@ jobs:
           EOF
       - name: Uczenie i test
         run: |
+          # pliki GKG mają tytuły stron dopiero od 2019 r., więc uczenie realnie obejmuje 2019-2024
           python -m analizator.ucz --db historia_gkg.db --train-events wydarzenia_2015_2024.csv --test-events wydarzenia.csv \
-            --train-from 2015-05-01 --train-to 2024-12-31 --test-from 2025-03-01 --out-report raporty/model-wyniki.md
+            --train-from 2019-03-01 --train-to 2024-12-31 --test-from 2025-03-01 --out-report raporty/model-wyniki.md
       - name: Zapisz model w repozytorium
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add analizator/model.json raporty/model-wyniki.md
-          git commit -m "Model uczony na historii 2015-2024 (test 2025-2026)" || exit 0
-          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
+          # zapis na najnowszym main (w międzyczasie mogły wejść inne zmiany), bez konfliktów
+          mkdir -p /tmp/wynik && cp analizator/model.json raporty/model-wyniki.md /tmp/wynik/
+          for i in 1 2 3; do
+            git fetch -q origin main && git checkout -q -B main origin/main
+            cp /tmp/wynik/model.json analizator/model.json && mkdir -p raporty && cp /tmp/wynik/model-wyniki.md raporty/
+            git add analizator/model.json raporty/model-wyniki.md
+            git commit -q -m "Model uczony na historii (test 2025-2026)" || exit 0
+            git push -q origin main && break
+            sleep 5
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
