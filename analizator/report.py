@@ -58,8 +58,22 @@ Sprzedaż ma wiele zwykłych powodów (podatki, opcje), więc liczy się tylko w
 <th align=left>Norma</th><th align=left>Zakup</th><th></th></tr>{tr}</table></div></section>"""
 
 
+def _congress_html(rows: list[dict]) -> str:
+    if not rows:
+        return ""
+    e = html.escape
+    tr = "".join(f"<tr><td>{e(r['grupa'])}</td><td>{r['kupujacy']}</td><td>{e(', '.join(r['spolki_kupno'][:8]))}</td>"
+                 f"<td>{r['sprzedajacy']}</td><td>{e(', '.join(r['spolki_sprzedaz'][:8]))}</td></tr>" for r in rows)
+    return f"""<section class="card"><h2 style="margin:0 0 6px;font-size:19px">Kongresmeni USA: transakcje w ostatnich 60 dniach</h2>
+<p class="muted" style="margin:0 0 8px">Zgłoszenia transakcji członków Izby Reprezentantów (jawne, z opóźnieniem do 45 dni) w spółkach zbrojeniowych,
+energetycznych, lotniczych, żeglugowych i zależnych od Tajwanu. Kongresmeni mają dostęp do niejawnych odpraw, ale kupują też z wielu zwykłych powodów.
+Na razie tylko do wglądu: nie wpływa na indeks krajów.</p>
+<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14px"><tr><th align=left>Grupa</th><th align=left>Kupujących</th>
+<th align=left>Kupowane spółki</th><th align=left>Sprzedających</th><th align=left>Sprzedawane spółki</th></tr>{tr}</table></div></section>"""
+
+
 def to_html(results: list[CountryAssessment], n_articles: int, n_signals: int, title: str = "Analizator ruchów firm",
-            insiders: list[dict] | None = None) -> str:
+            insiders: list[dict] | None = None, congress: list[dict] | None = None) -> str:
     e = html.escape
     cards = []
     for r in results:
@@ -112,6 +126,7 @@ się dzieje (atak, awaria), więc waży mało. Sekcja skutków to typowe reakcje
 {_fronts_html(results)}
 {''.join(cards) or '<p>Brak sygnałów z przypisanym krajem.</p>'}
 {_insider_html(insiders or [])}
+{_congress_html(congress or [])}
 </main></body></html>"""
 
 

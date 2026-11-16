@@ -27,12 +27,14 @@ def _load_watchlist(path: str = "watchlist.txt") -> list[str] | None:
 def _analyze(articles: list[dict], out: str, title: str, today: date | None = None, con=None) -> None:
     signals = extract_signals(articles, _load_watchlist())
     results = assess(signals, today=today)
-    insiders = []
+    insiders, congress = [], []
     if con is not None:
         from . import pierwotne
         insiders = pierwotne.insider_panel(con)
+        from . import ryby
+        congress = ryby.congress_panel(con)
     with open(out, "w", encoding="utf-8") as f:
-        f.write(report.to_html(results, len(articles), len(signals), title, insiders=insiders))
+        f.write(report.to_html(results, len(articles), len(signals), title, insiders=insiders, congress=congress))
     report.to_csv(results, os.path.splitext(out)[0] + ".csv")
     report.to_candidates_json(results, os.path.join(os.path.dirname(os.path.abspath(out)), "kandydaci.json"))
     print(f"\n{len(articles)} artykułów -> {len(signals)} sygnałów -> {len(results)} krajów")

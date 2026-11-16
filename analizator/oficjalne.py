@@ -37,6 +37,10 @@ STRUCTURED: dict[str, tuple[str, float, str]] = {
     "portwatch": ("lancuch_dostaw", 3.0, "firma"),
     "acled": ("ostrzezenia_panstw", 2.5, "panstwo"),
     "agsi": ("energia_surowce", 2.5, "firma"),
+    # ślady dobrze poinformowanych (analizator/ryby.py)
+    "finra_short": ("przeplywy_finansowe", 2.5, "firma"),
+    "opcje": ("przeplywy_finansowe", 2.5, "firma"),
+    "dsca": ("ostrzezenia_panstw", 2.0, "panstwo"),
 }
 OFFICIAL_RSS = {"rada_ue": ("https://www.consilium.europa.eu/en/rss/pressreleases.ashx", "consilium.europa.eu"),
                 "onz": ("https://press.un.org/en/rss.xml", "press.un.org"),

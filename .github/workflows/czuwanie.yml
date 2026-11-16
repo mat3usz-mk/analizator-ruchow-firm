@@ -58,6 +58,7 @@ jobs:
           AISSTREAM_API_KEY: ${{ secrets.AISSTREAM_API_KEY }}
           AGSI_KEY: ${{ secrets.AGSI_KEY }}
         run: |
+          pip install -q pypdf  # odczyt zgłoszeń transakcji kongresmenów (PDF)
           python -m analizator watch --once --db dane/analizator.db \
             --out dane/raport_biezacy.html --alerts-out dane/nowe_alerty.txt
 

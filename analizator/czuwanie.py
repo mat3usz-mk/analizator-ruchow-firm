@@ -20,7 +20,7 @@ from . import report, sources, store
 from .score import PRIORITY_CATS, PRIORITY_SOURCES, assess, country_name, extract_signals
 from .skutki import indices
 
-FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "kursy", "agsi", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
+FAST_PRIMARY = ["travel_us", "travel_uk", "easa", "faa", "ofac", "opensky", "oficjalne_rss", "kursy", "agsi", "finra_short", "opcje", "dsca", "kongres", "portwatch", "sankcje_ue_uk"]  # szybkie, bez AIS (3 min) i danych dziennych
 LEVELS = {"niski": 0, "podwyższony": 1, "wysoki": 2}
 
 
@@ -133,11 +133,18 @@ def cycle(db: str, out: str, srcs: list[str], days: int, topic: str | None, watc
         con = store.connect(local)
         _fetch(con, days, srcs)
         arts = store.load(con, (date.today() - timedelta(days=365)).isoformat())
+        from . import pierwotne, ryby
+        try:
+            insiders, congress = pierwotne.insider_panel(con), ryby.congress_panel(con)
+        except Exception as e:
+            print(f"  [panele] {e}")
+            insiders, congress = [], []
         con.close()
     signals = extract_signals(arts, watchlist)
     results = assess(signals, today=date.today())
     with open(out, "w", encoding="utf-8") as f:
-        f.write(report.to_html(results, len(arts), len(signals), "Analizator ruchów firm (tryb ciągły)"))
+        f.write(report.to_html(results, len(arts), len(signals), "Analizator ruchów firm (tryb ciągły)",
+                                insiders=insiders, congress=congress))
     alerts, new_state = changes(results, state, date.today())
     for a in alerts:
         notify("Analizator: " + a.split(":")[0], a, topic, os.path.join(base, "alerty.log"))
