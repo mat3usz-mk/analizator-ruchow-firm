@@ -54,6 +54,8 @@ class CountryAssessment:
     unconfirmed: bool = False      # indeks obcięty poniżej alarmu: brak potwierdzenia w rzetelnych źródłach
     confirmations: int = 0         # liczba niezależnych rzetelnych źródeł + sygnałów pierwotnych
     model_note: str = ""           # zmiana alarmu przez regułę łączoną (model + ręczny indeks)
+    impulse: float = 0.0           # nagły przyrost nowych sygnałów w ostatnich 48 h względem zwykłego tła kraju (z-score)
+    impulse_info: dict = field(default_factory=dict)  # teraz / norma / nowe kategorie / świeże dowody
     prob: float | None = None      # szansa wydarzenia w horyzoncie wg modelu uczonego na historii (analizator/model.json)
 
 
@@ -264,6 +266,26 @@ def _damp_sec(signals: list[dict], baseline_weeks: int, cap: float) -> list[dict
     return out
 
 
+IMPULSE_DAYS, IMPULSE_BASE_DAYS = 2, 28
+
+
+def _impulse(stories: dict, today: date) -> tuple[float, dict]:
+    """Ile nowych historii pojawiło się w ostatnich 48 h w porównaniu ze zwykłym tłem kraju z poprzednich 4 tygodni.
+
+    Liczy wagi (źródła pierwotne ważą więcej), nie same artykuły. Kryzys, który trwa od tygodni, ma wysokie tło,
+    więc daje mały impuls; nagły skok w spokojnym kraju daje duży."""
+    cut = today - timedelta(days=IMPULSE_DAYS)
+    now = [v for v in stories.values() if v[0] > cut]
+    base = [v for v in stories.values() if v[0] <= cut]
+    w_now = sum(min(v[1], 3.0) for v in now)
+    w_base = sum(min(v[1], 3.0) for v in base) * IMPULSE_DAYS / IMPULSE_BASE_DAYS
+    new_cats = sorted({v[2] for v in now} - {v[2] for v in base})
+    z = (w_now - w_base) / math.sqrt(w_base + 1.0) + 0.5 * len(new_cats) * (1 if now else 0)
+    fresh = [v[3] for v in sorted(now, key=lambda v: (-v[1], v[0]))]
+    return round(z, 2), {"teraz": round(w_now, 1), "norma": round(w_base, 1), "nowe_kategorie": new_cats,
+                         "historii": len(now), "dowody": fresh[:4]}
+
+
 def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2,
            min_baseline_weeks: int = 8, params: dict | None = None, use_model: bool = True) -> list[CountryAssessment]:
     P = {**PARAMS, **(params or {})}
@@ -279,9 +301,17 @@ def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2
     prio_hist: dict[str, dict[date, set]] = defaultdict(lambda: defaultdict(set))
     quiet_hist: dict[str, dict[date, set]] = defaultdict(lambda: defaultdict(set))
     cat_hist: dict[str, dict[date, set]] = defaultdict(lambda: defaultdict(set))
+    # Impuls: dzienne, unikalne historie z ostatnich 30 dni (bez reakcji na zdarzenia i zaprzeczeń)
+    imp_from = today - timedelta(days=IMPULSE_BASE_DAYS + IMPULSE_DAYS)
+    daily: dict[str, dict[str, tuple]] = defaultdict(dict)
     for s in signals:
         if s["weight"] <= 0.05:
             continue
+        if imp_from < s["date"] <= today and not s["reactive"] and not s["negated"]:
+            st = s.get("story") or s.get("url") or s["title"]
+            old = daily[s["country"]].get(st)
+            if old is None or s["date"] < old[0]:  # historia liczy się od dnia, w którym pojawiła się pierwszy raz
+                daily[s["country"]][st] = (s["date"], s["weight"], s["category"], s)
         wk = week_start(s["date"])
         key = (s["country"], wk, s["key"], s["category"])
         moves[key] = max(moves.get(key, 0.0), s["weight"])
@@ -380,13 +410,14 @@ def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2
                 continue
             seen.add(e["story"])
             evidence.append(e)
+        imp, imp_info = _impulse(daily.get(c, {}), today)
         own[c] = CountryAssessment(
             country=c, index=index, level="", confidence=confidence, recent_score=round(recent_score, 1),
             baseline=round(med, 1), zscore=round(z, 2), companies=len(companies), states=len(states),
             quiet=len({e["story"] for e in quiet}), proactive_share=round(proactive_share, 2), categories=cats,
             weekly=[(wk.isoformat(), round(values[wk], 1)) for wk in span[-26:]],
             evidence=evidence[:15], co_occurring=co, priority=prio_now, own_index=index, unconfirmed=unconfirmed,
-            confirmations=len(cred_domains) + len(primary),
+            confirmations=len(cred_domains) + len(primary), impulse=imp, impulse_info=imp_info,
             parts={"z": round(z, 2), "z_act": round(z_act, 2), "cats": len(cats), "cats_base": cats_base, "quiet": len(quiet), "quiet_excess": round(quiet_excess, 2), "prio_now": prio_now,
                    "prio_base": round(prio_base, 2), "prio_excess": round(prio_excess, 2), "proactive": round(proactive_share, 2),
                    "dominance": round(dominance, 2), "anomaly": round(anomaly, 2), "raw": round(raw, 2)},

@@ -186,35 +186,52 @@ def _ev_li(x: dict, country: str | None = None) -> str:
     return f'<li><span class="muted">{x["date"]}</span> · {who}{tag}{e(category_label(x["category"]))}{react}: {link}</li>'
 
 
+IMPULSE_MIN = 2.5
+
+
+def _country_block(r, causes: list[dict], head_note: str) -> str:
+    e = html.escape
+    ix = indices(r.country, r.level if r.level != "niski" else "podwyższony")
+    ver = lambda xs: sorted(xs, key=lambda x: "sprawdziło się" not in x)
+    ix = {"down": ver(ix["down"]), "up": ver(ix["up"])}
+    imp = implications(r.country, r.categories, [], r.level)
+    prob = (f'<div><span class="big">{r.prob:.0%}</span> <span class="muted">szansa poważnego wydarzenia w 60 dni wg modelu</span></div>'
+            if r.prob is not None else '<div class="muted">model: brak oceny</div>')
+    li = lambda xs: "<ul>" + "".join(f"<li>{e(x)}</li>" for x in xs) + "</ul>" if xs else '<p class="muted">brak sprawdzonych kierunków</p>'
+    return f"""<section class="card ov">
+  <div class="head"><h2 style="margin:0;font-size:19px">{e(country_name(r.country))}</h2>
+  <div><span class="idx">{r.index:.0f}</span><span class="muted">/100</span> · <span class="lvl {r.level}">{r.level}</span></div></div>
+  <p style="margin:4px 0 6px">{head_note}</p>
+  {prob}{_unconfirmed_html(r)}
+  <h3>Przyczyny (co nowego się pojawiło)</h3><ul>{"".join(_ev_li(x) for x in causes) or '<li class="muted">brak</li>'}</ul>
+  <h3>Możliwe skutki</h3>{li(imp["effects"][:3])}
+  <div class="imp"><div><h4>Może spaść ▼</h4>{li(ix["down"][:3])}</div><div><h4>Może wzrosnąć ▲</h4>{li(ix["up"][:3])}</div></div>
+</section>"""
+
+
 def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
-    """Zakładka „Najważniejsze teraz”: kilka krajów z przyczynami, skutkami i szansą oraz lista najnowszych sygnałów."""
+    """Zakładka „Najważniejsze teraz”: najpierw nagłe impulsy z 48 h, potem trwające kryzysy w skrócie, na końcu najnowsze sygnały."""
     from datetime import date, timedelta
     from .score import PRIMARY_SOURCES
     e = html.escape
-    pick = sorted(results, key=lambda r: (LEVEL_RANK.get(r.level, 0), r.index), reverse=True)
-    pick = [r for r in pick if r.level != "niski"] or pick[:3]
-    pick = pick[:top]
+    imp = sorted((r for r in results if r.impulse >= IMPULSE_MIN and r.impulse_info.get("historii", 0) >= 2),
+                 key=lambda r: -r.impulse)[:top]
     blocks = []
-    for r in pick:
-        ix = indices(r.country, r.level)
-        ver = lambda xs: sorted(xs, key=lambda x: "sprawdziło się" not in x)
-        ix = {"down": ver(ix["down"]), "up": ver(ix["up"])}
-        imp = implications(r.country, r.categories, [], r.level)
-        prob = (f'<div><span class="big">{r.prob:.0%}</span> <span class="muted">szansa poważnego wydarzenia w 60 dni wg modelu</span>'
-                + ('<br><span class="muted" style="font-size:13px">Wysoki indeks przy niskiej szansie: dużo się dzieje, ale w przeszłości '
-                   'podobny obraz rzadko kończył się nowym, dużym wydarzeniem (często to trwający już kryzys).</span>'
-                   if r.index >= 40 and r.prob < 0.05 else '') + '</div>'
-                if r.prob is not None else '<div class="muted">model: brak oceny</div>')
-        trend = "rośnie" if r.zscore >= 1 else ("spada" if r.zscore <= -1 else "bez wyraźnej zmiany")
-        li = lambda xs: "<ul>" + "".join(f"<li>{e(x)}</li>" for x in xs) + "</ul>" if xs else '<p class="muted">brak sprawdzonych kierunków</p>'
-        blocks.append(f"""<section class="card ov">
-  <div class="head"><h2 style="margin:0;font-size:19px">{e(country_name(r.country))}</h2>
-  <div><span class="idx">{r.index:.0f}</span><span class="muted">/100</span> · <span class="lvl {r.level}">{r.level}</span> · <span class="muted">trend: {trend}</span></div></div>
-  {prob}{_unconfirmed_html(r)}
-  <h3>Przyczyny (najmocniejsze i najświeższe)</h3><ul>{"".join(_ev_li(x) for x in _causes(r)) or '<li class="muted">brak</li>'}</ul>
-  <h3>Możliwe skutki</h3>{li(imp["effects"][:3])}
-  <div class="imp"><div><h4>Może spaść ▼</h4>{li(ix["down"][:3])}</div><div><h4>Może wzrosnąć ▲</h4>{li(ix["up"][:3])}</div></div>
-</section>""")
+    for r in imp:
+        info = r.impulse_info
+        nc = info.get("nowe_kategorie") or []
+        times = f'{info["teraz"] / max(info["norma"], 0.1):.0f}× więcej niż zwykle' if info["norma"] >= 0.05 else "zwykle prawie nic"
+        note = (f'<b class="q">Nagły impuls</b> · w 48 h {info["historii"]} nowe sprawy, siła {info["teraz"]:.1f} '
+                f'wobec zwykłych {info["norma"]:.1f} ({times})'
+                + (f' · nowe rodzaje ruchów: {e(", ".join(category_label(c) for c in nc))}' if nc else ""))
+        blocks.append(_country_block(r, info.get("dowody") or _causes(r), note))
+    ids = {r.country for r in imp}
+    ongoing = sorted((r for r in results if r.level != "niski" and r.country not in ids), key=lambda r: -r.index)
+    rows_on = "".join(
+        f'<li><b>{e(country_name(r.country))}</b> · indeks {r.index:.0f} ({r.level})'
+        + (f" · szansa wg modelu {r.prob:.0%}" if r.prob is not None else "")
+        + f' · <span class="muted">{e(", ".join(category_label(c) for c in r.categories[:3]))}; bez nowego impulsu w 48 h</span></li>'
+        for r in ongoing)
     since = date.today() - timedelta(days=fresh_days)
     fresh = [(r.country, x) for r in results for x in r.evidence if x["date"] >= since and not x.get("negated")]
     fresh.sort(key=lambda cx: (cx[1]["date"], cx[1].get("source") in PRIMARY_SOURCES, not cx[1].get("reactive"),
@@ -228,10 +245,15 @@ def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
         rows.append(_ev_li(x, c))
         if len(rows) >= 15:
             break
-    return (f"""<div class="warn" style="margin-top:12px"><b>W skrócie.</b> Poniżej kraje z najwyższym poziomem: dlaczego (przyczyny ze źródeł),
-co może z tego wyniknąć (skutki i indeksy giełdowe z typową skalą i czasem ruchu, liczone z historii) oraz szansa wydarzenia według modelu.
-Szansa to przybliżenie z danych historycznych: w teście 2025–2026 tylko ok. 12–17% alarmów kończyło się wydarzeniem w 60 dni. To nie jest rekomendacja inwestycyjna.</div>
-{"".join(blocks)}
+    return (f"""<div class="warn" style="margin-top:12px"><b>W skrócie.</b> Na górze kraje, w których w ostatnich 48 godzinach nagle pojawiło się
+dużo nowych sygnałów w porównaniu z ich zwykłym tłem z 4 tygodni (impuls). Kryzysy, które trwają od dawna, są niżej, w krótkiej liście.
+Przy każdym kraju: przyczyny, możliwe skutki, indeksy giełdowe z typową skalą i czasem ruchu oraz szansa wydarzenia według modelu
+(w teście 2025–2026 tylko ok. 12–17% alarmów kończyło się wydarzeniem w 60 dni). To nie jest rekomendacja inwestycyjna.</div>
+<h2 style="font-size:17px;margin:18px 0 4px">Nagłe impulsy (ostatnie 48 godzin)</h2>
+{"".join(blocks) or '<p class="muted">Brak nagłych impulsów: w żadnym kraju nie pojawiło się w 48 h wyraźnie więcej nowych sygnałów niż zwykle.</p>'}
+<section class="card ov"><h2 style="margin:0;font-size:19px">Trwające napięcia</h2>
+<p class="muted" style="margin:4px 0">Wysoki poziom, ale bez nagłej zmiany. Szczegóły w zakładce „Wszystkie kraje”.</p>
+<ul>{rows_on or '<li class="muted">brak</li>'}</ul></section>
 <section class="card ov"><h2 style="margin:0;font-size:19px">Najnowsze sygnały (ostatnie {fresh_days} dni)</h2>
 <ul>{"".join(rows) or '<li class="muted">brak nowych sygnałów</li>'}</ul></section>""")
 

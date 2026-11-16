@@ -378,3 +378,15 @@ class TestOficjalne(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestImpuls(unittest.TestCase):
+    def test_nagly_skok_vs_trwajacy_kryzys(self):
+        from datetime import date, timedelta
+        from analizator.score import _impulse
+        t = date(2026, 11, 16)
+        calm = {f"n{i}": (t - timedelta(days=i % 2), 2.0, "ewakuacja_personelu", {}) for i in range(3)}
+        long = {**{f"b{i}": (t - timedelta(days=3 + i), 2.0, "lotnictwo_przestrzen", {}) for i in range(28)},
+                **{f"n{i}": (t - timedelta(days=i % 2), 2.0, "lotnictwo_przestrzen", {}) for i in range(3)}}
+        self.assertGreater(_impulse(calm, t)[0], 2.5)
+        self.assertLess(_impulse(long, t)[0], 2.5)
