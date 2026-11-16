@@ -28,6 +28,15 @@ main{max-width:980px;margin:0 auto;padding:24px 16px 64px}h1{font-size:24px;marg
 .tag{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin:2px 4px 2px 0}
 ul{padding-left:18px;margin:6px 0}li{margin:3px 0}a{color:inherit}svg{display:block;max-width:100%}
 details summary{cursor:pointer;color:var(--muted);font-size:13px}
+input.tab{position:absolute;opacity:0;pointer-events:none}
+nav.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 4px;border-bottom:1px solid var(--line)}
+nav.tabs label{cursor:pointer;padding:8px 14px;border:1px solid var(--line);border-bottom:none;border-radius:8px 8px 0 0;color:var(--muted);font-size:14px;background:var(--bg)}
+.panel{display:none}
+#t1:checked~.panels .p1,#t2:checked~.panels .p2,#t3:checked~.panels .p3{display:block}
+#t1:checked~nav label[for=t1],#t2:checked~nav label[for=t2],#t3:checked~nav label[for=t3]{background:var(--card);color:var(--fg);font-weight:600}
+input.tab:focus-visible~nav{outline:2px solid var(--bar)}
+.ov h3{margin:12px 0 4px;font-size:14px}.ov .src{font-size:12px;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-right:4px}
+.ov .pri{border-color:var(--low);color:var(--low)}.big{font-size:20px;font-weight:650}
 """
 
 
@@ -123,10 +132,15 @@ i treści sponsorowanych ważą mniej, a raporty „rynkowe” są pomijane. Ala
 pierwotnym albo w dwóch niezależnych, rzeczowych mediach.
 <br><b>Cichy sygnał</b> to ruch wyprzedzający opisany tylko przez 1–2 wiarygodne źródła. <b>Reakcja na zdarzenie</b> opisuje coś, co już
 się dzieje (atak, awaria), więc waży mało. Sekcja skutków to typowe reakcje z podobnych sytuacji w przeszłości, nie rekomendacja inwestycyjna.</div>
-{_fronts_html(results)}
-{''.join(cards) or '<p>Brak sygnałów z przypisanym krajem.</p>'}
-{_insider_html(insiders or [])}
-{_congress_html(congress or [])}
+<input type="radio" name="tab" id="t1" class="tab" checked><input type="radio" name="tab" id="t2" class="tab"><input type="radio" name="tab" id="t3" class="tab">
+<nav class="tabs"><label for="t1">Najważniejsze teraz</label><label for="t2">Wszystkie kraje ({len(results)})</label><label for="t3">Grube ryby</label></nav>
+<div class="panels">
+<div class="panel p1">{_overview_html(results)}</div>
+<div class="panel p2">{_fronts_html(results)}
+{''.join(cards) or '<p>Brak sygnałów z przypisanym krajem.</p>'}</div>
+<div class="panel p3">{_insider_html(insiders or []) or '<p class="muted">Brak danych o insiderach w tym cyklu.</p>'}
+{_congress_html(congress or []) or '<p class="muted">Brak danych o transakcjach kongresmenów w tym cyklu.</p>'}</div>
+</div>
 </main></body></html>"""
 
 
@@ -147,6 +161,79 @@ def _quality_badge(x: dict) -> str:
         return ""
     why = html.escape("; ".join(x.get("quality_reasons") or []))
     return f'<span class=r title="{why}">{html.escape(", ".join(tags))}: waga obniżona</span> · '
+
+
+LEVEL_RANK = {"wysoki": 2, "podwyższony": 1, "niski": 0}
+
+
+def _causes(r, n: int = 3) -> list[dict]:
+    """Najświeższe i najmocniejsze dowody: najpierw źródła pierwotne i ruchy wyprzedzające, potem reszta."""
+    from .score import PRIMARY_SOURCES
+    ev = [x for x in r.evidence if not x.get("negated")]
+    ev.sort(key=lambda x: (not x.get("reactive"), x.get("source") in PRIMARY_SOURCES, x["date"], x.get("weight", 0)), reverse=True)
+    return ev[:n]
+
+
+def _ev_li(x: dict, country: str | None = None) -> str:
+    from .score import PRIMARY_SOURCES
+    e = html.escape
+    tag = ('<span class="src pri">źródło pierwotne</span>' if x.get("source") in PRIMARY_SOURCES
+           else '<span class="src">media</span>')
+    t = e(x["title"][:180])
+    link = f'<a href="{e(x["url"])}" target=_blank rel=noopener>{t}</a>' if x.get("url") else t
+    who = f"<b>{e(country_name(country))}</b> · " if country else ""
+    react = " · <span class=r>reakcja na zdarzenie</span>" if x.get("reactive") else ""
+    return f'<li><span class="muted">{x["date"]}</span> · {who}{tag}{e(category_label(x["category"]))}{react}: {link}</li>'
+
+
+def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
+    """Zakładka „Najważniejsze teraz”: kilka krajów z przyczynami, skutkami i szansą oraz lista najnowszych sygnałów."""
+    from datetime import date, timedelta
+    from .score import PRIMARY_SOURCES
+    e = html.escape
+    pick = sorted(results, key=lambda r: (LEVEL_RANK.get(r.level, 0), r.index), reverse=True)
+    pick = [r for r in pick if r.level != "niski"] or pick[:3]
+    pick = pick[:top]
+    blocks = []
+    for r in pick:
+        ix = indices(r.country, r.level)
+        ver = lambda xs: sorted(xs, key=lambda x: "sprawdziło się" not in x)
+        ix = {"down": ver(ix["down"]), "up": ver(ix["up"])}
+        imp = implications(r.country, r.categories, [], r.level)
+        prob = (f'<div><span class="big">{r.prob:.0%}</span> <span class="muted">szansa poważnego wydarzenia w 60 dni wg modelu</span>'
+                + ('<br><span class="muted" style="font-size:13px">Wysoki indeks przy niskiej szansie: dużo się dzieje, ale w przeszłości '
+                   'podobny obraz rzadko kończył się nowym, dużym wydarzeniem (często to trwający już kryzys).</span>'
+                   if r.index >= 40 and r.prob < 0.05 else '') + '</div>'
+                if r.prob is not None else '<div class="muted">model: brak oceny</div>')
+        trend = "rośnie" if r.zscore >= 1 else ("spada" if r.zscore <= -1 else "bez wyraźnej zmiany")
+        li = lambda xs: "<ul>" + "".join(f"<li>{e(x)}</li>" for x in xs) + "</ul>" if xs else '<p class="muted">brak sprawdzonych kierunków</p>'
+        blocks.append(f"""<section class="card ov">
+  <div class="head"><h2 style="margin:0;font-size:19px">{e(country_name(r.country))}</h2>
+  <div><span class="idx">{r.index:.0f}</span><span class="muted">/100</span> · <span class="lvl {r.level}">{r.level}</span> · <span class="muted">trend: {trend}</span></div></div>
+  {prob}{_unconfirmed_html(r)}
+  <h3>Przyczyny (najmocniejsze i najświeższe)</h3><ul>{"".join(_ev_li(x) for x in _causes(r)) or '<li class="muted">brak</li>'}</ul>
+  <h3>Możliwe skutki</h3>{li(imp["effects"][:3])}
+  <div class="imp"><div><h4>Może spaść ▼</h4>{li(ix["down"][:3])}</div><div><h4>Może wzrosnąć ▲</h4>{li(ix["up"][:3])}</div></div>
+</section>""")
+    since = date.today() - timedelta(days=fresh_days)
+    fresh = [(r.country, x) for r in results for x in r.evidence if x["date"] >= since and not x.get("negated")]
+    fresh.sort(key=lambda cx: (cx[1]["date"], cx[1].get("source") in PRIMARY_SOURCES, not cx[1].get("reactive"),
+                               cx[1].get("weight", 0)), reverse=True)
+    seen, rows = set(), []
+    for c, x in fresh:
+        k = x.get("url") or x["title"]
+        if k in seen:
+            continue
+        seen.add(k)
+        rows.append(_ev_li(x, c))
+        if len(rows) >= 15:
+            break
+    return (f"""<div class="warn" style="margin-top:12px"><b>W skrócie.</b> Poniżej kraje z najwyższym poziomem: dlaczego (przyczyny ze źródeł),
+co może z tego wyniknąć (skutki i indeksy giełdowe z typową skalą i czasem ruchu, liczone z historii) oraz szansa wydarzenia według modelu.
+Szansa to przybliżenie z danych historycznych: w teście 2025–2026 tylko ok. 12–17% alarmów kończyło się wydarzeniem w 60 dni. To nie jest rekomendacja inwestycyjna.</div>
+{"".join(blocks)}
+<section class="card ov"><h2 style="margin:0;font-size:19px">Najnowsze sygnały (ostatnie {fresh_days} dni)</h2>
+<ul>{"".join(rows) or '<li class="muted">brak nowych sygnałów</li>'}</ul></section>""")
 
 
 def _unconfirmed_html(r) -> str:
