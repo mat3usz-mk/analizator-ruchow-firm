@@ -58,17 +58,21 @@ def parse_truth(page: str) -> list[tuple[str, str, str]]:
     return out
 
 
-def next_cursor(page: str) -> str | None:
-    """Kursor „następna strona” podany przez samą stronę (pewniejszy niż własny: strona może zawierać starsze, przypięte wpisy)."""
+def next_cursor(page: str, last: str) -> str:
+    """Kursor do starszych wpisów. Bierze link ze strony wskazujący na datę nie późniejszą niż ostatni (najstarszy w kolejności
+    strony) wpis; gdy takiego nie ma, buduje kursor z daty ostatniego wpisu. Nie bierze minimum dat, bo strona może zawierać
+    starsze, przypięte wpisy (to pomijało wcześniej większość archiwum)."""
+    best = None
     for c in re.findall(r'cursor=([A-Za-z0-9_\-=%]+)', page):
         c = urllib.parse.unquote(c)
         try:
             d = json.loads(base64.b64decode(c + "=" * (-len(c) % 4)))
         except Exception:
             continue
-        if d.get("_pointsToNextItems"):
-            return c
-    return None
+        ts = str(d.get("status_created_at", "")).replace(" ", "T")
+        if d.get("_pointsToNextItems") and ts and ts <= last[:19] and (best is None or ts > best[0]):
+            best = (ts, c)
+    return best[1] if best else _cursor(last)
 
 
 def _cursor(ts: str) -> str:
@@ -97,16 +101,17 @@ def fetch_truth(path: str, since: str = TRUTH_FROM, delay: float = 1.5) -> int:
         pages += 1
         if not items:
             break
-        low = min(x[1] for x in items)
+        low = items[-1][1]
         if pages % 20 == 0:
             f.flush()
             print(f"  strona {pages}: do {low}, wpisów {len(seen)}", flush=True)
-        if low < since or not new:
+        if low < since:
+            break
+        if not new:
+            print(f"  strona {pages}: same znane wpisy (do {low}), koniec", flush=True)
             break
         oldest = low
-        nxt = next_cursor(page)
-        if not nxt:
-            break
+        nxt = next_cursor(page, low)
         url = TRUTH_URL + f"&cursor={urllib.parse.quote(nxt)}"
         time.sleep(delay)
     f.close()
@@ -259,6 +264,8 @@ def main(argv=None) -> int:
     tw = load_posts(a.tweety, None)
     tr = load_posts(None, a.truth)
     posts = sorted(tw + tr)
+    from collections import Counter
+    print("wpisy na rok:", sorted(Counter(t.year for t, _ in posts).items()), flush=True)
     d = date.fromisoformat
     periods = [("2017–2021 (tweety, lista 2015–2024)", "wydarzenia_2015_2024.csv", d("2017-03-01"), d("2021-01-08")),
                (f"2022–2024 (Truth Social, lista 2015–2024)", "wydarzenia_2015_2024.csv", d("2022-03-01"), d("2024-12-31")),
