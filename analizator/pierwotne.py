@@ -263,10 +263,22 @@ def ted_defence(con: sqlite3.Connection, days: int = 30) -> list[dict]:
 
 
 # --- Ruch lotniczy: OpenSky ---------------------------------------------------
+def _robust_drop(n: float, hist: list[float]) -> tuple[float, float] | None:
+    """(spadek względem mediany, odchylenie w jednostkach MAD) albo None, gdy za mało historii."""
+    if len(hist) < 7:
+        return None
+    med = statistics.median(hist)
+    mad = statistics.median(abs(x - med) for x in hist) or max(1.0, 0.05 * med)
+    return (1 - n / med if med else 0.0), (med - n) / (1.4826 * mad)
+
+
 def opensky(con: sqlite3.Connection, days: int = 7) -> list[dict]:
-    """Liczba samolotów w powietrzu nad krajem, porównana z medianą z 14 ostatnich pomiarów (o tej samej porze)."""
+    """Liczba samolotów w powietrzu nad krajem, porównana z normą z 14 ostatnich dni (mediana i odchylenie MAD).
+
+    Anomalia: spadek o co najmniej połowę i ponad 3 odchylenia od normy. Gdy taki spadek widać naraz w co najmniej 30% krajów,
+    to awaria albo limit OpenSky, a nie zamknięcie przestrzeni, więc nie zgłaszamy nic."""
     _con(con)
-    out = []
+    meas = {}
     for c, (la0, lo0, la1, lo1) in BBOX.items():
         url = f"https://opensky-network.org/api/states/all?lamin={la0}&lomin={lo0}&lamax={la1}&lomax={lo1}"
         try:
@@ -279,14 +291,19 @@ def opensky(con: sqlite3.Connection, days: int = 7) -> list[dict]:
         con.commit()
         hist = [v for (v,) in con.execute("SELECT value FROM metrics WHERE source='opensky' AND key=? AND day<? ORDER BY day DESC LIMIT 14",
                                            (c, _today()))]
-        if len(hist) >= 7:
-            med = statistics.median(hist)
-            if med >= 10 and n <= 0.5 * med:
-                drop = round(100 * (1 - n / med))
-                out.append(_item(f"https://opensky-network.org/#{c}", f"Air traffic over {COUNTRIES[c][0]} down {drop}% vs 14-day norm "
-                                 f"({int(n)} aircraft vs {med:.0f}); airlines avoid airspace (OpenSky)", _today(), "opensky", "opensky-network.org"))
+        meas[c] = (n, hist)
         time.sleep(1.0)
-    return out
+    flagged = []
+    for c, (n, hist) in meas.items():
+        r = _robust_drop(n, hist)
+        if r and statistics.median(hist) >= 10 and r[0] >= 0.5 and r[1] >= 3:
+            flagged.append((c, n, statistics.median(hist), r))
+    if meas and len(flagged) >= max(2, 0.3 * len(meas)):
+        print(f"  [opensky] spadek naraz w {len(flagged)} z {len(meas)} krajów: awaria danych, pomijam")
+        return []
+    return [_item(f"https://opensky-network.org/#{c}", f"Air traffic over {COUNTRIES[c][0]} down {round(100 * r[0])}% vs 14-day norm "
+                  f"({int(n)} aircraft vs {med:.0f}, {r[1]:.1f} deviations); airlines avoid airspace (OpenSky)", _today(), "opensky",
+                  "opensky-network.org") for c, n, med, r in flagged]
 
 
 # --- Insiderzy: Form 4 --------------------------------------------------------

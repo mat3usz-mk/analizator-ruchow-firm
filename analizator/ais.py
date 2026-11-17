@@ -252,4 +252,9 @@ def fetch(con: sqlite3.Connection, days: int = 7, seconds: int = 180, force: boo
                 out.append({"url": f"https://aisstream.io/#{n}", "date": today, "source": "ais", "domain": "aisstream.io", "lang": "en",
                             "title": f"{word} through {label} down {drop}% vs 14-day norm ({v[kind]} vs {med:.0f} vessels); tankers avoid route (AIS)"})
     print("  [ais] " + ", ".join(f"{n}: {v['ships']} statków/{v['tankers']} tankowców" for n, v in counts.items()))
+    # spadek naraz w większości cieśnin to problem ze strumieniem AIS (zasięg, rozłączenie), a nie ruch statków
+    hit = {x["url"] for x in out}
+    if len(counts) >= 3 and len(hit) >= max(2, 0.5 * len(counts)):
+        print(f"  [ais] spadek naraz w {len(hit)} z {len(counts)} miejsc: problem ze strumieniem, pomijam")
+        return []
     return out
