@@ -1,0 +1,63 @@
+name: Test Reddita
+
+# Ręcznie: nastroje z Reddita (archiwum Arctic Shift) wprost i odwrotnie: uwaga o kraju i wzmianki na r/wallstreetbets.
+on:
+  workflow_dispatch:
+    inputs:
+      z_przebiegu:
+        description: "numer przebiegu z bazą historia_gkg"
+        default: "43880895708"
+      pierwotne_z_przebiegu:
+        description: "numer przebiegu z historią źródeł pierwotnych"
+        default: "43888316198"
+      reddit_z_przebiegu:
+        description: "numer wcześniejszego przebiegu z pobranymi licznikami Reddita (pomija pobieranie)"
+        default: ""
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: historia_gkg
+          path: .
+          run-id: ${{ github.event.inputs.z_przebiegu }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: pierwotne_historia
+          path: .
+          run-id: ${{ github.event.inputs.pierwotne_z_przebiegu }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        if: github.event.inputs.reddit_z_przebiegu != ''
+        with:
+          name: reddit
+          path: .
+          run-id: ${{ github.event.inputs.reddit_z_przebiegu }}
+          github-token: ${{ github.token }}
+      - name: Test
+        run: python -m analizator.reddit_test --db historia_gkg.db --pierwotne pierwotne_historia.db --cache reddit.db --out raporty/reddit-wyniki.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reddit
+          path: reddit.db
+          retention-days: 30
+      - name: Zapis wyniku
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add raporty/reddit-wyniki.md
+          git commit -m "Test Reddita: wyniki" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done

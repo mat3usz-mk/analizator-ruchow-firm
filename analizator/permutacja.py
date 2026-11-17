@@ -38,7 +38,8 @@ def run(eps, events, start: date, end: date, n: int = 2000, seed: int = 7, horiz
     out = {"alarmow": total, "trafnych": real, "wydarzen": len(events)}
     for k, xs in (("przesuniecie", shift), ("zamiana", swap)):
         xs.sort()
-        out[k] = {"srednio": sum(xs) / n, "p": sum(1 for x in xs if x >= real) / n, "p95": xs[int(0.95 * n)]}
+        out[k] = {"srednio": sum(xs) / n, "p": sum(1 for x in xs if x >= real) / n, "p_niski": sum(1 for x in xs if x <= real) / n,
+                  "p95": xs[int(0.95 * n)]}
     return out
 
 
