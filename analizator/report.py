@@ -68,6 +68,13 @@ def _insider_html(rows: list[dict]) -> str:
         flag = (f'<p style="margin:0 0 8px"><b class="q">Nietypowa sprzedaż w spółkach energetycznych</b>: {fmt(sell)} wobec normy {fmt(norm)}. '
                 'W teście 2019–2026 taka sprzedaż poprzedzała kryzys energetyczny albo blokadę w ciągu 30 dni mniej więcej 2 razy częściej '
                 'niż zwykle (31% wobec 18% i 57% wobec 27%), bez wyraźnego wpływu na kurs XLE (raporty/insiderzy-wyniki.md).</p>')
+    div = [r["rozjazd"] for r in rows if r.get("rozjazd")]
+    if div:
+        flag += "".join(
+            f'<p style="margin:0 0 8px"><b class="q">Rozjazd: {html.escape(d["rodzaj"])}</b> ({d["ticker"]}): sprzedaż {fmt(d["sprzedaz"])} '
+            f'wobec normy {fmt(d["norma"])}, zakup {fmt(d["zakup"])}; nagłówki z 7 dni: {d["optymistyczne"]} optymistycznych, '
+            f'{d["pesymistyczne"]} pesymistycznych, {d["emocjonalne"]} emocjonalnych z {d["naglowkow"]}. Twarde dane mają pierwszeństwo, '
+            'artykuły mogą grać na emocjach. Połączenie niesprawdzone na historii: tylko do wglądu.</p>' for d in div)
     return f"""<section class="card"><h2 style="margin:0 0 6px;font-size:19px">Insiderzy w USA (Form 4, ostatnie 14 dni)</h2>{flag}
 <p class="muted" style="margin:0 0 8px">Sprzedaż i zakup akcji przez zarząd i dużych udziałowców spółek zbrojeniowych i energetycznych.
 Sprzedaż ma wiele zwykłych powodów (podatki, opcje), więc liczy się tylko wyraźne odchylenie od normy. Nie wpływa na indeks krajów.

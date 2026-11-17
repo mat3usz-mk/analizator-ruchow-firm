@@ -156,6 +156,13 @@ def cycle(db: str, out: str, srcs: list[str], days: int, topic: str | None, watc
         except Exception as e:
             print(f"  [panele] {e}")
             insiders, congress = [], []
+        try:
+            from .rozjazd import cached
+            div = cached(os.path.join(base, "rozjazd.json"), insiders)
+            for r in insiders:
+                r["rozjazd"] = next((d for d in div if d["ticker"] == r["ticker"]), None)
+        except Exception as e:
+            print(f"  [rozjazd] {e}")
         con.close()
     signals = extract_signals(arts, watchlist)
     results = assess(signals, today=date.today())

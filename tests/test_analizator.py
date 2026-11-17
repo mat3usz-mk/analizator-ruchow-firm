@@ -488,3 +488,15 @@ class TestSlady(unittest.TestCase):
         from analizator.gdelt_pliki import slug_title
         self.assertEqual(slug_title("https://x.com/news/2017/05/12/shell-exits-nigeria-oil-fields.html"), "shell exits nigeria oil fields")
         self.assertEqual(slug_title("https://x.com/world/12345"), "")
+
+
+class TestRozjazd(unittest.TestCase):
+    def test_media_w_gore_insiderzy_sprzedaja(self):
+        from analizator import rozjazd
+        rows = [{"ticker": "XOM", "unusual": True, "sell": 2e7, "sell_norm": 3e6, "buy": 0.0},
+                {"ticker": "CVX", "unusual": False, "sell": 1e6, "sell_norm": 1e6, "buy": 0.0}]
+        titles = ["Exxon stock soars to record high", "Analysts upgrade Exxon", "Exxon shares rally", "Exxon beats estimates",
+                  "Exxon gains on oil", "Exxon falls slightly", "Exxon CEO speaks"]
+        res = rozjazd.assess(rows, titles_of=lambda t: titles)
+        self.assertEqual([(r["ticker"], r["rodzaj"]) for r in res], [("XOM", "media w górę, insiderzy sprzedają")])
+        self.assertEqual(rozjazd.tone("Chevron shares plunge after downgrade"), -1)
