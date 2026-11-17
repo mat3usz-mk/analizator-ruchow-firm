@@ -23,8 +23,8 @@ Samo źródło jako alarm:
 |---|---|---|---|---|---|---|---|
 | wiki | 2019–2024 | 174 | 71 | 8% | 2.1× | 0.328 | 0.268 |
 | wiki | 2025–2026 (test) | 19 | 5 | 0% | 0.0× | 1.000 | 1.000 |
-| ton | 2019–2024 | 1084 | 670 | 3% | 0.7× | 0.963 | 0.953 |
-| ton | 2025–2026 (test) | 232 | 154 | 3% | 0.8× | 0.713 | 0.864 |
+| ton | 2019–2024 | 0 | 0 | brak | brak | 1.000 | 1.000 |
+| ton | 2025–2026 (test) | 0 | 0 | brak | brak | 1.000 | 1.000 |
 
 Dołożone do ręcznego indeksu (próg 40, wydarzenie w 60 dni):
 
@@ -32,10 +32,10 @@ Dołożone do ręcznego indeksu (próg 40, wydarzenie w 60 dni):
 |---|---|---|---|---|---|---|
 | bez nowych źródeł | 2019–2024 | 48% | 26% | 9% | 90 | 967 |
 | + wiki | 2019–2024 | 47% | 26% | 8% | 89 | 975 |
-| + ton | 2019–2024 | 49% | 29% | 8% | 91 | 1053 |
+| + ton | 2019–2024 | 48% | 26% | 9% | 90 | 967 |
 | bez nowych źródeł | 2025–2026 (test) | 71% | 38% | 11% | 30 | 248 |
 | + wiki | 2025–2026 (test) | 71% | 38% | 11% | 30 | 248 |
-| + ton | 2025–2026 (test) | 71% | 50% | 10% | 30 | 275 |
+| + ton | 2025–2026 (test) | 71% | 38% | 11% | 30 | 248 |
 
 Reguła Sahm (bezrobocie w USA) pominięta: wskaźnik miesięczny, dotyczy tylko gospodarki USA i nie ma związku z krajami, dla których analizator szuka wydarzeń. Google Trends pominięte: brak oficjalnego dostępu do historii (tylko nieoficjalne pobieranie strony, blokowane przy większej liczbie zapytań); zamiast tego odsłony Wikipedii z oficjalnego API Wikimedia.
 
