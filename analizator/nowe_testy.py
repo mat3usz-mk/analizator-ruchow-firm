@@ -50,6 +50,7 @@ def main(argv=None) -> int:
     ap.add_argument("--nowe", nargs="*", default=["nowe_historia.db"])
     ap.add_argument("--out", default="raporty/nowe-zrodla-wyniki.md")
     ap.add_argument("--zrodla", default="wiki,ton")
+    ap.add_argument("--tylko-eia", action="store_true")
     a = ap.parse_args(argv)
     t0 = time.time()
     base_items = store.load(store.connect(a.db)) + [x for p in a.pierwotne if os.path.exists(p) for x in store.load(store.connect(p))]
@@ -65,6 +66,8 @@ def main(argv=None) -> int:
          "odsetek losowań (daty wydarzeń losowo przesunięte albo kraje zamienione), w których wynik był co najmniej tak dobry jak "
          "naprawdę; mniej niż 0,05 = raczej nie przypadek.", ""]
 
+    if a.tylko_eia:
+        sig, new_sig = [], {}
     # 1) permutacja dla alarmów, które idą mailem albo mają potwierdzać alarm
     tr = slady.traces(sig)
     import json
@@ -72,7 +75,7 @@ def main(argv=None) -> int:
     weights = {(p["a"], p["b"], p["dni"]): p["przewaga"] for p in pairs["pary"]}
     L += ["## Test permutacyjny", "", "| alarm | okres | alarmów | trafnych | losowo (przesunięcie) | p | losowo (zamiana krajów) | p |",
           "|---|---|---|---|---|---|---|---|"]
-    for label, evs, s, e in periods:
+    for label, evs, s, e in ([] if a.tylko_eia else periods):
         imp = daily_impulse([x for x in sig if s - timedelta(days=40) <= x["date"] <= e], s, e)
         sets = {"impuls 48 h ≥ 10": episodes(imp, 10.0), "impuls 48 h ≥ 6": episodes(imp, 6.0),
                 "wyuczone pary śladów": _eps_from_days(slady.weighted_hits(tr, weights, pairs["prog"], s, e)),
@@ -102,7 +105,7 @@ def main(argv=None) -> int:
             print(f"  {src} {label}: {ev}", flush=True)
     L += ["", "Dołożone do ręcznego indeksu (próg 40, wydarzenie w 60 dni):", "",
           "| wariant | okres | trafione wydarzenia | z zaskoczenia | precyzja | prawdziwe alarmy | fałszywe alarmy |", "|---|---|---|---|---|---|---|"]
-    for label, evs, s, e in periods:
+    for label, evs, s, e in ([] if a.tylko_eia else periods):
         win = lambda xs: [x for x in xs if s - timedelta(days=200) <= x["date"] <= e]
         base = _counts(bt_eval(replay(win(sig), s, e), evs))
         rows = [("bez nowych źródeł", base)] + [(f"+ {src}", _counts(bt_eval(replay(win(sig + ns), s, e), evs))) for src, ns in new_sig.items()]

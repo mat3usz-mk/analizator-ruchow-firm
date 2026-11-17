@@ -54,17 +54,19 @@ def eia_series() -> list[tuple[date, float]]:
     html = _get("https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WCESTUS1&f=W").decode("utf-8", "replace")
     out = []
     # wiersz: "2024-Jan" i do pięciu par (data tygodnia "01/05", wartość)
-    for row in re.findall(r"<tr>(.*?)</tr>", html, re.S):
+    for row in re.findall(r"<tr[^>]*>(.*?)</tr>", html, re.S):
         ym = re.search(r"(\d{4})-([A-Z][a-z]{2})", row)
         if not ym:
             continue
         y = int(ym.group(1))
-        for md, val in re.findall(r"(\d{2}/\d{2})</td>\s*<td[^>]*>\s*([\d,]+)\s*</td>", row):
+        for md, val in re.findall(r"(\d{2}/\d{2})(?:&nbsp;|\s)*</td>\s*<td[^>]*>(?:&nbsp;|\s)*([\d,]+)", row):
             try:
                 d = datetime.strptime(f"{y}/{md}", "%Y/%m/%d").date()
                 out.append((d, float(val.replace(",", ""))))
             except ValueError:
                 continue
+    if not out:
+        print("  [eia] nie rozpoznano tabeli, początek strony:", re.sub(r"\s+", " ", html[html.find("<table"):][:1500]))
     return sorted(out)
 
 
