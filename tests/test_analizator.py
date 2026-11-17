@@ -500,3 +500,17 @@ class TestRozjazd(unittest.TestCase):
         res = rozjazd.assess(rows, titles_of=lambda t: titles)
         self.assertEqual([(r["ticker"], r["rodzaj"]) for r in res], [("XOM", "media w górę, insiderzy sprzedają")])
         self.assertEqual(rozjazd.tone("Chevron shares plunge after downgrade"), -1)
+
+
+class TestSladyNaZywo(unittest.TestCase):
+    def test_wyuczona_para(self):
+        import json, os, tempfile
+        from datetime import date
+        from analizator import slady
+        path = os.path.join(tempfile.mkdtemp(), "p.json")
+        json.dump({"prog": 3.0, "pary": [{"a": "energia", "b": "statki", "dni": 2, "przewaga": 3.6}]}, open(path, "w"))
+        sig = [{"date": date(2026, 11, 15), "country": "IR", "category": "energia_surowce", "source": "gdelt", "title": "a", "story": 1, "weight": 1},
+               {"date": date(2026, 11, 16), "country": "IR", "category": "lancuch_dostaw", "source": "gdelt", "title": "b", "story": 2, "weight": 1}]
+        res = slady.live(sig, date(2026, 11, 17), path=path)
+        self.assertEqual(res["IR"][0]["data"], "2026-11-16")
+        self.assertEqual(slady.live(sig[:1], date(2026, 11, 17), path=path), {})

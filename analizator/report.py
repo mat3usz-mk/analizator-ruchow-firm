@@ -209,6 +209,18 @@ def _ev_li(x: dict, country: str | None = None) -> str:
 IMPULSE_MIN = 6.0  # test 2019–2026: od 6 ok. 2× lepiej niż losowo, od 10 ok. 4× (raporty/impuls-wyniki.md)
 
 
+def _slady_html(r) -> str:
+    """Zbieżne niezależne ślady (pary kanałów, które w historii najlepiej poprzedzały wydarzenia)."""
+    if not getattr(r, "slady", None):
+        return ""
+    e = html.escape
+    items = "".join(f"<li>{e(x['a'])} → {e(x['b'])} (do {x['dni']} dni, ostatnio {x['data'][8:10]}.{x['data'][5:7]}): "
+                    f"w historii {x['przewaga']:.1f}× częściej przed wydarzeniem niż zwykle</li>" for x in r.slady[:3])
+    return ('<h3>Zbieżne ślady z niezależnych źródeł</h3><ul>' + items + '</ul><p class="muted" style="margin:0 0 6px">'
+            'Alarmy z takim potwierdzeniem w teście 2025–2026: 18% trafnych wobec 11% bez niego (raporty/slady-wyniki.md). '
+            'Brak zbieżności nie znaczy spokoju: bez niej zdarzyła się mniej więcej połowa wydarzeń.</p>')
+
+
 def _country_block(r, causes: list[dict], head_note: str) -> str:
     e = html.escape
     ix = indices(r.country, r.level if r.level != "niski" else "podwyższony")
@@ -222,7 +234,7 @@ def _country_block(r, causes: list[dict], head_note: str) -> str:
   <div class="head"><h2 style="margin:0;font-size:19px">{e(country_name(r.country))}</h2>
   <div><span class="idx">{r.index:.0f}</span><span class="muted">/100</span> · <span class="lvl {r.level}">{r.level}</span></div></div>
   <p style="margin:4px 0 6px">{head_note}</p>
-  {prob}{_unconfirmed_html(r)}
+  {prob}{_unconfirmed_html(r)}{_slady_html(r)}
   <h3>Prognoza</h3><ul>{"".join(f"<li>{e(x)}</li>" for x in forecast_lines(r))}</ul>
   <h3>Fakty (co nowego się pojawiło)</h3><ul>{"".join(_ev_li(x) for x in causes) or '<li class="muted">brak</li>'}</ul>
   <h3>Możliwe decyzje państw</h3>{li(imp["effects"][:3])}

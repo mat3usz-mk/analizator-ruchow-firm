@@ -57,6 +57,7 @@ class CountryAssessment:
     impulse: float = 0.0           # nagły przyrost nowych sygnałów w ostatnich 48 h względem zwykłego tła kraju (z-score)
     impulse_info: dict = field(default_factory=dict)  # teraz / norma / nowe kategorie / świeże dowody
     prob: float | None = None      # szansa wydarzenia w horyzoncie wg modelu uczonego na historii (analizator/model.json)
+    slady: list = field(default_factory=list)  # zbieżne pary niezależnych śladów z 14 dni (analizator/slady.py, wagi z historii)
 
 
 # Wiarygodność źródeł: oficjalne raporty > agencje i prasa branżowa > reszta.
@@ -487,6 +488,13 @@ def assess(signals: list[dict], today: date | None = None, recent_weeks: int = 2
                 elif r.index < 40 and alarm:
                     r.index, r.model_note = 40.0, "podniesione przez model"
                 r.level = "wysoki" if r.index >= 70 else "podwyższony" if r.index >= 40 else "niski"
+        try:
+            from .slady import live
+            found = live([s for s in signals if s["date"] >= today - timedelta(days=30)], today)
+            for r in own.values():
+                r.slady = found.get(r.country, [])
+        except Exception as e:  # dodatek do wglądu: błąd nie może zatrzymać oceny
+            print(f"  [ślady] {e}")
     return sorted(own.values(), key=lambda r: -r.index)
 
 

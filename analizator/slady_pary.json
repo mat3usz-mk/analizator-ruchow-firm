@@ -1,0 +1,119 @@
+{
+ "prog": 3.0,
+ "pary": [
+  {
+   "a": "statki",
+   "b": "gielda",
+   "dni": 2,
+   "przewaga": 3.89
+  },
+  {
+   "a": "energia",
+   "b": "finanse",
+   "dni": 7,
+   "przewaga": 3.77
+  },
+  {
+   "a": "gielda",
+   "b": "energia",
+   "dni": 7,
+   "przewaga": 3.72
+  },
+  {
+   "a": "energia",
+   "b": "statki",
+   "dni": 2,
+   "przewaga": 3.56
+  },
+  {
+   "a": "statki",
+   "b": "energia",
+   "dni": 7,
+   "przewaga": 3.51
+  },
+  {
+   "a": "gielda",
+   "b": "statki",
+   "dni": 2,
+   "przewaga": 3.5
+  },
+  {
+   "a": "statki",
+   "b": "finanse",
+   "dni": 7,
+   "przewaga": 3.43
+  },
+  {
+   "a": "statki",
+   "b": "finanse",
+   "dni": 2,
+   "przewaga": 3.38
+  },
+  {
+   "a": "loty",
+   "b": "statki",
+   "dni": 2,
+   "przewaga": 3.34
+  },
+  {
+   "a": "energia",
+   "b": "ambasady",
+   "dni": 7,
+   "przewaga": 3.23
+  },
+  {
+   "a": "statki",
+   "b": "energia",
+   "dni": 14,
+   "przewaga": 3.22
+  },
+  {
+   "a": "energia",
+   "b": "statki",
+   "dni": 7,
+   "przewaga": 3.21
+  },
+  {
+   "a": "energia",
+   "b": "statki",
+   "dni": 14,
+   "przewaga": 3.18
+  },
+  {
+   "a": "ambasady",
+   "b": "energia",
+   "dni": 2,
+   "przewaga": 3.11
+  },
+  {
+   "a": "energia",
+   "b": "loty",
+   "dni": 14,
+   "przewaga": 3.11
+  },
+  {
+   "a": "loty",
+   "b": "energia",
+   "dni": 14,
+   "przewaga": 3.09
+  },
+  {
+   "a": "statki",
+   "b": "finanse",
+   "dni": 14,
+   "przewaga": 3.03
+  },
+  {
+   "a": "loty",
+   "b": "finanse",
+   "dni": 2,
+   "przewaga": 3.03
+  },
+  {
+   "a": "energia",
+   "b": "ambasady",
+   "dni": 14,
+   "przewaga": 3.02
+  }
+ ]
+}

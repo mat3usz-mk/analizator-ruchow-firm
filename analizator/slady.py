@@ -203,6 +203,30 @@ def weighted_hits(tr: dict, weights: dict[tuple, float], thr: float, start: date
     return dict(out)
 
 
+PARY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slady_pary.json")
+
+
+def live(signals: list[dict], today: date, days: int = 14, path: str = PARY) -> dict[str, list[dict]]:
+    """Na żywo: które wyuczone pary śladów zaszły w kraju w ostatnich `days` dniach (najsilniejsza przewaga pierwsza)."""
+    import json
+    try:
+        with open(path, encoding="utf-8") as f:
+            cfg = json.load(f)
+    except (OSError, ValueError):
+        return {}
+    tr = traces(signals)
+    out: dict[str, dict] = defaultdict(dict)
+    for p in cfg.get("pary", []):
+        for c, ds in pair_hits(tr, p["a"], p["b"], p["dni"], today - timedelta(days=days - 1), today).items():
+            if not ds:
+                continue
+            k = (p["a"], p["b"])
+            old = out[c].get(k)
+            if old is None or p["przewaga"] > old["przewaga"]:
+                out[c][k] = {"a": LABELS[p["a"]], "b": LABELS[p["b"]], "dni": p["dni"], "przewaga": p["przewaga"], "data": max(ds).isoformat()}
+    return {c: sorted(v.values(), key=lambda x: -x["przewaga"]) for c, v in out.items()}
+
+
 def gate(index: dict, hits: dict[str, set[date]], days: int = 14, threshold: float = 40.0) -> dict:
     """Indeks z bramką: wartość ≥ progu zostaje tylko przy zbieżności śladów w `days` dni przed tygodniem."""
     out = {}
