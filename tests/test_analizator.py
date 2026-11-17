@@ -468,3 +468,23 @@ class TestTrafnosc(unittest.TestCase):
         self.assertEqual(summary(out)["prognoz_trafnych"], 1)
         early = settle(al, today=date(2026, 9, 10), prices=prices)
         self.assertEqual(early[0]["prognozy"][0]["status"], "w toku")
+
+
+class TestSlady(unittest.TestCase):
+    def test_zbieznosc_kanalow(self):
+        from datetime import date
+        from analizator import slady
+        sig = [{"date": date(2025, 5, 1), "country": "IR", "category": "lotnictwo_przestrzen", "source": "gdelt", "title": "a", "story": 1, "weight": 1},
+               {"date": date(2025, 5, 2), "country": "IR", "category": "sankcje", "source": "sankcje_ue", "title": "b", "story": 2, "weight": 1},
+               {"date": date(2025, 5, 2), "country": "IQ", "category": "lotnictwo_przestrzen", "source": "gdelt", "title": "c", "story": 3, "weight": 1},
+               {"date": date(2025, 5, 2), "country": "IQ", "category": "ewakuacja_personelu", "source": "gdelt", "title": "c", "story": 3, "weight": 1}]
+        tr = slady.traces(sig)
+        h = slady.daily(tr, date(2025, 4, 28), date(2025, 5, 5), 2, 2, "twarde+")
+        self.assertEqual(h["IR"], {date(2025, 5, 2)})
+        self.assertEqual(h["IQ"], set())  # jeden artykuł z dwoma kanałami to nie dwa ślady
+        self.assertEqual(slady.daily(tr, date(2025, 4, 28), date(2025, 5, 5), 2, 2, "twarde")["IR"], set())
+
+    def test_tytul_z_adresu(self):
+        from analizator.gdelt_pliki import slug_title
+        self.assertEqual(slug_title("https://x.com/news/2017/05/12/shell-exits-nigeria-oil-fields.html"), "shell exits nigeria oil fields")
+        self.assertEqual(slug_title("https://x.com/world/12345"), "")

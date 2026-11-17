@@ -1,0 +1,56 @@
+name: Test łączenia śladów
+
+# Ręcznie: czy zbieżność kilku niezależnych kanałów (loty, ambasady, firmy, sankcje, waluta, statki, energia, giełda)
+# w krótkim oknie wyprzedza wydarzenia lepiej niż pojedyncze sygnały.
+on:
+  workflow_dispatch:
+    inputs:
+      z_przebiegu:
+        description: "numer przebiegu z bazą historia_gkg"
+        default: "43880895708"
+      pierwotne_z_przebiegu:
+        description: "numer przebiegu z historią źródeł pierwotnych"
+        default: "43888316198"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: historia_gkg
+          path: .
+          run-id: ${{ github.event.inputs.z_przebiegu }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: pierwotne_historia
+          path: .
+          run-id: ${{ github.event.inputs.pierwotne_z_przebiegu }}
+          github-token: ${{ github.token }}
+      - name: Historia krótkiej sprzedaży (FINRA)
+        continue-on-error: true
+        run: python -m analizator.ryby --od 2021-09-01 --zrodla finra_short --db ryby_historia.db
+      - name: Historia magazynów gazu (AGSI)
+        continue-on-error: true
+        env:
+          AGSI_KEY: ${{ secrets.AGSI_KEY }}
+        run: python -m analizator.oficjalne --od 2021-09-01 --zrodla agsi --db pierwotne_klucze.db
+      - name: Test
+        run: python -m analizator.slady --db historia_gkg.db --pierwotne pierwotne_historia.db ryby_historia.db pierwotne_klucze.db --out raporty/slady-wyniki.md
+      - name: Zapis wyniku
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add raporty/slady-wyniki.md
+          git commit -m "Test łączenia śladów: wyniki" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done

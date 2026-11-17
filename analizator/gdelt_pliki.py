@@ -58,8 +58,24 @@ def file_list(start: date, end: date) -> list[str]:
     return out
 
 
-def process(url: str) -> tuple[str, list[tuple], int]:
-    """Zwraca (url pliku, wiersze do zapisania, liczba artykułów w pliku)."""
+_SLUG_SKIP = re.compile(r"^(?:index|article|news|story|amp|html?|php|aspx?)$|^\d+$|^[0-9a-f]{8,}$", re.I)
+
+
+def slug_title(url: str) -> str:
+    """Tytuł odtworzony z adresu (pliki GKG sprzed 2019 r. nie mają <PAGE_TITLE>): najdłuższy człon z myślnikami."""
+    path = re.sub(r"^https?://[^/]+", "", url).split("?")[0].split("#")[0]
+    best = ""
+    for seg in path.split("/"):
+        seg = re.sub(r"\.(?:html?|php|aspx?|cms|ece|story)$", "", seg, flags=re.I)
+        words = [w for w in re.split(r"[-_+]+", seg) if w and not _SLUG_SKIP.match(w)]
+        if len(words) >= 4 and len(words) > len(best.split()):
+            best = " ".join(words)
+    return best
+
+
+def process(url: str, from_url: bool = False) -> tuple[str, list[tuple], int]:
+    """Zwraca (url pliku, wiersze do zapisania, liczba artykułów w pliku).
+    from_url: gdy wiersz nie ma tytułu strony, tytuł odtwarzany jest z adresu artykułu."""
     try:
         raw = _get(url)
     except Exception as e:
@@ -71,13 +87,16 @@ def process(url: str) -> tuple[str, list[tuple], int]:
     rows, n = [], 0
     for line in data.split(b"\n"):
         m = _TITLE.search(line)
-        if not m:
+        f = line.split(b"\t", 5)
+        if m:
+            title = m.group(1).decode("utf-8", "replace").strip()
+        elif from_url and len(f) >= 5:
+            title = slug_title(f[4].decode("utf-8", "replace"))
+        else:
             continue
         n += 1
-        title = m.group(1).decode("utf-8", "replace").strip()
         if not title or not _COUNTRY.search(title) or not signals.classify(title):
             continue
-        f = line.split(b"\t", 5)
         if len(f) < 5:
             continue
         d = f[1].decode()
@@ -92,6 +111,7 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--db", default="historia_gdelt_pliki.db")
     p.add_argument("--workers", type=int, default=6)
     p.add_argument("--stride", type=int, default=1, help="co który plik brać (4 = jeden na godzinę; próbka do wieloletniej historii)")
+    p.add_argument("--z-adresu", action="store_true", help="bez tytułu strony: tytuł z adresu artykułu (lata 2015-2018)")
     a = p.parse_args(argv)
     con = store.connect(a.db)
     con.execute("CREATE TABLE IF NOT EXISTS gdelt_files_done (file TEXT PRIMARY KEY, n_all INTEGER, n_saved INTEGER)")
@@ -100,7 +120,7 @@ def main(argv: list[str] | None = None) -> None:
     print(f"plików do pobrania: {len(todo)} (zrobione wcześniej: {len(done)})", flush=True)
     t0, k, failed = time.time(), 0, 0
     with ProcessPoolExecutor(a.workers) as ex:
-        futs = [ex.submit(process, u) for u in todo]
+        futs = [ex.submit(process, u, a.z_adresu) for u in todo]
         for fut in as_completed(futs):
             try:
                 url, rows, n = fut.result()

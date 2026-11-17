@@ -1,0 +1,99 @@
+name: Model z latami 2015-2018
+
+# Ręcznie: dobiera lata 2015-2018 z GDELT GKG (tytuł odtworzony z adresu artykułu, bo te pliki nie mają tytułów stron),
+# łączy z gotową bazą 2019-2026 i uczy model na 2015-2024. Wynik zapisuje OSOBNO (model-2015.json, model-wyniki-2015.md),
+# bez podmiany modelu używanego na żywo.
+on:
+  workflow_dispatch:
+    inputs:
+      z_przebiegu:
+        description: "numer przebiegu z bazą historia_gkg 2019-2026"
+        default: "43880895708"
+      lata_z_przebiegu:
+        description: "numer wcześniejszego przebiegu tego zadania: tylko uczenie na już pobranych latach"
+        default: ""
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  rok:
+    if: github.event.inputs.lata_z_przebiegu == ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        rok: [2015, 2016, 2017, 2018]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pobierz rok ${{ matrix.rok }}
+        run: |
+          start="${{ matrix.rok }}-01-01"; [ "${{ matrix.rok }}" = "2015" ] && start="2015-02-18"
+          for i in 1 2; do
+            python -m analizator.gdelt_pliki --from "$start" --to "${{ matrix.rok }}-12-31" --db "s_${{ matrix.rok }}.db" \
+              --stride 4 --workers 10 --z-adresu | (grep -v "^  błąd" || true) | tail -n 20
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s_${{ matrix.rok }}
+          path: s_${{ matrix.rok }}.db
+          retention-days: 30
+
+  ucz:
+    needs: rok
+    if: always() && (needs.rok.result == 'success' || github.event.inputs.lata_z_przebiegu != '')
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: historia_gkg
+          path: .
+          run-id: ${{ github.event.inputs.z_przebiegu }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          path: lata
+          pattern: s_*
+          merge-multiple: true
+          run-id: ${{ github.event.inputs.lata_z_przebiegu || github.run_id }}
+          github-token: ${{ github.token }}
+      - name: Połącz z bazą 2019-2026
+        run: |
+          python - <<'PY'
+          import glob
+          from analizator import store
+          con = store.connect("historia_gkg.db")
+          for f in sorted(glob.glob("lata/*.db")):
+              con.execute("ATTACH ? AS s", (f,))
+              con.execute("INSERT OR IGNORE INTO articles(url,title,date,source,domain,lang) SELECT url,title,date,source,domain,lang FROM s.articles")
+              con.commit(); con.execute("DETACH s")
+          for y, n in con.execute("SELECT substr(date,1,4), COUNT(*) FROM articles GROUP BY 1"):
+              print(y, n)
+          PY
+      - name: Uczenie 2015-2024 i test 2025-2026
+        run: |
+          python -m analizator.ucz --db historia_gkg.db --train-events wydarzenia_2015_2024.csv --test-events wydarzenia.csv \
+            --train-from 2015-05-01 --train-to 2024-12-31 --test-from 2025-03-01 \
+            --out-model analizator/model-2015.json --out-report raporty/model-wyniki-2015.md --out-episodes raporty/epizody-2015.json
+      - name: Zapis wyniku (osobno, model na żywo bez zmian)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add analizator/model-2015.json raporty/model-wyniki-2015.md raporty/epizody-2015.json
+          git commit -m "Model z latami 2015-2018: wyniki (osobno)" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: historia_gkg_2015
+          path: historia_gkg.db
+          retention-days: 30
