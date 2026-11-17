@@ -67,7 +67,7 @@ BBOX = {
 }
 
 # Amerykańskie spółki wrażliwe na konflikty (Form 4 składają tylko spółki z USA, nie zagraniczne)
-INSIDER_TICKERS = ["LMT", "RTX", "NOC", "GD", "LHX", "BA", "XOM", "CVX", "COP", "LNG", "OXY", "HAL", "SLB", "KMI"]
+INSIDER_TICKERS = ["LMT", "RTX", "NOC", "GD", "LHX", "BA", "XOM", "CVX", "COP", "LNG", "OXY", "HAL", "SLB", "KMI", "EOG", "PSX"]
 
 
 def _con(con: sqlite3.Connection) -> sqlite3.Connection:

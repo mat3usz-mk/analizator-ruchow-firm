@@ -60,9 +60,18 @@ def _insider_html(rows: list[dict]) -> str:
     fmt = lambda v: "brak" if v is None else f"${v / 1e6:.1f} mln"
     tr = "".join(f"<tr><td>{r['ticker']}</td><td>{fmt(r['sell'])}</td><td>{fmt(r['sell_norm'])}</td><td>{fmt(r['buy'])}</td>"
                  f"<td>{'<b class=q>nietypowo duża sprzedaż</b>' if r['unusual'] else ''}</td></tr>" for r in rows)
-    return f"""<section class="card"><h2 style="margin:0 0 6px;font-size:19px">Insiderzy w USA (Form 4, ostatnie 14 dni)</h2>
+    energy = {"XOM", "CVX", "COP", "LNG", "OXY", "HAL", "SLB", "KMI", "EOG", "PSX"}
+    en = [r for r in rows if r["ticker"] in energy]
+    sell, norm = sum(r["sell"] or 0 for r in en), sum(r["sell_norm"] or 0 for r in en)
+    flag = ""
+    if en and norm > 0 and sell >= 3 * norm and sell >= 5e6:
+        flag = (f'<p style="margin:0 0 8px"><b class="q">Nietypowa sprzedaż w spółkach energetycznych</b>: {fmt(sell)} wobec normy {fmt(norm)}. '
+                'W teście 2019–2026 taka sprzedaż poprzedzała kryzys energetyczny albo blokadę w ciągu 30 dni mniej więcej 2 razy częściej '
+                'niż zwykle (31% wobec 18% i 57% wobec 27%), bez wyraźnego wpływu na kurs XLE (raporty/insiderzy-wyniki.md).</p>')
+    return f"""<section class="card"><h2 style="margin:0 0 6px;font-size:19px">Insiderzy w USA (Form 4, ostatnie 14 dni)</h2>{flag}
 <p class="muted" style="margin:0 0 8px">Sprzedaż i zakup akcji przez zarząd i dużych udziałowców spółek zbrojeniowych i energetycznych.
-Sprzedaż ma wiele zwykłych powodów (podatki, opcje), więc liczy się tylko wyraźne odchylenie od normy. Nie wpływa na indeks krajów.</p>
+Sprzedaż ma wiele zwykłych powodów (podatki, opcje), więc liczy się tylko wyraźne odchylenie od normy. Nie wpływa na indeks krajów.
+W teście 2019–2026 transakcje w spółkach zbrojeniowych i zakupy w energetycznych niczego nie zapowiadały.</p>
 <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14px"><tr><th align=left>Spółka</th><th align=left>Sprzedaż</th>
 <th align=left>Norma</th><th align=left>Zakup</th><th></th></tr>{tr}</table></div></section>"""
 
