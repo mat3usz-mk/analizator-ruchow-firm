@@ -102,6 +102,10 @@ def _tokens(title: str) -> set[str]:
     return {w.lower() for w in _WORD.findall(title)}
 
 
+# IODA: +60 fałszywych alarmów w teście (raporty/pierwotne-ioda.md); DSCA: +17 fałszywych przy +1 trafieniu (raporty/pierwotne-dsca.md)
+DISABLED_SOURCES = {"ioda", "dsca"}
+
+
 def extract_signals(articles: list[dict], watchlist: list[str] | None = None) -> list[dict]:
     rows = []
     sec_seen: dict[str, list[set]] = defaultdict(list)
@@ -121,6 +125,8 @@ def extract_signals(articles: list[dict], watchlist: list[str] | None = None) ->
                 continue
             sec_seen[company.lower()].append(tok)
         official = a.get("source") in PRIMARY_SOURCES
+        if a.get("source") in DISABLED_SOURCES:
+            continue  # wyłączone po teście historycznym; stare wpisy w bazie też nie liczą się do indeksu
         if a.get("source") in STRUCTURED:  # pomiar albo oficjalna lista: kraj i kategoria podane wprost, bez zgadywania z tytułu
             cat, w, actor = STRUCTURED[a["source"]]
             c = country_of(a)
