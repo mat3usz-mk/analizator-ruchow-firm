@@ -43,6 +43,14 @@ def robust_z(x: float, hist: list[float]) -> float:
 
 # --- EIA: zapasy ropy -----------------------------------------------------------
 def eia_series() -> list[tuple[date, float]]:
+    """Zapasy ropy w USA (tys. baryłek, tygodniowo). Najpierw kopia serii EIA w FRED (prosty CSV), potem strona EIA."""
+    try:
+        rows = _get("https://fred.stlouisfed.org/graph/fredgraph.csv?id=WCESTUS1", tries=2, wait=5, timeout=60).decode().splitlines()[1:]
+        out = [(date.fromisoformat(r.split(",")[0]), float(r.split(",")[1])) for r in rows if r.count(",") == 1 and r.split(",")[1] not in ("", ".")]
+        if out:
+            return sorted(out)
+    except Exception as e:
+        print(f"  [eia] FRED: {e}")
     html = _get("https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WCESTUS1&f=W").decode("utf-8", "replace")
     out = []
     # wiersz: "2024-Jan" i do pięciu par (data tygodnia "01/05", wartość)
