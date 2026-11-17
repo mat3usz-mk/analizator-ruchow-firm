@@ -25,6 +25,7 @@ import time
 import urllib.request
 from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone
+from . import limit
 
 RESULTS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "rynki.json")
 
@@ -87,7 +88,8 @@ def _yahoo(sym: str, start: date) -> dict[date, float]:
     url = (f"https://query1.finance.yahoo.com/v8/finance/chart/{urllib.request.quote(sym)}?period1={p1}"
            f"&period2={int(time.time())}&interval=1d")
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (analizator ruchow firm)"})
-    js = json.loads(urllib.request.urlopen(req, timeout=30).read())
+    limit.check()
+    js = json.loads(urllib.request.urlopen(req, timeout=limit.left(30)).read())
     r = js["chart"]["result"][0]
     closes = r["indicators"]["quote"][0]["close"]
     return {datetime.fromtimestamp(t, timezone.utc).date(): c for t, c in zip(r["timestamp"], closes) if c}
@@ -95,7 +97,8 @@ def _yahoo(sym: str, start: date) -> dict[date, float]:
 
 def _stooq(sym: str, start: date) -> dict[date, float]:
     url = f"https://stooq.com/q/d/l/?s={urllib.request.quote(sym)}&d1={start:%Y%m%d}&i=d"
-    txt = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=30).read().decode()
+    limit.check()
+    txt = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=limit.left(30)).read().decode()
     out = {}
     for row in csv.DictReader(io.StringIO(txt)):
         try:

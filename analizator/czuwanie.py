@@ -86,7 +86,7 @@ def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list
             if key in seen:
                 continue
             new_seen.add(key)
-            if x["date"] >= recent and not x.get("reactive") and not x.get("negated") and \
+            if x["date"] >= recent and not x.get("reactive") and not x.get("negated") and not x.get("reprint") and \
                     (x["category"] in PRIORITY_CATS or x.get("source") in PRIORITY_SOURCES):
                 fresh.append(x)
         if fresh:

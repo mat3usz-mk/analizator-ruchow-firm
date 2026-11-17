@@ -25,6 +25,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from collections import defaultdict
 from datetime import date, datetime, timedelta, timezone
+from . import limit
 
 UA = {"User-Agent": "Mozilla/5.0 (analizator ruchow firm; public data)"}
 
@@ -57,7 +58,8 @@ def _get(url: str, timeout: int = 120, tries: int = 3, wait: int = 20) -> bytes:
     err = None
     for i in range(tries):
         try:
-            return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout).read()
+            limit.check()
+            return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=limit.left(timeout)).read()
         except Exception as e:
             err = e
             time.sleep(wait * (i + 1) if "429" in str(e) else 3)

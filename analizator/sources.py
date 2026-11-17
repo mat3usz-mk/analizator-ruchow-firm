@@ -19,6 +19,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta
 from email.utils import parsedate_to_datetime
+from . import limit
 
 UA = "analizator-ruchow-firm/0.1 (+research prototype)"
 
@@ -62,7 +63,8 @@ def _get(url: str, headers: dict | None = None, timeout: int = 30, tries: int | 
     for attempt in range(tries):
         req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
         try:
-            with urllib.request.urlopen(req, timeout=timeout) as r:
+            limit.check()
+            with urllib.request.urlopen(req, timeout=limit.left(timeout)) as r:
                 return r.read()
         except urllib.error.HTTPError as e:
             if e.code not in (429, 500, 502, 503, 504) or attempt == tries - 1:

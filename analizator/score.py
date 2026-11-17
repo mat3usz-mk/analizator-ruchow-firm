@@ -149,22 +149,32 @@ def extract_signals(articles: list[dict], watchlist: list[str] | None = None) ->
         r["quiet"] = (r["coverage"] <= 2 and not r["reactive"] and not r["negated"] and r["actor"] != "nieznany"
                       and r["base_weight"] >= 2.0 and r["credibility"] >= 0.9 and r["quality"] >= 0.9)
         art = 1.0 if r.get("source") in PRIMARY_SOURCES else PARAMS.get("artykuly", 1.0)
-        r["weight"] = round(r["base_weight"] * r["credibility"] * r["quality"] * (1.25 if r["quiet"] else 1.0) * art, 2)
+        rep = PARAMS.get("przedruk", 0.15) if r.get("reprint") else 1.0  # stare zdarzenie opisane ponownie
+        r["weight"] = round(r["base_weight"] * r["credibility"] * r["quality"] * (1.25 if r["quiet"] else 1.0) * art * rep, 2)
     return rows
 
 
 def _cluster_stories(rows: list[dict]) -> None:
-    """Łączy nagłówki o tym samym wydarzeniu (ta sama firma albo podobne słowa, do 10 dni)."""
+    """Łączy nagłówki o tym samym wydarzeniu (ta sama firma albo podobne słowa, do 10 dni od ostatniej wzmianki).
+
+    Do 90 dni wstecz szuka też starych historii o bardzo podobnym tytule: przedruk albo ponowny opis starej decyzji
+    (np. nakaz wyjazdu z 22.10 opisany znowu 13.11) dołącza do starej historii. Wzmianki późniejsze niż PARAMS["przedruk_dni"]
+    od pierwszej wzmianki dostają `reprint` i datę zdarzenia `event_date` (liczy się data zdarzenia, nie artykułu)."""
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for r in rows:
         groups[(r["country"], r["category"])].append(r)
     for (c, cat), items in groups.items():
         clusters: list[dict] = []
         active: list[dict] = []  # tylko historie z ostatnich 10 dni (przy wieloletniej historii pełna lista byłaby kwadratowa)
+        old: list[dict] = []     # historie sprzed 10–90 dni: tylko do wykrywania przedruków
         for r in sorted(items, key=lambda r: r["date"]):
             tok = _tokens(r["title"])
             hit = None
-            active = [cl for cl in active if (r["date"] - cl["last"]).days <= 10]
+            gone = [cl for cl in active if (r["date"] - cl["last"]).days > 10]
+            if gone:
+                old += gone
+                active = [cl for cl in active if (r["date"] - cl["last"]).days <= 10]
+                old = [cl for cl in old if (r["date"] - cl["last"]).days <= 90]
             for cl in active:
                 same_company = r["company"] and cl["company"] and r["company"].split()[0].lower() == cl["company"].split()[0].lower()
                 jac = len(tok & cl["tok"]) / max(len(tok | cl["tok"]), 1)
@@ -173,20 +183,34 @@ def _cluster_stories(rows: list[dict]) -> None:
                 if same_company or jac >= 0.35 or (close and jac >= 0.2):
                     hit = cl
                     break
+            if not hit and r.get("source") not in STRUCTURED:
+                for cl in old:  # stara historia: tylko wyraźne podobieństwo tytułu (sama firma nie wystarcza)
+                    best = max((len(tok & t) / max(len(tok | t), 1) for t in cl["titles"]), default=0.0)
+                    if best >= 0.4:
+                        hit = cl
+                        old.remove(cl)
+                        active.append(cl)
+                        break
             if not hit:
-                hit = {"id": f"{c}-{cat}-{len(clusters)}", "tok": set(tok), "company": r["company"], "last": r["date"], "rows": []}
+                hit = {"id": f"{c}-{cat}-{len(clusters)}", "tok": set(tok), "titles": [], "company": r["company"],
+                       "first": r["date"], "last": r["date"], "rows": []}
                 clusters.append(hit)
                 active.append(hit)
             hit["rows"].append(r)
             hit["tok"] |= tok
+            if len(hit["titles"]) < 30:
+                hit["titles"].append(tok)
             hit["last"] = r["date"]
             hit["company"] = hit["company"] or r["company"]
+        lag = int(PARAMS.get("przedruk_dni", 7))
         for cl in clusters:
             domains = {x.get("domain") or x.get("url") for x in cl["rows"]}
             for x in cl["rows"]:
                 x["story"] = cl["id"]
                 x["key"] = (cl["company"].split()[0] if cl["company"] else cl["id"]).lower()
                 x["coverage"] = len(domains)
+                x["event_date"] = cl["first"]
+                x["reprint"] = x.get("source") not in STRUCTURED and (x["date"] - cl["first"]).days > lag
 
 
 # Źródła pierwotne, które same w sobie są sygnałem priorytetowym (pomiar ruchu, ostrzeżenia urzędów)
@@ -215,6 +239,8 @@ PARAMS: dict[str, float] = {
     "w_z": 0.6, "w_actors": 0.5, "w_priority": 2.0, "prio_offset": 0.0, "priority_cap": 3.0, "w_quiet": 0.25, "w_cats": 0.3,
     "bias": -3.0, "spill": 0.0, "spill_min": 40.0, "sec_cap": 3.0, "baseline_weeks": 26.0,
     "confirm": 1.0, "confirm_domains": 2.0,  # alarm wymaga potwierdzenia (źródło pierwotne albo 2 niezależne rzetelne media)
+    "przedruk": 0.15,     # waga wzmianki o zdarzeniu starszym niż przedruk_dni (przedruk, ponowny opis starej decyzji)
+    "przedruk_dni": 7,
     "artykuly": 1.0,  # mnożnik wagi artykułów prasowych względem źródeł pierwotnych i pomiarów (sprawdzany w teście historycznym)
 }
 

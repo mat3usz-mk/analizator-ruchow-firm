@@ -31,6 +31,7 @@ from collections import defaultdict
 from datetime import date, datetime, timedelta
 
 from .oficjalne import _item, _name, _once_a_day
+from . import limit
 
 UA = {"User-Agent": "Mozilla/5.0 (analizator ruchow firm; public data)", "Accept": "application/json, text/plain, */*"}
 
@@ -45,7 +46,8 @@ def _get(url: str, timeout: int = 60, tries: int = 3, headers: dict | None = Non
     err = None
     for i in range(tries):
         try:
-            return urllib.request.urlopen(urllib.request.Request(url, headers=headers or UA), timeout=timeout).read()
+            limit.check()
+            return urllib.request.urlopen(urllib.request.Request(url, headers=headers or UA), timeout=limit.left(timeout)).read()
         except urllib.error.HTTPError as e:
             if e.code == 404:
                 raise

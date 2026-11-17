@@ -89,6 +89,7 @@ def to_html(results: list[CountryAssessment], n_articles: int, n_signals: int, t
         ev = "".join(
             f'<li><span class="muted">{x["date"]}</span> · <b>{e(category_label(x["category"]))}</b> · '
             f'{"<span class=q>cichy sygnał</span> · " if x.get("quiet") else ""}{"<span class=r>reakcja na zdarzenie</span> · " if x.get("reactive") else ""}'
+            f'{"<span class=r>powtórka: zdarzenie z " + x["event_date"].strftime("%d.%m") + "</span> · " if x.get("reprint") and x.get("event_date") else ""}'
             f'{_quality_badge(x)}'
             f'{"<a href=" + chr(34) + e(x["url"]) + chr(34) + " target=_blank rel=noopener>" if x.get("url") else ""}{e(x["title"])}{"</a>" if x.get("url") else ""}</li>'
             for x in r.evidence
@@ -183,6 +184,8 @@ def _ev_li(x: dict, country: str | None = None) -> str:
     link = f'<a href="{e(x["url"])}" target=_blank rel=noopener>{t}</a>' if x.get("url") else t
     who = f"<b>{e(country_name(country))}</b> · " if country else ""
     react = " · <span class=r>reakcja na zdarzenie</span>" if x.get("reactive") else ""
+    if x.get("reprint") and x.get("event_date"):
+        react += f" · <span class=r>powtórka: zdarzenie z {x['event_date']:%d.%m}</span>"
     return f'<li><span class="muted">{x["date"]}</span> · {who}{tag}{e(category_label(x["category"]))}{react}: {link}</li>'
 
 

@@ -420,3 +420,20 @@ class TestArchiwum(unittest.TestCase):
         self.assertEqual(n["pomiary"], 1)
         self.assertTrue(os.path.exists(os.path.join(d, "out", "2026-11-16", "pomiary.csv")))
         self.assertFalse(os.path.exists(os.path.join(d, "out", "2026-11-14")))
+
+
+class TestPrzedruki(unittest.TestCase):
+    def test_stara_decyzja_opisana_ponownie_wazy_mniej(self):
+        from analizator.score import extract_signals
+        arts = [{"date": "2026-10-22", "title": "US orders embassy staff and families to leave Saudi Arabia amid Houthi attacks",
+                 "url": "u1", "domain": "reuters.com", "source": "gdelt"},
+                {"date": "2026-11-13", "title": "US orders embassy staff and families to leave Saudi Arabia over security risks",
+                 "url": "u2", "domain": "reuters.com", "source": "gdelt"}]
+        sig = [x for x in extract_signals(arts) if x["country"] == "SA"]
+        self.assertTrue(sig)
+        old = [x for x in sig if str(x["date"]) == "2026-10-22"][0]
+        new = [x for x in sig if str(x["date"]) == "2026-11-13"][0]
+        self.assertFalse(old["reprint"])
+        self.assertTrue(new["reprint"])
+        self.assertEqual(str(new["event_date"]), "2026-10-22")
+        self.assertLess(new["weight"], old["weight"])

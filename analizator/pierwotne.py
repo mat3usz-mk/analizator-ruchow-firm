@@ -36,6 +36,7 @@ from email.utils import parsedate_to_datetime
 
 from .sources import _get, sec_user_agent
 from .signals import COUNTRIES, detect_countries
+from . import limit
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS snapshots (source TEXT, key TEXT, value TEXT, day TEXT, PRIMARY KEY (source, key, day));
@@ -239,7 +240,8 @@ def ted_defence(con: sqlite3.Connection, days: int = 30) -> list[dict]:
         req = urllib.request.Request("https://api.ted.europa.eu/v3/notices/search", data=body,
                                      headers={"Content-Type": "application/json", "User-Agent": "analizator-ruchow-firm/0.3"})
         try:
-            with urllib.request.urlopen(req, timeout=30) as r:
+            limit.check()
+            with urllib.request.urlopen(req, timeout=limit.left(30)) as r:
                 n = float(json.loads(r.read()).get("totalNoticeCount", 0))
         except Exception as e:
             print(f"  [ted] {c3}: {e}")
@@ -375,14 +377,21 @@ FETCHERS = {
 }
 
 
+# Limit czasu na źródło w sekundach (AIS słucha strumienia ok. 3 min, FINRA przy pierwszym uruchomieniu pobiera 100 dni)
+LIMITS = {"ais": 300, "finra_short": 240, "kongres": 240}
+
+
 def fetch_all(con: sqlite3.Connection, days: int = 7, names: list[str] | None = None) -> list[dict]:
     _con(con)
     out = []
     for name in names or list(FETCHERS):
+        limit.start(LIMITS.get(name, 120))
         try:
             items = FETCHERS[name](con, days=days)
             print(f"  [{name}] {len(items)} rekordów")
             out += items
         except Exception as e:
             print(f"  [{name}] pominięto: {e}")
+        finally:
+            limit.stop()
     return out
