@@ -246,7 +246,7 @@ PARAMS: dict[str, float] = {
     "bias": -3.0, "spill": 0.0, "spill_min": 40.0, "sec_cap": 3.0, "baseline_weeks": 26.0,
     "confirm": 1.0, "confirm_domains": 2.0,  # alarm wymaga potwierdzenia (źródło pierwotne albo 2 niezależne rzetelne media)
     "przedruk": 0.15,     # waga wzmianki o zdarzeniu starszym niż przedruk_dni (przedruk, ponowny opis starej decyzji)
-    "przedruk_dni": 7,
+    "przedruk_dni": 14,  # test 2019–2026 (raporty/przedruki-wyniki*.md): 14 dni najmniej fałszywych alarmów bez utraty trafień w 2025–2026
     "artykuly": 1.0,  # mnożnik wagi artykułów prasowych względem źródeł pierwotnych i pomiarów (sprawdzany w teście historycznym)
 }
 
