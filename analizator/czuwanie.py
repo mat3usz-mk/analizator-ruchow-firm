@@ -45,6 +45,9 @@ def notify(title: str, body: str, topic: str | None, log_path: str) -> None:
             print(f"  [ntfy] nie wysłano: {e}")
 
 
+STATUS: dict[str, str] = {}
+
+
 def _fetch(con, days: int, srcs: list[str]) -> None:
     sources.RETRIES = 2
     for src in srcs:
@@ -57,9 +60,12 @@ def _fetch(con, days: int, srcs: list[str]) -> None:
                 arts = pierwotne.fetch_all(con, days, names=names)
             else:
                 arts = sources.FETCHERS[src](days=days)
-            print(f"  [{src}] nowych: {store.save(con, arts)}")
+            n = store.save(con, arts)
+            print(f"  [{src}] nowych: {n}")
+            STATUS[src] = f"nowych: {n}"
         except Exception as e:
             print(f"  [{src}] pominięto: {e}")
+            STATUS[src] = f"błąd: {str(e)[:160]}"
 
 
 def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list[str], dict]:
@@ -156,6 +162,12 @@ def cycle(db: str, out: str, srcs: list[str], days: int, topic: str | None, watc
         json.dump(new_state, f, ensure_ascii=False)
     with open(os.path.join(base, "podsumowanie.txt"), "w", encoding="utf-8") as f:
         f.write(summary(results, len(arts)))
+    # materiał dla nocnego przeglądu AI (te same dane i źródła co czuwanie)
+    report.to_candidates_json(results, os.path.join(base, "kandydaci.json"))
+    from . import pierwotne as _p
+    with open(os.path.join(base, "zrodla.json"), "w", encoding="utf-8") as f:
+        json.dump({"czas": datetime.now().isoformat(timespec="minutes"), "artykuly": len(arts),
+                   "zrodla": {**STATUS, **{f"pierwotne/{k}": v for k, v in _p.STATUS.items()}}}, f, ensure_ascii=False, indent=1)
     print(f"{datetime.now():%H:%M} cykl: {len(arts)} artykułów, {len(results)} krajów, alarmów: {len(alerts)}")
     return len(alerts)
 

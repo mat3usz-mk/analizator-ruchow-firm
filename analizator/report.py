@@ -324,7 +324,9 @@ def to_candidates_json(results: list[CountryAssessment], path: str, top: int = 8
             "dowody": [{"data": x["date"].isoformat(), "kategoria": x["category"], "tytul": x["title"], "url": x.get("url"),
                         "firma": x.get("company"), "aktor": x.get("actor"), "cichy": x.get("quiet"), "reakcja": x.get("reactive"),
                         "zrodlo": x.get("domain"), "emocje": x.get("emotion"),
-                        "klasa_zrodla": x.get("source_class")} for x in r.evidence],
+                        "klasa_zrodla": x.get("source_class"), "powtorka": x.get("reprint"),
+                        "data_zdarzenia": x["event_date"].isoformat() if x.get("event_date") else None} for x in r.evidence],
+            "impuls_48h": r.impulse, "impuls": {k: v for k, v in r.impulse_info.items() if k != "dowody"},
         })
     fr = [{k: v for k, v in f.items() if k != "klucz"} for f in fronts(results)]
     with open(path, "w", encoding="utf-8") as f:

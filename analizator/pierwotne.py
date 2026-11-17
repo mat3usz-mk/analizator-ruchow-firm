@@ -378,6 +378,7 @@ FETCHERS = {
 
 
 # Limit czasu na źródło w sekundach (AIS słucha strumienia ok. 3 min, FINRA przy pierwszym uruchomieniu pobiera 100 dni)
+STATUS: dict[str, str] = {}  # wynik ostatniego pobrania każdego źródła (do paczki dla nocnego przeglądu)
 LIMITS = {"ais": 300, "finra_short": 240, "kongres": 240}
 
 
@@ -389,9 +390,11 @@ def fetch_all(con: sqlite3.Connection, days: int = 7, names: list[str] | None = 
         try:
             items = FETCHERS[name](con, days=days)
             print(f"  [{name}] {len(items)} rekordów")
+            STATUS[name] = f"{len(items)} rekordów"
             out += items
         except Exception as e:
             print(f"  [{name}] pominięto: {e}")
+            STATUS[name] = f"błąd: {str(e)[:160]}"
         finally:
             limit.stop()
     return out

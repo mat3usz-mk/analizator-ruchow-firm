@@ -437,3 +437,14 @@ class TestPrzedruki(unittest.TestCase):
         self.assertTrue(new["reprint"])
         self.assertEqual(str(new["event_date"]), "2026-10-22")
         self.assertLess(new["weight"], old["weight"])
+
+
+class TestPaczka(unittest.TestCase):
+    def test_szyfrowanie_w_obie_strony(self):
+        import tempfile, os
+        from analizator.paczka import pack, unpack
+        d = tempfile.mkdtemp()
+        open(os.path.join(d, "podsumowanie.txt"), "w").write("test ż")
+        blob = pack(d, "haslo")
+        self.assertNotIn("test", str(blob))
+        self.assertEqual(unpack(blob, "haslo")["podsumowanie.txt"], "test ż")

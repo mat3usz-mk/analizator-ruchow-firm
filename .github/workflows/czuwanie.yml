@@ -7,6 +7,10 @@ on:
     - cron: "*/30 * * * *"
   workflow_dispatch:
     inputs:
+      paczka_teraz:
+        description: "zapisz teraz zaszyfrowaną paczkę dla nocnego przeglądu"
+        type: boolean
+        default: false
       mail_teraz:
         description: "wyślij teraz raport e-mailem (test wysyłki)"
         type: boolean
@@ -134,16 +138,25 @@ jobs:
 
       # Raz dziennie: własna historia pomiarów (insiderzy, opcje, krótka sprzedaż, statki, loty, kongresmeni) i dziennych wyników
       # na gałęzi `archiwum`, do przyszłych testów. To dane z publicznych źródeł, bez treści alarmów i bez danych ACLED.
-      - name: Archiwum dzienne
+      - name: Archiwum dzienne i paczka nocna
         continue-on-error: true
+        env:
+          PAGE_PASSWORD: ${{ secrets.PAGE_PASSWORD }}
+          TERAZ: ${{ github.event.inputs.paczka_teraz }}
         run: |
-          [ "$(cat dane/ostatnie_archiwum.txt 2>/dev/null)" = "$(date -u +%F)" ] && exit 0
+          today=$(date -u +%F)
+          arch=0; pacz=0
+          [ "$(cat dane/ostatnie_archiwum.txt 2>/dev/null)" != "$today" ] && arch=1
+          # paczka dla nocnego przeglądu AI (zadanie o 3:00 czasu polskiego): w pierwszym cyklu po 1:00 UTC
+          if [ -n "$PAGE_PASSWORD" ] && { [ "$TERAZ" = "true" ] || { [ "$(date -u +%H)" -ge 1 ] && [ "$(cat dane/ostatnia_paczka.txt 2>/dev/null)" != "$today" ]; }; }; then pacz=1; fi
+          [ $arch = 0 ] && [ $pacz = 0 ] && exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           if git fetch -q origin archiwum; then git worktree add -q arch origin/archiwum && git -C arch switch -q -C archiwum
           else git worktree add -q --orphan -b archiwum arch; fi
-          python -m analizator.archiwum --db dane/analizator.db --stan dane/czuwanie_stan.json --out arch/archiwum
-          cd arch && git add -A archiwum && { git commit -qm "Archiwum $(date -u +%F)" || exit 0; }
+          [ $arch = 1 ] && python -m analizator.archiwum --db dane/analizator.db --stan dane/czuwanie_stan.json --out arch/archiwum
+          [ $pacz = 1 ] && python -m analizator.paczka zapisz --dane dane --out arch/nocny/paczka.json && echo "$today" > dane/ostatnia_paczka.txt
+          cd arch && git add -A && { git commit -qm "Archiwum $(date -u +'%F %H:%M')" || exit 0; }
           for i in 1 2 3; do git push -q origin archiwum && break; sleep 5; git pull -q --rebase origin archiwum; done
 
       - name: Zapisz bazę na następny cykl
