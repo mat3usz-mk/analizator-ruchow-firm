@@ -12,7 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Archiwa Reddita i X (kod, rozmiar, początek odpowiedzi)
+        run: |
+          while read -r name url; do
+            [ -z "$name" ] && continue
+            r=$(curl -s -L -m 60 -A "analizator-ruchow-firm/0.10 (github.com/mat3usz-mk/analizator-ruchow-firm)" -o /tmp/b -w '%{http_code} %{size_download}' "$url")
+            echo "$name $r $(head -c 400 /tmp/b | tr -d '\n\r' | tr -c '[:print:]' ' ')"
+          done <<LIST
+          arctic_posts https://arctic-shift.photon-reddit.com/api/posts/search?subreddit=worldnews&after=2020-01-01&before=2020-01-02&limit=3
+          arctic_agg https://arctic-shift.photon-reddit.com/api/posts/search/aggregate?aggregate=created_utc&frequency=day&subreddit=worldnews&after=2020-01-01&before=2020-01-10
+          arctic_agg_q https://arctic-shift.photon-reddit.com/api/posts/search/aggregate?aggregate=created_utc&frequency=day&subreddit=worldnews&title=Iran&after=2020-01-01&before=2020-01-10
+          arctic_wsb https://arctic-shift.photon-reddit.com/api/posts/search?subreddit=wallstreetbets&after=2021-01-27&before=2021-01-28&limit=2
+          pullpush https://api.pullpush.io/reddit/search/submission/?subreddit=worldnews&after=1577836800&before=1577923200&size=2
+          reddit_json https://www.reddit.com/r/worldnews/new.json?limit=2
+          x_search https://api.twitter.com/2/tweets/search/all?query=iran
+          nitter https://nitter.net/search?q=iran
+          LIST
       - name: Źródła „grubych ryb” (kod, rozmiar, początek odpowiedzi)
+        if: false
         run: |
           while read -r name url; do
             [ -z "$name" ] && continue
