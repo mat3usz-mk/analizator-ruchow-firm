@@ -269,6 +269,21 @@ def fx_shocks(start: date, end: date) -> list[dict]:
         except Exception as e:
             print(f"  [kursy] {cur}: {e}")
             continue
+        try:  # druga para (EUR/XXX) do odsiania błędów notowań Yahoo (np. fałszywy skok hrywny 16.11.2026)
+            eur = dict(_yahoo(f"EUR{cur}=X", start - timedelta(days=30)))
+        except Exception:
+            eur = {}
+        eur_days = sorted(eur)
+
+        def eur_confirms(d: date) -> bool:
+            if not eur_days:  # brak drugiej pary: wymagamy, żeby ruch trwał dwa kolejne dni
+                return None
+            past = [x for x in eur_days if x <= d - timedelta(days=7)]
+            now = [x for x in eur_days if x <= d]
+            if not past or not now:
+                return None
+            return eur[now[-1]] / eur[past[-1]] - 1 >= 0.02
+
         last = None
         for i in range(255, len(s)):
             d = s[i][0]
@@ -277,7 +292,10 @@ def fx_shocks(start: date, end: date) -> list[dict]:
             ch = s[i][1] / s[i - 5][1] - 1  # USD/XXX w górę = waluta słabnie
             hist = [s[j][1] / s[j - 5][1] - 1 for j in range(i - 250, i - 5)]
             sd = statistics.pstdev(hist) or 1e-9
-            if ch >= 0.03 and ch >= 3 * sd and (last is None or (d - last).days >= 14):
+            ok = eur_confirms(d)
+            if ok is None:
+                ok = s[i - 1][1] / s[i - 6][1] - 1 >= 0.02
+            if ch >= 0.03 and ch >= 3 * sd and ok and (last is None or (d - last).days >= 14):
                 last = d
                 out.append(_item(f"https://finance.yahoo.com/quote/{cur}%3DX",
                                  f"{_name(code)} currency ({cur}) weakens {100 * ch:.1f}% against USD in 5 trading days, "
