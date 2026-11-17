@@ -313,7 +313,8 @@ def _accuracy_html(t: dict | None) -> str:
             f'{_chg(p.get("zmiana"))}'
             f' · <b>{e(p["status"])}</b></li>' for p in a.get("prognozy", []))
         rows.append(f'<tr><td>{e(a["data"])}</td><td><b>{e(country_name(a["kraj"]))}</b><br><span class="muted">indeks {a["indeks"]:.0f}, '
-                    f'{e(a["poziom"])}</span></td><td style="font-size:13px">{e("; ".join(a.get("powody", [])))}</td>'
+                    f'{e(a["poziom"])}</span></td><td style="font-size:13px">{e("; ".join(a.get("powody", [])))}'
+                    f'{"<br><b class=q>potwierdzony, wysłany od razu</b>" if a.get("od_razu") else "<br><span class=muted>bez potwierdzenia: tylko strona i raport dzienny</span>" if a.get("od_razu") is False else ""}</td>'
                     f'<td><ul style="margin:0">{progs or "<li class=muted>brak sprawdzonych indeksów</li>"}</ul></td>'
                     f'<td style="font-size:13px">{e(a.get("wydarzenie", ""))}</td></tr>')
     live = (f'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14px"><tr><th align=left>Data</th>'

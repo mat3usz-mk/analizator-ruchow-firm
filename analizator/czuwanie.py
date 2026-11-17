@@ -47,6 +47,28 @@ def notify(title: str, body: str, topic: str | None, log_path: str) -> None:
 
 STATUS: dict[str, str] = {}
 LAST_ALARMS: list = []  # (wynik kraju, powody) z ostatniego wywołania changes(), do dziennika trafności
+URGENT: list[bool] = []  # dla każdego alarmu z changes(): czy wysłać od razu (wybór osoby 17.11: dwa poziomy powiadomień)
+
+
+def urgent(r, reasons: list[str]) -> bool:
+    """Od razu (mail, ntfy) idą alarmy potwierdzone zbieżnymi niezależnymi śladami (test 2025-26: 18% trafnych wobec 8%)
+    oraz silne impulsy 48 h (osobno sprawdzone: 12-17% trafnych, ok. 4x losowo). Reszta: strona i codzienny raport."""
+    return bool(getattr(r, "slady", None)) or any(x.startswith("nagły impuls") for x in reasons)
+
+
+def deferred_text(path: str, hours: int = 26) -> list[str]:
+    """Alarmy bez potwierdzenia z ostatniej doby (z dziennika alarmów), do codziennego raportu."""
+    out = []
+    cut = (datetime.now() - timedelta(hours=hours)).isoformat(timespec="minutes")
+    try:
+        for line in open(path, encoding="utf-8"):
+            a = json.loads(line)
+            if a.get("czas", "") >= cut and a.get("od_razu") is False:
+                out.append(f"- {country_name(a['kraj'])} ({a['kraj']}), {a['czas'][11:16]} UTC: indeks {a['indeks']:.0f}, "
+                           + "; ".join(a.get("powody", [])))
+    except (OSError, ValueError):
+        pass
+    return out
 
 
 def _fetch(con, days: int, srcs: list[str]) -> None:
@@ -79,6 +101,7 @@ def _load_json(path: str):
 def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list[str], dict]:
     """Porównuje bieżące wyniki ze stanem z poprzedniego cyklu. Zwraca listę alarmów i nowy stan."""
     LAST_ALARMS.clear()
+    URGENT.clear()
     prev = state.get("kraje", {})
     seen = set(state.get("widziane", []))
     alerts, new_state, new_seen = [], {}, set(seen)
@@ -120,10 +143,11 @@ def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list
             lines += ["Prognoza:"] + [f"- {x}" for x in forecast_lines(r)]
             alerts.append("\n".join(lines))
             LAST_ALARMS.append((r, reasons))
+            URGENT.append(urgent(r, reasons))
     return alerts, {"kraje": new_state, "widziane": sorted(new_seen)[-5000:], "czas": datetime.now().isoformat()}
 
 
-def summary(results, n_articles: int, top: int = 10) -> str:
+def summary(results, n_articles: int, top: int = 10, deferred: list[str] | None = None) -> str:
     """Krótki tekst do e-maila z codziennym raportem."""
     from .skutki import fronts
     L = [f"Analizator ruchów firm, {datetime.now():%Y-%m-%d %H:%M} UTC. {n_articles} artykułów z ostatniego roku.", "",
@@ -136,6 +160,8 @@ def summary(results, n_articles: int, top: int = 10) -> str:
             L += [f"    {x}" for x in forecast_lines(r)[1:]]
             for x in r.evidence[:2]:
                 L.append(f"    · {x['title'][:150]}")
+    if deferred:
+        L += ["", "Alarmy bez potwierdzenia z ostatniej doby (nie wysłane od razu; w teście trafne w ok. 8%):"] + deferred
     fr = fronts(results)
     if fr:
         L += ["", "Fronty (jeden kryzys w kilku krajach):"]
@@ -177,20 +203,22 @@ def cycle(db: str, out: str, srcs: list[str], days: int, topic: str | None, watc
                                 insiders=insiders, congress=congress, trafnosc=_load_json(os.path.join(base, "trafnosc.json"))))
     alerts, new_state = changes(results, state, date.today())
     from .trafnosc import log_alarm
-    for r, reasons in LAST_ALARMS:
+    for (r, reasons), now in zip(LAST_ALARMS, URGENT):
         try:
-            log_alarm(os.path.join(base, "alarmy.jsonl"), r, reasons)
+            log_alarm(os.path.join(base, "alarmy.jsonl"), r, reasons, od_razu=now)
         except Exception as e:
             print(f"  [trafność] nie zapisano alarmu: {e}")
-    for a in alerts:
+    send = [a for a, now in zip(alerts, URGENT) if now]
+    print(f"  alarmy: {len(send)} od razu, {len(alerts) - len(send)} tylko na stronie i w codziennym raporcie")
+    for a in send:
         notify("Analizator: " + a.split(":")[0], a, topic, os.path.join(base, "alerty.log"))
-    if alerts_out:  # alarmy tylko z tego cyklu (np. dla GitHub Actions, które zakłada z nich zgłoszenie)
+    if alerts_out:  # alarmy do wysłania od razu z tego cyklu (GitHub Actions wysyła z nich e-mail)
         with open(alerts_out, "w", encoding="utf-8") as f:
-            f.write("\n\n".join(alerts))
+            f.write("\n\n".join(send))
     with open(state_path, "w", encoding="utf-8") as f:
         json.dump(new_state, f, ensure_ascii=False)
     with open(os.path.join(base, "podsumowanie.txt"), "w", encoding="utf-8") as f:
-        f.write(summary(results, len(arts)))
+        f.write(summary(results, len(arts), deferred=deferred_text(os.path.join(base, "alarmy.jsonl"))))
     # materiał dla nocnego przeglądu AI (te same dane i źródła co czuwanie)
     report.to_candidates_json(results, os.path.join(base, "kandydaci.json"))
     from . import pierwotne as _p

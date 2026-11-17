@@ -514,3 +514,12 @@ class TestSladyNaZywo(unittest.TestCase):
         res = slady.live(sig, date(2026, 11, 17), path=path)
         self.assertEqual(res["IR"][0]["data"], "2026-11-16")
         self.assertEqual(slady.live(sig[:1], date(2026, 11, 17), path=path), {})
+
+
+class TestDwaPoziomy(unittest.TestCase):
+    def test_od_razu_tylko_potwierdzone_i_impulsy(self):
+        from types import SimpleNamespace
+        from analizator.czuwanie import urgent
+        self.assertTrue(urgent(SimpleNamespace(slady=[{"a": "x", "b": "y"}]), ["indeks 30 -> 45"]))
+        self.assertTrue(urgent(SimpleNamespace(slady=[]), ["nagły impuls: w 48 h 3 nowe sprawy"]))
+        self.assertFalse(urgent(SimpleNamespace(slady=[]), ["poziom niski -> podwyższony"]))

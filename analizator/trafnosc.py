@@ -39,11 +39,12 @@ def forecast_items(country: str, level: str) -> list[dict]:
     return out
 
 
-def log_alarm(path: str, r, reasons: list[str]) -> None:
+def log_alarm(path: str, r, reasons: list[str], od_razu: bool | None = None) -> None:
     rec = {"czas": datetime.now().isoformat(timespec="minutes"), "data": date.today().isoformat(), "kraj": r.country,
            "indeks": round(r.index, 1), "poziom": r.level, "impuls": round(getattr(r, "impulse", 0.0), 1),
            "szansa": None if r.prob is None else round(r.prob, 3), "powody": reasons,
-           "prognozy": forecast_items(r.country, r.level)}
+           "prognozy": forecast_items(r.country, r.level), "od_razu": od_razu,
+           "slady": [f"{x['a']} → {x['b']}" for x in (getattr(r, "slady", None) or [])[:3]]}
     with open(path, "a", encoding="utf-8") as f:
         f.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
