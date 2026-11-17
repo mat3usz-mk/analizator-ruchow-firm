@@ -102,6 +102,9 @@ def daily(tr: dict, start: date, end: date, window: int, k: int, variant: str) -
     return out
 
 
+_BASE: dict = {}
+
+
 def evaluate(hits: dict[str, set[date]], tr: dict, events: list[dict], start: date, end: date, horizon: int = 60, gap: int = 7) -> dict:
     ev_by_c = defaultdict(list)
     for e in events:
@@ -117,15 +120,18 @@ def evaluate(hits: dict[str, set[date]], tr: dict, events: list[dict], start: da
     judged = [(c, d) for c, d in eps if d + timedelta(days=horizon) <= end]
     true = sum(1 for c, d in judged if any(d < ed <= d + timedelta(days=horizon) for ed in ev_by_c.get(c, [])))
     # stopa bazowa: dni kraj-dzień (kraje z jakimkolwiek śladem), po których w horyzoncie było wydarzenie
+    bkey = (id(tr), id(events), start, end, horizon)
     tot = pos = 0
-    for c in tr:
+    for c in (tr if bkey not in _BASE else ()):
         evs = ev_by_c.get(c, [])
         t = start
         while t + timedelta(days=horizon) <= end:
             tot += 1
             pos += any(t < ed <= t + timedelta(days=horizon) for ed in evs)
             t += timedelta(days=3)
-    base = pos / tot if tot else None
+    if bkey not in _BASE:
+        _BASE[bkey] = pos / tot if tot else None
+    base = _BASE[bkey]
     n_ev = sum(len(v) for v in ev_by_c.values())
     caught7 = caught30 = 0
     for c, evs in ev_by_c.items():
@@ -135,6 +141,66 @@ def evaluate(hits: dict[str, set[date]], tr: dict, events: list[dict], start: da
     prec = true / len(judged) if judged else None
     return {"epizodow": len(eps), "ocenionych": len(judged), "prawdziwe": true, "precyzja": prec, "baza": base,
             "lift": prec / base if prec is not None and base else None, "wydarzen": n_ev, "w7": caught7, "w30": caught30}
+
+
+CHANNELS = list(LABELS)
+LAGS = [2, 7, 14]
+
+
+def pair_hits(tr: dict, a: str, b: str | None, lag: int, start: date, end: date) -> dict[str, set[date]]:
+    """Dni, w których pojawia się ślad b, a ślad a był w ciągu `lag` dni wcześniej (lub tego samego dnia), z innej sprawy.
+    b=None: sam kanał a."""
+    out = {}
+    for c, dm in tr.items():
+        days = set()
+        for t, xs in dm.items():
+            if not (start <= t <= end):
+                continue
+            if b is None:
+                if any(ch == a for ch, _, _ in xs):
+                    days.add(t)
+                continue
+            for ch, st, _ in xs:
+                if ch != b:
+                    continue
+                if any(c2 == a and st2 != st for i in range(lag + 1) for c2, st2, _ in dm.get(t - timedelta(days=i), [])):
+                    days.add(t)
+                    break
+        out[c] = days
+    return out
+
+
+def pair_scan(tr: dict, events: list[dict], start: date, end: date, min_eps: int = 10) -> list[dict]:
+    """Wszystkie kanały i uporządkowane pary kanałów (a, potem b w ciągu L dni) z precyzją i przewagą nad losowym."""
+    rows = []
+    for a in CHANNELS:
+        r = evaluate(pair_hits(tr, a, None, 0, start, end), tr, events, start, end)
+        rows.append({"a": a, "b": None, "lag": 0, **r})
+        for b in CHANNELS:
+            if b == a:
+                continue
+            for L in LAGS:
+                r = evaluate(pair_hits(tr, a, b, L, start, end), tr, events, start, end)
+                if r["ocenionych"] >= min_eps:
+                    rows.append({"a": a, "b": b, "lag": L, **r})
+    return rows
+
+
+def shrunk_lift(r: dict, prior: int = 20) -> float:
+    """Przewaga ściągnięta do 1 przy małej liczbie epizodów (żeby 2 trafienia na 3 nie wygrywały)."""
+    base = r["baza"] or 1e-9
+    return ((r["prawdziwe"] + base * prior) / (r["ocenionych"] + prior)) / base
+
+
+def weighted_hits(tr: dict, weights: dict[tuple, float], thr: float, start: date, end: date) -> dict[str, set[date]]:
+    """Alarm, gdy w kraju zaszła para kanałów, której przewaga (wyuczona na latach wcześniejszych) jest co najmniej `thr`."""
+    out: dict[str, set[date]] = defaultdict(set)
+    for (a, b, L), w in weights.items():
+        if w < thr:
+            continue
+        for c, days in pair_hits(tr, a, b, L, start, end).items():
+            out[c] |= days
+    return dict(out)
 
 
 def gate(index: dict, hits: dict[str, set[date]], days: int = 14, threshold: float = 40.0) -> dict:
@@ -150,12 +216,54 @@ def _pct(x):
     return "brak" if x is None else f"{x:.0%}"
 
 
-def write(path: str, res: dict, meta: str) -> None:
+def _lift(x):
+    return "brak" if x is None else f"{x:.1f}×"
+
+
+def _name(a, b, L):
+    return LABELS[a] if b is None else f"{LABELS[a]} → {LABELS[b]} (do {L} dni)"
+
+
+def write(path: str, res: dict, meta: str, scan: dict | None = None) -> None:
     L = [f"# Łączenie śladów: test historyczny ({date.today().isoformat()})", "",
          "Zbieżność: w oknie W dni w kraju pojawiły się nowe sprawy (bez przedruków) z co najmniej K różnych kanałów "
          "(" + ", ".join(LABELS.values()) + "). Kolejne dni zbieżności w odstępie do 7 dni to jeden epizod. "
          "Precyzja: odsetek epizodów, po których w ciągu 60 dni nastąpiło wydarzenie w tym kraju. Przewaga = precyzja / odsetek "
          "zwykłych dni kraju, po których nastąpiło wydarzenie.", "", meta, ""]
+    if scan:
+        tr_rows, te_idx, rule = scan["uczenie"], scan["test"], scan["regula"]
+        key = lambda r: (r["a"], r["b"], r["lag"])
+        L += ["## Które ślady i pary śladów poprzedzają wydarzenia", "",
+              "Para „A → B (do L dni)”: ślad B pojawia się, gdy ślad A był w tym kraju w ciągu L dni wcześniej (z innej sprawy). "
+              "Przewaga liczona na latach 2019–2024, potem sprawdzona na 2025–2026, których dobór nie widział. "
+              "„Ściągnięta” przewaga uwzględnia małą liczbę epizodów.", "",
+              "### Pojedyncze kanały", "", "| kanał | epizodów 2019–24 | precyzja | przewaga | epizodów 2025–26 | precyzja | przewaga |", "|---|---|---|---|---|---|---|"]
+        for r in [r for r in tr_rows if r["b"] is None]:
+            t = te_idx.get(key(r), {})
+            L.append(f"| {LABELS[r['a']]} | {r['ocenionych']} | {_pct(r['precyzja'])} | {_lift(r['lift'])} | {t.get('ocenionych', 0)} | "
+                     f"{_pct(t.get('precyzja'))} | {_lift(t.get('lift'))} |")
+        pairs = sorted([r for r in tr_rows if r["b"] is not None], key=shrunk_lift, reverse=True)
+        L += ["", "### Najlepsze pary na latach 2019–2024 i jak wypadły w 2025–2026", "",
+              "| para | epizodów 2019–24 | precyzja | przewaga (ściągnięta) | epizodów 2025–26 | precyzja | przewaga |", "|---|---|---|---|---|---|---|"]
+        for r in pairs[:15]:
+            t = te_idx.get(key(r), {})
+            L.append(f"| {_name(*key(r))} | {r['ocenionych']} | {_pct(r['precyzja'])} | {_lift(shrunk_lift(r))} | {t.get('ocenionych', 0)} | "
+                     f"{_pct(t.get('precyzja'))} | {_lift(t.get('lift'))} |")
+        top = [te_idx.get(key(r)) for r in pairs[:15]]
+        ok = sum(1 for t in top if t and t.get("lift") and t["lift"] > 1)
+        L += ["", f"Z 15 najlepszych par z lat 2019–2024 w 2025–2026 przewagę ponad 1× utrzymało {ok} (pozostałe: brak epizodów albo gorzej niż losowo).",
+              "", "### Najsłabsze pary (2019–2024)", "", "| para | epizodów | precyzja | przewaga (ściągnięta) |", "|---|---|---|---|"]
+        for r in pairs[-8:]:
+            L.append(f"| {_name(*key(r))} | {r['ocenionych']} | {_pct(r['precyzja'])} | {_lift(shrunk_lift(r))} |")
+        L += ["", "### Reguła z wyuczonymi wagami par", "",
+              f"Alarm, gdy w kraju zaszła para, której ściągnięta przewaga na latach 2019–2024 wynosi co najmniej P. Próg wybrany na latach uczenia: P = {rule['prog']}.", "",
+              "| P | epizodów 2019–24 | precyzja | przewaga | epizodów 2025–26 | precyzja | przewaga | wydarzeń złapanych ≤30 dni przed (2025–26) |",
+              "|---|---|---|---|---|---|---|---|"]
+        for thr, a, b in rule["wyniki"]:
+            n = b["wydarzen"] or 1
+            L.append(f"| {thr} | {a['ocenionych']} | {_pct(a['precyzja'])} | {_lift(a['lift'])} | {b['ocenionych']} | {_pct(b['precyzja'])} | "
+                     f"{_lift(b['lift'])} | {b['w30']} z {b['wydarzen']} ({b['w30'] / n:.0%}) |")
+        L.append("")
     for period, r in res.items():
         L += [f"## {period}", "", "| wariant | okno | K | epizodów | precyzja | przewaga nad losowym | wydarzeń złapanych ≤7 dni przed | ≤30 dni przed |",
               "|---|---|---|---|---|---|---|---|"]
@@ -200,12 +308,28 @@ def main(argv=None) -> int:
     meta = "Ślady w danych: " + ", ".join(f"{k} {v}" for k, v in sorted(cnt.items(), key=lambda x: -x[1])) + "."
     print(f"sygnały {len(sig)}, {meta} ({time.time() - t0:.0f} s)", flush=True)
     d = date.fromisoformat
+    periods = [("Lata 2019–2024 (wydarzenia z listy 2015–2024)", load_events("wydarzenia_2015_2024.csv"), d("2019-03-01"), d("2024-12-31")),
+               (f"Test 2025-03 – {date.today():%Y-%m} (wydarzenia 2025–2026)", load_events("wydarzenia.csv"), d("2025-03-01"), date.today())]
+    # 1) korelacje: pojedyncze kanały i pary z opóźnieniem, uczenie na 2019-2024, sprawdzenie na 2025-2026
+    (_, ev_tr, s_tr, e_tr), (_, ev_te, s_te, e_te) = periods
+    scan_tr = pair_scan(tr_all, ev_tr, s_tr, e_tr)
+    scan_te = pair_scan(tr_all, ev_te, s_te, e_te, min_eps=0)
+    te_idx = {(r["a"], r["b"], r["lag"]): r for r in scan_te}
+    weights = {(r["a"], r["b"], r["lag"]): shrunk_lift(r) for r in scan_tr if r["b"] is not None}
+    print(f"pary: {len(scan_tr)} ({time.time() - t0:.0f} s)", flush=True)
+    rule_rows = []
+    for thr in (1.5, 2.0, 2.5, 3.0):
+        ra = evaluate(weighted_hits(tr_all, weights, thr, s_tr, e_tr), tr_all, ev_tr, s_tr, e_tr)
+        rb = evaluate(weighted_hits(tr_all, weights, thr, s_te, e_te), tr_all, ev_te, s_te, e_te)
+        rule_rows.append((thr, ra, rb))
+        print(f"  reguła P{thr}: uczenie {ra}, test {rb}", flush=True)
+    cand = [(thr, ra) for thr, ra, _ in rule_rows if ra["ocenionych"] >= 30 and ra["precyzja"] is not None]
+    best = max(cand, key=lambda x: x[1]["precyzja"])[0] if cand else 2.0
+    scan = {"uczenie": scan_tr, "test": te_idx, "regula": {"prog": best, "wyniki": rule_rows}}
+    # 2) zbieżność K kanałów i bramka
     res = {}
-    for label, csv, s, e in [("Lata 2019–2024 (wydarzenia z listy 2015–2024)", "wydarzenia_2015_2024.csv", d("2019-03-01"), d("2024-12-31")),
-                             (f"Test 2025-03 – {date.today():%Y-%m} (wydarzenia 2025–2026)", "wydarzenia.csv", d("2025-03-01"), date.today())]:
-        evs = load_events(csv)
+    for label, evs, s, e in periods:
         rows = []
-        hits_gate = None
         for var, _ in VARIANTS:
             for w in WINDOWS:
                 for k in KS:
@@ -218,12 +342,16 @@ def main(argv=None) -> int:
             idx = replay([x for x in sig if s - timedelta(days=200) <= x["date"] <= e], s, e)
             out = {"bez bramki": _counts(bt_eval(idx, evs))}
             for var in ("wszystkie", "twarde+"):
-                hits_gate = daily(tr_all, s - timedelta(days=14), e, 7, 2, var)
-                out[f"bramka: {var}, 2 kanały w 14 dniach"] = _counts(bt_eval(gate(idx, hits_gate), evs))
+                out[f"bramka: {var}, 2 kanały w 14 dniach"] = _counts(bt_eval(gate(idx, daily(tr_all, s - timedelta(days=14), e, 7, 2, var)), evs))
+            out[f"bramka: wyuczone pary (P {best}) w 14 dniach"] = _counts(bt_eval(gate(idx, weighted_hits(tr_all, weights, best, s - timedelta(days=14), e)), evs))
             res[label]["bramka"] = out
-            print(f"  bramka {label[:10]}: {out}", flush=True)
+            print(f"  bramka {label[:10]}: { {k: (v['prawdziwe'], v['falszywe'], v['hit_rate']) for k, v in out.items()} }", flush=True)
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
-    write(a.out, res, meta)
+    write(a.out, res, meta, scan)
+    best_pairs = sorted(((k, v) for k, v in weights.items() if v >= best), key=lambda x: -x[1])
+    with open(os.path.join(os.path.dirname(os.path.abspath(a.out)), "slady-pary.json"), "w", encoding="utf-8") as f:
+        import json
+        json.dump({"prog": best, "pary": [{"a": k[0], "b": k[1], "dni": k[2], "przewaga": round(v, 2)} for k, v in best_pairs]}, f, ensure_ascii=False, indent=1)
     print(open(a.out, encoding="utf-8").read())
     return 0
 
