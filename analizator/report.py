@@ -32,8 +32,8 @@ input.tab{position:absolute;opacity:0;pointer-events:none}
 nav.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 4px;border-bottom:1px solid var(--line)}
 nav.tabs label{cursor:pointer;padding:8px 14px;border:1px solid var(--line);border-bottom:none;border-radius:8px 8px 0 0;color:var(--muted);font-size:14px;background:var(--bg)}
 .panel{display:none}
-#t1:checked~.panels .p1,#t2:checked~.panels .p2,#t3:checked~.panels .p3{display:block}
-#t1:checked~nav label[for=t1],#t2:checked~nav label[for=t2],#t3:checked~nav label[for=t3]{background:var(--card);color:var(--fg);font-weight:600}
+#t1:checked~.panels .p1,#t2:checked~.panels .p2,#t3:checked~.panels .p3,#t4:checked~.panels .p4{display:block}
+#t1:checked~nav label[for=t1],#t2:checked~nav label[for=t2],#t3:checked~nav label[for=t3],#t4:checked~nav label[for=t4]{background:var(--card);color:var(--fg);font-weight:600}
 input.tab:focus-visible~nav{outline:2px solid var(--bar)}
 .ov h3{margin:12px 0 4px;font-size:14px}.ov .src{font-size:12px;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-right:4px}
 .ov .pri{border-color:var(--low);color:var(--low)}.big{font-size:20px;font-weight:650}
@@ -82,7 +82,7 @@ Na razie tylko do wglądu: nie wpływa na indeks krajów.</p>
 
 
 def to_html(results: list[CountryAssessment], n_articles: int, n_signals: int, title: str = "Analizator ruchów firm",
-            insiders: list[dict] | None = None, congress: list[dict] | None = None) -> str:
+            insiders: list[dict] | None = None, congress: list[dict] | None = None, trafnosc: dict | None = None) -> str:
     e = html.escape
     cards = []
     for r in results:
@@ -133,14 +133,15 @@ i treści sponsorowanych ważą mniej, a raporty „rynkowe” są pomijane. Ala
 pierwotnym albo w dwóch niezależnych, rzeczowych mediach.
 <br><b>Cichy sygnał</b> to ruch wyprzedzający opisany tylko przez 1–2 wiarygodne źródła. <b>Reakcja na zdarzenie</b> opisuje coś, co już
 się dzieje (atak, awaria), więc waży mało. Sekcja skutków to typowe reakcje z podobnych sytuacji w przeszłości, nie rekomendacja inwestycyjna.</div>
-<input type="radio" name="tab" id="t1" class="tab" checked><input type="radio" name="tab" id="t2" class="tab"><input type="radio" name="tab" id="t3" class="tab">
-<nav class="tabs"><label for="t1">Najważniejsze teraz</label><label for="t2">Wszystkie kraje ({len(results)})</label><label for="t3">Grube ryby</label></nav>
+<input type="radio" name="tab" id="t1" class="tab" checked><input type="radio" name="tab" id="t2" class="tab"><input type="radio" name="tab" id="t3" class="tab"><input type="radio" name="tab" id="t4" class="tab">
+<nav class="tabs"><label for="t1">Najważniejsze teraz</label><label for="t2">Wszystkie kraje ({len(results)})</label><label for="t3">Grube ryby</label><label for="t4">Trafność</label></nav>
 <div class="panels">
 <div class="panel p1">{_overview_html(results)}</div>
 <div class="panel p2">{_fronts_html(results)}
 {''.join(cards) or '<p>Brak sygnałów z przypisanym krajem.</p>'}</div>
 <div class="panel p3">{_insider_html(insiders or []) or '<p class="muted">Brak danych o insiderach w tym cyklu.</p>'}
 {_congress_html(congress or []) or '<p class="muted">Brak danych o transakcjach kongresmenów w tym cyklu.</p>'}</div>
+<div class="panel p4">{_accuracy_html(trafnosc)}</div>
 </div>
 </main></body></html>"""
 
@@ -263,6 +264,46 @@ Przy każdym kraju: przyczyny, możliwe skutki, indeksy giełdowe z typową skal
 <ul>{rows_on or '<li class="muted">brak</li>'}</ul></section>
 <section class="card ov"><h2 style="margin:0;font-size:19px">Najnowsze sygnały (ostatnie {fresh_days} dni)</h2>
 <ul>{"".join(rows) or '<li class="muted">brak nowych sygnałów</li>'}</ul></section>""")
+
+
+def _chg(x) -> str:
+    return "brak danych" if x is None else f"{x * 100:+.1f}%".replace(".", ",")
+
+
+def _accuracy_html(t: dict | None) -> str:
+    """Zakładka „Trafność”: alarmy na żywo i ich rozliczenie oraz wynik alarmów z testu historycznego."""
+    e = html.escape
+    if not t:
+        return ('<p class="muted" style="margin-top:12px">Rozliczenie alarmów pojawi się po pierwszym dziennym przeliczeniu '
+                '(raz na dobę). Alarmy są zapisywane od 17.11.2026.</p>')
+    z, h = t.get("na_zywo", {}), t.get("historia", {})
+    pct = lambda a, b: f"{a} z {b} ({a / b:.0%})" if b else "brak rozliczonych"
+    rows = []
+    for a in reversed(t.get("alarmy", [])[-40:]):
+        progs = "".join(
+            f'<li>{e(p["nazwa"])} {"▼" if p["kierunek"] == "down" else "▲"} w {p["dni"]} dni: '
+            f'{_chg(p.get("zmiana"))}'
+            f' · <b>{e(p["status"])}</b></li>' for p in a.get("prognozy", []))
+        rows.append(f'<tr><td>{e(a["data"])}</td><td><b>{e(country_name(a["kraj"]))}</b><br><span class="muted">indeks {a["indeks"]:.0f}, '
+                    f'{e(a["poziom"])}</span></td><td style="font-size:13px">{e("; ".join(a.get("powody", [])))}</td>'
+                    f'<td><ul style="margin:0">{progs or "<li class=muted>brak sprawdzonych indeksów</li>"}</ul></td>'
+                    f'<td style="font-size:13px">{e(a.get("wydarzenie", ""))}</td></tr>')
+    live = (f'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14px"><tr><th align=left>Data</th>'
+            f'<th align=left>Kraj</th><th align=left>Powód</th><th align=left>Prognoza rynkowa i wynik</th><th align=left>Wydarzenie</th></tr>'
+            f'{"".join(rows)}</table></div>') if rows else '<p class="muted">Od 17.11.2026 nie było jeszcze alarmu.</p>'
+    hist_rows = "".join(f'<li>{e(r["data"])} · {e(country_name(r["kraj"]))}: '
+                        f'{"<b>wydarzenie " + e(r["wydarzenie"]) + "</b>" if r["wydarzenie"] else "<span class=muted>bez wydarzenia w 60 dni</span>"}</li>'
+                        for r in reversed(h.get("alarmy", [])))
+    return f"""<section class="card"><h2 style="margin:0;font-size:19px">Alarmy na żywo</h2>
+<p class="muted" style="margin:4px 0 8px">Każdy alarm jest zapisywany z prognozą rynkową. Po zapowiedzianym okresie sprawdzamy notowania,
+a po 60 dniach, czy nastąpiło wydarzenie z listy wydarzeń (uzupełnianej ręcznie). Rozliczenie raz na dobę, stan z {e(t.get("czas", "")[:16])}.</p>
+<div class="stats"><span>alarmów: {z.get("alarmow", 0)}</span><span>prognozy rynkowe trafne: {pct(z.get("prognoz_trafnych", 0), z.get("prognoz_rozliczonych", 0))}</span>
+<span>alarmy z wydarzeniem w 60 dni: {pct(z.get("z_wydarzeniem", 0), z.get("alarmow_rozliczonych", 0))}</span></div>
+{live}</section>
+<section class="card"><h2 style="margin:0;font-size:19px">Test historyczny: alarmy od {e(str(h.get("od", "2025-03")))}</h2>
+<p class="muted" style="margin:4px 0 8px">Alarmy, które analizator dałby na danych z przeszłości (reguła łączona: indeks + model), i czy w ciągu 60 dni nastąpiło wydarzenie.
+Trafne: {pct(h.get("trafnych", 0), h.get("alarmow", 0))}. Większość alarmów nie kończy się wydarzeniem; to wskazówka, gdzie patrzeć, nie prognoza.</p>
+<details><summary>Ostatnie alarmy z testu ({len(h.get("alarmy", []))})</summary><ul>{hist_rows}</ul></details></section>"""
 
 
 def _unconfirmed_html(r) -> str:

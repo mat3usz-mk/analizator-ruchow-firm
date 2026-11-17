@@ -17,7 +17,7 @@ import sys
 import urllib.request
 
 URL = "https://raw.githubusercontent.com/mat3usz-mk/analizator-ruchow-firm/archiwum/nocny/paczka.json"
-FILES = ["kandydaci.json", "fronty.json", "podsumowanie.txt", "zrodla.json", "raport_biezacy.html", "czuwanie_stan.json"]
+FILES = ["kandydaci.json", "fronty.json", "podsumowanie.txt", "zrodla.json", "raport_biezacy.html", "czuwanie_stan.json", "alarmy.jsonl", "trafnosc.json"]
 ITER = 300_000
 
 

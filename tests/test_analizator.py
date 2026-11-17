@@ -448,3 +448,23 @@ class TestPaczka(unittest.TestCase):
         blob = pack(d, "haslo")
         self.assertNotIn("test", str(blob))
         self.assertEqual(unpack(blob, "haslo")["podsumowanie.txt"], "test ż")
+
+
+class TestTrafnosc(unittest.TestCase):
+    def test_rozliczenie_prognozy_rynkowej(self):
+        from datetime import date, timedelta
+        from analizator.rynki import Series
+        from analizator.trafnosc import settle, summary
+        d0 = date(2026, 9, 1)
+        s = Series({d0 + timedelta(days=i): 100 - i * 0.2 for i in range(80)})  # indeks spada
+        prices = lambda k, start: ([(s, 1, 0.0)], "X")
+        al = [{"data": "2026-09-01", "kraj": "ZZ", "indeks": 50, "poziom": "podwyższony", "powody": ["test"],
+               "prognozy": [{"nazwa": "X", "klucz": "x", "kierunek": "down", "dni": 37, "mediana": -0.05},
+                            {"nazwa": "Y", "klucz": "x", "kierunek": "up", "dni": 37, "mediana": 0.02}]}]
+        out = settle(al, today=date(2026, 11, 17), prices=prices)
+        st = [p["status"] for p in out[0]["prognozy"]]
+        self.assertEqual(st, ["sprawdziło się", "nie sprawdziło się"])
+        self.assertEqual(out[0]["wydarzenie"], "brak wydarzenia w 60 dni")
+        self.assertEqual(summary(out)["prognoz_trafnych"], 1)
+        early = settle(al, today=date(2026, 9, 10), prices=prices)
+        self.assertEqual(early[0]["prognozy"][0]["status"], "w toku")

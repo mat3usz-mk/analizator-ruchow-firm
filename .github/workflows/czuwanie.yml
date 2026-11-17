@@ -154,6 +154,8 @@ jobs:
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           if git fetch -q origin archiwum; then git worktree add -q arch origin/archiwum && git -C arch switch -q -C archiwum
           else git worktree add -q --orphan -b archiwum arch; fi
+          # raz dziennie: rozliczenie trafności alarmów (notowania po alarmach, wydarzenia w 60 dni)
+          [ $arch = 1 ] && { python -m analizator.trafnosc --dane dane || true; }
           [ $arch = 1 ] && python -m analizator.archiwum --db dane/analizator.db --stan dane/czuwanie_stan.json --out arch/archiwum
           [ $pacz = 1 ] && python -m analizator.paczka zapisz --dane dane --out arch/nocny/paczka.json && echo "$today" > dane/ostatnia_paczka.txt
           cd arch && git add -A && { git commit -qm "Archiwum $(date -u +'%F %H:%M')" || exit 0; }

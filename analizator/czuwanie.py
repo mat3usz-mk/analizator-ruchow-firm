@@ -46,6 +46,7 @@ def notify(title: str, body: str, topic: str | None, log_path: str) -> None:
 
 
 STATUS: dict[str, str] = {}
+LAST_ALARMS: list = []  # (wynik kraju, powody) z ostatniego wywołania changes(), do dziennika trafności
 
 
 def _fetch(con, days: int, srcs: list[str]) -> None:
@@ -68,8 +69,16 @@ def _fetch(con, days: int, srcs: list[str]) -> None:
             STATUS[src] = f"błąd: {str(e)[:160]}"
 
 
+def _load_json(path: str):
+    try:
+        return json.load(open(path, encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
 def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list[str], dict]:
     """Porównuje bieżące wyniki ze stanem z poprzedniego cyklu. Zwraca listę alarmów i nowy stan."""
+    LAST_ALARMS.clear()
     prev = state.get("kraje", {})
     seen = set(state.get("widziane", []))
     alerts, new_state, new_seen = [], {}, set(seen)
@@ -104,6 +113,7 @@ def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list
             lines += [f"- {x['date']} {x['title'][:160]}" for x in (fresh or r.evidence)[:3]]
             lines += ["Prognoza:"] + [f"- {x}" for x in forecast_lines(r)]
             alerts.append("\n".join(lines))
+            LAST_ALARMS.append((r, reasons))
     return alerts, {"kraje": new_state, "widziane": sorted(new_seen)[-5000:], "czas": datetime.now().isoformat()}
 
 
@@ -151,8 +161,14 @@ def cycle(db: str, out: str, srcs: list[str], days: int, topic: str | None, watc
     results = assess(signals, today=date.today())
     with open(out, "w", encoding="utf-8") as f:
         f.write(report.to_html(results, len(arts), len(signals), "Analizator ruchów firm (tryb ciągły)",
-                                insiders=insiders, congress=congress))
+                                insiders=insiders, congress=congress, trafnosc=_load_json(os.path.join(base, "trafnosc.json"))))
     alerts, new_state = changes(results, state, date.today())
+    from .trafnosc import log_alarm
+    for r, reasons in LAST_ALARMS:
+        try:
+            log_alarm(os.path.join(base, "alarmy.jsonl"), r, reasons)
+        except Exception as e:
+            print(f"  [trafność] nie zapisano alarmu: {e}")
     for a in alerts:
         notify("Analizator: " + a.split(":")[0], a, topic, os.path.join(base, "alerty.log"))
     if alerts_out:  # alarmy tylko z tego cyklu (np. dla GitHub Actions, które zakłada z nich zgłoszenie)
