@@ -47,13 +47,13 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="analizator.nowe_testy")
     ap.add_argument("--db", required=True)
     ap.add_argument("--pierwotne", nargs="*", default=[])
-    ap.add_argument("--nowe", default="nowe_historia.db")
+    ap.add_argument("--nowe", nargs="*", default=["nowe_historia.db"])
     ap.add_argument("--out", default="raporty/nowe-zrodla-wyniki.md")
     ap.add_argument("--zrodla", default="wiki,ton")
     a = ap.parse_args(argv)
     t0 = time.time()
     base_items = store.load(store.connect(a.db)) + [x for p in a.pierwotne if os.path.exists(p) for x in store.load(store.connect(p))]
-    new_items = store.load(store.connect(a.nowe)) if os.path.exists(a.nowe) else []
+    new_items = [x for p in a.nowe if os.path.exists(p) for x in store.load(store.connect(p))]
     sig = extract_signals(base_items)
     new_sig = {src: extract_signals([x for x in new_items if x["source"] == src]) for src in a.zrodla.split(",")}
     print(f"sygnały: {len(sig)}, nowe: { {k: len(v) for k, v in new_sig.items()} } ({time.time() - t0:.0f} s)", flush=True)

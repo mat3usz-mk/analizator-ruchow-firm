@@ -24,11 +24,11 @@ from .oficjalne import _item
 UA = {"User-Agent": "analizator-ruchow-firm/0.10 (https://github.com/mat3usz-mk/analizator-ruchow-firm)"}
 
 
-def _get(url: str, tries: int = 4, wait: float = 10.0) -> bytes:
+def _get(url: str, tries: int = 4, wait: float = 10.0, timeout: int = 120) -> bytes:
     err = None
     for i in range(tries):
         try:
-            return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120).read()
+            return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout).read()
         except Exception as e:
             err = e
             time.sleep(wait * (i + 1))
@@ -105,7 +105,7 @@ def wiki_views(lang: str, title: str, start: date, end: date) -> dict[date, floa
     url = (f"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/{lang}.wikipedia/all-access/user/{t}/daily/"
            f"{start:%Y%m%d}00/{end:%Y%m%d}00")
     try:
-        items = json.loads(_get(url, tries=2, wait=3)).get("items", [])
+        items = json.loads(_get(url, tries=2, wait=3, timeout=60)).get("items", [])
     except Exception as e:
         print(f"  [wiki] {lang} {title}: {e}")
         return {}
@@ -136,7 +136,7 @@ def ton_series(country: str, name: str, start: date, end: date) -> dict[date, fl
     q = urllib.parse.urlencode({"query": f'"{name}" sourcelang:english', "mode": "timelinetone", "format": "json",
                                 "startdatetime": f"{start:%Y%m%d}000000", "enddatetime": f"{end:%Y%m%d}235959"})
     try:
-        data = json.loads(_get(f"https://api.gdeltproject.org/api/v2/doc/doc?{q}", tries=4, wait=20))
+        data = json.loads(_get(f"https://api.gdeltproject.org/api/v2/doc/doc?{q}", tries=2, wait=30, timeout=60))
     except Exception as e:
         print(f"  [ton] {country}: {e}")
         return {}
@@ -167,7 +167,8 @@ def ton_items(series: dict[str, dict[date, float]], start: date, z_thr: float = 
     return out
 
 
-def history(sources: set[str], start: date, end: date) -> list[dict]:
+def history(sources: set[str], start: date, end: date, sink=None) -> list[dict]:
+    """sink(items): zapis na bieżąco (długie pobieranie może zostać przerwane limitem czasu)."""
     from .signals import COUNTRIES
     items: list[dict] = []
     if "eia" in sources:
@@ -192,11 +193,13 @@ def history(sources: set[str], start: date, end: date) -> list[dict]:
         for c, names in COUNTRIES.items():
             name = re.sub(r"\\[bB]|[()?\\]", "", names[0])
             s = ton_series(c, name, max(start - timedelta(days=40), date(2017, 1, 1)), end)
-            if s:
-                series[c] = s
-            print(f"  ton {c}: {len(s)} dni", flush=True)
+            part = ton_items({c: s}, start) if s else []
+            if sink and part:
+                sink(part)
+            else:
+                items += part
+            print(f"  ton {c}: {len(s)} dni, {len(part)} sygnałów", flush=True)
             time.sleep(6)
-        items += ton_items(series, start)
     return items
 
 
@@ -208,8 +211,8 @@ def main(argv=None) -> int:
     ap.add_argument("--do", default=date.today().isoformat())
     ap.add_argument("--db", default="nowe_historia.db")
     a = ap.parse_args(argv)
-    items = history(set(a.zrodla.split(",")), date.fromisoformat(a.od), date.fromisoformat(a.do))
     con = store.connect(a.db)
+    items = history(set(a.zrodla.split(",")), date.fromisoformat(a.od), date.fromisoformat(a.do), sink=lambda xs: store.save(con, xs))
     print(f"zapisano {store.save(con, items)} z {len(items)}")
     for src, n in con.execute("SELECT source, COUNT(*) FROM articles GROUP BY 1"):
         print(f"  {src}: {n}")

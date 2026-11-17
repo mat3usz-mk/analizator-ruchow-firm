@@ -49,20 +49,29 @@ jobs:
           path: .
           run-id: ${{ github.event.inputs.nowe_z_przebiegu }}
           github-token: ${{ github.token }}
-      - name: Historia nowych źródeł
+      - name: Historia EIA i Wikipedii
         if: github.event.inputs.nowe_z_przebiegu == ''
-        run: python -m analizator.nowe_zrodla --zrodla "${{ github.event.inputs.zrodla }}" --od 2017-03-01 --db nowe_historia.db
+        timeout-minutes: 90
+        continue-on-error: true
+        run: python -m analizator.nowe_zrodla --zrodla eia,wiki --od 2017-03-01 --db nowe_historia.db
+      - name: Historia tonu GDELT
+        if: github.event.inputs.nowe_z_przebiegu == '' && contains(github.event.inputs.zrodla, 'ton')
+        timeout-minutes: 180
+        continue-on-error: true
+        run: python -m analizator.nowe_zrodla --zrodla ton --od 2017-03-01 --db nowe_ton.db
       - uses: actions/upload-artifact@v4
         if: github.event.inputs.nowe_z_przebiegu == ''
         with:
           name: nowe_historia
-          path: nowe_historia.db
+          path: |
+            nowe_historia.db
+            nowe_ton.db
           retention-days: 30
       - name: Historia krótkiej sprzedaży (FINRA)
         continue-on-error: true
         run: python -m analizator.ryby --od 2021-09-01 --zrodla finra_short --db ryby_historia.db
       - name: Test
-        run: python -m analizator.nowe_testy --db historia_gkg.db --pierwotne pierwotne_historia.db ryby_historia.db --nowe nowe_historia.db --out raporty/nowe-zrodla-wyniki.md
+        run: python -m analizator.nowe_testy --db historia_gkg.db --pierwotne pierwotne_historia.db ryby_historia.db --nowe nowe_historia.db nowe_ton.db --out raporty/nowe-zrodla-wyniki.md
       - name: Zapis wyniku
         run: |
           git config user.name "github-actions[bot]"
