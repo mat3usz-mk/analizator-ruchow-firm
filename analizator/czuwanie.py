@@ -47,13 +47,13 @@ def notify(title: str, body: str, topic: str | None, log_path: str) -> None:
 
 STATUS: dict[str, str] = {}
 LAST_ALARMS: list = []  # (wynik kraju, powody) z ostatniego wywołania changes(), do dziennika trafności
-URGENT: list[bool] = []  # dla każdego alarmu z changes(): czy wysłać od razu (wybór osoby 17.11: dwa poziomy powiadomień)
+URGENT: list[bool] = []  # dla każdego alarmu z changes(): czy wysłać od razu (wybór osoby 17.11: mailem tylko najsilniejsze impulsy)
 
 
 def urgent(r, reasons: list[str]) -> bool:
-    """Od razu (mail, ntfy) idą alarmy potwierdzone zbieżnymi niezależnymi śladami (test 2025-26: 18% trafnych wobec 8%)
-    oraz silne impulsy 48 h (osobno sprawdzone: 12-17% trafnych, ok. 4x losowo). Reszta: strona i codzienny raport."""
-    return bool(getattr(r, "slady", None)) or any(x.startswith("nagły impuls") for x in reasons)
+    """Od razu (mail, ntfy) idą tylko najsilniejsze impulsy 48 h (wybór osoby 17.11; w teście 12-17% trafnych, ok. 4x losowo).
+    Wszystko inne, także alarmy ze zbieżnymi śladami, tylko na stronie i w porannym raporcie."""
+    return any(x.startswith("nagły impuls") for x in reasons)
 
 
 def deferred_text(path: str, hours: int = 26) -> list[str]:
@@ -161,7 +161,7 @@ def summary(results, n_articles: int, top: int = 10, deferred: list[str] | None 
             for x in r.evidence[:2]:
                 L.append(f"    · {x['title'][:150]}")
     if deferred:
-        L += ["", "Alarmy bez potwierdzenia z ostatniej doby (nie wysłane od razu; w teście trafne w ok. 8%):"] + deferred
+        L += ["", "Pozostałe alarmy z ostatniej doby (tylko na stronie, bez osobnego maila):"] + deferred
     fr = fronts(results)
     if fr:
         L += ["", "Fronty (jeden kryzys w kilku krajach):"]
