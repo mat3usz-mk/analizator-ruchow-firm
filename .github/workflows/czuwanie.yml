@@ -116,7 +116,7 @@ jobs:
               --body-file mail.txt $att || true
           fi
 
-      # Raz dziennie, w pierwszym cyklu po 2:00 UTC (3:00 w Polsce zimą, 4:00 latem): podsumowanie i pełny raport.
+      # Codzienny raport e-mailem: wyłączony 17.11 na prośbę osoby, tylko ręcznie (Run workflow z mail_teraz).
       - name: Codzienny raport e-mailem
         env:
           MAIL_TO: ${{ secrets.MAIL_TO }}
@@ -127,7 +127,8 @@ jobs:
           TERAZ: ${{ github.event.inputs.mail_teraz }}
         run: |
           today=$(date -u +%F)
-          if [ "$TERAZ" = "true" ] || { [ "$(date -u +%H)" -ge 2 ] && [ "$(cat dane/ostatni_mail_dzienny.txt 2>/dev/null)" != "$today" ]; }; then
+          # 17.11 osoba wyłączyła poranny mail: mailem idą tylko najsilniejsze impulsy. Ręcznie nadal można wysłać (mail_teraz).
+          if [ "$TERAZ" = "true" ]; then
             cp dane/podsumowanie.txt mail.txt
             if [ "${{ steps.strona.outputs.ok }}" = "1" ]; then att=""; printf '\nRaport online (hasło jak zwykle): %s\n' "$PAGE_URL" >> mail.txt
             else att="--attach dane/raport_biezacy.html"; fi
