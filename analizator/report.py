@@ -217,8 +217,8 @@ def _slady_html(r) -> str:
     items = "".join(f"<li>{e(x['a'])} → {e(x['b'])} (do {x['dni']} dni, ostatnio {x['data'][8:10]}.{x['data'][5:7]}): "
                     f"w historii {x['przewaga']:.1f}× częściej przed wydarzeniem niż zwykle</li>" for x in r.slady[:3])
     return ('<h3>Zbieżne ślady z niezależnych źródeł</h3><ul>' + items + '</ul><p class="muted" style="margin:0 0 6px">'
-            'Alarmy z takim potwierdzeniem w teście 2025–2026: 18% trafnych wobec 11% bez niego (raporty/slady-wyniki.md). '
-            'Brak zbieżności nie znaczy spokoju: bez niej zdarzyła się mniej więcej połowa wydarzeń.</p>')
+            'Uwaga: test permutacyjny (raporty/nowe-zrodla-wyniki.md) pokazał, że w latach 2025–2026 takie pary nie trafiają w czas lepiej '
+            'niż przypadek: wskazują głównie kraje, w których i tak dużo się dzieje. Traktuj to jako tło, nie zapowiedź.</p>')
 
 
 def _country_block(r, causes: list[dict], head_note: str) -> str:

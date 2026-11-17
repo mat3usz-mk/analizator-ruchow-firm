@@ -136,10 +136,8 @@ def changes(results, state: dict, today: date, jump: float = 15.0) -> tuple[list
             lines += [f"- {x['date']} {x['title'][:160]}" for x in (fresh or r.evidence)[:3]]
             if getattr(r, "slady", None):
                 sl = r.slady[0]
-                lines += [f"Potwierdzenie: zbieżne niezależne ślady ({sl['a']} → {sl['b']}, do {sl['dni']} dni); alarmy z takim potwierdzeniem "
-                          "w teście 2025–2026 trafne w 18% wobec 11% bez."]
-            else:
-                lines += ["Potwierdzenie: brak zbieżnych niezależnych śladów (w teście takie alarmy trafne w ok. 8%)."]
+                lines += [f"Tło: zbieżne niezależne ślady ({sl['a']} → {sl['b']}, do {sl['dni']} dni); w teście permutacyjnym nie trafiają w czas "
+                          "lepiej niż przypadek, więc to tło, nie zapowiedź."]
             lines += ["Prognoza:"] + [f"- {x}" for x in forecast_lines(r)]
             alerts.append("\n".join(lines))
             LAST_ALARMS.append((r, reasons))
