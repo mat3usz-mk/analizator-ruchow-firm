@@ -54,7 +54,7 @@ class CountryAssessment:
     unconfirmed: bool = False      # indeks obcięty poniżej alarmu: brak potwierdzenia w rzetelnych źródłach
     confirmations: int = 0         # liczba niezależnych rzetelnych źródeł + sygnałów pierwotnych
     model_note: str = ""           # zmiana alarmu przez regułę łączoną (model + ręczny indeks)
-    impulse: float = 0.0           # nagły przyrost nowych sygnałów w ostatnich 48 h względem zwykłego tła kraju (z-score)
+    impulse: float = 0.0           # nagły przyrost nowych sygnałów w ostatniej dobie względem zwykłego tła kraju (z-score)
     impulse_info: dict = field(default_factory=dict)  # teraz / norma / nowe kategorie / świeże dowody
     prob: float | None = None      # szansa wydarzenia w horyzoncie wg modelu uczonego na historii (analizator/model.json)
     slady: list = field(default_factory=list)  # zbieżne pary niezależnych śladów z 14 dni (analizator/slady.py, wagi z historii)
@@ -299,11 +299,12 @@ def _damp_sec(signals: list[dict], baseline_weeks: int, cap: float) -> list[dict
     return out
 
 
-IMPULSE_DAYS, IMPULSE_BASE_DAYS = 2, 28
+# 18.11 po teście wariantów (raporty/impuls-warianty.md): okno 24 h, tło 56 dni, bez premii za nowe kategorie, próg alarmu 8
+IMPULSE_DAYS, IMPULSE_BASE_DAYS, IMPULSE_NEW_CAT = 1, 56, 0.0
 
 
 def _impulse(stories: dict, today: date) -> tuple[float, dict]:
-    """Ile nowych historii pojawiło się w ostatnich 48 h w porównaniu ze zwykłym tłem kraju z poprzednich 4 tygodni.
+    """Ile nowych historii pojawiło się w ostatniej dobie w porównaniu ze zwykłym tłem kraju z poprzednich 8 tygodni.
 
     Liczy wagi (źródła pierwotne ważą więcej), nie same artykuły. Kryzys, który trwa od tygodni, ma wysokie tło,
     więc daje mały impuls; nagły skok w spokojnym kraju daje duży."""
@@ -313,7 +314,7 @@ def _impulse(stories: dict, today: date) -> tuple[float, dict]:
     w_now = sum(min(v[1], 3.0) for v in now)
     w_base = sum(min(v[1], 3.0) for v in base) * IMPULSE_DAYS / IMPULSE_BASE_DAYS
     new_cats = sorted({v[2] for v in now} - {v[2] for v in base})
-    z = (w_now - w_base) / math.sqrt(w_base + 1.0) + 0.5 * len(new_cats) * (1 if now else 0)
+    z = (w_now - w_base) / math.sqrt(w_base + 1.0) + IMPULSE_NEW_CAT * len(new_cats) * (1 if now else 0)
     fresh = [v[3] for v in sorted(now, key=lambda v: (-v[1], v[0]))]
     return round(z, 2), {"teraz": round(w_now, 1), "norma": round(w_base, 1), "nowe_kategorie": new_cats,
                          "historii": len(now), "dowody": fresh[:4]}

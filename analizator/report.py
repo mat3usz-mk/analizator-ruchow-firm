@@ -206,7 +206,8 @@ def _ev_li(x: dict, country: str | None = None) -> str:
     return f'<li><span class="muted">{x["date"]}</span> · {who}{tag}{e(category_label(x["category"]))}{react}: {link}</li>'
 
 
-IMPULSE_MIN = 6.0  # test 2019–2026: od 6 ok. 2× lepiej niż losowo, od 10 ok. 4× (raporty/impuls-wyniki.md)
+IMPULSE_MIN = 6.0  # na stronie od 6; alarm od 8 (raporty/impuls-warianty.md)
+IMPULSE_ALARM = 8.0
 
 
 def _slady_html(r) -> str:
@@ -244,7 +245,7 @@ def _country_block(r, causes: list[dict], head_note: str) -> str:
 
 
 def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
-    """Zakładka „Najważniejsze teraz”: najpierw nagłe impulsy z 48 h, potem trwające kryzysy w skrócie, na końcu najnowsze sygnały."""
+    """Zakładka „Najważniejsze teraz”: najpierw nagłe impulsy z ostatniej doby, potem trwające kryzysy w skrócie, na końcu najnowsze sygnały."""
     from datetime import date, timedelta
     from .score import PRIMARY_SOURCES
     e = html.escape
@@ -255,8 +256,8 @@ def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
         info = r.impulse_info
         nc = info.get("nowe_kategorie") or []
         times = f'{info["teraz"] / max(info["norma"], 0.1):.0f}× więcej niż zwykle' if info["norma"] >= 0.05 else "zwykle prawie nic"
-        strong = "Impuls 48 h powyżej progu alarmu" if r.impulse >= 10 else "Impuls 48 h"
-        note = (f'<b class="q">{strong}</b> · w 48 h {info["historii"]} nowe sprawy, siła {info["teraz"]:.1f} '
+        strong = "Impuls 24 h powyżej progu alarmu" if r.impulse >= IMPULSE_ALARM else "Impuls 24 h"
+        note = (f'<b class="q">{strong}</b> · w 24 h {info["historii"]} nowe sprawy, siła {info["teraz"]:.1f} '
                 f'wobec zwykłych {info["norma"]:.1f} ({times})'
                 + (f' · nowe rodzaje ruchów: {e(", ".join(category_label(c) for c in nc))}' if nc else ""))
         blocks.append(_country_block(r, info.get("dowody") or _causes(r), note))
@@ -265,7 +266,7 @@ def _overview_html(results, top: int = 6, fresh_days: int = 3) -> str:
     rows_on = "".join(
         f'<li><b>{e(country_name(r.country))}</b> · indeks {r.index:.0f} ({r.level})'
         + (f" · szansa wg modelu {r.prob:.0%}" if r.prob is not None else "")
-        + f' · <span class="muted">{e(", ".join(category_label(c) for c in r.categories[:3]))}; bez nowego impulsu w 48 h</span></li>'
+        + f' · <span class="muted">{e(", ".join(category_label(c) for c in r.categories[:3]))}; bez nowego impulsu w 24 h</span></li>'
         for r in ongoing)
     since = date.today() - timedelta(days=fresh_days)
     fresh = [(r.country, x) for r in results for x in r.evidence if x["date"] >= since and not x.get("negated")]
@@ -286,9 +287,9 @@ poprzedzał wydarzenie w ciągu 30 dni w 12–17% przypadków, ok. 4 razy częś
 Przy każdym kraju: przyczyny, możliwe skutki, indeksy giełdowe z typową skalą i czasem ruchu oraz szansa wydarzenia według modelu
 (w teście 2025–2026 tylko ok. 12–17% alarmów kończyło się wydarzeniem w 60 dni). To nie jest rekomendacja inwestycyjna.</div>
 <h2 style="font-size:17px;margin:18px 0 4px">Impulsy (ostatnie 48 godzin)</h2>
-{"".join(blocks) or '<p class="muted">Brak impulsów: w żadnym kraju nie pojawiło się w 48 h wyraźnie więcej nowych sygnałów niż zwykle.</p>'}
+{"".join(blocks) or '<p class="muted">Brak impulsów: w żadnym kraju nie pojawiło się w 24 h wyraźnie więcej nowych sygnałów niż zwykle.</p>'}
 <section class="card ov"><h2 style="margin:0;font-size:19px">Trwające napięcia</h2>
-<p class="muted" style="margin:4px 0">Wysoki poziom bez zmiany w ostatnich 48 h. Szczegóły w zakładce „Wszystkie kraje”.</p>
+<p class="muted" style="margin:4px 0">Wysoki poziom bez nowego impulsu w ostatniej dobie. Szczegóły w zakładce „Wszystkie kraje”.</p>
 <ul>{rows_on or '<li class="muted">brak</li>'}</ul></section>
 <section class="card ov"><h2 style="margin:0;font-size:19px">Najnowsze sygnały (ostatnie {fresh_days} dni)</h2>
 <ul>{"".join(rows) or '<li class="muted">brak nowych sygnałów</li>'}</ul></section>""")
