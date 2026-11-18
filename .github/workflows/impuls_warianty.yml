@@ -1,0 +1,33 @@
+name: Dopracowanie impulsu
+
+# Ręcznie: siatka wariantów impulsu 48 h (okno, tło, minimum spraw, premia, waga artykułów, 2 dni z rzędu, próg),
+# wybór na 2019-2024, sprawdzenie na 2025-2026 z testem permutacyjnym.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dane z wydania „dane”
+        run: bash .github/dane.sh pobierz historia_gkg.db pierwotne_historia.db
+      - name: Test
+        run: python -m analizator.impuls_warianty --db historia_gkg.db --pierwotne pierwotne_historia.db --out raporty/impuls-warianty.md
+      - name: Zapis wyniku
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add raporty/impuls-warianty.md
+          git commit -m "Dopracowanie impulsu: wyniki" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done
