@@ -35,7 +35,9 @@ jobs:
         run: |
           mkdir -p paczki && cd paczki
           curl -sSL -o reddit.torrent "https://academictorrents.com/download/${{ github.event.inputs.torrent }}.torrent"
-          aria2c --show-files reddit.torrent > lista.txt
+          ls -la reddit.torrent; file reddit.torrent; head -c 300 reddit.torrent | tr -c '[:print:]' '.'; echo
+          aria2c --show-files reddit.torrent > lista.txt || true
+          wc -l lista.txt; head -30 lista.txt; grep -iE "worldnews|wallstreetbets" lista.txt | head
           grep -E "/(worldnews|wallstreetbets)_submissions\.zst" -B1 -A2 lista.txt | head -20
           idx=$(awk -F'|' '/^ *[0-9]+\|/{i=$1; gsub(/ /,"",i); f=$2} f ~ /\/(worldnews|wallstreetbets)_submissions\.zst/ {print i; f=""}' lista.txt | sort -un | paste -sd, -)
           echo "wybrane pliki: $idx"
