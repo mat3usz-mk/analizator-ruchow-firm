@@ -38,6 +38,20 @@ def _con(path: str) -> sqlite3.Connection:
     return con
 
 
+def _fetch(sub: str, q: str, after: date, before: date, tries: int = 2):
+    params = urllib.parse.urlencode({"aggregate": "created_utc", "frequency": "day", "subreddit": sub, "title": q,
+                                     "after": after.isoformat(), "before": before.isoformat()})
+    for i in range(tries):
+        try:
+            data = json.loads(urllib.request.urlopen(urllib.request.Request(f"{API}?{params}", headers=UA), timeout=90).read())["data"]
+            time.sleep(1.0)
+            return data
+        except Exception as e:
+            print(f"  [reddit] {sub} {q} {after}..{before}: {e}", flush=True)
+            time.sleep(20 * (i + 1))
+    return None
+
+
 def daily_counts(con, sub: str, q: str, y0: int, y1: int) -> dict[date, int]:
     out: dict[date, int] = {}
     for y in range(y0, y1 + 1):
@@ -45,22 +59,16 @@ def daily_counts(con, sub: str, q: str, y0: int, y1: int) -> dict[date, int]:
         if row:
             data = json.loads(row[0])
         else:
-            data = None
             end = min(date(y, 12, 31), date.today())
-            params = urllib.parse.urlencode({"aggregate": "created_utc", "frequency": "day", "subreddit": sub, "title": q,
-                                             "after": f"{y}-01-01", "before": (end + timedelta(days=1)).isoformat()})
-            for i in range(4):
-                try:
-                    data = json.loads(urllib.request.urlopen(urllib.request.Request(f"{API}?{params}", headers=UA), timeout=90).read())["data"]
-                    break
-                except Exception as e:
-                    print(f"  [reddit] {sub} {q} {y}: {e}", flush=True)
-                    time.sleep(10 * (i + 1))
+            data = _fetch(sub, q, date(y, 1, 1), end + timedelta(days=1))
+            if data is None:  # serwer nie zdążył: kwartałami
+                parts = [_fetch(sub, q, date(y, m, 1), min(date(y + (m == 10), (m + 3 - 1) % 12 + 1, 1), end + timedelta(days=1)))
+                         for m in (1, 4, 7, 10) if date(y, m, 1) <= end]
+                data = None if any(x is None for x in parts) else [p for x in parts for p in x]
             if data is None:
                 continue
             con.execute("INSERT OR REPLACE INTO counts VALUES (?,?,?,?)", (sub, q, y, json.dumps(data)))
             con.commit()
-            time.sleep(1.5)
         for p in data or []:
             # znacznik dnia bywa przesunięty o strefę (23:00 dnia poprzedniego), więc zaokrąglamy do najbliższej doby
             t = datetime.fromisoformat(p["created_utc"].replace("Z", "+00:00")) + timedelta(hours=12)
@@ -147,16 +155,22 @@ def main(argv=None) -> int:
     ap.add_argument("--cache", default="reddit.db")
     ap.add_argument("--od", type=int, default=2019)
     ap.add_argument("--out", default="raporty/reddit-wyniki.md")
+    ap.add_argument("--suby", default="worldnews")
     a = ap.parse_args(argv)
     con = _con(a.cache)
     y1 = date.today().year
     # A. uwaga o kraju
-    att: dict[str, dict[str, set[date]]] = {"worldnews": {}, "geopolitics": {}}
+    from .backtest import load_events as _le
+    # kraje z wydarzeniami od 2019 r. (archiwum jest wolne, więc bez krajów, w których nie ma czego przewidywać)
+    wanted = {e["kraj"] for f in ("wydarzenia_2015_2024.csv", "wydarzenia.csv") for e in _le(f) if e["data"].year >= a.od}
+    att: dict[str, dict[str, set[date]]] = {sub: {} for sub in a.suby.split(",")}
     for c, names in COUNTRIES.items():
+        if c not in wanted:
+            continue
         name = re.sub(r"\\[bB]|[()?\\]", "", names[0])
         for sub in att:
             att[sub][c] = spikes(daily_counts(con, sub, name, a.od, y1))
-        print(f"  {c}: worldnews {len(att['worldnews'][c])}, geopolitics {len(att['geopolitics'][c])} skoków", flush=True)
+        print(f"  {c}: " + ", ".join(f"{sub} {len(att[sub][c])}" for sub in att) + " skoków", flush=True)
     t0 = time.time()
     sig = extract_signals(store.load(store.connect(a.db)) + [x for p in a.pierwotne if os.path.exists(p) for x in store.load(store.connect(p))])
     tr = traces(sig)
@@ -168,7 +182,7 @@ def main(argv=None) -> int:
          "Dane: archiwum Arctic Shift (kopia Reddita), dzienne liczby wpisów ze słowem w tytule. Skok: co najmniej 3× mediana z 28 dni. "
          "Trafny alarm: wydarzenie w tym kraju w ciągu 60 dni. p (przesunięcie): odsetek losowań z losowymi datami wydarzeń, w których wynik "
          "był co najmniej tak dobry; dla „odwrotnie” liczy się, czy wynik jest wyraźnie GORSZY od losowego (p odwrotnie małe).", "",
-         "## A. Uwaga o kraju (r/worldnews, r/geopolitics)", "", "Skok sam jako alarm:", "",
+         "## A. Uwaga o kraju (r/worldnews; kraje z wydarzeniami od 2019 r.)", "", "Skok sam jako alarm:", "",
          "| subreddit | okres | epizodów | precyzja | przewaga nad losowym | p wprost | p odwrotnie |", "|---|---|---|---|---|---|---|"]
     gates = []
     for label, evs, s, e in periods:
@@ -184,7 +198,7 @@ def main(argv=None) -> int:
             print(f"  {label} {sub}: {ev} perm {r}", flush=True)
         # bramki dla ręcznego indeksu i impulsy
         idx = replay([x for x in sig if s - timedelta(days=200) <= x["date"] <= e], s, e)
-        both = {c: att["worldnews"].get(c, set()) | att["geopolitics"].get(c, set()) for c in COUNTRIES}
+        both = {c: set().union(*(att[sub].get(c, set()) for sub in att)) for c in COUNTRIES}
         base = _counts(bt_eval(idx, evs))
         keep_if = _counts(bt_eval(gate(idx, both, days=14), evs))
         # odwrotnie: alarm zostaje tylko wtedy, gdy na Reddicie NIE było skoku w 14 dniach
