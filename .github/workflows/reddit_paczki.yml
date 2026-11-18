@@ -34,7 +34,16 @@ jobs:
         timeout-minutes: 200
         run: |
           mkdir -p paczki && cd paczki
-          curl -sSL -o reddit.torrent "https://academictorrents.com/download/${{ github.event.inputs.torrent }}.torrent"
+          h="${{ github.event.inputs.torrent }}"
+          curl -sSL -o reddit.torrent "https://academictorrents.com/download/$h.torrent" || true
+          if ! head -c 20 reddit.torrent | grep -q "^d"; then
+            # zgoda osoby z 18.11 na pobranie przez magnet/BitTorrent; wysyłanie do innych ograniczone do minimum
+            echo "plik .torrent niedostępny, pobieram opis przez magnet"
+            rm -f reddit.torrent
+            timeout 1200 aria2c --bt-metadata-only=true --bt-save-metadata=true --enable-dht=true --max-overall-upload-limit=1K --console-log-level=warn \
+              "magnet:?xt=urn:btih:$h&tr=https%3A%2F%2Facademictorrents.com%2Fannounce.php&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce" || true
+            mv "$h.torrent" reddit.torrent 2>/dev/null || true
+          fi
           ls -la reddit.torrent; file reddit.torrent; head -c 300 reddit.torrent | tr -c '[:print:]' '.'; echo
           aria2c --show-files reddit.torrent > lista.txt || true
           wc -l lista.txt; head -30 lista.txt; grep -iE "worldnews|wallstreetbets" lista.txt | head
@@ -42,7 +51,7 @@ jobs:
           idx=$(awk -F'|' '/^ *[0-9]+\|/{i=$1; gsub(/ /,"",i); f=$2} f ~ /\/(worldnews|wallstreetbets)_submissions\.zst/ {print i; f=""}' lista.txt | sort -un | paste -sd, -)
           echo "wybrane pliki: $idx"
           [ -n "$idx" ] || { echo "nie znaleziono plików w torrencie"; exit 1; }
-          aria2c --select-file="$idx" --seed-time=0 --bt-stop-timeout=1800 --summary-interval=300 --console-log-level=warn \
+          aria2c --select-file="$idx" --seed-time=0 --max-overall-upload-limit=1K --bt-stop-timeout=1800 --summary-interval=300 --console-log-level=warn \
             --file-allocation=none --max-connection-per-server=8 reddit.torrent || true
           find . -name "*_submissions.zst" -exec ls -la {} \;
       - name: Liczniki dzienne
