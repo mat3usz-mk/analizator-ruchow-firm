@@ -28,6 +28,11 @@ jobs:
           path: .
           run-id: ${{ github.event.inputs.z_przebiegu }}
           github-token: ${{ github.token }}
+      - name: Dane z wydania „dane” (bez ponownego pobierania)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: bash .github/dane.sh pobierz sec_slady.db
       - name: Test
         timeout-minutes: 320
         env:
@@ -39,6 +44,12 @@ jobs:
           name: sec_slady
           path: sec_slady.db
           retention-days: 30
+      - name: Zapis danych w wydaniu „dane”
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: bash .github/dane.sh wyslij sec_slady.db
       - name: Zapis wyniku
         run: |
           git config user.name "github-actions[bot]"

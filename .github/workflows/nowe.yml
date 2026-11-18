@@ -5,11 +5,11 @@ on:
   workflow_dispatch:
     inputs:
       z_przebiegu:
-        description: "numer przebiegu z bazą historia_gkg"
-        default: "43880895708"
+        description: "numer przebiegu z bazą historia_gkg (puste = z wydania „dane”)"
+        default: ""
       pierwotne_z_przebiegu:
-        description: "numer przebiegu z historią źródeł pierwotnych"
-        default: "43888316198"
+        description: "numer przebiegu z historią źródeł pierwotnych (puste = z wydania „dane”)"
+        default: ""
       nowe_z_przebiegu:
         description: "numer wcześniejszego przebiegu tego zadania z pobraną historią nowych źródeł (pomija pobieranie)"
         default: ""
@@ -31,12 +31,14 @@ jobs:
         with:
           python-version: "3.12"
       - uses: actions/download-artifact@v4
+        if: github.event.inputs.z_przebiegu != ''
         with:
           name: historia_gkg
           path: .
           run-id: ${{ github.event.inputs.z_przebiegu }}
           github-token: ${{ github.token }}
       - uses: actions/download-artifact@v4
+        if: github.event.inputs.pierwotne_z_przebiegu != ''
         with:
           name: pierwotne_historia
           path: .
@@ -49,24 +51,27 @@ jobs:
           path: .
           run-id: ${{ github.event.inputs.nowe_z_przebiegu }}
           github-token: ${{ github.token }}
+      - name: Dane z wydania „dane” (bez ponownego pobierania)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: bash .github/dane.sh pobierz historia_gkg.db pierwotne_historia.db nowe_historia.db nowe_ton.db
       - name: Historia EIA i Wikipedii
-        if: github.event.inputs.nowe_z_przebiegu == ''
+        if: hashFiles('nowe_historia.db') == ''
         timeout-minutes: 90
         continue-on-error: true
         run: python -m analizator.nowe_zrodla --zrodla ${{ github.event.inputs.zrodla == 'eia' && 'eia' || 'eia,wiki' }} --od 2017-03-01 --db nowe_historia.db
       - name: Historia tonu GDELT
-        if: github.event.inputs.nowe_z_przebiegu == '' && contains(github.event.inputs.zrodla, 'ton')
+        if: hashFiles('nowe_ton.db') == '' && contains(github.event.inputs.zrodla, 'ton')
         timeout-minutes: 180
         continue-on-error: true
         run: python -m analizator.nowe_zrodla --zrodla ton --od 2017-03-01 --db nowe_ton.db
-      - uses: actions/upload-artifact@v4
-        if: github.event.inputs.nowe_z_przebiegu == ''
-        with:
-          name: nowe_historia
-          path: |
-            nowe_historia.db
-            nowe_ton.db
-          retention-days: 30
+      - name: Zapis danych w wydaniu „dane”
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: bash .github/dane.sh wyslij nowe_historia.db nowe_ton.db
       - name: Historia krótkiej sprzedaży (FINRA)
         if: github.event.inputs.zrodla != 'eia'
         continue-on-error: true

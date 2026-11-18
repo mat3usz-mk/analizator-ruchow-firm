@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
     inputs:
       z_przebiegu:
-        description: "numer przebiegu z bazą historia_gkg (artefakt)"
-        default: "43880895708"
+        description: "numer przebiegu z bazą historia_gkg (puste = z wydania „dane”)"
+        default: ""
       pierwotne_z_przebiegu:
         description: "numer przebiegu z gotową historią źródeł pierwotnych (pomija pobieranie)"
         default: ""
@@ -29,6 +29,7 @@ jobs:
         with:
           python-version: "3.12"
       - uses: actions/download-artifact@v4
+        if: github.event.inputs.z_przebiegu != ''
         with:
           name: historia_gkg
           path: .
@@ -41,15 +42,20 @@ jobs:
           path: .
           run-id: ${{ github.event.inputs.pierwotne_z_przebiegu }}
           github-token: ${{ github.token }}
+      - name: Dane z wydania „dane” (bez ponownego pobierania)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: bash .github/dane.sh pobierz historia_gkg.db pierwotne_historia.db
       - name: Historia źródeł pierwotnych
-        if: github.event.inputs.pierwotne_z_przebiegu == ''
+        if: hashFiles('pierwotne_historia.db') == ''
         run: python -m analizator.oficjalne --od 2018-09-01 --db pierwotne_historia.db
-      - uses: actions/upload-artifact@v4
-        if: github.event.inputs.pierwotne_z_przebiegu == ''
-        with:
-          name: pierwotne_historia
-          path: pierwotne_historia.db
-          retention-days: 30
+      - name: Zapis danych w wydaniu „dane”
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: bash .github/dane.sh wyslij pierwotne_historia.db
       # Źródła z kontem (ACLED, AGSI): dane tylko w tym zadaniu, bez artefaktu (warunki ACLED zabraniają publikacji danych)
       - name: Historia źródeł z kontem
         env:

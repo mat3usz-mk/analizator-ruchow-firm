@@ -108,3 +108,9 @@ jobs:
           name: historia_gkg
           path: historia_gkg.db
           retention-days: 30
+      - name: Zapis danych w wydaniu „dane”
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: bash .github/dane.sh wyslij historia_gkg.db

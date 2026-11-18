@@ -1,0 +1,37 @@
+name: Dane do wydania
+
+# Ręcznie: przenosi bazy z artefaktów przebiegów (znikają po 30 dniach) do stałego wydania „dane”.
+on:
+  workflow_dispatch:
+    inputs:
+      artefakty:
+        description: "pary nazwa_artefaktu:numer_przebiegu oddzielone spacją"
+        default: "historia_gkg:43880895708 historia_gkg_2015:44072940932 pierwotne_historia:43888316198 nowe_historia:44121171133 reddit_paczki:44292354742"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  przenies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Przeniesienie
+        run: |
+          gh release view dane >/dev/null 2>&1 || gh release create dane --target main --latest=false --title "Dane historyczne" \
+            --notes "Pobrane dane publiczne (liczniki GDELT, SEC, źródła pierwotne, Reddit, EIA, Wikipedia), żeby testy nie pobierały ich od nowa. Bez danych ACLED."
+          for p in ${{ github.event.inputs.artefakty }}; do
+            n=${p%%:*}; r=${p##*:}; d="a_$n"
+            gh run download "$r" -n "$n" -D "$d" || { echo "brak $n z $r"; continue; }
+            ( cd "$d" && for f in *; do
+                t="$f"; [ "$n" = historia_gkg_2015 ] && [ "$f" = historia_gkg.db ] && t=historia_gkg_2015.db
+                [ "$t" != "$f" ] && mv "$f" "$t"
+                bash ../.github/dane.sh wyslij "$t"
+              done )
+          done
+          gh release view dane --json assets --jq '.assets[] | "\(.name) \(.size)"'
