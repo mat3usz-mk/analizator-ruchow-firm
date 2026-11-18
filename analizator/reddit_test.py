@@ -132,7 +132,30 @@ def market_test(con, y0: int, y1: int, horizon: int = 30, n_perm: int = 1000) ->
         for _ in range(n_perm if ev else 0):
             smp = rnd.sample(allr, len(ev)) if len(allr) >= len(ev) else allr
             sims.append(mean(smp) - mean(allr))
-        rows.append({"aktywo": label, "skokow": len(sp), "po_skoku": mean(ev), "zwykle": mean(allr), "roznica": diff,
+        # odporność: epizody bez nachodzenia (po skoku 30 dni przerwy), wynik w latach i bez 2020 r.
+        eps, last = [], None
+        for d0 in sp:
+            if last is None or (d0 - last).days > horizon:
+                eps.append(d0)
+                last = d0
+        epr = [(d0, r) for d0 in eps if (r := s.ret(d0 + timedelta(days=1), horizon)) is not None]
+        base_by_y = defaultdict(list)
+        for d0 in days:
+            if (r := s.ret(d0 + timedelta(days=1), horizon)) is not None:
+                base_by_y[d0.year].append(r)
+        lata = {}
+        for y in sorted({d0.year for d0, _ in epr}):
+            xs = [r for d0, r in epr if d0.year == y]
+            lata[y] = (len(xs), mean(xs) - mean(base_by_y[y]))
+        no20 = [r for d0, r in epr if d0.year != 2020]
+        all20 = [r for y, xs in base_by_y.items() if y != 2020 for r in xs]
+        diff_ep = mean([r for _, r in epr]) - mean(allr) if epr and allr else None
+        sims_ep = [mean(rnd.sample(allr, len(epr))) - mean(allr) for _ in range(n_perm)] if epr and len(allr) >= len(epr) else []
+        rows.append({"epizodow": len(epr), "roznica_ep": diff_ep, "lata": lata,
+                     "bez_2020": (mean(no20) - mean(all20)) if no20 and all20 else None,
+                     "p_ep_wprost": sum(x >= diff_ep for x in sims_ep) / len(sims_ep) if sims_ep else None,
+                     "p_ep_odwrotnie": sum(x <= diff_ep for x in sims_ep) / len(sims_ep) if sims_ep else None})
+        rows[-1].update({"aktywo": label, "skokow": len(sp), "po_skoku": mean(ev), "zwykle": mean(allr), "roznica": diff,
                      "w_gore": sum(r > 0 for r in ev) / len(ev) if ev else None, "w_gore_zwykle": sum(r > 0 for r in allr) / len(allr) if allr else None,
                      "p_wprost": sum(x >= diff for x in sims) / len(sims) if sims else None,
                      "p_odwrotnie": sum(x <= diff for x in sims) / len(sims) if sims else None})
@@ -241,6 +264,13 @@ def main(argv=None) -> int:
         L.append(f"| {r['aktywo']} | {r['skokow']} | {_pp(r['po_skoku'])} | {_pp(r['zwykle'])} | {_pp(r['roznica'])} | {_pct(r['w_gore'])} | "
                  f"{_pct(r['w_gore_zwykle'])} | {'brak' if r['p_wprost'] is None else format(r['p_wprost'], '.3f')} | "
                  f"{'brak' if r['p_odwrotnie'] is None else format(r['p_odwrotnie'], '.3f')} |")
+    f3 = lambda x: "brak" if x is None else format(x, ".3f")
+    L += ["", "Odporność (epizody bez nachodzenia: po skoku 30 dni przerwy; różnica wobec zwykłego dnia):", "",
+          "| wzmianki | epizodów | różnica | p wprost | p odwrotnie | bez 2020 r. | w kolejnych latach (epizody: różnica) |", "|---|---|---|---|---|---|---|"]
+    for r in mk:
+        lata = ", ".join(f"{y} ({n}: {_pp(dv)})" for y, (n, dv) in r["lata"].items())
+        L.append(f"| {r['aktywo']} | {r['epizodow']} | {_pp(r['roznica_ep'])} | {f3(r['p_ep_wprost'])} | {f3(r['p_ep_odwrotnie'])} | "
+                 f"{_pp(r['bez_2020'])} | {lata} |")
     L += ["", "Uwaga: kolejne dni na giełdzie nie są niezależne (okna 30 dni nachodzą na siebie), więc p dla giełdy jest raczej zbyt optymistyczne. "
           "X/Twitter pominięty: brak darmowego dostępu do archiwum (API płatne, Nitter wyłączony). Reddit bez archiwum Arctic Shift nie daje historii "
           "(Pushshift zamknięty, PullPush blokuje automaty). To test historyczny, nie gwarancja i nie rekomendacja inwestycyjna."]

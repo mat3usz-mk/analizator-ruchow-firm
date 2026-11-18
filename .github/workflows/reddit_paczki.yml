@@ -14,6 +14,9 @@ on:
       torrent:
         description: "identyfikator paczki na academictorrents.com"
         default: "1614740ac8c94505e4ecb9d88be8bed7b6afddd4"
+      liczniki_z_przebiegu:
+        description: "numer przebiegu z gotowymi licznikami (pomija pobieranie paczek)"
+        default: ""
 
 permissions:
   contents: write
@@ -29,8 +32,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Narzędzia
+        if: github.event.inputs.liczniki_z_przebiegu == ''
         run: sudo apt-get install -y -q aria2 >/dev/null && pip install -q zstandard
       - name: Pobranie paczek (tylko dwa pliki z torrenta)
+        if: github.event.inputs.liczniki_z_przebiegu == ''
         timeout-minutes: 200
         run: |
           mkdir -p paczki && cd paczki
@@ -55,12 +60,21 @@ jobs:
             --file-allocation=none --max-connection-per-server=8 reddit.torrent || true
           find . -name "*_submissions.zst" -exec ls -la {} \;
       - name: Liczniki dzienne
+        if: github.event.inputs.liczniki_z_przebiegu == ''
         run: |
           for s in worldnews wallstreetbets; do
             f=$(find paczki -name "${s}_submissions.zst" | head -n1)
             [ -n "$f" ] && python -m analizator.reddit_paczki --plik "$f" --sub "$s" --cache reddit.db
           done
+      - uses: actions/download-artifact@v4
+        if: github.event.inputs.liczniki_z_przebiegu != ''
+        with:
+          name: reddit_paczki
+          path: .
+          run-id: ${{ github.event.inputs.liczniki_z_przebiegu }}
+          github-token: ${{ github.token }}
       - uses: actions/upload-artifact@v4
+        if: github.event.inputs.liczniki_z_przebiegu == ''
         with:
           name: reddit_paczki
           path: reddit.db
