@@ -16,24 +16,20 @@ jobs:
         run: |
           while read -r name url; do
             [ -z "$name" ] && continue
-            r=$(curl -s -L -m 60 -A "analizator-ruchow-firm/0.10 (github.com/mat3usz-mk/analizator-ruchow-firm)" -o /tmp/b -w '%{http_code} %{size_download}' "$url")
-            echo "$name $r $(head -c 400 /tmp/b | tr -d '\n\r' | tr -c '[:print:]' ' ')"
+            r=$(curl -s -L -m 60 -A "analizator-ruchow-firm/0.10 (github.com/mat3usz-mk/analizator-ruchow-firm)" -r 0-4000 -o /tmp/b -w '%{http_code} %{size_download}' "$url")
+            echo "$name $r $(head -c 1500 /tmp/b | tr -d '\n\r' | tr -c '[:print:]' ' ')"
           done <<LIST
-          arctic_posts https://arctic-shift.photon-reddit.com/api/posts/search?subreddit=worldnews&after=2020-01-01&before=2020-01-02&limit=3
-          arctic_agg https://arctic-shift.photon-reddit.com/api/posts/search/aggregate?aggregate=created_utc&frequency=day&subreddit=worldnews&after=2020-01-01&before=2020-01-10
-          arctic_agg_q https://arctic-shift.photon-reddit.com/api/posts/search/aggregate?aggregate=created_utc&frequency=day&subreddit=worldnews&title=Iran&after=2020-01-01&before=2020-01-10
-          arctic_wsb https://arctic-shift.photon-reddit.com/api/posts/search?subreddit=wallstreetbets&after=2021-01-27&before=2021-01-28&limit=2
-          pullpush https://api.pullpush.io/reddit/search/submission/?subreddit=worldnews&after=1577836800&before=1577923200&size=2
-          reddit_json https://www.reddit.com/r/worldnews/new.json?limit=2
-          x_search https://api.twitter.com/2/tweets/search/all?query=iran
-          nitter https://nitter.net/search?q=iran
+          sc_list https://data.source.coop/dataforcanada/d4c-datapkg-web-corpus?list-type=2&prefix=archive/reddit/subreddits25/&max-keys=15
+          sc_list2 https://data.source.coop/dataforcanada/d4c-datapkg-web-corpus/?list-type=2&prefix=archive/reddit/subreddits25/worldnews&max-keys=15
+          sc_head https://data.source.coop/dataforcanada/d4c-datapkg-web-corpus/archive/reddit/subreddits25/worldnews_submissions.zst
+          at_search https://academictorrents.com/browse.php?search=reddit+subreddits+2024
           LIST
       - name: Źródła „grubych ryb” (kod, rozmiar, początek odpowiedzi)
         if: false
         run: |
           while read -r name url; do
             [ -z "$name" ] && continue
-            r=$(curl -s -L -m 60 -A "Mozilla/5.0 (analizator ruchow firm; kontakt w repozytorium)" -o /tmp/b -w '%{http_code} %{size_download}' "$url")
+            r=$(curl -s -L -m 60 -A "Mozilla/5.0 (analizator ruchow firm; kontakt w repozytorium)" -r 0-4000 -o /tmp/b -w '%{http_code} %{size_download}' "$url")
             echo "$name $r $(head -c 220 /tmp/b | tr -d '\n\r' | tr -c '[:print:]' ' ')"
           done <<LIST
           trumpstruth https://trumpstruth.org/
