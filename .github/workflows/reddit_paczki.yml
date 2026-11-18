@@ -1,0 +1,77 @@
+name: Test Reddita z paczek
+
+# Ręcznie (zgoda osoby 18.11): pełna kopia r/worldnews i r/wallstreetbets do końca 2024 r. z paczek „top 40k subreddits”
+# (Academic Torrents), liczniki dzienne i test wprost/odwrotnie na latach 2019-2021 i 2022-2024.
+on:
+  workflow_dispatch:
+    inputs:
+      z_przebiegu:
+        description: "numer przebiegu z bazą historia_gkg"
+        default: "43880895708"
+      pierwotne_z_przebiegu:
+        description: "numer przebiegu z historią źródeł pierwotnych"
+        default: "43888316198"
+      torrent:
+        description: "identyfikator paczki na academictorrents.com"
+        default: "1614740ac8c94505e4ecb9d88be8bed7b6afddd4"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Narzędzia
+        run: sudo apt-get install -y -q aria2 >/dev/null && pip install -q zstandard
+      - name: Pobranie paczek (tylko dwa pliki z torrenta)
+        timeout-minutes: 200
+        run: |
+          mkdir -p paczki && cd paczki
+          curl -sSL -o reddit.torrent "https://academictorrents.com/download/${{ github.event.inputs.torrent }}.torrent"
+          aria2c --show-files reddit.torrent > lista.txt
+          grep -E "/(worldnews|wallstreetbets)_submissions\.zst" -B1 -A2 lista.txt | head -20
+          idx=$(awk -F'|' '/^ *[0-9]+\|/{i=$1; gsub(/ /,"",i); f=$2} f ~ /\/(worldnews|wallstreetbets)_submissions\.zst/ {print i; f=""}' lista.txt | sort -un | paste -sd, -)
+          echo "wybrane pliki: $idx"
+          [ -n "$idx" ] || { echo "nie znaleziono plików w torrencie"; exit 1; }
+          aria2c --select-file="$idx" --seed-time=0 --bt-stop-timeout=1800 --summary-interval=300 --console-log-level=warn \
+            --file-allocation=none --max-connection-per-server=8 reddit.torrent || true
+          find . -name "*_submissions.zst" -exec ls -la {} \;
+      - name: Liczniki dzienne
+        run: |
+          for s in worldnews wallstreetbets; do
+            f=$(find paczki -name "${s}_submissions.zst" | head -n1)
+            [ -n "$f" ] && python -m analizator.reddit_paczki --plik "$f" --sub "$s" --cache reddit.db
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reddit_paczki
+          path: reddit.db
+          retention-days: 30
+      - uses: actions/download-artifact@v4
+        with:
+          name: historia_gkg
+          path: .
+          run-id: ${{ github.event.inputs.z_przebiegu }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: pierwotne_historia
+          path: .
+          run-id: ${{ github.event.inputs.pierwotne_z_przebiegu }}
+          github-token: ${{ github.token }}
+      - name: Test
+        run: python -m analizator.reddit_test --db historia_gkg.db --pierwotne pierwotne_historia.db --cache reddit.db --do-roku 2024 --wszystkie-kraje --out raporty/reddit-wyniki.md
+      - name: Zapis wyniku
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add raporty/reddit-wyniki.md
+          git commit -m "Test Reddita z paczek: wyniki" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done

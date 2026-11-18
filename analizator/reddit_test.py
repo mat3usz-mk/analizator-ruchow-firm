@@ -121,9 +121,9 @@ def market_test(con, y0: int, y1: int, horizon: int = 30, n_perm: int = 1000) ->
             sp = spikes(daily_counts(con, "wallstreetbets", q, y0, y1))
         else:
             sp = {d for d in puts if puts[d] >= 5 and puts[d] >= 2 * max(calls.get(d, 0), 1)}
-        sp = sorted(d for d in sp if date(y0, 3, 1) <= d <= date.today() - timedelta(days=horizon + 2))
+        sp = sorted(d for d in sp if date(y0, 3, 1) <= d <= min(date.today(), date(y1, 12, 31)) - timedelta(days=horizon + 2))
         ev = [r for d in sp if (r := s.ret(d + timedelta(days=1), horizon)) is not None]
-        days = [date(y0, 3, 1) + timedelta(days=i) for i in range((date.today() - timedelta(days=horizon + 2) - date(y0, 3, 1)).days)]
+        days = [date(y0, 3, 1) + timedelta(days=i) for i in range((min(date.today(), date(y1, 12, 31)) - timedelta(days=horizon + 2) - date(y0, 3, 1)).days)]
         allr = [r for d in days if (r := s.ret(d + timedelta(days=1), horizon)) is not None]
         mean = lambda xs: sum(xs) / len(xs) if xs else None
         diff = (mean(ev) - mean(allr)) if ev and allr else None
@@ -154,15 +154,18 @@ def main(argv=None) -> int:
     ap.add_argument("--pierwotne", nargs="*", default=[])
     ap.add_argument("--cache", default="reddit.db")
     ap.add_argument("--od", type=int, default=2019)
+    ap.add_argument("--do-roku", type=int, default=date.today().year, help="2024 = tylko paczki z kopią Reddita (do końca 2024)")
     ap.add_argument("--out", default="raporty/reddit-wyniki.md")
     ap.add_argument("--suby", default="worldnews")
+    ap.add_argument("--wszystkie-kraje", action="store_true")
     a = ap.parse_args(argv)
     con = _con(a.cache)
-    y1 = date.today().year
+    y1 = a.do_roku
     # A. uwaga o kraju
     from .backtest import load_events as _le
     # kraje z wydarzeniami od 2019 r. (archiwum jest wolne, więc bez krajów, w których nie ma czego przewidywać)
-    wanted = {e["kraj"] for f in ("wydarzenia_2015_2024.csv", "wydarzenia.csv") for e in _le(f) if e["data"].year >= a.od}
+    wanted = ({e["kraj"] for f in ("wydarzenia_2015_2024.csv", "wydarzenia.csv") for e in _le(f) if e["data"].year >= a.od}
+              if not a.wszystkie_kraje else set(COUNTRIES))
     att: dict[str, dict[str, set[date]]] = {sub: {} for sub in a.suby.split(",")}
     for c, names in COUNTRIES.items():
         if c not in wanted:
@@ -176,10 +179,14 @@ def main(argv=None) -> int:
     tr = traces(sig)
     print(f"sygnały: {len(sig)} ({time.time() - t0:.0f} s)", flush=True)
     d = date.fromisoformat
-    periods = [("2019–2024", load_events("wydarzenia_2015_2024.csv"), d("2019-03-01"), d("2024-12-31")),
-               ("2025–2026 (test)", load_events("wydarzenia.csv"), d("2025-03-01"), date.today())]
+    if y1 <= 2024:  # paczki kończą się na 2024 r.: dwa okresy z listy 2015-2024
+        ev = load_events("wydarzenia_2015_2024.csv")
+        periods = [("2019–2021", ev, d("2019-03-01"), d("2021-12-31")), ("2022–2024", ev, d("2022-01-01"), d("2024-12-31"))]
+    else:
+        periods = [("2019–2024", load_events("wydarzenia_2015_2024.csv"), d("2019-03-01"), d("2024-12-31")),
+                   ("2025–2026 (test)", load_events("wydarzenia.csv"), d("2025-03-01"), date.today())]
     L = [f"# Reddit: nastroje wprost i odwrotnie ({date.today().isoformat()})", "",
-         "Dane: archiwum Arctic Shift (kopia Reddita), dzienne liczby wpisów ze słowem w tytule. Skok: co najmniej 3× mediana z 28 dni. "
+         "Dane: kopia Reddita (paczki „top 40k subreddits” do końca 2024 r. albo archiwum Arctic Shift), dzienne liczby wpisów ze słowem w tytule. Skok: co najmniej 3× mediana z 28 dni. "
          "Trafny alarm: wydarzenie w tym kraju w ciągu 60 dni. p (przesunięcie): odsetek losowań z losowymi datami wydarzeń, w których wynik "
          "był co najmniej tak dobry; dla „odwrotnie” liczy się, czy wynik jest wyraźnie GORSZY od losowego (p odwrotnie małe).", "",
          "## A. Uwaga o kraju (r/worldnews; kraje z wydarzeniami od 2019 r.)", "", "Skok sam jako alarm:", "",
