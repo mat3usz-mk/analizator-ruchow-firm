@@ -32,24 +32,16 @@ FIRMY: list[tuple[str, str, str, tuple]] = [
     ("RTX", "zbrojenia", "workday", ("globalhr", "wd5", "REC_RTX_Ext_Gateway")),
     ("Chevron", "energia", "workday", ("chevron", "wd5", "jobs")),
     ("Baker Hughes", "energia", "workday", ("bakerhughes", "wd5", "BakerHughes")),
-    ("Halliburton", "energia", "workday", ("halliburton", "wd5", "HalliburtonCareers")),
     ("GE Vernova", "energia", "workday", ("gevernova", "wd5", "Vernova_ExternalSite")),
     ("GE Aerospace", "lotnictwo i zbrojenia", "workday", ("geaerospace", "wd5", "GE_ExternalSite")),
     ("Citi", "finanse", "workday", ("citi", "wd5", "2")),
-    ("Walmart", "handel", "workday", ("walmart", "wd5", "WalmartExternal")),
     ("Pfizer", "farmacja", "workday", ("pfizer", "wd1", "PfizerCareers")),
     ("Shell", "energia", "workday", ("shell", "wd3", "ShellCareers")),
     ("BP", "energia", "workday", ("bpinternational", "wd3", "bpCareers")),
     ("ConocoPhillips", "energia", "workday", ("conocophillips", "wd1", "External")),
     ("Caterpillar", "przemysł", "workday", ("cat", "wd5", "CaterpillarCareers")),
-    ("Cargill", "żywność i zboża", "workday", ("cargill", "wd5", "Cargill")),
-    ("ADM", "żywność i zboża", "workday", ("adm", "wd5", "External")),
-    ("Bunge", "żywność i zboża", "workday", ("bunge", "wd1", "Bunge_Careers")),
-    ("Honeywell", "przemysł", "workday", ("honeywell", "wd5", "Honeywell")),
     ("3M", "przemysł", "workday", ("3m", "wd1", "Search")),
-    ("Visa", "finanse", "smartrecruiters", ("Visa",)),
     ("Bosch", "przemysł", "smartrecruiters", ("BoschGroup",)),
-    ("IKEA", "handel", "smartrecruiters", ("IKEA",)),
     ("Palantir", "zbrojenia", "lever", ("palantir",)),
     ("Anduril", "zbrojenia", "greenhouse", ("andurilindustries",)),
     ("Stripe", "finanse", "greenhouse", ("stripe",)),
@@ -87,7 +79,17 @@ def workday(tenant: str, wd: str, site: str) -> Counter:
                     if "count" in v:
                         out[v.get("descriptor", "?")] += int(v["count"])
     if not out:
-        out["razem"] = int(r.get("total", 0))
+        # bez faset krajów: fasety miejsc („Poland, Warsaw”, „USA, TX, Houston”), kraj zostaje do odczytania przy analizie
+        for f in r.get("facets", []):
+            vals = f.get("values", [])
+            for g in [f] + [v for v in vals if isinstance(v, dict) and "values" in v]:
+                if "location" in (g.get("facetParameter", "") + g.get("descriptor", "")).lower():
+                    for v in g.get("values", []):
+                        if "count" in v:
+                            out["miejsce: " + v.get("descriptor", "?")] += int(v["count"])
+            if out:
+                break
+    out["razem"] = int(r.get("total", 0))
     return out
 
 
