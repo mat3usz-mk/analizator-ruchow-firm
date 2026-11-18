@@ -1,0 +1,48 @@
+name: Test planów firm (SEC)
+
+# Ręcznie: miesięczne liczby dokumentów SEC o krajach (ryzyka w 10-K/10-Q/20-F, zawieszenie i wygaszanie w 8-K) i test na historii.
+on:
+  workflow_dispatch:
+    inputs:
+      z_przebiegu:
+        description: "numer wcześniejszego przebiegu z pobranymi liczbami (dociąga tylko brakujące)"
+        default: ""
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        if: github.event.inputs.z_przebiegu != ''
+        with:
+          name: sec_slady
+          path: .
+          run-id: ${{ github.event.inputs.z_przebiegu }}
+          github-token: ${{ github.token }}
+      - name: Test
+        timeout-minutes: 320
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: python -m analizator.sec_slady --od 2018-01 --cache sec_slady.db --out raporty/sec-slady-wyniki.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sec_slady
+          path: sec_slady.db
+          retention-days: 30
+      - name: Zapis wyniku
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add raporty/sec-slady-wyniki.md
+          git commit -m "Test planów firm (SEC): wyniki" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done
