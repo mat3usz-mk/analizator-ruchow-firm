@@ -1,0 +1,60 @@
+name: Zbieranie na przyszłość
+
+# Raz dziennie (wywołuje Zegar czuwania ok. 5:00 UTC): oferty pracy dużych firm według kraju do gałęzi `archiwum`
+# (archiwum/<dzień>/oferty.csv), a 3. dnia miesiąca uzupełnienie liczb SEC o poprzedni miesiąc (wydanie „dane”).
+# Ręcznie z trybem „sprawdz”: tylko pokazuje, które firmy odpowiadają.
+on:
+  workflow_dispatch:
+    inputs:
+      tryb:
+        description: "zbieraj albo sprawdz"
+        default: "zbieraj"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oferty
+  cancel-in-progress: false
+
+jobs:
+  zbieraj:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Sprawdzenie firm
+        if: github.event.inputs.tryb == 'sprawdz'
+        run: python -m analizator.oferty --sprawdz
+      - name: Oferty pracy do archiwum
+        if: github.event.inputs.tryb != 'sprawdz'
+        run: |
+          today=$(date -u +%F)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git fetch -q origin archiwum && git worktree add -q arch origin/archiwum && git -C arch switch -q -C archiwum
+          if [ -s "arch/archiwum/$today/oferty.csv" ]; then echo "dzisiejsze oferty już zapisane"; exit 0; fi
+          python -m analizator.oferty --out "arch/archiwum/$today/oferty.csv"
+          cd arch && git add -A && { git commit -qm "Oferty pracy $today" || exit 0; }
+          for i in 1 2 3; do git push -q origin archiwum && break; sleep 5; git pull -q --rebase origin archiwum; done
+      - name: Liczby SEC za poprzedni miesiąc (3. dnia miesiąca)
+        if: github.event.inputs.tryb != 'sprawdz'
+        timeout-minutes: 60
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          [ "$(date -u +%d)" = "03" ] || { echo "nie dziś"; exit 0; }
+          bash .github/dane.sh pobierz sec_slady.db
+          python -m analizator.sec_slady --od 2018-01 --cache sec_slady.db --out raporty/sec-slady-wyniki.md --minut 40
+          bash .github/dane.sh wyslij sec_slady.db
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add raporty/sec-slady-wyniki.md
+          git commit -qm "Liczby SEC: nowy miesiąc" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done

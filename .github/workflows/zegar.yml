@@ -28,6 +28,8 @@ jobs:
         run: |
           for i in $(seq 1 11); do
             gh api -X POST "repos/$REPO/actions/workflows/czuwanie.yml/dispatches" -f ref=main && echo "$(date -u +%H:%M) cykl $i wywołany" || echo "nie wywołano cyklu $i"
+            # raz dziennie ok. 5:00 UTC zbieranie na przyszłość (oferty pracy, liczby SEC); zadanie samo pomija powtórkę tego dnia
+            [ "$(date -u +%H)" = "05" ] && { gh api -X POST "repos/$REPO/actions/workflows/oferty.yml/dispatches" -f ref=main && echo "zbieranie wywołane" || true; }
             [ "$i" -lt 11 ] && sleep 1800
           done
       - name: Następna zmiana zegara
