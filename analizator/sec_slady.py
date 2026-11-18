@@ -14,11 +14,13 @@ Sprawdzenie: czy w ciągu 90 dni od końca takiego miesiąca w kraju nastąpiło
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import json
 import os
 import random
 import re
 import sqlite3
+import threading
 import statistics
 import time
 import urllib.parse
@@ -38,25 +40,64 @@ def _months(y0: int, m0: int, end: date):
         y, m = nxt.year, nxt.month
 
 
-def fetch(con, ua: str, country: str, name: str, key: str, start: date, end: date) -> int | None:
-    row = con.execute("SELECT n FROM liczby WHERE kraj=? AND seria=? AND miesiac=?", (country, key, start.isoformat())).fetchone()
-    if row:
-        return row[0]
+_LOCK = threading.Lock()
+_LAST = [0.0]
+
+
+def _pace(per_sec: float = 8.0) -> None:
+    """Wspólny ogranicznik dla wszystkich wątków: SEC pozwala na 10 zapytań na sekundę, trzymamy się 8."""
+    with _LOCK:
+        wait = _LAST[0] + 1 / per_sec - time.monotonic()
+        if wait > 0:
+            time.sleep(wait)
+        _LAST[0] = time.monotonic()
+
+
+def fetch_remote(ua: str, name: str, key: str, start: date, end: date) -> int | None:
     forms, q = SERIES[key]
     params = urllib.parse.urlencode({"q": q.format(n=name), "forms": forms, "dateRange": "custom",
                                      "startdt": start.isoformat(), "enddt": end.isoformat()})
     for i in range(3):
+        _pace()
         try:
             data = json.loads(urllib.request.urlopen(urllib.request.Request(
                 f"https://efts.sec.gov/LATEST/search-index?{params}", headers={"User-Agent": ua}), timeout=60).read())
-            n = int(data.get("hits", {}).get("total", {}).get("value", 0))
-            con.execute("INSERT OR REPLACE INTO liczby VALUES (?,?,?,?)", (country, key, start.isoformat(), n))
-            time.sleep(0.12)  # SEC: do 10 zapytań na sekundę
-            return n
+            return int(data.get("hits", {}).get("total", {}).get("value", 0))
         except Exception as e:
-            print(f"  [sec] {country} {key} {start:%Y-%m}: {e}", flush=True)
+            print(f"  [sec] {name} {key} {start:%Y-%m}: {e}", flush=True)
             time.sleep(5 * (i + 1))
     return None
+
+
+def fetch(con, ua: str, country: str, name: str, key: str, start: date, end: date) -> int | None:
+    row = con.execute("SELECT n FROM liczby WHERE kraj=? AND seria=? AND miesiac=?", (country, key, start.isoformat())).fetchone()
+    if row:
+        return row[0]
+    n = fetch_remote(ua, name, key, start, end)
+    if n is not None:
+        con.execute("INSERT OR REPLACE INTO liczby VALUES (?,?,?,?)", (country, key, start.isoformat(), n))
+    return n
+
+
+def prefetch(con, ua: str, jobs: list[tuple[str, str, str, date, date]], workers: int = 6, deadline: float | None = None) -> int:
+    """Pobiera brakujące liczby równolegle (kilka wątków, wspólny limit tempa); zapis do bazy tylko w głównym wątku."""
+    have = {(k, s_, m) for k, s_, m in con.execute("SELECT kraj, seria, miesiac FROM liczby")}
+    todo = [j for j in jobs if (j[0], j[2], j[3].isoformat()) not in have]
+    print(f"  do pobrania {len(todo)} z {len(jobs)}", flush=True)
+    done = 0
+    with concurrent.futures.ThreadPoolExecutor(workers) as ex:
+        for i in range(0, len(todo), 400):
+            if deadline and time.monotonic() > deadline:
+                print("  koniec czasu na pobieranie, test na tym, co jest", flush=True)
+                break
+            batch = todo[i:i + 400]
+            for (c, name, k, s, e), n in zip(batch, ex.map(lambda j: fetch_remote(ua, j[1], j[2], j[3], j[4]), batch)):
+                if n is not None:
+                    con.execute("INSERT OR REPLACE INTO liczby VALUES (?,?,?,?)", (c, k, s.isoformat(), n))
+                    done += 1
+            con.commit()
+            print(f"  pobrano {done} z {len(todo)}", flush=True)
+    return done
 
 
 def flags(ser: dict[date, float], z_thr: float = 2.0, min_ratio: float = 1.5) -> set[date]:
@@ -121,6 +162,7 @@ def main(argv=None) -> int:
     ap.add_argument("--od", default="2018-01")
     ap.add_argument("--cache", default="sec_slady.db")
     ap.add_argument("--out", default="raporty/sec-slady-wyniki.md")
+    ap.add_argument("--minut", type=float, default=0, help="limit czasu na pobieranie (0 = bez limitu)")
     a = ap.parse_args(argv)
     ua = sec_user_agent()
     if not ua:
@@ -130,17 +172,16 @@ def main(argv=None) -> int:
     con.execute("CREATE TABLE IF NOT EXISTS liczby (kraj TEXT, seria TEXT, miesiac TEXT, n INTEGER, PRIMARY KEY (kraj, seria, miesiac))")
     y0, m0 = map(int, a.od.split("-"))
     last = date.today().replace(day=1) - timedelta(days=1)
-    data: dict[str, dict[str, dict[date, int]]] = {}
-    for c, names in COUNTRIES.items():
-        name = re.sub(r"\\[bB]|[()?\\]", "", names[0])
-        data[c] = {k: {} for k in SERIES}
-        for s, e in _months(y0, m0, last):
-            for k in SERIES:
-                n = fetch(con, ua, c, name, k, s, e)
-                if n is not None:
-                    data[c][k][s] = n
-        con.commit()
-        print(f"  {c} ({name}): " + ", ".join(f"{k} {sum(v.values())}" for k, v in data[c].items()), flush=True)
+    names = {c: re.sub(r"\\[bB]|[()?\\]", "", ns[0]) for c, ns in COUNTRIES.items()}
+    months = list(_months(y0, m0, last))
+    prefetch(con, ua, [(c, names[c], k, s, e) for c in names for s, e in months for k in SERIES],
+             deadline=time.monotonic() + a.minut * 60 if a.minut else None)
+    data: dict[str, dict[str, dict[date, int]]] = {c: {k: {} for k in SERIES} for c in names}
+    for c, k, m, n in con.execute("SELECT kraj, seria, miesiac, n FROM liczby"):
+        if c in data and k in data[c] and date.fromisoformat(m) >= date(y0, m0, 1):
+            data[c][k][date.fromisoformat(m)] = n
+    for c in data:
+        print(f"  {c} ({names[c]}): " + ", ".join(f"{k} {sum(v.values())}" for k, v in data[c].items()), flush=True)
     # sygnały
     variants = {}
     for k in ("sankcje", "geopolityka"):

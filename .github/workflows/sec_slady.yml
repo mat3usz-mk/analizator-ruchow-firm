@@ -37,7 +37,7 @@ jobs:
         timeout-minutes: 320
         env:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-        run: python -m analizator.sec_slady --od 2018-01 --cache sec_slady.db --out raporty/sec-slady-wyniki.md
+        run: python -m analizator.sec_slady --od 2018-01 --cache sec_slady.db --out raporty/sec-slady-wyniki.md --minut 290
       - uses: actions/upload-artifact@v4
         if: always()
         with:
