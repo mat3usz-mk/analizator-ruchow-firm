@@ -41,9 +41,20 @@ Kurs ETF 30 dni od dnia po skoku wzmianek, wobec zwykłego dnia. p wprost: czy p
 |---|---|---|---|---|---|---|---|---|
 | ropa (XLE) | 135 | +2,8% | +1,0% | +1,8% | 53% | 54% | 0.024 | 0.976 |
 | złoto (GLD) | 127 | +0,5% | +1,1% | -0,6% | 56% | 58% | 0.949 | 0.051 |
-| zbrojeniówka (ITA) | 1 | +3,5% | +0,9% | +2,7% | 100% | 60% | 0.305 | 0.695 |
-| Chiny (FXI) | 179 | +0,4% | -0,2% | +0,6% | 50% | 46% | 0.142 | 0.858 |
-| Tajwan (EWT) | 11 | -0,1% | +0,9% | -1,0% | 45% | 59% | 0.698 | 0.302 |
+| zbrojeniówka (ITA) | 1 | +3,5% | +0,9% | +2,7% | 100% | 60% | 0.308 | 0.692 |
+| Chiny (FXI) | 179 | +0,4% | -0,2% | +0,6% | 50% | 46% | 0.143 | 0.857 |
+| Tajwan (EWT) | 11 | -0,1% | +0,9% | -1,0% | 45% | 59% | 0.724 | 0.276 |
 | strach na WSB: puts ≥ 2× calls (SPY) | 219 | +2,5% | +1,2% | +1,3% | 71% | 70% | 0.000 | 1.000 |
+
+Odporność (epizody bez nachodzenia: po skoku 30 dni przerwy; różnica wobec zwykłego dnia):
+
+| wzmianki | epizodów | różnica | p wprost | p odwrotnie | bez 2020 r. | w kolejnych latach (epizody: różnica) |
+|---|---|---|---|---|---|---|
+| ropa (XLE) | 29 | -3,1% | 0.948 | 0.052 | -0,9% | 2019 (1: -6,9%), 2020 (6: -11,1%), 2021 (7: -2,5%), 2022 (9: +0,5%), 2023 (3: -5,9%), 2024 (3: -2,6%) |
+| złoto (GLD) | 33 | +0,1% | 0.454 | 0.546 | +0,1% | 2019 (3: -1,7%), 2020 (8: -0,0%), 2021 (6: +0,9%), 2022 (6: +1,7%), 2023 (5: +0,0%), 2024 (5: -1,4%) |
+| zbrojeniówka (ITA) | 1 | +2,7% | 0.280 | 0.720 | +2,4% | 2022 (1: +2,7%) |
+| Chiny (FXI) | 42 | -0,3% | 0.576 | 0.424 | +0,2% | 2019 (7: +0,2%), 2020 (6: -2,4%), 2021 (8: +0,3%), 2022 (7: -0,7%), 2023 (8: +0,4%), 2024 (6: +1,6%) |
+| Tajwan (EWT) | 5 | +0,9% | 0.391 | 0.609 | +1,3% | 2021 (1: +6,5%), 2022 (2: +0,9%), 2024 (2: +0,6%) |
+| strach na WSB: puts ≥ 2× calls (SPY) | 39 | -0,6% | 0.787 | 0.213 | -0,5% | 2019 (5: +1,1%), 2020 (3: -0,3%), 2021 (4: +2,3%), 2022 (11: -1,1%), 2023 (10: -0,7%), 2024 (6: -0,8%) |
 
 Uwaga: kolejne dni na giełdzie nie są niezależne (okna 30 dni nachodzą na siebie), więc p dla giełdy jest raczej zbyt optymistyczne. X/Twitter pominięty: brak darmowego dostępu do archiwum (API płatne, Nitter wyłączony). Reddit bez archiwum Arctic Shift nie daje historii (Pushshift zamknięty, PullPush blokuje automaty). To test historyczny, nie gwarancja i nie rekomendacja inwestycyjna.
