@@ -1,0 +1,2174 @@
+dzien,firma,sektor,kraj,ofert
+2026-11-21,Nvidia,technologia,miejsce: Armenia,3
+2026-11-21,Nvidia,technologia,"miejsce: Armenia, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: Armenia, Yerevan",3
+2026-11-21,Nvidia,technologia,miejsce: Australia,16
+2026-11-21,Nvidia,technologia,"miejsce: Australia, Remote",16
+2026-11-21,Nvidia,technologia,"miejsce: Australia, Sydney",1
+2026-11-21,Nvidia,technologia,miejsce: Brazil,1
+2026-11-21,Nvidia,technologia,"miejsce: Brazil, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: Brazil, Sao Paulo",1
+2026-11-21,Nvidia,technologia,miejsce: Canada,16
+2026-11-21,Nvidia,technologia,"miejsce: Canada, Remote",7
+2026-11-21,Nvidia,technologia,"miejsce: Canada, Toronto",14
+2026-11-21,Nvidia,technologia,miejsce: China,233
+2026-11-21,Nvidia,technologia,"miejsce: China, Beijing",83
+2026-11-21,Nvidia,technologia,"miejsce: China, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: China, Shanghai",197
+2026-11-21,Nvidia,technologia,"miejsce: China, Shenzhen",63
+2026-11-21,Nvidia,technologia,miejsce: Czechia,3
+2026-11-21,Nvidia,technologia,"miejsce: Czechia, Remote",3
+2026-11-21,Nvidia,technologia,miejsce: Denmark,4
+2026-11-21,Nvidia,technologia,"miejsce: Denmark, Roskilde",4
+2026-11-21,Nvidia,technologia,miejsce: Finland,2
+2026-11-21,Nvidia,technologia,"miejsce: Finland, Helsinki",1
+2026-11-21,Nvidia,technologia,"miejsce: Finland, Remote",1
+2026-11-21,Nvidia,technologia,miejsce: France,20
+2026-11-21,Nvidia,technologia,"miejsce: France, Courbevoie",10
+2026-11-21,Nvidia,technologia,"miejsce: France, Remote",17
+2026-11-21,Nvidia,technologia,miejsce: Germany,36
+2026-11-21,Nvidia,technologia,"miejsce: Germany, Berlin",6
+2026-11-21,Nvidia,technologia,"miejsce: Germany, Munich",18
+2026-11-21,Nvidia,technologia,"miejsce: Germany, Remote",26
+2026-11-21,Nvidia,technologia,"miejsce: Germany, Wuerselen",5
+2026-11-21,Nvidia,technologia,miejsce: Hong Kong,2
+2026-11-21,Nvidia,technologia,"miejsce: Hong Kong, STP",2
+2026-11-21,Nvidia,technologia,miejsce: Hungary,2
+2026-11-21,Nvidia,technologia,"miejsce: Hungary, Budapest",1
+2026-11-21,Nvidia,technologia,"miejsce: Hungary, Remote",1
+2026-11-21,Nvidia,technologia,miejsce: India,237
+2026-11-21,Nvidia,technologia,"miejsce: India, Bengaluru",191
+2026-11-21,Nvidia,technologia,"miejsce: India, Gurugram",11
+2026-11-21,Nvidia,technologia,"miejsce: India, Hyderabad",39
+2026-11-21,Nvidia,technologia,"miejsce: India, Mumbai",9
+2026-11-21,Nvidia,technologia,"miejsce: India, Pune",70
+2026-11-21,Nvidia,technologia,"miejsce: India, Remote",12
+2026-11-21,Nvidia,technologia,miejsce: Israel,388
+2026-11-21,Nvidia,technologia,"miejsce: Israel, Beer Sheva",27
+2026-11-21,Nvidia,technologia,"miejsce: Israel, Raanana",95
+2026-11-21,Nvidia,technologia,"miejsce: Israel, Tel Aviv",214
+2026-11-21,Nvidia,technologia,"miejsce: Israel, Tel Hai",11
+2026-11-21,Nvidia,technologia,"miejsce: Israel, Yokneam",293
+2026-11-21,Nvidia,technologia,miejsce: Italy,2
+2026-11-21,Nvidia,technologia,"miejsce: Italy, Remote",2
+2026-11-21,Nvidia,technologia,miejsce: Japan,20
+2026-11-21,Nvidia,technologia,"miejsce: Japan, Remote",4
+2026-11-21,Nvidia,technologia,"miejsce: Japan, Tokyo",18
+2026-11-21,Nvidia,technologia,miejsce: Korea,16
+2026-11-21,Nvidia,technologia,"miejsce: Korea, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: Korea, Seoul",16
+2026-11-21,Nvidia,technologia,miejsce: Mexico,5
+2026-11-21,Nvidia,technologia,"miejsce: Mexico, Remote",5
+2026-11-21,Nvidia,technologia,miejsce: Netherlands,3
+2026-11-21,Nvidia,technologia,"miejsce: Netherlands, Remote",3
+2026-11-21,Nvidia,technologia,miejsce: Office,2509
+2026-11-21,Nvidia,technologia,miejsce: Palestine,2
+2026-11-21,Nvidia,technologia,"miejsce: Palestine, Hebron",1
+2026-11-21,Nvidia,technologia,"miejsce: Palestine, Nablus",1
+2026-11-21,Nvidia,technologia,"miejsce: Palestine, Rawabi",2
+2026-11-21,Nvidia,technologia,miejsce: Poland,19
+2026-11-21,Nvidia,technologia,"miejsce: Poland, Remote",15
+2026-11-21,Nvidia,technologia,"miejsce: Poland, Warsaw",10
+2026-11-21,Nvidia,technologia,miejsce: Remote,554
+2026-11-21,Nvidia,technologia,miejsce: Romania,1
+2026-11-21,Nvidia,technologia,"miejsce: Romania, Remote",1
+2026-11-21,Nvidia,technologia,miejsce: Singapore,26
+2026-11-21,Nvidia,technologia,"miejsce: Singapore, Pasir Panjang",3
+2026-11-21,Nvidia,technologia,"miejsce: Singapore, Remote",8
+2026-11-21,Nvidia,technologia,"miejsce: Singapore, Singapore-Suntec Tower",19
+2026-11-21,Nvidia,technologia,miejsce: Spain,3
+2026-11-21,Nvidia,technologia,"miejsce: Spain, Remote",3
+2026-11-21,Nvidia,technologia,miejsce: Sweden,6
+2026-11-21,Nvidia,technologia,"miejsce: Sweden, Gothenburg",3
+2026-11-21,Nvidia,technologia,"miejsce: Sweden, Lund",1
+2026-11-21,Nvidia,technologia,"miejsce: Sweden, Remote",4
+2026-11-21,Nvidia,technologia,miejsce: Switzerland,22
+2026-11-21,Nvidia,technologia,"miejsce: Switzerland, Remote",13
+2026-11-21,Nvidia,technologia,"miejsce: Switzerland, Zurich",18
+2026-11-21,Nvidia,technologia,miejsce: Taiwan,153
+2026-11-21,Nvidia,technologia,"miejsce: Taiwan, Hsinchu",91
+2026-11-21,Nvidia,technologia,"miejsce: Taiwan, Remote",2
+2026-11-21,Nvidia,technologia,"miejsce: Taiwan, Taipei",107
+2026-11-21,Nvidia,technologia,miejsce: Thailand,5
+2026-11-21,Nvidia,technologia,"miejsce: Thailand, Remote",5
+2026-11-21,Nvidia,technologia,"miejsce: UAE, Dubai",2
+2026-11-21,Nvidia,technologia,"miejsce: UAE, Remote",2
+2026-11-21,Nvidia,technologia,"miejsce: UK, Belfast",1
+2026-11-21,Nvidia,technologia,"miejsce: UK, Bristol",1
+2026-11-21,Nvidia,technologia,"miejsce: UK, Cambridge",6
+2026-11-21,Nvidia,technologia,"miejsce: UK, Reading",9
+2026-11-21,Nvidia,technologia,"miejsce: UK, Remote",29
+2026-11-21,Nvidia,technologia,"miejsce: US, AL, Madison",2
+2026-11-21,Nvidia,technologia,"miejsce: US, AR, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: US, AZ, Remote",7
+2026-11-21,Nvidia,technologia,"miejsce: US, CA, Remote",230
+2026-11-21,Nvidia,technologia,"miejsce: US, CA, San Jose",1
+2026-11-21,Nvidia,technologia,"miejsce: US, CA, Santa Clara",1269
+2026-11-21,Nvidia,technologia,"miejsce: US, CO, Boulder",8
+2026-11-21,Nvidia,technologia,"miejsce: US, CO, Remote",26
+2026-11-21,Nvidia,technologia,"miejsce: US, CT, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: US, DC, Remote",15
+2026-11-21,Nvidia,technologia,"miejsce: US, DC, Washington",1
+2026-11-21,Nvidia,technologia,"miejsce: US, FL, Remote",8
+2026-11-21,Nvidia,technologia,"miejsce: US, GA, Remote",7
+2026-11-21,Nvidia,technologia,"miejsce: US, ID, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: US, IL, Champaign",4
+2026-11-21,Nvidia,technologia,"miejsce: US, IL, Remote",14
+2026-11-21,Nvidia,technologia,"miejsce: US, LA, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: US, MA, Remote",39
+2026-11-21,Nvidia,technologia,"miejsce: US, MA, Westford",49
+2026-11-21,Nvidia,technologia,"miejsce: US, MD, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: US, MI, Remote",4
+2026-11-21,Nvidia,technologia,"miejsce: US, MO, St. Louis",1
+2026-11-21,Nvidia,technologia,"miejsce: US, NC, Durham",61
+2026-11-21,Nvidia,technologia,"miejsce: US, NC, Remote",32
+2026-11-21,Nvidia,technologia,"miejsce: US, NE, Remote",2
+2026-11-21,Nvidia,technologia,"miejsce: US, NJ, Holmdel",1
+2026-11-21,Nvidia,technologia,"miejsce: US, NJ, Remote",9
+2026-11-21,Nvidia,technologia,"miejsce: US, NM, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: US, NV, Remote",5
+2026-11-21,Nvidia,technologia,"miejsce: US, NY, New York",24
+2026-11-21,Nvidia,technologia,"miejsce: US, NY, Remote",38
+2026-11-21,Nvidia,technologia,"miejsce: US, OR, Hillsboro",47
+2026-11-21,Nvidia,technologia,"miejsce: US, OR, Remote",23
+2026-11-21,Nvidia,technologia,"miejsce: US, PA, Remote",3
+2026-11-21,Nvidia,technologia,"miejsce: US, Remote",103
+2026-11-21,Nvidia,technologia,"miejsce: US, SC, Remote",5
+2026-11-21,Nvidia,technologia,"miejsce: US, SD, Remote",1
+2026-11-21,Nvidia,technologia,"miejsce: US, TN, Remote",2
+2026-11-21,Nvidia,technologia,"miejsce: US, TX, Austin",168
+2026-11-21,Nvidia,technologia,"miejsce: US, TX, Dallas",2
+2026-11-21,Nvidia,technologia,"miejsce: US, TX, Houston",3
+2026-11-21,Nvidia,technologia,"miejsce: US, TX, Remote",99
+2026-11-21,Nvidia,technologia,"miejsce: US, UT, Remote",6
+2026-11-21,Nvidia,technologia,"miejsce: US, UT, Salt Lake City",1
+2026-11-21,Nvidia,technologia,"miejsce: US, VA, Charlottesville",1
+2026-11-21,Nvidia,technologia,"miejsce: US, VA, Herndon",2
+2026-11-21,Nvidia,technologia,"miejsce: US, VA, Remote",12
+2026-11-21,Nvidia,technologia,"miejsce: US, WA, Redmond",62
+2026-11-21,Nvidia,technologia,"miejsce: US, WA, Remote",81
+2026-11-21,Nvidia,technologia,"miejsce: US, WA, Seattle",59
+2026-11-21,Nvidia,technologia,"miejsce: US, WI, Remote",1
+2026-11-21,Nvidia,technologia,miejsce: Ukraine,6
+2026-11-21,Nvidia,technologia,"miejsce: Ukraine, Kyiv",6
+2026-11-21,Nvidia,technologia,"miejsce: Ukraine, Remote",6
+2026-11-21,Nvidia,technologia,miejsce: United Arab Emirates,2
+2026-11-21,Nvidia,technologia,miejsce: United Kingdom,35
+2026-11-21,Nvidia,technologia,miejsce: United States,1380
+2026-11-21,Nvidia,technologia,miejsce: Vietnam,29
+2026-11-21,Nvidia,technologia,"miejsce: Vietnam, Hanoi",11
+2026-11-21,Nvidia,technologia,"miejsce: Vietnam, Ho Chi Minh City",5
+2026-11-21,Nvidia,technologia,"miejsce: Vietnam, Remote",17
+2026-11-21,Nvidia,technologia,razem,2000
+2026-11-21,Intel,technologia,"miejsce: Canada, Toronto",16
+2026-11-21,Intel,technologia,"miejsce: Costa Rica, San Jose",4
+2026-11-21,Intel,technologia,"miejsce: Germany, Munich",8
+2026-11-21,Intel,technologia,"miejsce: India, Bangalore",107
+2026-11-21,Intel,technologia,"miejsce: Ireland, Leixlip",24
+2026-11-21,Intel,technologia,"miejsce: Israel, Haifa",11
+2026-11-21,Intel,technologia,"miejsce: Israel, Jerusalem",2
+2026-11-21,Intel,technologia,"miejsce: Israel, Kiryat-Gat",12
+2026-11-21,Intel,technologia,"miejsce: Israel, Petah-Tikva",5
+2026-11-21,Intel,technologia,"miejsce: Japan, Tokyo",9
+2026-11-21,Intel,technologia,"miejsce: Malaysia, Kulim",57
+2026-11-21,Intel,technologia,"miejsce: Malaysia, Penang",120
+2026-11-21,Intel,technologia,"miejsce: Mexico, Guadalajara",18
+2026-11-21,Intel,technologia,"miejsce: PRC, Beijing",5
+2026-11-21,Intel,technologia,"miejsce: PRC, Chengdu",6
+2026-11-21,Intel,technologia,"miejsce: PRC, Shanghai",34
+2026-11-21,Intel,technologia,"miejsce: PRC, Shenzhen",10
+2026-11-21,Intel,technologia,"miejsce: Poland, Gdansk",17
+2026-11-21,Intel,technologia,"miejsce: Saudi Arabia, Riyadh",2
+2026-11-21,Intel,technologia,"miejsce: South Korea, Seoul",7
+2026-11-21,Intel,technologia,"miejsce: Taiwan, Hsinchu",3
+2026-11-21,Intel,technologia,"miejsce: Taiwan, Taipei",13
+2026-11-21,Intel,technologia,"miejsce: US, Arizona, Phoenix",181
+2026-11-21,Intel,technologia,"miejsce: US, California, Folsom",88
+2026-11-21,Intel,technologia,"miejsce: US, California, San Diego",2
+2026-11-21,Intel,technologia,"miejsce: US, California, Santa Clara",133
+2026-11-21,Intel,technologia,"miejsce: US, Colorado, Fort Collins",4
+2026-11-21,Intel,technologia,"miejsce: US, Massachusetts, Beaver Brook",9
+2026-11-21,Intel,technologia,"miejsce: US, New Mexico, Albuquerque",60
+2026-11-21,Intel,technologia,"miejsce: US, New York, New York",1
+2026-11-21,Intel,technologia,"miejsce: US, Ohio, New Albany",4
+2026-11-21,Intel,technologia,"miejsce: US, Oregon, Hillsboro",271
+2026-11-21,Intel,technologia,"miejsce: US, Oregon, Portland",2
+2026-11-21,Intel,technologia,"miejsce: US, Pennsylvania, Allentown",1
+2026-11-21,Intel,technologia,"miejsce: US, Texas, Austin",60
+2026-11-21,Intel,technologia,"miejsce: US, Virginia, Fairfax",1
+2026-11-21,Intel,technologia,"miejsce: US, Washington,  Multiple Cities",2
+2026-11-21,Intel,technologia,"miejsce: US, Washington, D.C.",1
+2026-11-21,Intel,technologia,"miejsce: Vietnam, Ho_Chi_Minh_City",6
+2026-11-21,Intel,technologia,miejsce: Virtual China,1
+2026-11-21,Intel,technologia,miejsce: Virtual India,1
+2026-11-21,Intel,technologia,miejsce: Virtual Malaysia,1
+2026-11-21,Intel,technologia,miejsce: Virtual South Korea,1
+2026-11-21,Intel,technologia,miejsce: Virtual US,2
+2026-11-21,Intel,technologia,miejsce: Virtual United Kingdom,1
+2026-11-21,Intel,technologia,razem,936
+2026-11-21,Salesforce,technologia,Argentina,17
+2026-11-21,Salesforce,technologia,Australia,49
+2026-11-21,Salesforce,technologia,Austria,7
+2026-11-21,Salesforce,technologia,Belgium,5
+2026-11-21,Salesforce,technologia,Brazil,55
+2026-11-21,Salesforce,technologia,Canada,49
+2026-11-21,Salesforce,technologia,Chile,11
+2026-11-21,Salesforce,technologia,Colombia,18
+2026-11-21,Salesforce,technologia,Denmark,9
+2026-11-21,Salesforce,technologia,Finland,5
+2026-11-21,Salesforce,technologia,France,45
+2026-11-21,Salesforce,technologia,Germany,35
+2026-11-21,Salesforce,technologia,India,94
+2026-11-21,Salesforce,technologia,Indonesia,3
+2026-11-21,Salesforce,technologia,Ireland,144
+2026-11-21,Salesforce,technologia,Israel,17
+2026-11-21,Salesforce,technologia,Italy,29
+2026-11-21,Salesforce,technologia,Japan,85
+2026-11-21,Salesforce,technologia,"Korea, Republic of",15
+2026-11-21,Salesforce,technologia,Mexico,74
+2026-11-21,Salesforce,technologia,Morocco,7
+2026-11-21,Salesforce,technologia,Netherlands,20
+2026-11-21,Salesforce,technologia,New Zealand,9
+2026-11-21,Salesforce,technologia,Norway,5
+2026-11-21,Salesforce,technologia,Peru,1
+2026-11-21,Salesforce,technologia,Philippines,11
+2026-11-21,Salesforce,technologia,Poland,6
+2026-11-21,Salesforce,technologia,Portugal,5
+2026-11-21,Salesforce,technologia,Saudi Arabia,13
+2026-11-21,Salesforce,technologia,Singapore,33
+2026-11-21,Salesforce,technologia,South Africa,9
+2026-11-21,Salesforce,technologia,Spain,12
+2026-11-21,Salesforce,technologia,Sweden,10
+2026-11-21,Salesforce,technologia,Switzerland,13
+2026-11-21,Salesforce,technologia,Taiwan,7
+2026-11-21,Salesforce,technologia,Thailand,6
+2026-11-21,Salesforce,technologia,United Arab Emirates,21
+2026-11-21,Salesforce,technologia,United Kingdom,90
+2026-11-21,Salesforce,technologia,United States of America,599
+2026-11-21,Salesforce,technologia,razem,1614
+2026-11-21,Mastercard,finanse,miejsce: 1 Toronto Street,1
+2026-11-21,Mastercard,finanse,"miejsce: Abidjan, Cote d'ivoire",1
+2026-11-21,Mastercard,finanse,"miejsce: Almaty, Kazakhstan",1
+2026-11-21,Mastercard,finanse,"miejsce: Amsterdam, Netherlands",2
+2026-11-21,Mastercard,finanse,"miejsce: Arlington, Virginia",37
+2026-11-21,Mastercard,finanse,"miejsce: Atlanta, Georgia",16
+2026-11-21,Mastercard,finanse,"miejsce: Atlanta, Georgia (675 Ponce De Leon Ave NE)",9
+2026-11-21,Mastercard,finanse,"miejsce: Austin, Texas",1
+2026-11-21,Mastercard,finanse,"miejsce: Bangalore, India",1
+2026-11-21,Mastercard,finanse,"miejsce: Beijing, China",2
+2026-11-21,Mastercard,finanse,"miejsce: Beirut, Lebanon",1
+2026-11-21,Mastercard,finanse,"miejsce: Belgrade, Serbia",1
+2026-11-21,Mastercard,finanse,"miejsce: Besiktas, Istanbul Turkey",7
+2026-11-21,Mastercard,finanse,"miejsce: Bogota, Colombia",29
+2026-11-21,Mastercard,finanse,"miejsce: Bogota, Colombia (Bldg 978)",3
+2026-11-21,Mastercard,finanse,"miejsce: Boston, Massachusetts",13
+2026-11-21,Mastercard,finanse,"miejsce: Brussels, Belgium",1
+2026-11-21,Mastercard,finanse,"miejsce: Budapest, Hungary",2
+2026-11-21,Mastercard,finanse,"miejsce: Buenos Aires, Argentina",6
+2026-11-21,Mastercard,finanse,"miejsce: Buenos Aires, Argentina (Corrientes)",2
+2026-11-21,Mastercard,finanse,"miejsce: Cairo, Egypt",4
+2026-11-21,Mastercard,finanse,"miejsce: Caracas, Venezuela",1
+2026-11-21,Mastercard,finanse,"miejsce: Casablanca, Morocco",2
+2026-11-21,Mastercard,finanse,"miejsce: Chicago, Illinois",9
+2026-11-21,Mastercard,finanse,"miejsce: Copenhagen, Denmark",1
+2026-11-21,Mastercard,finanse,"miejsce: Doha, Qatar",1
+2026-11-21,Mastercard,finanse,"miejsce: Dubai, United Arab Emirates",8
+2026-11-21,Mastercard,finanse,"miejsce: Dublin, Ireland",13
+2026-11-21,Mastercard,finanse,"miejsce: Dublin, Ireland (One South County)",1
+2026-11-21,Mastercard,finanse,"miejsce: Dublin, Ireland (Two South County)",1
+2026-11-21,Mastercard,finanse,"miejsce: Dunstable, England (Vocalink)",1
+2026-11-21,Mastercard,finanse,"miejsce: Frankfurt, Germany",4
+2026-11-21,Mastercard,finanse,"miejsce: Guangzhou, China",1
+2026-11-21,Mastercard,finanse,miejsce: Guatemala,2
+2026-11-21,Mastercard,finanse,"miejsce: Gurgaon, India",21
+2026-11-21,Mastercard,finanse,"miejsce: Hanoi, Vietnam",5
+2026-11-21,Mastercard,finanse,"miejsce: Harrogate, England (Vocalink)",1
+2026-11-21,Mastercard,finanse,"miejsce: Hyderabad, India",4
+2026-11-21,Mastercard,finanse,"miejsce: Jakarta, Indonesia (6th Floor)",6
+2026-11-21,Mastercard,finanse,"miejsce: Johannesburg, South Africa",3
+2026-11-21,Mastercard,finanse,"miejsce: Kansas City, Missouri",1
+2026-11-21,Mastercard,finanse,"miejsce: Kuala Lumpur, Malaysia",12
+2026-11-21,Mastercard,finanse,"miejsce: Kyiv, Ukraine",1
+2026-11-21,Mastercard,finanse,"miejsce: Lagos, Nigeria",1
+2026-11-21,Mastercard,finanse,"miejsce: Lima, Peru",1
+2026-11-21,Mastercard,finanse,"miejsce: Lisbon, Portugal",11
+2026-11-21,Mastercard,finanse,"miejsce: London, England (Angel Lane)",9
+2026-11-21,Mastercard,finanse,"miejsce: London, England (Devonshire Square)",1
+2026-11-21,Mastercard,finanse,"miejsce: Madrid, Spain",2
+2026-11-21,Mastercard,finanse,"miejsce: Manila, Philippines",13
+2026-11-21,Mastercard,finanse,"miejsce: Manila, Philippines (Transfast)",1
+2026-11-21,Mastercard,finanse,"miejsce: Melbourne, Australia",1
+2026-11-21,Mastercard,finanse,"miejsce: Mexico City, Mexico",34
+2026-11-21,Mastercard,finanse,"miejsce: Miami, Florida",12
+2026-11-21,Mastercard,finanse,"miejsce: Mumbai, India",2
+2026-11-21,Mastercard,finanse,"miejsce: Navi Mumbai, India (Finicity)",10
+2026-11-21,Mastercard,finanse,"miejsce: New York City, New York",24
+2026-11-21,Mastercard,finanse,"miejsce: New York City, New York (150 5th Avenue)",7
+2026-11-21,Mastercard,finanse,"miejsce: O'Fallon, Missouri",105
+2026-11-21,Mastercard,finanse,"miejsce: O'Fallon, Missouri (Main Campus)",8
+2026-11-21,Mastercard,finanse,"miejsce: Oslo, Norway",2
+2026-11-21,Mastercard,finanse,"miejsce: Oslo, Norway (haavard martinsens vei)",3
+2026-11-21,Mastercard,finanse,"miejsce: Panama City, Panama",2
+2026-11-21,Mastercard,finanse,"miejsce: Paris, France",3
+2026-11-21,Mastercard,finanse,"miejsce: Pune, India",111
+2026-11-21,Mastercard,finanse,"miejsce: Purchase, New York",68
+2026-11-21,Mastercard,finanse,"miejsce: Ramat-Gan, Israel",2
+2026-11-21,Mastercard,finanse,miejsce: Remote - Alabama,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - Arkansas,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - California,1
+2026-11-21,Mastercard,finanse,miejsce: Remote - Colorado,1
+2026-11-21,Mastercard,finanse,miejsce: Remote - Connecticut,3
+2026-11-21,Mastercard,finanse,miejsce: Remote - Delaware,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - Florida,4
+2026-11-21,Mastercard,finanse,miejsce: Remote - Georgia,4
+2026-11-21,Mastercard,finanse,miejsce: Remote - Illinois,3
+2026-11-21,Mastercard,finanse,miejsce: Remote - Indiana,3
+2026-11-21,Mastercard,finanse,miejsce: Remote - Kansas,1
+2026-11-21,Mastercard,finanse,miejsce: Remote - Kentucky,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - Louisiana,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - Maine,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - Maryland,3
+2026-11-21,Mastercard,finanse,miejsce: Remote - Massachusetts,3
+2026-11-21,Mastercard,finanse,miejsce: Remote - Mexico,1
+2026-11-21,Mastercard,finanse,miejsce: Remote - Michigan,3
+2026-11-21,Mastercard,finanse,miejsce: Remote - Mississippi,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - Missouri,4
+2026-11-21,Mastercard,finanse,miejsce: Remote - New Hampshire,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - New Jersey,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - New York,5
+2026-11-21,Mastercard,finanse,miejsce: Remote - North Carolina,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - Ohio,3
+2026-11-21,Mastercard,finanse,miejsce: Remote - Pennsylvania,4
+2026-11-21,Mastercard,finanse,miejsce: Remote - Rhode Island,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - South Carolina,2
+2026-11-21,Mastercard,finanse,miejsce: Remote - Tennessee,3
+2026-11-21,Mastercard,finanse,miejsce: Remote - Texas,5
+2026-11-21,Mastercard,finanse,miejsce: Remote - Vermont,1
+2026-11-21,Mastercard,finanse,miejsce: Remote - Virginia,4
+2026-11-21,Mastercard,finanse,miejsce: Remote - Wisconsin,3
+2026-11-21,Mastercard,finanse,"miejsce: Riga, Latvia (Dynamic Yield)",1
+2026-11-21,Mastercard,finanse,"miejsce: Riyadh, Saudi Arabia",7
+2026-11-21,Mastercard,finanse,"miejsce: Salt Lake City, Utah (Holladay)",7
+2026-11-21,Mastercard,finanse,miejsce: San Francisco (Spear Street),1
+2026-11-21,Mastercard,finanse,"miejsce: San Francisco, California",5
+2026-11-21,Mastercard,finanse,"miejsce: San Jose, Costa Rica",3
+2026-11-21,Mastercard,finanse,"miejsce: San Juan, Puerto Rico",1
+2026-11-21,Mastercard,finanse,"miejsce: Santiago, Chile",12
+2026-11-21,Mastercard,finanse,"miejsce: Santo Domingo, Dominican Republic",4
+2026-11-21,Mastercard,finanse,"miejsce: Sao Paulo, Brazil",15
+2026-11-21,Mastercard,finanse,"miejsce: Seattle, Washington",3
+2026-11-21,Mastercard,finanse,"miejsce: Shanghai, China",4
+2026-11-21,Mastercard,finanse,miejsce: Singapore,25
+2026-11-21,Mastercard,finanse,"miejsce: Sofia, Bulgaria",1
+2026-11-21,Mastercard,finanse,"miejsce: St. Leonards, Australia",4
+2026-11-21,Mastercard,finanse,"miejsce: Taipei, Taiwan",6
+2026-11-21,Mastercard,finanse,"miejsce: Tokyo, Japan",18
+2026-11-21,Mastercard,finanse,"miejsce: Toronto, Canada",28
+2026-11-21,Mastercard,finanse,"miejsce: Toronto, Canada (Ethoca)",8
+2026-11-21,Mastercard,finanse,"miejsce: Vadodara, India",1
+2026-11-21,Mastercard,finanse,"miejsce: Vancouver, Canada",13
+2026-11-21,Mastercard,finanse,"miejsce: Vienna, Austria",2
+2026-11-21,Mastercard,finanse,"miejsce: Wanchai, Hong Kong",5
+2026-11-21,Mastercard,finanse,"miejsce: Wanchai, Hong Kong (Main Campus)",1
+2026-11-21,Mastercard,finanse,"miejsce: Warsaw, Poland",8
+2026-11-21,Mastercard,finanse,"miejsce: Waterloo, Belgium",3
+2026-11-21,Mastercard,finanse,"miejsce: Zagreb, Croatia",1
+2026-11-21,Mastercard,finanse,razem,719
+2026-11-21,Boeing,lotnictwo i zbrojenia,Australia,1
+2026-11-21,Boeing,lotnictwo i zbrojenia,Belgium,1
+2026-11-21,Boeing,lotnictwo i zbrojenia,Brazil,7
+2026-11-21,Boeing,lotnictwo i zbrojenia,Canada,7
+2026-11-21,Boeing,lotnictwo i zbrojenia,Chile,1
+2026-11-21,Boeing,lotnictwo i zbrojenia,China,1
+2026-11-21,Boeing,lotnictwo i zbrojenia,France,1
+2026-11-21,Boeing,lotnictwo i zbrojenia,Germany,24
+2026-11-21,Boeing,lotnictwo i zbrojenia,India,16
+2026-11-21,Boeing,lotnictwo i zbrojenia,Ireland,3
+2026-11-21,Boeing,lotnictwo i zbrojenia,Japan,2
+2026-11-21,Boeing,lotnictwo i zbrojenia,"Korea, Republic of",1
+2026-11-21,Boeing,lotnictwo i zbrojenia,Kuwait,2
+2026-11-21,Boeing,lotnictwo i zbrojenia,Netherlands,1
+2026-11-21,Boeing,lotnictwo i zbrojenia,Poland,11
+2026-11-21,Boeing,lotnictwo i zbrojenia,Qatar,3
+2026-11-21,Boeing,lotnictwo i zbrojenia,Singapore,2
+2026-11-21,Boeing,lotnictwo i zbrojenia,Spain,1
+2026-11-21,Boeing,lotnictwo i zbrojenia,Türkiye,1
+2026-11-21,Boeing,lotnictwo i zbrojenia,Ukraine,3
+2026-11-21,Boeing,lotnictwo i zbrojenia,United Arab Emirates,1
+2026-11-21,Boeing,lotnictwo i zbrojenia,United Kingdom,60
+2026-11-21,Boeing,lotnictwo i zbrojenia,United States of America,777
+2026-11-21,Boeing,lotnictwo i zbrojenia,razem,918
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: ALHU12,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Amberley,10
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Canberra,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Edinburgh Parks,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Exmouth,4
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Fairbairn,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Fortitude Valley,9
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Mascot,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Mulwala,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-NSW-Richmond,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Pinkenba,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Springfield Central,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Symonston,5
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Australia-Tindal,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Italy-Sigonella,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Japan-Kyotango-shi,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Netherlands-Hoogerheide,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Netherlands-Leeuwarden,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: Netherlands-Volkel,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: US Expat - P754 Australia Alice Springs,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: US Expat - P890 Saudi Arabia Prince Sultan AFB,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United Kingdom-Cheltenham,24
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United Kingdom-Harrogate,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United Kingdom-London,10
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United Kingdom-Manchester,12
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United Kingdom-New Malden,5
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Alabama-Huntsville,112
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Alabama-Madison,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Alabama-Marshall Space Flight Center,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Arizona-Chandler,118
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Arizona-Gilbert,48
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Arizona-Mesa,15
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Arizona-Sierra Vista,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Arizona-Tempe,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Arizona-Yuma,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Azusa,20
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Beale AFB,9
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Camarillo,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Commerce,10
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Edwards AFB,58
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-El Segundo,114
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Goleta,15
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Lemoore,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Los Angeles,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Manhattan Beach,49
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-McClellan,18
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Mojave,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Northridge,45
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Oxnard,10
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Palmdale,193
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Port Hueneme,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Redondo Beach,213
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Ridgecrest,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Sacramento,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-San Diego,302
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Sunnyvale,114
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Unknown City,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Vandenberg AFB,13
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Ventura,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-California-Woodland Hills,72
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Colorado-Aurora,53
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Colorado-Boulder,18
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Colorado-Colorado Springs,76
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Colorado-Englewood,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Colorado-Schriever AFB,29
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Connecticut-East Hartford,5
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Connecticut-Groton,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Connecticut-Unknown City,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-District of Columbia-Washington,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Apopka,20
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Cape Canaveral,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Jacksonville,5
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Kennedy Space Center,5
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Melbourne,202
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Merritt Island,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Niceville,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Orlando,4
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Palm Beach Gardens,4
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Florida-Saint Augustine,8
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Georgia-Robins AFB,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Georgia-Unknown City,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Georgia-Warner Robins,26
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Hawaii-Honolulu,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Illinois-Rolling Meadows,95
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Indiana-Unknown City,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Louisiana-Barksdale AFB,4
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Louisiana-Lake Charles,17
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Annapolis,49
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Annapolis Junction,24
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Baltimore,222
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Elkridge,14
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Elkton,55
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Hanover,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Hollywood,14
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Linthicum,133
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Middle River,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Patuxent River,11
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Sykesville,9
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Maryland-Unknown City,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Massachusetts-Devens,10
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Michigan-Grand Rapids,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Minnesota-Elk River,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Minnesota-Plymouth,51
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Mississippi-Iuka,51
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Mississippi-Moss Point,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Mississippi-Ocean Springs,9
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Missouri-Independence,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Missouri-Whiteman AFB,13
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Montana-Great Falls,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Nebraska-Bellevue,13
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-New Hampshire-Nashua,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-New Hampshire-Unknown City,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-New York-Bethpage,7
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-New York-Buffalo,23
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-New York-Rome,7
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-New York-Ronkonkoma,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-New York-Unknown City,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-North Carolina-Charlotte,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-North Carolina-Morrisville,22
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-North Carolina-Unknown City,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-North Dakota-Emerado,4
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-North Dakota-Grand Forks,4
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-North Dakota-Minot,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-North Dakota-Unknown City,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Ohio-Beavercreek,29
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Ohio-Cincinnati,35
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Ohio-Cleveland,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Ohio-Dayton,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Ohio-Kettering,6
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Ohio-Unknown City,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Ohio-Wright-Patterson AFB,21
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Oklahoma-Oklahoma City,64
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Oklahoma-Tinker AFB,12
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Pennsylvania-Philadelphia,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Pennsylvania-Unknown City,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Remote,24
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Rhode Island-North Kingston,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-South Carolina-Beaufort,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-South Dakota-Ellsworth AFB,15
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Texas-Bertram,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Texas-Fort Worth,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Texas-Irving,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Texas-San Antonio,19
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Utah-Clearfield,97
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Utah-Corinne,75
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Utah-Hill AFB,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Utah-Layton,9
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Utah-Magna,31
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Utah-Ogden,4
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Utah-Roy,438
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Utah-Salt Lake City,31
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Arlington,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Chantilly,27
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Charlottesville,17
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Dulles,107
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Fairfax,11
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Falls Church,22
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-McLean,26
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-New Church,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Newport News,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Radford,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Stafford,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Sterling,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Unknown City,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Warrenton,1
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Virginia-Yorktown,2
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Washington-Oak Harbor,4
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Washington-Silverdale,3
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-Waynesboro-Virginia,12
+2026-11-21,Northrop Grumman,zbrojenia,miejsce: United States-West Virginia-Rocket Center,67
+2026-11-21,Northrop Grumman,zbrojenia,razem,3718
+2026-11-21,RTX,zbrojenia,"miejsce: 1st Flr, Wing B, North Gate Phase-II, Modern Asset, Sy.No.2/2, Venkatala Village, Yelahanka Hobli, Bangalore – 560064, Karnataka",1
+2026-11-21,RTX,zbrojenia,miejsce: AE-AZ-ABU DHABI-ADGM TOWER 3 ~ Al Maqam Tower ~ GLOBAL MARKET SQ TWR 3,4
+2026-11-21,RTX,zbrojenia,miejsce: AE-AZ-ABU DHABI-COMPLEX 02 ~ FAC 110 Zone 4 Tawazun Industrial Park ~ TAWAZUN INDUSTRIAL PARK,1
+2026-11-21,RTX,zbrojenia,"miejsce: AE-AZ-MILITARY-CUST ~ Abu Dhabi Capital ~ ABU DHABI CAPITAL, Military Locations (External Site)",2
+2026-11-21,RTX,zbrojenia,miejsce: AE-DU-DUBAI-002 ~ Rd 36-Rm Jafza South Plot-S50604 Jebel Ali Free Zone ~ JEBEL ALI FREE ZONE,5
+2026-11-21,RTX,zbrojenia,miejsce: AE-UNITED ARAB EMIRATES-CLIENT SITE ~ United Arab Emirates Remote ~  (External Site),1
+2026-11-21,RTX,zbrojenia,"miejsce: AU-ACT-CANBERRA-2613 ~ 4 Brindabella Cct ~ BRINDABELLA PARK, Lvl 1",2
+2026-11-21,RTX,zbrojenia,"miejsce: AU-NSW-MACQUARIE PARK-12 ~ 12-24 Talavera Rd ~ BLDG D TALAVERA CORP CTR, Macquarie Park NSW, Level 3",4
+2026-11-21,RTX,zbrojenia,"miejsce: AU-NSW-NOWRA-039 ~ 39 Wugan St ~ WUGAN, Lot 10",1
+2026-11-21,RTX,zbrojenia,miejsce: AU-NSW-POTTS POINT-083-CUST ~ 83 Cowper Wharf Roadway ~ COWPER WHARF (External Site),2
+2026-11-21,RTX,zbrojenia,"miejsce: AU-NSW-SYDNEY-001 ~ 12 Mars Rd ~ MARS BLDG, Lane Cove",1
+2026-11-21,RTX,zbrojenia,"miejsce: AU-NSW-SYDNEY-012 ~ 12 Mars Rd ~ MARS BLDG 8, Lane Cove",1
+2026-11-21,RTX,zbrojenia,"miejsce: AU-NSW-WILLIAMTOWN-001 ~ 1 Technology Pl ~ BLDG C, Unit 201",1
+2026-11-21,RTX,zbrojenia,miejsce: AU-QLD-AMBERLEY-RAAF-CUST ~ RAAF Base Amberley ~ AMBERLEY RAAF (External Site),5
+2026-11-21,RTX,zbrojenia,miejsce: AU-QLD-CANNON HILL-101 ~ 101 Southgate Ave ~ SOUTHGATE,8
+2026-11-21,RTX,zbrojenia,miejsce: AU-QLD-GLENVALE-169 ~ 169 Hursley Rd ~ TOOWOOMBA,1
+2026-11-21,RTX,zbrojenia,miejsce: AU-SA-MAWSON LAKES-111 ~ 1-11 Technology Dr ~ BLDG 111,14
+2026-11-21,RTX,zbrojenia,miejsce: AU-SA-MAWSON LAKES-112 ~ 1-11 Technology Dr ~ BLDG 112,1
+2026-11-21,RTX,zbrojenia,miejsce: AU-SA-OSBOURNE-620-CUST ~ 620 Mersey Rd North ~ 620 MERSEY (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: AU-WA-EXMOUTH-HEH-CUST ~ HEH Murat Rd ~ NAVAL COMMS (External Site),5
+2026-11-21,RTX,zbrojenia,miejsce: AU-WA-GARDEN ISLAND-DAMPIER-CUST ~ Dampier Rd ~ DAMPIER (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: AU-WA-HENDERSON-001 ~ 1 Mcgrath Rd ~ MCGRATH,9
+2026-11-21,RTX,zbrojenia,miejsce: AU-WA-HENDERSON-103-CUST ~ 103 Quill Way ~ QUILL (External Site),5
+2026-11-21,RTX,zbrojenia,miejsce: BE-BRU-BRUSSELS-86C-CUST ~ Av. Du Port 86C; 1000 Bruxelles ~ DU PORT (External Site),1
+2026-11-21,RTX,zbrojenia,"miejsce: BH-13-MILITARY-CUST ~ Manama Capital ~ MANAMA CAPITAL, Military Locations (External Site)",1
+2026-11-21,RTX,zbrojenia,miejsce: BR-BRAZIL-REMOTE,1
+2026-11-21,RTX,zbrojenia,"miejsce: CA-AB-CALGARY-111 ~ 919 72nd Ave NE ~ 72ND AVE, Ste A",19
+2026-11-21,RTX,zbrojenia,miejsce: CA-AB-LETHBRIDGE-P32 ~ 4045 26th Ave N ~ MAIN FACILITY,1
+2026-11-21,RTX,zbrojenia,miejsce: CA-NS-HALIFAX-PLANT 41 ~ 189 Pratt & Whitney Dr ~ PLANT 41,7
+2026-11-21,RTX,zbrojenia,miejsce: CA-ON-MIDLAND-450 ~ 450 Leitz Rd ~ BLDG 450,21
+2026-11-21,RTX,zbrojenia,"miejsce: CA-ON-MISSISSAUGA-3111-CUST ~ 3111 Convair Dr ~ AC ANNEX BLDG, 1st Flr (External Site)",2
+2026-11-21,RTX,zbrojenia,miejsce: CA-ON-MISSISSAUGA-P22M01 ~ 1801 Courtney Park Dr ~ P22M01 BLDG,16
+2026-11-21,RTX,zbrojenia,miejsce: CA-ON-OAKVILLE-1400 ~ 1400 S Service Rd W ~ 1400 SERVICE,6
+2026-11-21,RTX,zbrojenia,miejsce: CA-ON-OTTAWA-030 ~ 30 Edgewater St ~ EDGEWATER,3
+2026-11-21,RTX,zbrojenia,miejsce: CA-ON-OTTAWA-PLANT 23 ~ 1200 Montreal Rd ~ PLANT 23,1
+2026-11-21,RTX,zbrojenia,miejsce: CA-ON-RENFREW-114 ~ 1 Innovation Dr ~ INNOVATION,1
+2026-11-21,RTX,zbrojenia,"miejsce: CA-ON-WATERLOO-440 ~ 440 Phillip St ~ PHILLIP, Unit D",2
+2026-11-21,RTX,zbrojenia,miejsce: CA-QC-LONGUEUIL-AY ~ 1000 Blvd Marie-Victorin ~ AY BLDG,3
+2026-11-21,RTX,zbrojenia,miejsce: CA-QC-LONGUEUIL-J01 ~ 1000 Blvd Marie-Victorin ~ J01 BLDG,106
+2026-11-21,RTX,zbrojenia,miejsce: CA-QC-LONGUEUIL-J27 ~ 1000 Blvd Marie-Victorin ~ J27 BLDG,1
+2026-11-21,RTX,zbrojenia,miejsce: CA-QC-LONGUEUIL-MA ~ 1000 Blvd Marie-Victorin ~ MA BLDG,1
+2026-11-21,RTX,zbrojenia,miejsce: CA-QC-MIRABEL-13100-CUST ~ 13100 Boul Henri-Fabre ~ AIRBUS CANADA (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: CA-QC-MIRABEL-M01 ~ 11155 Julien-Audette ~ M01 BLDG,9
+2026-11-21,RTX,zbrojenia,miejsce: CA-QC-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: CA-QC-SAINT HUBERT-H05 ~ 7007 Chemin De La Savane ~ BLDG H05 FACTORY,29
+2026-11-21,RTX,zbrojenia,miejsce: CN-HE-TIANJIN-015 ~ No 15 Ninghang Rd ~ COMPREHENSIVE BONDED,3
+2026-11-21,RTX,zbrojenia,"miejsce: CN-HE-TIANJIN-222-CUST ~ West 9 Road Tianjin Airport Industry Park Office 222 ~ 222, AIRBUS (External Site)",1
+2026-11-21,RTX,zbrojenia,miejsce: CN-SH-SHANGHAI-008 ~ No 8 Block 1 8228 Beiqing Hwy ~ BEIQING,1
+2026-11-21,RTX,zbrojenia,"miejsce: CN-SH-SHANGHAI-202 ~ No 202 Jinyue Rd ~ BLDG B, Unit 507-508",2
+2026-11-21,RTX,zbrojenia,miejsce: CN-SH-SHANGHAI-429 ~ No 429 N Nanquan Rd ~ TAIKANG INS TWR,1
+2026-11-21,RTX,zbrojenia,miejsce: CO-DC-BOGOTA-9A26-CUST ~ Cl. 95 #9A 26 ~ CL 95 (External Site),2
+2026-11-21,RTX,zbrojenia,miejsce: DE-BW-HEIDELBERG-036-751 ~ Grenzhofer Weg 36 ~ BLDG 751,4
+2026-11-21,RTX,zbrojenia,miejsce: DE-BY-LANDSHUT-004 ~ Mueller-Armack-Str. 4 ~ MUELLER ARMACK,1
+2026-11-21,RTX,zbrojenia,miejsce: DE-BY-NORDLINGEN-010 ~ Anton-Jaumann-Industriepark 10 ~ BLDG 10,6
+2026-11-21,RTX,zbrojenia,miejsce: DE-GERMANY-VENDOR ~ Germany Vendor ~ VENDOR (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: DE-HE-FRANKFURT-015 ~ Victor-Slotosch St 15 ~ BLDG 15,3
+2026-11-21,RTX,zbrojenia,miejsce: DE-HE-FRANKFURT-020 ~ Victor-Slotosch St 20 ~ BLDG 20,1
+2026-11-21,RTX,zbrojenia,miejsce: DE-HE-FRANKFURT-20-BLDG B ~ Victor-Slotosch St 20 ~ BLDG B,1
+2026-11-21,RTX,zbrojenia,"miejsce: DE-HE-FRANKFURT-AIRPORT-CUST ~ Airportring 322 ~ BLDG 335, Zweigniederlassung Deutschland (External Site)",1
+2026-11-21,RTX,zbrojenia,miejsce: DE-HH-HAMBURG-010-PB OFFICE ~ Hein-Sass-Stieg 10 ~ PB OFFICE,1
+2026-11-21,RTX,zbrojenia,"miejsce: DE-HH-HAMBURG-027-CUST ~ Kreetslag 10 ~ HAUS 27, Airbus Technologie Park, Haus 27 (External Site)",1
+2026-11-21,RTX,zbrojenia,miejsce: DE-HH-HAMBURG-041 ~ Focksweg 36 Eg ~ FOCKSWEG 36 EG,1
+2026-11-21,RTX,zbrojenia,"miejsce: DE-NW-LIPPSTADT-008 ~ Bertramstrasse 8 ~ BERTRAMSTRASSE, Hall 42, New 37 G",3
+2026-11-21,RTX,zbrojenia,miejsce: DE-NW-LIPPSTADT-009 ~ Bertramstrasse 8 ~ BERTRAMSTRASSE 9,1
+2026-11-21,RTX,zbrojenia,miejsce: DE-SH-LUBECK-BLDG 1 ~ Revalstr 1 ~ BLDG 1,4
+2026-11-21,RTX,zbrojenia,miejsce: FR-IDF-ANTONY-004 ~ 4 Rue Henri Poincare ~ HENRI POINCARE,3
+2026-11-21,RTX,zbrojenia,miejsce: FR-OCC-BLAGNAC-BAT CASS ~ 4 Ave Didier Daurat ~ DAURAT,6
+2026-11-21,RTX,zbrojenia,miejsce: FR-OCC-COLOMIERS-001 ~ 57 Ave Jean Monnet ~ JEAN MONNET,1
+2026-11-21,RTX,zbrojenia,miejsce: FR-OCC-COLOMIERS-008 ~ 30 Ave Georges Guynemer ~ GREEN PARK 2,1
+2026-11-21,RTX,zbrojenia,miejsce: FR-OCC-COLOMIERS-036 ~ 36 Ave Jean Monnet ~ HAUTE GARONNE,3
+2026-11-21,RTX,zbrojenia,miejsce: FR-OCC-FIGEAC-B46 ~ 770 Avenue Ratier ~ BLDG 46,1
+2026-11-21,RTX,zbrojenia,miejsce: FR-OCC-TOULOUSE-022 ~ 22 Chemin De La Crabe ~ HAUTE GARONNE,2
+2026-11-21,RTX,zbrojenia,"miejsce: Fareham, Hampshire",4
+2026-11-21,RTX,zbrojenia,miejsce: GB-BIR-BIRMINGHAM-001 ~ 1 Marston Green ~ GOODRICH CONTROL SYS,3
+2026-11-21,RTX,zbrojenia,miejsce: GB-BST-ALMONDSBURY-130 ~ 130 Aztec W ~ AZTEC CTR (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: GB-CMA-BARROW IN FURNESS-001-CUST ~ Bridge Rd ~ FOUNDATION HOUSE (External Site),1
+2026-11-21,RTX,zbrojenia,"miejsce: GB-HAM-HAVANT-001 ~ 1 Penner Rd ~ ALEXANDRIA PK, Unit 3",3
+2026-11-21,RTX,zbrojenia,miejsce: GB-NMD-KILKEEL-002B1 ~ 2 Moor Rd ~ BLDG 1,3
+2026-11-21,RTX,zbrojenia,miejsce: GB-PLY-PLYMOUTH-C ~ Clittaford Rd Southway ~ BLDG C,12
+2026-11-21,RTX,zbrojenia,miejsce: GB-PLY-PLYMOUTH-G ~ Clittaford Rd Southway ~ BLDG G,1
+2026-11-21,RTX,zbrojenia,miejsce: GB-SAY-AYRSHIRE-001 ~ 1 Dow Ave ~ ROHR AERO SRVCS,1
+2026-11-21,RTX,zbrojenia,miejsce: GB-SOL-SOLIHULL-001 ~ Fore 1 Huskisson Way ~ HS INTL CORP,2
+2026-11-21,RTX,zbrojenia,"miejsce: GB-SOL-SOLIHULL-003 ~ Fore 3 Huskisson Way ~ GOODRICH CONTROLS HOLDING, Motor Drives",1
+2026-11-21,RTX,zbrojenia,miejsce: GB-WLV-WOLVERHAMPTON-001 ~ Wobaston Rd ~ HS MARSTON AERO,19
+2026-11-21,RTX,zbrojenia,miejsce: GB-WSX-CRAWLEY-990 ~ 1 Pegasus Pl Gatwick Rd ~ PEGASUS,1
+2026-11-21,RTX,zbrojenia,"miejsce: Glenrothes, Fife",22
+2026-11-21,RTX,zbrojenia,"miejsce: Gloucester, South Gloucestershire",17
+2026-11-21,RTX,zbrojenia,"miejsce: HIN02: Ft Wayne IN 1010 Production Road  , Fort Wayne, IN, 46808 USA",1
+2026-11-21,RTX,zbrojenia,miejsce: HK-NT-TSEUNG KWAN O-080 ~ 80 Chun Choi St ~ HAECO BLDG,1
+2026-11-21,RTX,zbrojenia,"miejsce: HVA99: Field Office - VA Remote Location, Remote City, VA, 23218 USA",1
+2026-11-21,RTX,zbrojenia,"miejsce: Harlow, Essex",16
+2026-11-21,RTX,zbrojenia,miejsce: IE-CE-SHANNON-001 ~ World Aviation Park ~ BLDG 1,3
+2026-11-21,RTX,zbrojenia,miejsce: IN-KA-BENGALURU-040 ~ EPIP Industrial Area Old Plot No. 181 ~ EPIP INDUSTRIAL AREA OLD PLOT NO. 181,1
+2026-11-21,RTX,zbrojenia,"miejsce: IN-KA-BENGALURU-BLDG 1 ~ Hitech, Defence & Aerospace Park ~ HI TECH DEFENSE",5
+2026-11-21,RTX,zbrojenia,"miejsce: IN-KA-BENGALURU-BLDG 3 ~ Plot No 132 to 167 ~ BLDG 3, Hi-Tech Defence & Aerospace Park",1
+2026-11-21,RTX,zbrojenia,"miejsce: IN-KA-BENGALURU-NORTHGATE ~ Sy No 2/2 Venkatala Village ~ SY NO 2/2 VENKATALA VILLAGE, Yelahanka Hobli",52
+2026-11-21,RTX,zbrojenia,miejsce: IN-TS-HYDERABAD-012 ~ Plot No 12 ~ SARVOTHAM BLDG,4
+2026-11-21,RTX,zbrojenia,"miejsce: IN-TS-HYDERABAD-B3F7 ~ DLF Cybercity Gachibowli ~ DLF CYBERCITY GACHIBOWLI-B3F7, 7th Fl in Block 3",3
+2026-11-21,RTX,zbrojenia,"miejsce: JP-13-MINATO KU-251 ~ 2-5-1 Atago Minato-Ku ~ ATAGO, 4th Flr",2
+2026-11-21,RTX,zbrojenia,miejsce: JP-13-MINATO KU-431 ~ 4-3-1Toranmonminato-Ku ~ SHIROYAMA TRUST TWR,1
+2026-11-21,RTX,zbrojenia,"miejsce: JP-13-TOKYO-113 ~ 1-13, Hamamatsucho 2-Chome, Minato-Ku ~ SHIBA EXCELLENT BLDG, 2nd Flr",1
+2026-11-21,RTX,zbrojenia,"miejsce: JP-13-TOKYO-136 ~ 1-36-5 Nihonbashi Kakigaracho, Chuo-Ku ~ ICHIGO BLDG, 2nd Flr",1
+2026-11-21,RTX,zbrojenia,miejsce: JP-13-TOKYO-HANEDA AIRPORT-CUST ~ JP-13-TOKYO-HANEDA AIRPORT-CUST (External Site) ~ ANA CMB (External Site),2
+2026-11-21,RTX,zbrojenia,miejsce: JP-28-AKASHI-011-CUST ~ 1-1 Kawasakicho ~ KAWASAKI HEAVY (External Site),1
+2026-11-21,RTX,zbrojenia,"miejsce: KR-11-SEOUL-096 ~ 96 Jong-Ro Jongno-Gu ~ REGUS HANOL TWR, Rm 403 (External Site)",1
+2026-11-21,RTX,zbrojenia,"miejsce: KR-41-HWASEONG-018 ~ 18 Jeongnamsandan 2-Gil Jeongnam-Myeon ~ ATS KOREA, Gate 5, 2F",1
+2026-11-21,RTX,zbrojenia,"miejsce: KW-KU-MILITARY-CUST ~ Kuwait City Capital ~ KUWAIT CITY CAPITAL, Military Locations (External Site)",2
+2026-11-21,RTX,zbrojenia,"miejsce: Leighton Buzzard, Bedfordshire",7
+2026-11-21,RTX,zbrojenia,"miejsce: Livingston, West Lothian",10
+2026-11-21,RTX,zbrojenia,"miejsce: London, London",6
+2026-11-21,RTX,zbrojenia,"miejsce: MX-BCN-MEXICALI-238 ~ Blvd Venustiano Carranza #238 ~ BLDG 238, Desarrollo Industrial Colorado",14
+2026-11-21,RTX,zbrojenia,"miejsce: MX-BCN-MEXICALI-238B ~ Blvd Venustiano Carranza # 238 ~ BLDG 238B, Desarrollo Industrial Colorado",1
+2026-11-21,RTX,zbrojenia,miejsce: MX-BCN-MEXICALI-496 ~ Calzada Manuel Gomez Morin #3200 ~ CALZADA,20
+2026-11-21,RTX,zbrojenia,"miejsce: MX-CMX-MEXICO CITY-284-CUST ~ Av. P. de la Reforma 284, Juarez ~ TORRE MAGENTA, 17th Flr (External Site)",1
+2026-11-21,RTX,zbrojenia,miejsce: MY-10-KLANG-009 ~ 9 Lengkuk Keluli 2 ~ 9 LENGKUK KELULI 2-009,7
+2026-11-21,RTX,zbrojenia,"miejsce: MY-10-SUBANG-001 ~ Mukim Damansara, Daerah Petaling ~ JALAN LAPANGAN TERBANG SUBANG",8
+2026-11-21,RTX,zbrojenia,"miejsce: Malvern, Worcestershire",3
+2026-11-21,RTX,zbrojenia,"miejsce: Manchester, Lancashire",12
+2026-11-21,RTX,zbrojenia,miejsce: NL-UT-HOUTEN-001 ~ 1-3 Elzenkade ~ ELZENKADE,1
+2026-11-21,RTX,zbrojenia,miejsce: NZ-CAN-CHRISTCHURCH-115-1 ~ 115 Orchard Rd ~ V2500 WORKSHOP,2
+2026-11-21,RTX,zbrojenia,miejsce: PH-BTG-TANAUAN CITY-018 ~ Lot 18 3rd St ~ LOT 18-1,16
+2026-11-21,RTX,zbrojenia,miejsce: PH-BTG-TANAUAN CITY-019 ~ Lot 19A 3rd St ~ LOT 19A,1
+2026-11-21,RTX,zbrojenia,miejsce: PH-BTG-TANAUAN CITY-BQ4 ~ First Philippine Industrial Park ~ BLDG Q4,67
+2026-11-21,RTX,zbrojenia,miejsce: PL-12-NIEPOLOMICE-004 ~ Grabska 4 ~ GRABSKA,10
+2026-11-21,RTX,zbrojenia,miejsce: PL-14-WARSAW-049 ~ Ul Moktowska 49 ~ MOKTOWSKA,4
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-JASIONKA-111 ~ Tajecina 111 ~ PODKARPACKIE,4
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 A01 ~ Ul Hetmanska 120 ~ BLDG A01,1
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 A04 ~ Ul Hetmanska 120 ~ BLDG A04,1
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 B05 ~ Ul Hetmanska 120 ~ BLDG B05,35
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 C08 ~ Ul Hetmanska 120 ~ BLDG C08,1
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 D13 ~ Ul Hetmanska 120 ~ BLDG D13,1
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 E15 ~ Ul Hetmanska 120 ~ BLDG E15,1
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 F20 ~ Ul Hetmanska 120 ~ BLDG F20,3
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 F62 ~ Ul Hetmanska 120 ~ BLDG F62,2
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 L45 ~ Ul Hetmanska 120 ~ BLDG L45,1
+2026-11-21,RTX,zbrojenia,miejsce: PL-18-RZESZOW-120 N56 ~ Ul Hetmanska 120 ~ BLDG N56,2
+2026-11-21,RTX,zbrojenia,miejsce: PL-24-WROCLAW-006 ~ Bierutowska St 65-67 ~ BLDG 6,1
+2026-11-21,RTX,zbrojenia,miejsce: PL-24-WROCLAW-011 ~ Bierutowska St 60-65 ~ BLDG 11,26
+2026-11-21,RTX,zbrojenia,miejsce: PL-30-KALISZ-002 ~ Elektryczna ~ ELEKTRYCZNA,2
+2026-11-21,RTX,zbrojenia,miejsce: PL-30-KALISZ-140 ~ Czestochowska 140 ~ CZESTOCHOWSKA,6
+2026-11-21,RTX,zbrojenia,miejsce: PL-30-KALISZ-BLDG1 ~ Elektryczna ~ BLDG 1,16
+2026-11-21,RTX,zbrojenia,miejsce: PL-POLAND-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: QA-DA-DOHA-026 ~ Alfardan Towers-Office Tower ~ BLDG 26,3
+2026-11-21,RTX,zbrojenia,miejsce: SA-01-RIYADH-S1 ~ 9054 Airport Rd ~ ROSHAN FRONT BLDG S1,3
+2026-11-21,RTX,zbrojenia,miejsce: SA-02-JEDDAH-MILITARY ~ JEDDAH ~ JEDDAH MILITARY (External Site),9
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-005 B1 ~ 5 Tuas Dr 2 ~ 5 TUAS DR 2-005 B1,6
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-009 ~ 9 Seletar Aerospace Link ~ SELETAR LINK,8
+2026-11-21,RTX,zbrojenia,"miejsce: SG-01-SINGAPORE-010 ~ 10 Loyang Cres ~ 10 LOYANG CRES-010, Phase 1",12
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-011 ~ 11 Changi N Rise ~ 11 CHANGI N RISE,8
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-018 P1 ~ 18 Bedok S Rd ~ 18 BEDOK S RD-018 P1,9
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-018 P2 ~ 18 Bedok S Rd ~ 18 BEDOK S RD-018 P2,1
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-018 P3 ~ 18 Bedok S Rd ~ 18 BEDOK S RD-018 P3,1
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-018L ~ 18 Loyang Ln ~ 18 LOYANG LN,3
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-039 CARE ~ 39 Changi N Cres ~ 39 CHANGI N CRES-039 CARE,10
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-039 GCS ~ 39 Changi N Cres ~ 39 CHANGI N CRES-039 GCS,1
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-039 IHUB ~ 39 Changi N Cres ~ 39 IHUB BLDG,1
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-041 BLOCK A ~ 41 Changi N CRES ~ 41 CHANGI N CRES-041 BLOCK A,6
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-051 TC ~ 51 Calshot Rd ~ 51 CALSHOT RD-051 TC,16
+2026-11-21,RTX,zbrojenia,"miejsce: SG-01-SINGAPORE-051A ~ 51 Seletar Aerospace View ~ 51 SELETAR AEROSPACE VIEW, P&W Manufacturing Services",12
+2026-11-21,RTX,zbrojenia,"miejsce: SG-01-SINGAPORE-061 ~ 61 Seletar Aerospace View ~ SELETAR BLDG 61, Pratt & Whitney Singapore Component Repair",14
+2026-11-21,RTX,zbrojenia,miejsce: SG-01-SINGAPORE-083 ~ 83 Clemenceau Ave ~ UE SQAURE,1
+2026-11-21,RTX,zbrojenia,"miejsce: SG-01-SINGAPORE-690 ~ 690 W Camp Rd ~ 690 W CAMP RD, Seletar Aerospace Park JTC Aviation 2 #05-01",1
+2026-11-21,RTX,zbrojenia,"miejsce: TW-HSQ-ZHUBEI-173 ~ No 173 Section 3 Huanbei Rd ~ HUANBEI, 4th Flr",4
+2026-11-21,RTX,zbrojenia,"miejsce: Torpoint, Cornwall",1
+2026-11-21,RTX,zbrojenia,miejsce: US-AL-FOLEY-111 ~ 111 Airport Dr ~ MRO BLDG,3
+2026-11-21,RTX,zbrojenia,miejsce: US-AL-FOLEY-1300 ~ 1300 W Fern Ave ~ OEM BLDG,11
+2026-11-21,RTX,zbrojenia,miejsce: US-AL-HUNTSVILLE-315 ~ 315 Bob Heath Dr ~ BOB HEATH,51
+2026-11-21,RTX,zbrojenia,miejsce: US-AL-HUNTSVILLE-382 ~ 420 Jan Davis Dr ~ DAVIS 382,8
+2026-11-21,RTX,zbrojenia,miejsce: US-AL-HUNTSVILLE-401 ~ 401 Jan Davis Dr NW ~ JAN DAVIS 401,22
+2026-11-21,RTX,zbrojenia,miejsce: US-AL-HUNTSVILLE-499-CUST ~ 499 Boeing Blvd ~ BOEING (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-AL-HUNTSVILLE-7745 ~ 7745 Eagle Rd ~ EAGLE,10
+2026-11-21,RTX,zbrojenia,miejsce: US-AL-REMOTE,4
+2026-11-21,RTX,zbrojenia,"miejsce: US-AR-CAMDEN-181-CUST ~ 181 Bear Rd ~ BEAR, Highland Industrial Park (External Site)",6
+2026-11-21,RTX,zbrojenia,"miejsce: US-AR-CAMDEN-H100 ~ 100 Wilson Rd ~ BLDG H100, Highland Industrial Park",4
+2026-11-21,RTX,zbrojenia,miejsce: US-AR-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-AR-SPRINGDALE-BLDG 1 ~ 275 E Robinson Ave ~ BLDG 1,10
+2026-11-21,RTX,zbrojenia,miejsce: US-AR-SPRINGDALE-BLDG 2 ~ 275 E Robinson Ave ~ BLDG 2,3
+2026-11-21,RTX,zbrojenia,miejsce: US-AR-SPRINGDALE-BLDG 3 ~ 275 E Robinson Ave ~ BLDG 3,1
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-MARANA-GXO-CUST ~ 10070 North Clark Farms Blvd ~ GXO (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-PHOENIX-1007 ~ 1007 E University Dr ~ 1007 E UNIVERSITY DR,18
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-PHOENIX-3405 ~ 3405 S 5th St ~ BLDG 3405,4
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-PHOENIX-3414-B1 ~ 3414 S 5th St ~ BLDG 1,9
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-PHOENIX-3414-B2 ~ 3414 S 5th St ~ BLDG 2,2
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-REMOTE,16
+2026-11-21,RTX,zbrojenia,"miejsce: US-AZ-SCOTTSDALE-1355 ~ 1355 N Scottsdale Rd ~ SKYSONG, Ste 340",1
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-800 ~ 1151 E Hermans Rd ~ BLDG 800,14
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-801 A20 ~ 1151 E Hermans Rd ~ BLDG A20 (External Site),2
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-801 ~ 1151 E Hermans Rd ~ BLDG 801 (External Site),62
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-802 ~ 1151 E Hermans Rd ~ BLDG 802,10
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-802A ~ 1151 E Hermans Rd ~ BLDG 802A,1
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-805 ~ 1151 E Hermans Rd ~ BLDG 805,92
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-807 ~ 1151 E Hermans Rd ~ BLDG 807,30
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-807A ~ 1151 E Hermans Rd ~ BLDG 807A,14
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-808 ~ 1151 E Hermans Rd ~ BLDG 808,17
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-809 ~ 1151 E Hermans Rd ~ BLDG 809 (External Site),2
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-810 ~ 1151 E Hermans Rd ~ BLDG 810 (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-811 ~ 1151 E Hermans Rd ~ BLDG 811 (External Site),5
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-827C ~ 1151 E Hermans Rd ~ BLDG 827C (External Site),10
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-830 ~ 1151 E Hermans Rd ~ BLDG 830 (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-833 ~ 1151 E Hermans Rd ~ BLDG 833 (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-840 ~ 1151 E Hermans Rd ~ BLDG 840,2
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-842 ~ 1151 E Hermans Rd ~ BLDG 842,6
+2026-11-21,RTX,zbrojenia,"miejsce: US-AZ-TUCSON-846 ~ 1146 E Aero Park Blvd ~ BLDG 846, AZ201 Tucson Airport North",11
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-847 ~ 1151 E Hermans Rd ~ BLDG 847,1
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-848 ~ 1151 E Hermans Rd ~ BLDG 848,22
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-863A ~ 1151 E Hermans Rd ~ 863A,5
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-9016 ~ 9000 S Rita Rd ~ BLDG 9016,4
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-9020 ~ 9020 S Rita Rd ~ BLDG 9020,30
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-9022 ~ 9022 S Rita Rd ~ BLDG 9022,17
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-9024 ~ 9024 S Rita Rd ~ BLDG 9024,4
+2026-11-21,RTX,zbrojenia,"miejsce: US-AZ-TUCSON-9030 CORRIDOR ~ 9030 S Rita Rd ~ BLDG 9030 CORRIDOR, AZ201 Tucson Rita Road M30",8
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-9030 ~ 9030 S Rita Rd ~ BLDG 9030,13
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-9040 ~ 9040 S Rita Road ~ 9040,1
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-9070 ~ 9070 S Rita Rd ~ BLDG 9070,15
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-914 ~ 6880 S Tucson Blvd ~ BIKE SHOP 914,5
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-928 ~ 1151 E Hermans Rd ~ MULTI PURPOSE FAC 928,28
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-930 ~ 1151 E Hermans Rd ~ ETF 930,4
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-940 ~ 1151 E Hermans Rd ~ 940,1
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-M02 ~ 1151 E Hermans Rd ~ BLDG M02,75
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-M05 ~ 1151 E Hermans Rd ~ BLDG M05 (External Site),11
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-M07 ~ 3292 E Hemisphere Loop ~ BLDG M07,10
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-M09 ~ 3350 E Hemisphere Loop ~ BLDG M09,22
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-M10 ~ 3360 E Hemisphere Loop ~ BLDG M10,14
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-M13 ~ 3601 E Britannia Dr ~ BRITANNIA M13,15
+2026-11-21,RTX,zbrojenia,miejsce: US-AZ-TUCSON-M17 ~ 1851 S Pantano Rd ~ BLDG M17,1
+2026-11-21,RTX,zbrojenia,"miejsce: US-CA-ANAHEIM-406 ~ 160 N Riverview Dr ~ BLDG 406, Ste 150",4
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-CARLSBAD-582 ~ 2752 Loker Ave W ~ LOKER,4
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-CARLSBAD-5940 ~ 5940 Darwin Ct ~ DARWIN,6
+2026-11-21,RTX,zbrojenia,"miejsce: US-CA-CHULA VISTA-B107 ~ 850 Lagoon Dr ~ BLDG 107, Mail Zone 1-C",11
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-CHULA VISTA-B61 ~ 850 Lagoon Dr ~ BLDG B61,2
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-EDWARDS-AFB-CUST ~ 295 N Wolfe Ave ~ EDWARDS AFB (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-EL SEGUNDO-E01 ~ 2000 E El Segundo Blvd ~ BLDG E01,70
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-EL SEGUNDO-E02 ~ 2002 E El Segundo Blvd ~ BLDG E02,5
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-EL SEGUNDO-E04 ~ 2006 E El Segundo Blvd ~ BLDG E04,29
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-EL SEGUNDO-E06 ~ 2010 E El Segundo Blvd ~ BLDG E06,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-EL SEGUNDO-E07 ~ 2012 E El Segundo Blvd ~ BLDG E07,4
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-EL SEGUNDO-R01 ~ 2000 E Imperial Hwy ~ BLDG R01,23
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-EL SEGUNDO-R02 ~ 1970 E Imperial Hwy ~ BLDG R02,4
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-EL SEGUNDO-R09 ~ 2222 E Imperial Hwy ~ BLDG R09,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-FAIRFIELD-3530 ~ 3530 Branscombe Rd ~ BRANSCOMBE,10
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-FULLERTON-611 ~ 1801 Hughes Dr ~ BLDG 611,2
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-FULLERTON-622 ~ 1801 Hughes Dr ~ BLDG 622,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-FULLERTON-675 ~ 1801 Hughes Dr ~ BLDG 675,7
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-FULLERTON-676 ~ 1801 Hughes Dr ~ BLDG 676,11
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-FULLERTON-677 ~ 1801 Hughes Dr ~ BLDG 677,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-GOLETA-B01 ~ 6825 Cortona Dr ~ BLDG B01,26
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-GOLETA-B02 ~ 75 Coromar Dr ~ BLDG B02,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-GOLETA-B03 ~ 75 Coromar Dr ~ BLDG B03,3
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-GOLETA-B05 ~ 6875 Cortona Dr ~ BLDG B05,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-GOLETA-H01 ~ 6380 Hollister Ave ~ BLDG H01,39
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-GOLETA-H02 ~ 6380 Hollister Ave ~ BLDG H02,6
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-GOLETA-H03 ~ 6380 Hollister Ave ~ BLDG H03,3
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-GOLETA-H04 ~ 115 Robin Hill Rd ~ BLDG H04,2
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-GOLETA-H06 ~ 6380 Hollister Ave ~ BLDG H06,2
+2026-11-21,RTX,zbrojenia,"miejsce: US-CA-LAKEWOOD-4007 ~ 4007 Paramount Blvd ~ PARAMOUNT, Ste 110",1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-LIVERMORE-917 ~ 6011 Industrial Way ~ BLDG 917,3
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-LOMPOC-L01 ~ 425 Commerce Ct ~ BLDG L01,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-ONTARIO-R27 ~ 1120 S Vineyard Ave ~ BLDG R27,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-PASADENA-4800-CUST ~ 4800 Oak Grove Dr ~ OAK GROVE (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-REMOTE,6
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-RIVERSIDE-8200B1 ~ 8200 Arlington Ave ~ BLDG B1,6
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-SAN DIEGO-SD1 ~ 8650 Balboa Ave ~ SAN ANTONIO BLDG,3
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-SAN DIMAS-936 ~ 936-960 Overland Ct ~ OVERLAND,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-SAN JOSE-826 ~ 200 Holger Way ~ BLDG 826,15
+2026-11-21,RTX,zbrojenia,miejsce: US-CA-SANTA FE SPRINGS-9920 ~ 9920 Freeman Ave ~ FREEMAN,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-AURORA-S75 ~ 16800 E Centretech Pkwy ~ BLDG S75,38
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-AURORA-S76 ~ 16430 E Hughes Dr ~ BLDG S76,15
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-AURORA-S77 ~ 16470 E Hughes Dr ~ BLDG S77,14
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-AURORA-S79 ~ 16510 E Hughes Dr ~ BLDG S79,2
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-BUCKLEY-SFB-CUST ~ 18500 E 6th Ave ~ BUCKLEY SFB (External Site),7
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-COLORADO SPRINGS-1275 ~ 1275 N Newport Rd ~ NEWPORT,3
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-COLORADO SPRINGS-793 ~ 1225 Aeroplaza Dr ~ AEROPLAZA,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-COLORADO SPRINGS-9970-CUST ~ 9970 Federal Dr ~ FEDERAL (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-DENVER-4545-CUST ~ 4545 Airport Way ~ AIRPORT WAY (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-PUEBLO-050 ~ 50 William White Blvd ~ BLDG 50,12
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-REMOTE,2
+2026-11-21,RTX,zbrojenia,miejsce: US-CO-SCHRIEVER-AFB-CUST ~ 720 Irwin Ave ~ SCHRIEVER AFB (External Site),2
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-CHESHIRE-250 ~ 250 Knotter Dr ~ GOODRICH CORP,6
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST GRANBY-200 ~ 200 Signature Way ~ OFFICE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-A ~ 400 Main St ~ BLDG A,4
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-C ~ 400 Main St ~ BLDG C,2
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-CTC ~ 400 Main St ~ BLDG CTC,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-CWSTF ~ 400 Main St ~ BLDG CWSTF,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-D ~ 400 Main St ~ BLDG D,4
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-ENG ~ 400 Main St ~ BLDG ENG,6
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-ETC ~ 400 Main St ~ BLDG ETC,131
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-G ~ 400 Main St ~ BLDG G,7
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-IWDPCS ~ 400 Main St ~ IWDPCS,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-J ~ 400 Main St ~ BLDG J,12
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-K ~ 400 Main St ~ BLDG K,7
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-L ~ 400 Main St ~ BLDG L,10
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-M ~ 400 Main St ~ BLDG M,4
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-OBF1 ~ 400 Main St ~ BLDG OBF1,5
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-OBF2 ~ 400 Main St ~ BLDG OBF2,12
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-OBG ~ 400 Main St ~ BLDG OBG,17
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-PH ~ 400 Main St ~ BLDG PH,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-RTRC A ~ 411 Silver Ln ~ RTRC A,3
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-RTRC H ~ 411 Silver Ln ~ RTRC H,6
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-RTRC J ~ 411 Silver Ln ~ RTRC J,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-RTRC K ~ 411 Silver Ln ~ RTRC K,4
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-EAST HARTFORD-RTRC L ~ 411 Silver Ln ~ RTRC L,5
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-FARMINGTON-0001 ~ 1 Farm Springs Rd ~ 1 FARM SPRINGS,3
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-FARMINGTON-0004 ~ 4 Farm Springs Rd ~ 4 FARM SPRINGS,12
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-FARMINGTON-0008 ~ 8 Farm Springs Rd ~ 8 FARM SPRINGS,3
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-FARMINGTON-0010 ~ 10 Farm Springs Rd ~ 10 FARM SPRINGS,3
+2026-11-21,RTX,zbrojenia,"miejsce: US-CT-GLASTONBURY-124 ~ 124 Hebron Ave ~ HEBRON, 2nd Flr, Ste 200",1
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-MIDDLETOWN-110 ~ Aircraft Rd ~ BLDG 110,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-MIDDLETOWN-130 ~ Aircraft Rd ~ BLDG 130,6
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-MIDDLETOWN-140 ~ Aircraft Rd ~ BLDG 140,5
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-MIDDLETOWN-150 ~ Aircraft Rd ~ BLDG 150,2
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-MIDDLETOWN-220A ~ Aircraft Rd ~ BLDG 220A,34
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-REMOTE,25
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-WINDSOR LOCKS-B1 ~ 1 Hamilton Rd ~ BLDG 1,11
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-WINDSOR LOCKS-B1A ~ 1 Hamilton Rd ~ BLDG 1A,18
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-WINDSOR LOCKS-B1D ~ 1 Hamilton Rd ~ BLDG 1D SRV,1
+2026-11-21,RTX,zbrojenia,miejsce: US-CT-WINDSOR LOCKS-B2 ~ 1 Hamilton Rd ~ BLDG 2,12
+2026-11-21,RTX,zbrojenia,miejsce: US-DC-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-DE-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JACKSONVILLE-10531 ~ 10531 Busch Dr ~ BUSCH,1
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JACKSONVILLE-6061 BLDG 101 ~ 6061 Goodrich Blvd ~ BLDG 101 FINISH BLDG,3
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JACKSONVILLE-6801-CUST ~ 6801 Roosevelt Blvd ~ ROSSEVELT (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JACKSONVILLE-WASP-CUST ~ FRCSE JAX Wasp St ~ JAX WASP (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JUPITER-A05 STAND ~ 17900 Beeline Hwy ~ BLDG A05 STAND,1
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JUPITER-ADR ~ 17900 Beeline Hwy ~ ADR BLDG,38
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JUPITER-APREP ~ 17900 Beeline Hwy ~ APREP,1
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JUPITER-EOB ~ 17900 Beeline Hwy ~ BLDG EOB,2
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JUPITER-MFG ~ 17900 Beeline Hwy ~ MFG BLDG,2
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-JUPITER-PDC ~ 17900 Beeline Hwy ~ PDC BLDG,1
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-LARGO-382SR ~ 7887 Bryan Dairy Rd ~ BLDG 600,8
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-LARGO-382SS ~ 7887 Bryan Dairy Rd. ~ BLDG 100,19
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-LARGO-382ST ~ 7887 Bryan Dairy Rd ~ BLDG 400,6
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-MEDLEY-9100 ~ 9120-9124 NW 105th Cir ~ NW 105TH,3
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-MELBOURNE-307 ~ 1100 W Hibiscus Blvd ~ BLDG 307,9
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-MELBOURNE-308 ~ 1100 W Hibiscus Blvd ~ BLDG 308,8
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-MELBOURNE-310 ~ 1100 W Hibiscus Blvd ~ BLDG 310,2
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-MELBOURNE-311 ~ 1100 W Hibiscus Blvd ~ BLDG 311,7
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-MELBOURNE-312 ~ 795 W Nasa Blvd ~ BLDG 312,6
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-MELBOURNE-313 ~ 1344 S Babcock St ~ BLDG 313,7
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-MIRAMAR-3601 ~ 3601 Flamingo Rd ~ FLAMINGO,4
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-OPA LOCKA-3201 ~ 3201 NW 167th St ~ NW 167TH,3
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-REMOTE,8
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-ST PETERSBURG-381BD ~ 7401 22nd Ave N ~ BLDG D,6
+2026-11-21,RTX,zbrojenia,miejsce: US-FL-WEST PALM BEACH-777-CUST ~ 777 S Flagler ~ FLAGLER (External Site),3
+2026-11-21,RTX,zbrojenia,"miejsce: US-GA-ATLANTA-002 ~ 1 Glenlake Pkwy ~ GLENLAKE, Ste 650 (External Site)",1
+2026-11-21,RTX,zbrojenia,miejsce: US-GA-ATLANTA-100 ~ 100 Galleria Pkwy SE ~ GALLERIA,3
+2026-11-21,RTX,zbrojenia,miejsce: US-GA-ATLANTA-3625 SLC ~ 3625 Royal S Parkway ~ 3625 SLC,1
+2026-11-21,RTX,zbrojenia,miejsce: US-GA-ATLANTA-DELTA TECHOPS ~ 1600A Maynard H. Jackson Service Road ~ DELTA TECHOPS (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-GA-MIDLAND-AB1 ~ 8801/8987 Macon Rd ~ BLDG AB1,2
+2026-11-21,RTX,zbrojenia,miejsce: US-GA-MIDLAND-MPC ~ 8801/8987 Macon Rd ~ BLDG MPC,22
+2026-11-21,RTX,zbrojenia,miejsce: US-GA-REMOTE,7
+2026-11-21,RTX,zbrojenia,miejsce: US-GA-WARNER ROBINS-512 ~ 1230 Carl Vinson Pkwy ~ ROBINS ENGINEERING CTR,3
+2026-11-21,RTX,zbrojenia,"miejsce: US-GU-MILITARY-CUST ~ Hagatna Capital ~ HAGATNA CAPITAL, Military Locations (External Site)",2
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-BELLEVUE-186 ~ 1500 State St ~ STATE,7
+2026-11-21,RTX,zbrojenia,"miejsce: US-IA-CARROLL-426 ~ 426 Bella Vista Dr ~ BELLA VISTA, PO Box 826",10
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-104 ~ 400 Collins Rd NE ~ BLDG 104,7
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-105 ~ 400 Collins Rd NE ~ BLDG 105,28
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-106 ~ 400 Collins Rd NE ~ BLDG 106,28
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-107 ~ 400 Collins Rd NE ~ BLDG 107,6
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-108 ~ 400 Collins Rd NE ~ BLDG 108,24
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-109 ~ 400 Collins Rd NE ~ BLDG 109,2
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-112 ~ 400 Collins Rd NE ~ BLDG 112,13
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-121 ~ 350 Collins Rd NE ~ BLDG 121,22
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-124 ~ 400 Collins Rd NE ~ BLDG 124,14
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-130 ~ 5350 C Ave NE ~ BLDG 130,19
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-131 ~ 5450 C Ave NE ~ BLDG 131,23
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-137 ~ 855 35Th St NE ~ BLDG 137,55
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-139 ~ 855 35Th St NE ~ BLDG 139,5
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-143 ~ 855 35Th St NE ~ BLDG 143,1
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-165 ~ 855 35Th St NE ~ BLDG 165,2
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-166 ~ 855 35Th St NE ~ BLDG 166,16
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-179 ~ 855 35Th St NE ~ BLDG 179,1
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-182 ~ 1100 Cimmie Ave Ne ~ BLDG 182,29
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CEDAR RAPIDS-193 ~ 1120 Collins Rd NE ~ BLDG193,26
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-CORALVILLE-155 ~ 2855 Heartland Dr ~ HEARTLAND BLDG 155,11
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-DECORAH-129 ~ 2464 River Rd ~ RIVER,1
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-MANCHESTER-185 ~ 901 S 10th St ~ S 10TH,8
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-REMOTE,6
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-WEST DES MOINES-2200 ~ 2200 Delavan Dr ~ DELAVAN,1
+2026-11-21,RTX,zbrojenia,miejsce: US-IA-WEST DES MOINES-811 ~ 811 4th St ~ 4TH,9
+2026-11-21,RTX,zbrojenia,miejsce: US-IL-REMOTE,3
+2026-11-21,RTX,zbrojenia,miejsce: US-IL-ROCKFORD-BB ~ 4747 Harrison Ave ~ BUTLER BLDG,1
+2026-11-21,RTX,zbrojenia,miejsce: US-IL-ROCKFORD-P1 ~ 2421 11th St ~ 2421 11TH ST-P1,7
+2026-11-21,RTX,zbrojenia,miejsce: US-IL-ROCKFORD-P6 ~ 4747 Harrison Ave ~ 4747 HARRISON AVE-P6,21
+2026-11-21,RTX,zbrojenia,miejsce: US-IN-FT WAYNE-150A ~ 1010 Production Rd ~ BLDG 150A,43
+2026-11-21,RTX,zbrojenia,miejsce: US-IN-INDIANAPOLIS-206 ~ 3939 Priority Way S Dr ~ PRIORITY BLDG 6,11
+2026-11-21,RTX,zbrojenia,miejsce: US-IN-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-KS-LENEXA-885 ~ 15701 W 95Th St ~ KIN01 W 95TH 885,22
+2026-11-21,RTX,zbrojenia,miejsce: US-KS-REMOTE,2
+2026-11-21,RTX,zbrojenia,miejsce: US-KY-LOUISVILLE-102 ~ 6201 Strawberry Ln ~ STRAWBERRY,5
+2026-11-21,RTX,zbrojenia,miejsce: US-KY-LOUISVILLE-LBLDG ~ 6201 Strawberry Ln ~ L BLDG,1
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-ANDOVER-AN0 ~ 366 Lowell St ~ BLDG AN0,44
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-ANDOVER-AN1 ~ 350 Lowell St ~ AN1 ESSEX BLDG,90
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-ANDOVER-AN2 ~ 352 Lowell St ~ AN2 HAMPSHIRE BLDG,20
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-ANDOVER-AN3 ~ 354 Lowell St ~ AN3 SUFFOLK BLDG,16
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-ANDOVER-AN5 ~ 356 Lowell St ~ AN5 BRISTOL BLDG,1
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-ANDOVER-AR1 ~ 358 Lowell St ~ AR1 DUKES BLDG,11
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-ANDOVER-AR2 ~ 362 Lowell St ~ AR2 PLYMOUTH BLDG,12
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-BOSTON-BOSTON PERFORMANCE HUB ~ 41 Alexander Rd ~ BOSTON PERFORMANCE HUB,2
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-CAMBRIDGE-BBN01 ~ 10 & 50 Moulton St ~ MOULTON B2,15
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-CAMBRIDGE-BBN04 ~ 10 & 50 Moulton St ~ MOULTON B4,1
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-CAMBRIDGE-BBN05 ~ 10 & 50 Moulton St ~ MOULTON B5,2
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-CAMBRIDGE-BBN06 ~ 10 & 50 Moulton St ~ MOULTON B6,5
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-MARLBOROUGH-MA1 ~ 1001 Boston Post Rd ~ BLDG 1,36
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-MARLBOROUGH-MA2 ~ 1001 Boston Post Rd ~ BLDG 2,41
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-MARLBOROUGH-MA3 ~ 1001 Boston Post Rd ~ BLDG 3,40
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-MARLBOROUGH-MA4 ~ 1001 Boston Post Rd ~ BLDG 4,6
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-PITTSFIELD-540-CUST ~ 540 Merrill Rd ~ MERRILL (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-REMOTE,10
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-TEWKSBURY-TB1 ~ 50 Apple Hill Dr ~ ASSABET BLDG,65
+2026-11-21,RTX,zbrojenia,"miejsce: US-MA-TEWKSBURY-TB2 ~ 50 Apple Hill Dr ~ SUDBURY BLDG, Tewksbury Tb2 200 Sudbury",27
+2026-11-21,RTX,zbrojenia,"miejsce: US-MA-TEWKSBURY-TB3 ~ 50 Apple Hill Dr ~ CONCORD BLDG, Tewksbury Tb3 300 Concord",55
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-TEWKSBURY-TB4 ~ 836 North St ~ INNOVATION BLDG,35
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-WESTFORD-WFD7 ~ 7 Technology Park Dr ~ BLDG 7,5
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-WOBURN-WB1 ~ 235 Presidential Way ~ SPENCER BLDG,37
+2026-11-21,RTX,zbrojenia,miejsce: US-MA-WOBURN-WB2 ~ 225 Presidential Way ~ GODDARD BLDG,60
+2026-11-21,RTX,zbrojenia,miejsce: US-MD-ABERDEEN-APG ~ 6260 Guardian Gtwy ~ APG,1
+2026-11-21,RTX,zbrojenia,miejsce: US-MD-ANDREWS-AFB-CUST ~ 1558 Alabama Ave ~ ANDREWS AFB (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-MD-ANNAPOLIS JUNCTION-339 ~ 306 Sentinel Dr ~ 339 BLDG,6
+2026-11-21,RTX,zbrojenia,miejsce: US-MD-ANNAPOLIS-905 ~ 2551 Riva Rd ~ BLDG 905,1
+2026-11-21,RTX,zbrojenia,miejsce: US-MD-ANNAPOLIS-906 ~ 2551 Riva Rd ~ BLDG 906,2
+2026-11-21,RTX,zbrojenia,"miejsce: US-MD-COLUMBIA-7100 ~ 7100 Columbia Gateway Dr ~ COLUMBIA GATEWAY, Ste 160",2
+2026-11-21,RTX,zbrojenia,"miejsce: US-MD-COLUMBIA-720 ~ 9861 Broken Land Pkwy ~ BBN COLUMBIA, Ste 400",5
+2026-11-21,RTX,zbrojenia,miejsce: US-MD-FORT MEADE-9800-CUST ~ 9800 Savage Rd ~ SAVAGE (External Site),6
+2026-11-21,RTX,zbrojenia,"miejsce: US-MD-FULTON-8170 ~ 8170 Maple Lawn Blvd ~ MAPLE LAWN, Ste 190, 200 & 300",8
+2026-11-21,RTX,zbrojenia,"miejsce: US-ME-NORTH BERWICK-113 ~ 113 Wells St ~ WELLS, Rte 9",62
+2026-11-21,RTX,zbrojenia,miejsce: US-MI-HOLT-PLANT 5 ~ 1781 Holloway Dr ~ PLANT 5,3
+2026-11-21,RTX,zbrojenia,miejsce: US-MI-LANSING-PLANT 1 ~ 5640 Enterprise Dr ~ PLANT 1,1
+2026-11-21,RTX,zbrojenia,miejsce: US-MI-REMOTE,2
+2026-11-21,RTX,zbrojenia,miejsce: US-MN-BURNSVILLE-MEMS ~ 14300 Judicial Rd ~ MEMS BLDG,5
+2026-11-21,RTX,zbrojenia,miejsce: US-MN-BURNSVILLE-WEST ~ 14300 Judicial Rd ~ WEST BLDG,19
+2026-11-21,RTX,zbrojenia,miejsce: US-MS-FOREST-425 ~ 19859 Hwy 80 ~ BLDG 425,9
+2026-11-21,RTX,zbrojenia,miejsce: US-MS-FOREST-430 ~ 19859 Hwy 80 ~ BLDG 430,4
+2026-11-21,RTX,zbrojenia,miejsce: US-MS-FOREST-431 ~ 19859 Hwy 80 ~ BLDG 431,16
+2026-11-21,RTX,zbrojenia,miejsce: US-MS-PASCAGOULA-1000-CUST ~ 1000 Access Rd ~ ACCESS (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-MT-GREAT FALLS-6932-CUST ~ 6932 Goddard Dr ~ GODDARD (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-ASHEVILLE-330 ~ 330 Pratt Whitney Blvd ~ PRATT WHITNEY,37
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-CHARLOTTE-2730 ~ 2730 W Tyvola Rd ~ TYVOLA,16
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-MORRISVILLE-907 ~ 951 Aviation Pkwy ~ 907 BLDG,3
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-RALEIGH-3120 ~ 3120 Highwoods Blvd ~ HIGHWOODS,1
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-REMOTE,9
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-WILSON-4200 ~ 4200 Airport Dr ~ BLDG 4200,27
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-WINSTON SALEM-1455 ~ 1455 Fairchild Rd ~ ADMIN BLDG,3
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-WINSTON SALEM-1455B3 ~ 1455 Fairchild Rd ~ BLDG 3,1
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-WINSTON SALEM-150 ~ 150 Oak Plaza Blvd ~ BLDG 150,1
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-WINSTON SALEM-175 ~ 175 Oak Plaza Blvd ~ BLDG 175,1
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-WINSTON SALEM-190 ~ 190 Oak Plaza Blvd ~ BLDG 190,5
+2026-11-21,RTX,zbrojenia,miejsce: US-NC-WINSTON SALEM-961 ~ 961 Pinebrook Knolls Dr ~ PINEBROOK 961,3
+2026-11-21,RTX,zbrojenia,miejsce: US-ND-JAMESTOWN-P1 ~ 2604 Highway 20 N ~ PLANT 1,18
+2026-11-21,RTX,zbrojenia,miejsce: US-NE-YORK-2800 ~ 2800 Division Ave ~ PLANT 52,18
+2026-11-21,RTX,zbrojenia,miejsce: US-NH-DURHAM-121 ~ 121 Technology Dr ~ BLDG 125,11
+2026-11-21,RTX,zbrojenia,miejsce: US-NH-MANCHESTER-333-CUST ~ 333 Harvey Rd ~ HARVEY (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-NH-PELHAM-PE1 ~ 50 Bush Hill Rd ~ BLDG 1,2
+2026-11-21,RTX,zbrojenia,miejsce: US-NH-PELHAM-PE3 ~ 50 Bush Hill Rd ~ BLDG 3,3
+2026-11-21,RTX,zbrojenia,miejsce: US-NH-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-NJ-PRINCETON-330 ~ 330 Carter Rd ~ CARTER,2
+2026-11-21,RTX,zbrojenia,miejsce: US-NM-FARMINGTON-426N ~ 10059 Hwy 371 S ~ NORTH BLDG,4
+2026-11-21,RTX,zbrojenia,miejsce: US-NM-FARMINGTON-426S ~ 10059 Hwy 371 S ~ SOUTH BLDG,4
+2026-11-21,RTX,zbrojenia,miejsce: US-NM-LAS CRUCES-12400-CUST ~ 12400 NASA Rd ~ ASFCF CTR (External Site),1
+2026-11-21,RTX,zbrojenia,"miejsce: US-NM-WHITE SANDS-LC38 ~ Bldg. 23626, LC-38 Nike Ave ~ BLDG LC38 (External Site)",6
+2026-11-21,RTX,zbrojenia,miejsce: US-NY-BINGHAMTON-288 ~ 31 Lewis Rd ~ LEWIS,2
+2026-11-21,RTX,zbrojenia,miejsce: US-NY-BOHEMIA-937 ~ 613 Johnson Ave ~ JOHNSON,1
+2026-11-21,RTX,zbrojenia,miejsce: US-NY-CLAYVILLE-2395 ~ 2395 Main St ~ MAIN,40
+2026-11-21,RTX,zbrojenia,"miejsce: US-NY-MIDDLETOWN-060 ~ 60 Turner Dr ~ TURNER, Ste 1",2
+2026-11-21,RTX,zbrojenia,"miejsce: US-NY-NEW HYDE PARK-005 ~ 5 Vermont Dr ~ VERMONT, 1st Flr",1
+2026-11-21,RTX,zbrojenia,miejsce: US-NY-REMOTE,2
+2026-11-21,RTX,zbrojenia,miejsce: US-NY-ROME-104 ~ 104 Otis St ~ OTIS,12
+2026-11-21,RTX,zbrojenia,"miejsce: US-NY-ROME-184 ~ 184 Brooks Rd ~ BROOKS, Ste 302",1
+2026-11-21,RTX,zbrojenia,miejsce: US-OH-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-OH-TROY-101 ~ 101 Waco St ~ WACO,7
+2026-11-21,RTX,zbrojenia,miejsce: US-OH-UNIONTOWN-1555 ~ 1555 Corporate Woods Pkwy ~ CORP WOODS,2
+2026-11-21,RTX,zbrojenia,"miejsce: US-OK-OKLAHOMA CITY-8120SC ~ 8120 S Air Depot Blvd ~ SUSTAINMENT CTR, Dock 18",8
+2026-11-21,RTX,zbrojenia,miejsce: US-OK-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-OK-TINKER-AFB-CUST ~ 3001 Staff Dr ~ TINKER AFB (External Site),9
+2026-11-21,RTX,zbrojenia,miejsce: US-OR-WILSONVILLE-594 ~ 27300 SW Parkway Ave ~ BLDG 594,3
+2026-11-21,RTX,zbrojenia,miejsce: US-OR-WILSONVILLE-596 ~ 27500 SW Parkway Ave ~ BLDG 596,2
+2026-11-21,RTX,zbrojenia,miejsce: US-PA-MIDDLETOWN-181 ~ 181 Fulling Mill Rd ~ FULLING MILL,14
+2026-11-21,RTX,zbrojenia,miejsce: US-PA-STATE COLLEGE-5A ~ 302 Science Park Rd ~ BLDG 5A,10
+2026-11-21,RTX,zbrojenia,miejsce: US-PA-STATE COLLEGE-5C ~ 302 Science Park Rd ~ BLDG 5C,1
+2026-11-21,RTX,zbrojenia,miejsce: US-PR-AGUADILLA-110 ~ Rd 110 N Km 28.8 ~ RD110,31
+2026-11-21,RTX,zbrojenia,miejsce: US-PR-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-PR-SANTA ISABEL-B1 ~ Felicia Industrial Park - St B1 ~ BLDG 1,37
+2026-11-21,RTX,zbrojenia,miejsce: US-PR-SANTA ISABEL-B2 ~ Felicia Industrial Park - St B2 ~ BLDG 2,4
+2026-11-21,RTX,zbrojenia,miejsce: US-PR-SANTA ISABEL-B4 ~ Felicia Industrial Park - St B4 ~ BLDG 4,4
+2026-11-21,RTX,zbrojenia,"miejsce: US-RI-MIDDLETOWN-201 ~ 127 John Clarke Rd ~ BBN MIDDLETOWN, Ste 3",25
+2026-11-21,RTX,zbrojenia,miejsce: US-RI-PORTSMOUTH-PS1 ~ 1847 W Main Rd ~ NIMITZ BLDG,20
+2026-11-21,RTX,zbrojenia,miejsce: US-RI-PORTSMOUTH-PS2 ~ 1847 W Main Rd ~ NIMITZ SOUTH BLDG,4
+2026-11-21,RTX,zbrojenia,miejsce: US-RI-PORTSMOUTH-PS3 ~ 1847 W Main Rd ~ NIMITZ WEST BLDG,15
+2026-11-21,RTX,zbrojenia,miejsce: US-RI-PORTSMOUTH-PS5 ~ 1847 W Main Rd ~ PROVIDENCE BLDG,1
+2026-11-21,RTX,zbrojenia,miejsce: US-RI-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-SC-NORTH CHARLESTON-5400-CUST ~ 5400 International Blvd ~ INTERNATIONAL (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-SC-SIMPSONVILLE-1001 ~ 1001 Old Stage Rd ~ OLD STAGE,3
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-DALLAS-547A ~ 8201 Lemmon Ave ~ AUXILIARY BLDG,3
+2026-11-21,RTX,zbrojenia,"miejsce: US-TX-DALLAS-DALLAS PERFORMANCE HUB ~ 1950 North Stemmons Fwy ~ DALLAS PERFORMANCE HUB, Suite 2027",2
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-EL PASO-M2 ~ 7201 Montana Ave ~ BLDG M2,5
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-FORT BLISS-11005-CUST ~ 11005 Fort Bliss ~ BLDG 11005 (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-FREER-401-CUST ~ 401 County Rd ~ ESCONDITO RANCH (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-GRAND PRAIRIE-1177 ~ 1177 N Great SW Pkwy ~ 1177 GREAT SW,3
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-HALTOM CITY-4630 ~ 4630 N Beach St ~ BEACH,2
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-MCKINNEY-513PW ~ 2501 W University Dr ~ PW BLDG,27
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-MCKINNEY-513WA ~ 2501 W University Dr ~ WING A BLDG,47
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-MCKINNEY-513WB ~ 2501 W University Dr ~ WING B BLDG,11
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-MCKINNEY-513WC ~ 2501 W University Dr ~ WING C BLDG,34
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-MCKINNEY-513WD ~ 2501 W University Dr ~ WING D BLDG,56
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-MCKINNEY-513WH ~ 2501 W University Dr ~ WING W BLDG,6
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-MCKINNEY-513WM ~ 2501 W University Dr ~ WING M BLDG,20
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-MCKINNEY-513WZ ~ 2501 W University Dr ~ WING Z BLDG,14
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-MCKINNEY-513WZS ~ 2501 W University Dr ~ WZS BLDG,26
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-PLANO-465 ~ 465 Independence Pkwy ~ INDEPENDENCE,32
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-PREMONT-281-CUST ~ 10067 South 281 ~ SOUTH 281 (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-REMOTE,26
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-RICHARDSON-461 ~ 3200 E Renner Rd ~ RENNER BLDG 461,14
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-RICHARDSON-462 ~ 3200 E Renner Rd ~ RENNER BLDG 462,1
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-RICHARDSON-521 ~ 1601 N Plano Rd ~ PLANO BLDG EOI,2
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-RICHARDSON-C07 ~ 1707 Cityline Dr ~ CITYLINE C07,10
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-RICHARDSON-C17 ~ 1717 Cityline Dr ~ CITYLINE C17,15
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-RICHARDSON-C27 ~ 1727 Cityline Dr ~ CITYLINE C27,2
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-RICHARDSON-C37 ~ 1737 Cityline Dr ~ CITYLINE C37,5
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-SAN MARCOS-2005 ~ 2005 Technology Wy ~ TECHNOLOGY,5
+2026-11-21,RTX,zbrojenia,miejsce: US-TX-WICHITA FALLS-3101 ~ 3101 Hammon Rd ~ HAMMON,1
+2026-11-21,RTX,zbrojenia,miejsce: US-UT-WEST VALLEY CITY-338 ~ 1127 & 1128 w 2400 S ~ BLDG 338,8
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-ALEXANDRIA-7900-CUST ~ 7900 Telegraph Rd ~ 7900-CUST (External Site),6
+2026-11-21,RTX,zbrojenia,"miejsce: US-VA-ARLINGTON-1000 ~ 1000 Wilson Blvd ~ WILSON, Fl 23",3
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-ARLINGTON-108 ~ 1100 Wilson Blvd ~ ROSSLYN HQ,8
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-ARLINGTON-111 ~ 1300 17Th St N ~ BBN ARLINGTON,11
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-CHESAPEAKE-002-CUST ~ 2 Relay Rd ~ BLDG 344 (External Site),2
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-CHESAPEAKE-305 ~ 1100 International Plz ~ BLDG 305,3
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-DULLES-23031-CUST ~ 23031 Ladbrook Dr ~ LADBROOK (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-DULLES-710 ~ 22110 Pacific Blvd ~ BLDG 10,10
+2026-11-21,RTX,zbrojenia,"miejsce: US-VA-DULLES-760 ~ 22260 Pacific Blvd ~ BLDG 60, test",2
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-DULLES-770 ~ 22270 Pacific Blvd ~ BLDG 70,1
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-LANGLEY-AFB-CUST ~ 586 Weyland Rd ~ LANGLEY AFB (External Site),3
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-NEW KENT-9980-CUST ~ 9980 Rockahock Bar Rd ~ ROCKAHOCK (External Site),1
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-REMOTE,5
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-SPRINGFIELD-7500-CUST ~ 7500 Geoint Dr ~ GEOINT (External Site),6
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-STERLING-291 ~ 22640 Davis Dr ~ DAVIS,15
+2026-11-21,RTX,zbrojenia,miejsce: US-VA-STERLING-STERLING DATA CTR ~ 43290 Old Ox Rd ~ STERLING DATA CTR,1
+2026-11-21,RTX,zbrojenia,miejsce: US-VT-SOUTH BURLINGTON-001 ~ 15 Eagle Dr ~ EAGLE,5
+2026-11-21,RTX,zbrojenia,"miejsce: US-WA-BOTHELL-3350 ~ 3350 Monte Villa Pkwy ~ CREEKVIEW BLDG, Ste 210",1
+2026-11-21,RTX,zbrojenia,miejsce: US-WA-EVERETT-11404 ~ 11404 Commando Rd ~ COMMANDO,9
+2026-11-21,RTX,zbrojenia,"miejsce: US-WA-FEDERAL WAY-32125 ~ 32125 32nd Ave S ~ L5 TECHNOLOGY CTR, Ste 110",5
+2026-11-21,RTX,zbrojenia,miejsce: US-WA-POULSBO-WA1 ~ 26285 Twelve Trees Ln ~ TWELVE TREES,1
+2026-11-21,RTX,zbrojenia,miejsce: US-WA-REMOTE,1
+2026-11-21,RTX,zbrojenia,miejsce: US-WA-SPOKANE-11135 ~ 11135 W Westbow Ln ~ WESTBOW,5
+2026-11-21,RTX,zbrojenia,miejsce: US-WV-BRIDGEPORT-1525 ~ 1525 Midway Park Rd ~ MIDWAY BLDG A,4
+2026-11-21,RTX,zbrojenia,miejsce: US-WV-BRIDGEPORT-1527 ~ 1527 Midway Park Rd ~ MIDWAY BLDG B,1
+2026-11-21,RTX,zbrojenia,miejsce: US-WV-UNION-225 ~ 225 Stringtown Rd ~ STRINGTOWN,2
+2026-11-21,RTX,zbrojenia,"miejsce: UTNCC: North Carolina Corp HQ 2730 West Tyvola Road  , Charlotte, NC, 28217 USA",1
+2026-11-21,RTX,zbrojenia,"miejsce: VN-HN-HANOI-NOIBAI AIRPORT-CUST ~ Noibai International Airport ~ CUTE CORE RM, Lvl 1, Term 2 (External Site)",1
+2026-11-21,RTX,zbrojenia,"miejsce: VN-SG-HO CHI MINH-318-CUST ~ Tan Son Nhat International Airport ~ TAN SON NHAT INTL, Rm 3.18 (External Site)",1
+2026-11-21,RTX,zbrojenia,"miejsce: Warminster, Wiltshire",12
+2026-11-21,RTX,zbrojenia,"miejsce: Winnersh, Wokingham",8
+2026-11-21,RTX,zbrojenia,miejsce: XX-XX-UNDISCLOSED,3
+2026-11-21,RTX,zbrojenia,razem,4507
+2026-11-21,Chevron,energia,"miejsce: Antiguo Cuscatlan, La Libertad, El Salvador",2
+2026-11-21,Chevron,energia,"miejsce: Ashdod, Southern District, Israel",1
+2026-11-21,Chevron,energia,"miejsce: Ayala, Makati City, Philippines",26
+2026-11-21,Chevron,energia,"miejsce: Bakersfield, California, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: Bangalore, Karnataka, India",2
+2026-11-21,Chevron,energia,miejsce: Bangkok SCB Park Plaza Tower 3,1
+2026-11-21,Chevron,energia,"miejsce: Barcelona, Anzoategui, Venezuela",2
+2026-11-21,Chevron,energia,"miejsce: Belle Chasse, Louisiana, United States of America",2
+2026-11-21,Chevron,energia,"miejsce: Bengaluru, Karnataka, India",31
+2026-11-21,Chevron,energia,miejsce: Buenos Aires BASSC Madero Office,1
+2026-11-21,Chevron,energia,"miejsce: Buenos Aires, Buenos Aires, Argentina",17
+2026-11-21,Chevron,energia,"miejsce: Carlsbad, New Mexico, United States of America",2
+2026-11-21,Chevron,energia,"miejsce: Chatuchuk, Bangkok, Thailand",1
+2026-11-21,Chevron,energia,"miejsce: El Segundo, California, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: El Tigre, Anzoategui, Venezuela",1
+2026-11-21,Chevron,energia,"miejsce: Fresno, California, United States of America",1
+2026-11-21,Chevron,energia,miejsce: GOT Pailin Offshore Field,1
+2026-11-21,Chevron,energia,"miejsce: Ghent, East Flanders, Belgium",1
+2026-11-21,Chevron,energia,"miejsce: Greeley, Colorado, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: Guatemala City, Guatemala, Guatemala",1
+2026-11-21,Chevron,energia,"miejsce: Herzliya, Israel",1
+2026-11-21,Chevron,energia,"miejsce: Hoquiam, Washington, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: Houston, Texas, United States of America",27
+2026-11-21,Chevron,energia,"miejsce: Jimenez, Philippines",1
+2026-11-21,Chevron,energia,"miejsce: Keene, North Dakota, United States of America",1
+2026-11-21,Chevron,energia,miejsce: LEVIATHAN PLATFORM LPP,3
+2026-11-21,Chevron,energia,"miejsce: Lagos, Lagos, Nigeria",1
+2026-11-21,Chevron,energia,"miejsce: Los Angeles, California, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: Maracaibo, Zulia, Venezuela",2
+2026-11-21,Chevron,energia,"miejsce: Mason City, Iowa, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: Midland, Texas, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: Muang, Songkhla, Thailand",1
+2026-11-21,Chevron,energia,"miejsce: Ningbo, Zhejiang, China",6
+2026-11-21,Chevron,energia,"miejsce: Omaezaki-City, Shizuoka, Japan",1
+2026-11-21,Chevron,energia,"miejsce: Orla, Texas, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: Panama City, Panamá, Panama",1
+2026-11-21,Chevron,energia,"miejsce: Perth, Western Australia, Australia",1
+2026-11-21,Chevron,energia,"miejsce: Richmond, California, United States of America",3
+2026-11-21,Chevron,energia,"miejsce: Rotterdam, Netherlands",1
+2026-11-21,Chevron,energia,"miejsce: San Ramon, California, United States of America",5
+2026-11-21,Chevron,energia,"miejsce: Seneca, Illinois, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: Singapore, Central Singapore, Singapore",1
+2026-11-21,Chevron,energia,"miejsce: Singapore, DUO Tower, Singapore",1
+2026-11-21,Chevron,energia,"miejsce: Singapore, West Singapore, Singapore",2
+2026-11-21,Chevron,energia,"miejsce: Sugar Land, Texas, United States of America",1
+2026-11-21,Chevron,energia,"miejsce: Südlohn, Germany",1
+2026-11-21,Chevron,energia,"miejsce: Tokyo, Tokyo, Japan",1
+2026-11-21,Chevron,energia,"miejsce: Usine De Gonfreville-L Orcher, France",1
+2026-11-21,Chevron,energia,"miejsce: Warri, Federal Capital, Nigeria",1
+2026-11-21,Chevron,energia,"miejsce: Washington DC, District of Columbia, United States of America",2
+2026-11-21,Chevron,energia,"miejsce: Westferry, London, United Kingdom",1
+2026-11-21,Chevron,energia,razem,158
+2026-11-21,Baker Hughes,energia,AVENZA,2
+2026-11-21,Baker Hughes,energia,Aberdeen,21
+2026-11-21,Baker Hughes,energia,Abingdon,1
+2026-11-21,Baker Hughes,energia,Abu Dhabi,3
+2026-11-21,Baker Hughes,energia,Aksay,1
+2026-11-21,Baker Hughes,energia,Al Ahmadi,1
+2026-11-21,Baker Hughes,energia,Alberta - Remote,3
+2026-11-21,Baker Hughes,energia,Anchorage,1
+2026-11-21,Baker Hughes,energia,Ankara,5
+2026-11-21,Baker Hughes,energia,Arizona - Remote,4
+2026-11-21,Baker Hughes,energia,Bangalore,18
+2026-11-21,Baker Hughes,energia,Bari,3
+2026-11-21,Baker Hughes,energia,Batam,1
+2026-11-21,Baker Hughes,energia,Beijing,2
+2026-11-21,Baker Hughes,energia,Big Spring,2
+2026-11-21,Baker Hughes,energia,Bogota,2
+2026-11-21,Baker Hughes,energia,Bonnyville,1
+2026-11-21,Baker Hughes,energia,Boufarik,2
+2026-11-21,Baker Hughes,energia,Boulder,1
+2026-11-21,Baker Hughes,energia,Brisbane,4
+2026-11-21,Baker Hughes,energia,Brooks,1
+2026-11-21,Baker Hughes,energia,Broussard,8
+2026-11-21,Baker Hughes,energia,Buckhannon,2
+2026-11-21,Baker Hughes,energia,Buenos Aires,1
+2026-11-21,Baker Hughes,energia,Calgary,3
+2026-11-21,Baker Hughes,energia,California - Remote,1
+2026-11-21,Baker Hughes,energia,Canonsburg,1
+2026-11-21,Baker Hughes,energia,Cape Town,1
+2026-11-21,Baker Hughes,energia,Carlsbad,2
+2026-11-21,Baker Hughes,energia,Celle,12
+2026-11-21,Baker Hughes,energia,Centenario,1
+2026-11-21,Baker Hughes,energia,Cepagatti,1
+2026-11-21,Baker Hughes,energia,Changzhou,1
+2026-11-21,Baker Hughes,energia,Chon Buri,1
+2026-11-21,Baker Hughes,energia,Ciudad del Carmen,16
+2026-11-21,Baker Hughes,energia,Claremore,9
+2026-11-21,Baker Hughes,energia,Coca,1
+2026-11-21,Baker Hughes,energia,Coimbatore,6
+2026-11-21,Baker Hughes,energia,Conde-sur-Noireau,4
+2026-11-21,Baker Hughes,energia,Corpus Christi,4
+2026-11-21,Baker Hughes,energia,Dammam,6
+2026-11-21,Baker Hughes,energia,Deadhorse,2
+2026-11-21,Baker Hughes,energia,Denver,1
+2026-11-21,Baker Hughes,energia,Dhahran,1
+2026-11-21,Baker Hughes,energia,Dickinson,1
+2026-11-21,Baker Hughes,energia,Doha,3
+2026-11-21,Baker Hughes,energia,Dongying City,1
+2026-11-21,Baker Hughes,energia,Dubai,4
+2026-11-21,Baker Hughes,energia,Edmonton,1
+2026-11-21,Baker Hughes,energia,El Dorado,2
+2026-11-21,Baker Hughes,energia,Evansville,2
+2026-11-21,Baker Hughes,energia,Florence,54
+2026-11-21,Baker Hughes,energia,Florida - Remote,2
+2026-11-21,Baker Hughes,energia,Fort McMurray,1
+2026-11-21,Baker Hughes,energia,Fort St. John,1
+2026-11-21,Baker Hughes,energia,Fot,2
+2026-11-21,Baker Hughes,energia,Fougerolles,4
+2026-11-21,Baker Hughes,energia,Georgetown,8
+2026-11-21,Baker Hughes,energia,Gurgaon,4
+2026-11-21,Baker Hughes,energia,Hempstead,1
+2026-11-21,Baker Hughes,energia,Ho Chi Minh,8
+2026-11-21,Baker Hughes,energia,Hobbs,5
+2026-11-21,Baker Hughes,energia,Houston,61
+2026-11-21,Baker Hughes,energia,Hyderabad,7
+2026-11-21,Baker Hughes,energia,Idaho - Remote,1
+2026-11-21,Baker Hughes,energia,Illinois - Remote,2
+2026-11-21,Baker Hughes,energia,Jakarta,5
+2026-11-21,Baker Hughes,energia,Jandakot,2
+2026-11-21,Baker Hughes,energia,Kansas - Remote,1
+2026-11-21,Baker Hughes,energia,Kuala Belait,1
+2026-11-21,Baker Hughes,energia,Kuala Lumpur,12
+2026-11-21,Baker Hughes,energia,Kuwait,1
+2026-11-21,Baker Hughes,energia,Labuan,2
+2026-11-21,Baker Hughes,energia,Lago Agrio,1
+2026-11-21,Baker Hughes,energia,Lagos,3
+2026-11-21,Baker Hughes,energia,Le Creusot,1
+2026-11-21,Baker Hughes,energia,Leduc,7
+2026-11-21,Baker Hughes,energia,Leicester,3
+2026-11-21,Baker Hughes,energia,Liberty,17
+2026-11-21,Baker Hughes,energia,Liverpool,2
+2026-11-21,Baker Hughes,energia,Lloydminster,1
+2026-11-21,Baker Hughes,energia,London,3
+2026-11-21,Baker Hughes,energia,Louisiana - Remote,6
+2026-11-21,Baker Hughes,energia,Luanda,1
+2026-11-21,Baker Hughes,energia,Lufkin,8
+2026-11-21,Baker Hughes,energia,Macae,4
+2026-11-21,Baker Hughes,energia,Madrid,1
+2026-11-21,Baker Hughes,energia,Maracaibo,6
+2026-11-21,Baker Hughes,energia,Massa,5
+2026-11-21,Baker Hughes,energia,Mexico City,4
+2026-11-21,Baker Hughes,energia,Midland,14
+2026-11-21,Baker Hughes,energia,Midrand,1
+2026-11-21,Baker Hughes,energia,Minden,13
+2026-11-21,Baker Hughes,energia,Minnesota - Remote,1
+2026-11-21,Baker Hughes,energia,Minot,3
+2026-11-21,Baker Hughes,energia,Missouri - Remote,2
+2026-11-21,Baker Hughes,energia,Montrose,6
+2026-11-21,Baker Hughes,energia,Mount Pearl,2
+2026-11-21,Baker Hughes,energia,Mount Pleasant,5
+2026-11-21,Baker Hughes,energia,Mumbai,11
+2026-11-21,Baker Hughes,energia,Muscat,1
+2026-11-21,Baker Hughes,energia,Nailsea,18
+2026-11-21,Baker Hughes,energia,Nairobi,3
+2026-11-21,Baker Hughes,energia,Nasseria,2
+2026-11-21,Baker Hughes,energia,Neiva,1
+2026-11-21,Baker Hughes,energia,Neuquen,1
+2026-11-21,Baker Hughes,energia,Nevada - Remote,1
+2026-11-21,Baker Hughes,energia,New Mexico - Remote,1
+2026-11-21,Baker Hughes,energia,New Orleans,1
+2026-11-21,Baker Hughes,energia,New York - Remote,1
+2026-11-21,Baker Hughes,energia,Newcastle-upon-Tyne,9
+2026-11-21,Baker Hughes,energia,Newfoundland and Labrador - Remote,1
+2026-11-21,Baker Hughes,energia,North Carolina - Remote,3
+2026-11-21,Baker Hughes,energia,Odessa,3
+2026-11-21,Baker Hughes,energia,Ohio - Remote,2
+2026-11-21,Baker Hughes,energia,Oklahoma - Remote,4
+2026-11-21,Baker Hughes,energia,Oklahoma City,5
+2026-11-21,Baker Hughes,energia,Olney,3
+2026-11-21,Baker Hughes,energia,Oregon - Remote,1
+2026-11-21,Baker Hughes,energia,Paraiso,1
+2026-11-21,Baker Hughes,energia,Pasadena,5
+2026-11-21,Baker Hughes,energia,Pau,1
+2026-11-21,Baker Hughes,energia,Pecos,4
+2026-11-21,Baker Hughes,energia,Pennsylvania - Remote,3
+2026-11-21,Baker Hughes,energia,Perth,5
+2026-11-21,Baker Hughes,energia,Pilsen,5
+2026-11-21,Baker Hughes,energia,Pittsburgh,6
+2026-11-21,Baker Hughes,energia,Pleasanton,4
+2026-11-21,Baker Hughes,energia,Pointe Noire,2
+2026-11-21,Baker Hughes,energia,Port Gentil,2
+2026-11-21,Baker Hughes,energia,Port Harcourt,2
+2026-11-21,Baker Hughes,energia,Port Moresby,1
+2026-11-21,Baker Hughes,energia,Porto Recanati,1
+2026-11-21,Baker Hughes,energia,Pune,8
+2026-11-21,Baker Hughes,energia,Queretaro,1
+2026-11-21,Baker Hughes,energia,Quito,1
+2026-11-21,Baker Hughes,energia,Rayne,2
+2026-11-21,Baker Hughes,energia,Rio de Janeiro,4
+2026-11-21,Baker Hughes,energia,Sainte Tulle,1
+2026-11-21,Baker Hughes,energia,Sale,1
+2026-11-21,Baker Hughes,energia,Shafter,1
+2026-11-21,Baker Hughes,energia,ShangHai,3
+2026-11-21,Baker Hughes,energia,Shenzhen,1
+2026-11-21,Baker Hughes,energia,Singapore,13
+2026-11-21,Baker Hughes,energia,Sivasagar,1
+2026-11-21,Baker Hughes,energia,Son En Breugel,4
+2026-11-21,Baker Hughes,energia,South Carolina - Remote,2
+2026-11-21,Baker Hughes,energia,Stafford,1
+2026-11-21,Baker Hughes,energia,Stavanger,3
+2026-11-21,Baker Hughes,energia,Stord,1
+2026-11-21,Baker Hughes,energia,Sugar Land,10
+2026-11-21,Baker Hughes,energia,Suzhou,2
+2026-11-21,Baker Hughes,energia,Taft,1
+2026-11-21,Baker Hughes,energia,Taipei,1
+2026-11-21,Baker Hughes,energia,Takoradi,1
+2026-11-21,Baker Hughes,energia,Talamona,3
+2026-11-21,Baker Hughes,energia,Tallmadge,3
+2026-11-21,Baker Hughes,energia,Tananger,1
+2026-11-21,Baker Hughes,energia,Texas - Remote,4
+2026-11-21,Baker Hughes,energia,The Woodlands,6
+2026-11-21,Baker Hughes,energia,Tianjin,8
+2026-11-21,Baker Hughes,energia,Tomball,2
+2026-11-21,Baker Hughes,energia,Tripoli,2
+2026-11-21,Baker Hughes,energia,Utah - Remote,2
+2026-11-21,Baker Hughes,energia,Vavanje Village,3
+2026-11-21,Baker Hughes,energia,Vibo Valentia,2
+2026-11-21,Baker Hughes,energia,Victoria,3
+2026-11-21,Baker Hughes,energia,Villavicencio,4
+2026-11-21,Baker Hughes,energia,Virginia - Remote,2
+2026-11-21,Baker Hughes,energia,Vung Tau,3
+2026-11-21,Baker Hughes,energia,Warsaw,6
+2026-11-21,Baker Hughes,energia,Washington - Remote,1
+2026-11-21,Baker Hughes,energia,Welshpool,1
+2026-11-21,Baker Hughes,energia,Wyoming - Remote,2
+2026-11-21,Baker Hughes,energia,Yopal,1
+2026-11-21,Baker Hughes,energia,razem,688
+2026-11-21,GE Vernova,energia,miejsce: Abidjan,4
+2026-11-21,GE Vernova,energia,miejsce: Abilene,1
+2026-11-21,GE Vernova,energia,miejsce: Abu Dhabi,1
+2026-11-21,GE Vernova,energia,miejsce: Accra,2
+2026-11-21,GE Vernova,energia,miejsce: Ahmedabad,1
+2026-11-21,GE Vernova,energia,miejsce: Aix-les-Bains,22
+2026-11-21,GE Vernova,energia,miejsce: Al Khobar,4
+2026-11-21,GE Vernova,energia,miejsce: Algiers,7
+2026-11-21,GE Vernova,energia,miejsce: Algiers 16 DZ 7,2
+2026-11-21,GE Vernova,energia,miejsce: Allentown,3
+2026-11-21,GE Vernova,energia,miejsce: Almaty,3
+2026-11-21,GE Vernova,energia,miejsce: Anasco,1
+2026-11-21,GE Vernova,energia,miejsce: Ankara,2
+2026-11-21,GE Vernova,energia,miejsce: Apodaca,1
+2026-11-21,GE Vernova,energia,miejsce: Ashalim,1
+2026-11-21,GE Vernova,energia,miejsce: Ashdod,1
+2026-11-21,GE Vernova,energia,miejsce: Atlanta,61
+2026-11-21,GE Vernova,energia,miejsce: Autechaux,2
+2026-11-21,GE Vernova,energia,miejsce: Baden,12
+2026-11-21,GE Vernova,energia,miejsce: Baie-Comeau,2
+2026-11-21,GE Vernova,energia,miejsce: Baku,1
+2026-11-21,GE Vernova,energia,miejsce: Bandung,2
+2026-11-21,GE Vernova,energia,miejsce: Bangkok,2
+2026-11-21,GE Vernova,energia,miejsce: Bangor,27
+2026-11-21,GE Vernova,energia,miejsce: Barcelona,25
+2026-11-21,GE Vernova,energia,miejsce: BeiJing,5
+2026-11-21,GE Vernova,energia,miejsce: Beirut,1
+2026-11-21,GE Vernova,energia,miejsce: Beit She'an Valley,2
+2026-11-21,GE Vernova,energia,miejsce: Belfort,54
+2026-11-21,GE Vernova,energia,miejsce: Bellevue,13
+2026-11-21,GE Vernova,energia,miejsce: Bellevue WA US,6
+2026-11-21,GE Vernova,energia,miejsce: Belo Horizonte,7
+2026-11-21,GE Vernova,energia,miejsce: Bengaluru,104
+2026-11-21,GE Vernova,energia,miejsce: Berlin,52
+2026-11-21,GE Vernova,energia,miejsce: Betim,1
+2026-11-21,GE Vernova,energia,miejsce: Bintulu,1
+2026-11-21,GE Vernova,energia,miejsce: Birr,15
+2026-11-21,GE Vernova,energia,miejsce: Bodangora,1
+2026-11-21,GE Vernova,energia,miejsce: Bogota,1
+2026-11-21,GE Vernova,energia,miejsce: Boston,4
+2026-11-21,GE Vernova,energia,miejsce: Bourogne,12
+2026-11-21,GE Vernova,energia,miejsce: Brisbane,1
+2026-11-21,GE Vernova,energia,miejsce: Brossard,24
+2026-11-21,GE Vernova,energia,miejsce: Brussels,1
+2026-11-21,GE Vernova,energia,miejsce: Bucharest,25
+2026-11-21,GE Vernova,energia,miejsce: Budapest,15
+2026-11-21,GE Vernova,energia,miejsce: Budapest HU 26,2
+2026-11-21,GE Vernova,energia,miejsce: Buenos Aires,2
+2026-11-21,GE Vernova,energia,miejsce: Cairo,10
+2026-11-21,GE Vernova,energia,miejsce: Cambridge,22
+2026-11-21,GE Vernova,energia,miejsce: Campinas,27
+2026-11-21,GE Vernova,energia,miejsce: Canoas,1
+2026-11-21,GE Vernova,energia,miejsce: Carrara,8
+2026-11-21,GE Vernova,energia,miejsce: Casablanca,3
+2026-11-21,GE Vernova,energia,miejsce: Castellon,1
+2026-11-21,GE Vernova,energia,miejsce: Chamblee,1
+2026-11-21,GE Vernova,energia,miejsce: Champigneulle,12
+2026-11-21,GE Vernova,energia,miejsce: Champigneulles,1
+2026-11-21,GE Vernova,energia,miejsce: Changwon,7
+2026-11-21,GE Vernova,energia,miejsce: Charleroi USA,55
+2026-11-21,GE Vernova,energia,miejsce: Chennai,73
+2026-11-21,GE Vernova,energia,miejsce: Cherbourg-Octeville,4
+2026-11-21,GE Vernova,energia,miejsce: Chicago,3
+2026-11-21,GE Vernova,energia,miejsce: Cienega de Flores,1
+2026-11-21,GE Vernova,energia,miejsce: Clearwater,8
+2026-11-21,GE Vernova,energia,miejsce: Dammam,13
+2026-11-21,GE Vernova,energia,miejsce: Denver,1
+2026-11-21,GE Vernova,energia,miejsce: Doha,1
+2026-11-21,GE Vernova,energia,miejsce: Dresden,12
+2026-11-21,GE Vernova,energia,miejsce: Dubai,7
+2026-11-21,GE Vernova,energia,miejsce: Edinburgh,4
+2026-11-21,GE Vernova,energia,miejsce: Elblag,29
+2026-11-21,GE Vernova,energia,miejsce: Erbil,1
+2026-11-21,GE Vernova,energia,miejsce: Erlangen,2
+2026-11-21,GE Vernova,energia,miejsce: Erlanger,3
+2026-11-21,GE Vernova,energia,miejsce: Essen,3
+2026-11-21,GE Vernova,energia,miejsce: Findlay Township,23
+2026-11-21,GE Vernova,energia,miejsce: Florence ITA,1
+2026-11-21,GE Vernova,energia,miejsce: Foz do Iguacu,1
+2026-11-21,GE Vernova,energia,miejsce: Frankfurt,1
+2026-11-21,GE Vernova,energia,miejsce: Fruges,1
+2026-11-21,GE Vernova,energia,miejsce: Garching,1
+2026-11-21,GE Vernova,energia,miejsce: Garching DE 2,1
+2026-11-21,GE Vernova,energia,miejsce: Gaspe,6
+2026-11-21,GE Vernova,energia,miejsce: Gebze,5
+2026-11-21,GE Vernova,energia,miejsce: Glasgow,13
+2026-11-21,GE Vernova,energia,miejsce: Glasgow GB 4,1
+2026-11-21,GE Vernova,energia,miejsce: Goias,1
+2026-11-21,GE Vernova,energia,miejsce: Grand Forks,26
+2026-11-21,GE Vernova,energia,miejsce: Greenville,186
+2026-11-21,GE Vernova,energia,miejsce: Grenoble,5
+2026-11-21,GE Vernova,energia,miejsce: Gurugram,1
+2026-11-21,GE Vernova,energia,miejsce: Hai Phong,5
+2026-11-21,GE Vernova,energia,miejsce: Haiphong HP VN 2,1
+2026-11-21,GE Vernova,energia,miejsce: Hamburg,2
+2026-11-21,GE Vernova,energia,miejsce: Hangzhou,19
+2026-11-21,GE Vernova,energia,miejsce: Hanoi,2
+2026-11-21,GE Vernova,energia,miejsce: Hanoi HN VN 5,1
+2026-11-21,GE Vernova,energia,miejsce: Hanoi HN VN 6,1
+2026-11-21,GE Vernova,energia,miejsce: Hanoi HN VN 7,1
+2026-11-21,GE Vernova,energia,miejsce: Herzliya,1
+2026-11-21,GE Vernova,energia,miejsce: Ho Chi Minh,2
+2026-11-21,GE Vernova,energia,miejsce: Hong Kong,1
+2026-11-21,GE Vernova,energia,miejsce: Hosur,2
+2026-11-21,GE Vernova,energia,miejsce: Houston,46
+2026-11-21,GE Vernova,energia,miejsce: Hyderabad,44
+2026-11-21,GE Vernova,energia,miejsce: Hyderabad TS IN 26,16
+2026-11-21,GE Vernova,energia,miejsce: Imperial,3
+2026-11-21,GE Vernova,energia,miejsce: Issy Les Moulineaux,17
+2026-11-21,GE Vernova,energia,miejsce: Istanbul,1
+2026-11-21,GE Vernova,energia,miejsce: Istanbul TR 4,1
+2026-11-21,GE Vernova,energia,miejsce: Itajuba,10
+2026-11-21,GE Vernova,energia,miejsce: Izmir,1
+2026-11-21,GE Vernova,energia,miejsce: Jakarta,1
+2026-11-21,GE Vernova,energia,miejsce: Jebel Ali,4
+2026-11-21,GE Vernova,energia,miejsce: Jeddah,3
+2026-11-21,GE Vernova,energia,miejsce: Kanchipuram,2
+2026-11-21,GE Vernova,energia,miejsce: Kapolei,1
+2026-11-21,GE Vernova,energia,miejsce: Karachi,2
+2026-11-21,GE Vernova,energia,miejsce: Kassel,6
+2026-11-21,GE Vernova,energia,miejsce: Katowice,4
+2026-11-21,GE Vernova,energia,miejsce: Katowice PL 2,4
+2026-11-21,GE Vernova,energia,miejsce: Kiev,1
+2026-11-21,GE Vernova,energia,miejsce: Kolkata,5
+2026-11-21,GE Vernova,energia,miejsce: Koonoona,1
+2026-11-21,GE Vernova,energia,miejsce: Kuala Lumpur,6
+2026-11-21,GE Vernova,energia,miejsce: Kuwait,2
+2026-11-21,GE Vernova,energia,miejsce: La Prairie,16
+2026-11-21,GE Vernova,energia,miejsce: La Turballe,1
+2026-11-21,GE Vernova,energia,miejsce: Lagos,2
+2026-11-21,GE Vernova,energia,miejsce: Lahore,2
+2026-11-21,GE Vernova,energia,miejsce: Lake Cargelligo,1
+2026-11-21,GE Vernova,energia,miejsce: Leicester,5
+2026-11-21,GE Vernova,energia,miejsce: Leonding,1
+2026-11-21,GE Vernova,energia,miejsce: Lier,1
+2026-11-21,GE Vernova,energia,miejsce: Lisburn,4
+2026-11-21,GE Vernova,energia,miejsce: London,6
+2026-11-21,GE Vernova,energia,miejsce: Longmont,7
+2026-11-21,GE Vernova,energia,miejsce: Longueuil,1
+2026-11-21,GE Vernova,energia,miejsce: Longueuil QC CA 2,5
+2026-11-21,GE Vernova,energia,miejsce: Lozienica,1
+2026-11-21,GE Vernova,energia,miejsce: Lyon FR 1,1
+2026-11-21,GE Vernova,energia,miejsce: MESAGNE,2
+2026-11-21,GE Vernova,energia,miejsce: Madrid,6
+2026-11-21,GE Vernova,energia,miejsce: Malta,1
+2026-11-21,GE Vernova,energia,miejsce: Mannheim,1
+2026-11-21,GE Vernova,energia,miejsce: Markham,21
+2026-11-21,GE Vernova,energia,miejsce: Massy,33
+2026-11-21,GE Vernova,energia,miejsce: Melbourne AUS,6
+2026-11-21,GE Vernova,energia,miejsce: Mexico City,10
+2026-11-21,GE Vernova,energia,miejsce: Milan,1
+2026-11-21,GE Vernova,energia,miejsce: Milan IT 1,1
+2026-11-21,GE Vernova,energia,miejsce: Minato,8
+2026-11-21,GE Vernova,energia,miejsce: Monchengladbach,12
+2026-11-21,GE Vernova,energia,miejsce: Monterrey,13
+2026-11-21,GE Vernova,energia,miejsce: Montoir-de-Bretagne,7
+2026-11-21,GE Vernova,energia,miejsce: Montpellier,6
+2026-11-21,GE Vernova,energia,miejsce: Montreal,5
+2026-11-21,GE Vernova,energia,miejsce: Mumbai,1
+2026-11-21,GE Vernova,energia,miejsce: Nairobi,1
+2026-11-21,GE Vernova,energia,miejsce: New Cairo,1
+2026-11-21,GE Vernova,energia,miejsce: Niagara Falls,4
+2026-11-21,GE Vernova,energia,miejsce: Nimmitabel,1
+2026-11-21,GE Vernova,energia,miejsce: Niskayuna,51
+2026-11-21,GE Vernova,energia,miejsce: Niskayuna VERNOVA NY US 3,1
+2026-11-21,GE Vernova,energia,miejsce: Noida,90
+2026-11-21,GE Vernova,energia,miejsce: North Sydney,5
+2026-11-21,GE Vernova,energia,miejsce: Noventa di Piave,9
+2026-11-21,GE Vernova,energia,miejsce: Oakbrook Terrace,11
+2026-11-21,GE Vernova,energia,miejsce: Oberentfelden,6
+2026-11-21,GE Vernova,energia,miejsce: Oneonta,1
+2026-11-21,GE Vernova,energia,miejsce: Oslo,9
+2026-11-21,GE Vernova,energia,miejsce: Padappai,4
+2026-11-21,GE Vernova,energia,miejsce: Pallavaram,37
+2026-11-21,GE Vernova,energia,miejsce: Paris,5
+2026-11-21,GE Vernova,energia,miejsce: Paris FR 10,2
+2026-11-21,GE Vernova,energia,miejsce: Parsippany,5
+2026-11-21,GE Vernova,energia,miejsce: Pensacola,17
+2026-11-21,GE Vernova,energia,miejsce: Perth,2
+2026-11-21,GE Vernova,energia,miejsce: Peterborough CAN,1
+2026-11-21,GE Vernova,energia,miejsce: Phoenix,1
+2026-11-21,GE Vernova,energia,miejsce: Phu My,8
+2026-11-21,GE Vernova,energia,miejsce: Ponferrada,2
+2026-11-21,GE Vernova,energia,miejsce: Portsmouth,1
+2026-11-21,GE Vernova,energia,miejsce: Pulau Indah,2
+2026-11-21,GE Vernova,energia,miejsce: Pune,1
+2026-11-21,GE Vernova,energia,miejsce: QinHuangDao,3
+2026-11-21,GE Vernova,energia,miejsce: Quang Ngai,5
+2026-11-21,GE Vernova,energia,miejsce: Queretaro,16
+2026-11-21,GE Vernova,energia,miejsce: Queretaro VERNOVA QUE MX 3,15
+2026-11-21,GE Vernova,energia,miejsce: Ramat Gan,1
+2026-11-21,GE Vernova,energia,miejsce: Ramonville-Saint-Agne,1
+2026-11-21,GE Vernova,energia,miejsce: Remote,470
+2026-11-21,GE Vernova,energia,miejsce: Remote US,1
+2026-11-21,GE Vernova,energia,miejsce: Richmond USA,10
+2026-11-21,GE Vernova,energia,miejsce: Rijswijk,2
+2026-11-21,GE Vernova,energia,miejsce: Riyadh,3
+2026-11-21,GE Vernova,energia,miejsce: Riyadh SA 11,2
+2026-11-21,GE Vernova,energia,miejsce: Roanoke US VA 3,4
+2026-11-21,GE Vernova,energia,miejsce: Rochester,8
+2026-11-21,GE Vernova,energia,miejsce: Rong,1
+2026-11-21,GE Vernova,energia,miejsce: Rostraver,15
+2026-11-21,GE Vernova,energia,miejsce: Rugby,28
+2026-11-21,GE Vernova,energia,miejsce: Salem VA USA,7
+2026-11-21,GE Vernova,energia,miejsce: Salt Lake City,2
+2026-11-21,GE Vernova,energia,miejsce: Salzbergen,7
+2026-11-21,GE Vernova,energia,miejsce: Santiago,1
+2026-11-21,GE Vernova,energia,miejsce: Sao Paulo,13
+2026-11-21,GE Vernova,energia,miejsce: Saratoga Springs,2
+2026-11-21,GE Vernova,energia,miejsce: Schenectady,144
+2026-11-21,GE Vernova,energia,miejsce: Seoul,7
+2026-11-21,GE Vernova,energia,miejsce: Sesto San Giovanni,5
+2026-11-21,GE Vernova,energia,miejsce: Shanghai,10
+2026-11-21,GE Vernova,energia,miejsce: Silverwater,2
+2026-11-21,GE Vernova,energia,miejsce: Singapore,41
+2026-11-21,GE Vernova,energia,miejsce: Sorel-Tracy,6
+2026-11-21,GE Vernova,energia,miejsce: Stafford,109
+2026-11-21,GE Vernova,energia,miejsce: Stamford,2
+2026-11-21,GE Vernova,energia,miejsce: SuZhou,5
+2026-11-21,GE Vernova,energia,miejsce: Swansea GB 1,2
+2026-11-21,GE Vernova,energia,miejsce: Sydney,9
+2026-11-21,GE Vernova,energia,miejsce: Szazhalombatta,1
+2026-11-21,GE Vernova,energia,miejsce: Taipei,4
+2026-11-21,GE Vernova,energia,miejsce: Tampere,10
+2026-11-21,GE Vernova,energia,miejsce: Taubate,13
+2026-11-21,GE Vernova,energia,miejsce: Tianjin,5
+2026-11-21,GE Vernova,energia,miejsce: Toronto,2
+2026-11-21,GE Vernova,energia,miejsce: Tyne-and-Wear,2
+2026-11-21,GE Vernova,energia,miejsce: Union City,1
+2026-11-21,GE Vernova,energia,miejsce: Uungula,1
+2026-11-21,GE Vernova,energia,miejsce: Vadodara,28
+2026-11-21,GE Vernova,energia,miejsce: Vancouver USA,2
+2026-11-21,GE Vernova,energia,miejsce: Veresegyhaz,13
+2026-11-21,GE Vernova,energia,miejsce: Vertus,1
+2026-11-21,GE Vernova,energia,miejsce: Verviers,6
+2026-11-21,GE Vernova,energia,miejsce: Vienna,2
+2026-11-21,GE Vernova,energia,miejsce: Villeurbanne,62
+2026-11-21,GE Vernova,energia,miejsce: Warsaw,22
+2026-11-21,GE Vernova,energia,miejsce: Warsaw MZ PL 7,3
+2026-11-21,GE Vernova,energia,miejsce: Washington DC,1
+2026-11-21,GE Vernova,energia,miejsce: West Chester,1
+2026-11-21,GE Vernova,energia,miejsce: West Chester OH US 16,2
+2026-11-21,GE Vernova,energia,miejsce: West Melbourne,3
+2026-11-21,GE Vernova,energia,miejsce: Wilmington NC USA,50
+2026-11-21,GE Vernova,energia,miejsce: Wroclaw,12
+2026-11-21,GE Vernova,energia,miejsce: Yokohama,9
+2026-11-21,GE Vernova,energia,miejsce: Zamudio,5
+2026-11-21,GE Vernova,energia,razem,2154
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Arkansas City,3
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Asheville,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Auburn AL USA,5
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Beavercreek,11
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Bengaluru,5
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Bielsko-Biala,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Bohemia,23
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Boisbriand,6
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Brindisi,4
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Brisbane,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Bromont,13
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Bucharest,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Butte,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Cardiff,7
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Changwon 48 KR 6,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Cheltenham,6
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Cincinnati,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Clearwater,14
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Dayton,6
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Dubai,3
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Durham,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Dzierzoniow,8
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Edwards AFB,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Euless,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Evendale,131
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Florence KY USA,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Garching,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Gdansk,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Gimpo,3
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Gloucester,8
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Grand Prairie,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Grand Rapids,32
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Grand Rapids MI US 1,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Hermosillo,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Hooksett,19
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Huntsville,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Indianapolis,7
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Indianapolis IN US 2,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Istanbul,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Istanbul TR 6,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Jacksonville,7
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Lafayette IN USA,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Lichtenfels,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Livonia,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: London,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Loves Park,16
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Lynn,45
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Madisonville,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Mascot,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: McAllen,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Molndal,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Muskegon,3
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Newark,7
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Niskayuna,15
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Norton Shores,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Norwalk,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Norwich,21
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Peebles,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Petropolis,11
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Piedmont,3
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Pittsburgh,8
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Pomigliano D'Arco,5
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Prague,14
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Prestwick,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Pune,4
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Queretaro,5
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Remote,64
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Rivalta di Torino,10
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Rockledge,7
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Rutland,13
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Saint George UT US 1,3
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Saint-Eustache,4
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Shanghai,3
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Singapore,22
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Springdale,11
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Sterling VA USA,5
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: SuZhou,3
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Subang,8
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Taoyuan City,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Terre Haute,6
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Vandalia,13
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Veresegyhaz,3
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: W Chester AEROSPACE OH US,2
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Warsaw,12
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Washington DC,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: West Chester,10
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Wilmington NC USA,5
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,miejsce: Winfield,1
+2026-11-21,GE Aerospace,lotnictwo i zbrojenia,razem,629
+2026-11-21,Citi,finanse,Algeria,1
+2026-11-21,Citi,finanse,Argentina,3
+2026-11-21,Citi,finanse,Australia,19
+2026-11-21,Citi,finanse,Bahrain,3
+2026-11-21,Citi,finanse,Bangladesh,3
+2026-11-21,Citi,finanse,Brazil,13
+2026-11-21,Citi,finanse,Cameroon,1
+2026-11-21,Citi,finanse,Canada,188
+2026-11-21,Citi,finanse,Chile,1
+2026-11-21,Citi,finanse,China,72
+2026-11-21,Citi,finanse,Colombia,9
+2026-11-21,Citi,finanse,Costa Rica,9
+2026-11-21,Citi,finanse,Czechia,3
+2026-11-21,Citi,finanse,Côte d'Ivoire,1
+2026-11-21,Citi,finanse,Denmark,1
+2026-11-21,Citi,finanse,Dominican Republic,2
+2026-11-21,Citi,finanse,Finland,1
+2026-11-21,Citi,finanse,France,10
+2026-11-21,Citi,finanse,Germany,8
+2026-11-21,Citi,finanse,Greece,1
+2026-11-21,Citi,finanse,Hong Kong,119
+2026-11-21,Citi,finanse,Hungary,49
+2026-11-21,Citi,finanse,India,941
+2026-11-21,Citi,finanse,Indonesia,1
+2026-11-21,Citi,finanse,Ireland,27
+2026-11-21,Citi,finanse,Israel,2
+2026-11-21,Citi,finanse,Italy,3
+2026-11-21,Citi,finanse,Japan,46
+2026-11-21,Citi,finanse,Jersey,1
+2026-11-21,Citi,finanse,Kazakhstan,1
+2026-11-21,Citi,finanse,"Korea, Republic of",11
+2026-11-21,Citi,finanse,Luxembourg,1
+2026-11-21,Citi,finanse,Malaysia,117
+2026-11-21,Citi,finanse,Mexico,289
+2026-11-21,Citi,finanse,Netherlands,7
+2026-11-21,Citi,finanse,Pakistan,1
+2026-11-21,Citi,finanse,Panama,1
+2026-11-21,Citi,finanse,Peru,1
+2026-11-21,Citi,finanse,Philippines,178
+2026-11-21,Citi,finanse,Poland,97
+2026-11-21,Citi,finanse,Singapore,250
+2026-11-21,Citi,finanse,South Africa,2
+2026-11-21,Citi,finanse,Spain,4
+2026-11-21,Citi,finanse,Sweden,3
+2026-11-21,Citi,finanse,Switzerland,7
+2026-11-21,Citi,finanse,Taiwan,57
+2026-11-21,Citi,finanse,Thailand,4
+2026-11-21,Citi,finanse,Türkiye,1
+2026-11-21,Citi,finanse,Ukraine,3
+2026-11-21,Citi,finanse,United Arab Emirates,28
+2026-11-21,Citi,finanse,United Kingdom,212
+2026-11-21,Citi,finanse,United States of America,1431
+2026-11-21,Citi,finanse,Vietnam,1
+2026-11-21,Citi,finanse,razem,2000
+2026-11-21,Pfizer,farmacja,Algeria,2
+2026-11-21,Pfizer,farmacja,Argentina,3
+2026-11-21,Pfizer,farmacja,Australia,6
+2026-11-21,Pfizer,farmacja,Austria,1
+2026-11-21,Pfizer,farmacja,Belgium,3
+2026-11-21,Pfizer,farmacja,Brazil,5
+2026-11-21,Pfizer,farmacja,Canada,7
+2026-11-21,Pfizer,farmacja,China,381
+2026-11-21,Pfizer,farmacja,Colombia,4
+2026-11-21,Pfizer,farmacja,Costa Rica,4
+2026-11-21,Pfizer,farmacja,Croatia,5
+2026-11-21,Pfizer,farmacja,Egypt,1
+2026-11-21,Pfizer,farmacja,France,2
+2026-11-21,Pfizer,farmacja,Germany,11
+2026-11-21,Pfizer,farmacja,Greece,17
+2026-11-21,Pfizer,farmacja,Hong Kong,3
+2026-11-21,Pfizer,farmacja,India,18
+2026-11-21,Pfizer,farmacja,Indonesia,5
+2026-11-21,Pfizer,farmacja,Ireland,7
+2026-11-21,Pfizer,farmacja,Japan,18
+2026-11-21,Pfizer,farmacja,Macao,1
+2026-11-21,Pfizer,farmacja,Malaysia,10
+2026-11-21,Pfizer,farmacja,Mexico,8
+2026-11-21,Pfizer,farmacja,Morocco,4
+2026-11-21,Pfizer,farmacja,Pakistan,2
+2026-11-21,Pfizer,farmacja,Philippines,17
+2026-11-21,Pfizer,farmacja,Poland,2
+2026-11-21,Pfizer,farmacja,Romania,1
+2026-11-21,Pfizer,farmacja,Saudi Arabia,2
+2026-11-21,Pfizer,farmacja,Singapore,4
+2026-11-21,Pfizer,farmacja,Spain,1
+2026-11-21,Pfizer,farmacja,Sweden,1
+2026-11-21,Pfizer,farmacja,Switzerland,1
+2026-11-21,Pfizer,farmacja,Taiwan,7
+2026-11-21,Pfizer,farmacja,Thailand,2
+2026-11-21,Pfizer,farmacja,Türkiye,3
+2026-11-21,Pfizer,farmacja,United Kingdom,18
+2026-11-21,Pfizer,farmacja,United States of America,150
+2026-11-21,Pfizer,farmacja,Vietnam,9
+2026-11-21,Pfizer,farmacja,razem,716
+2026-11-21,Shell,energia,Australia,1
+2026-11-21,Shell,energia,Bahamas,1
+2026-11-21,Shell,energia,Brazil,1
+2026-11-21,Shell,energia,Canada,11
+2026-11-21,Shell,energia,China,13
+2026-11-21,Shell,energia,Denmark,7
+2026-11-21,Shell,energia,France,1
+2026-11-21,Shell,energia,Germany,9
+2026-11-21,Shell,energia,Hong Kong,3
+2026-11-21,Shell,energia,India,8
+2026-11-21,Shell,energia,Indonesia,1
+2026-11-21,Shell,energia,Japan,1
+2026-11-21,Shell,energia,Kuwait,1
+2026-11-21,Shell,energia,Malaysia,5
+2026-11-21,Shell,energia,Netherlands,18
+2026-11-21,Shell,energia,Nigeria,1
+2026-11-21,Shell,energia,Philippines,9
+2026-11-21,Shell,energia,Poland,2
+2026-11-21,Shell,energia,Qatar,1
+2026-11-21,Shell,energia,Singapore,2
+2026-11-21,Shell,energia,Thailand,4
+2026-11-21,Shell,energia,Türkiye,2
+2026-11-21,Shell,energia,United Kingdom,15
+2026-11-21,Shell,energia,United States of America,19
+2026-11-21,Shell,energia,razem,137
+2026-11-21,BP,energia,Australia,4
+2026-11-21,BP,energia,Azerbaijan,3
+2026-11-21,BP,energia,Brazil,8
+2026-11-21,BP,energia,China,1
+2026-11-21,BP,energia,Germany,18
+2026-11-21,BP,energia,Hungary,23
+2026-11-21,BP,energia,India,23
+2026-11-21,BP,energia,Indonesia,9
+2026-11-21,BP,energia,Japan,3
+2026-11-21,BP,energia,Malaysia,19
+2026-11-21,BP,energia,Mexico,3
+2026-11-21,BP,energia,Netherlands,1
+2026-11-21,BP,energia,Poland,2
+2026-11-21,BP,energia,Singapore,3
+2026-11-21,BP,energia,South Africa,2
+2026-11-21,BP,energia,United Kingdom,13
+2026-11-21,BP,energia,United States of America,58
+2026-11-21,BP,energia,razem,191
+2026-11-21,ConocoPhillips,energia,Australia,2
+2026-11-21,ConocoPhillips,energia,Canada,1
+2026-11-21,ConocoPhillips,energia,United Kingdom,2
+2026-11-21,ConocoPhillips,energia,United States of America,17
+2026-11-21,ConocoPhillips,energia,razem,22
+2026-11-21,Caterpillar,przemysł,Australia,16
+2026-11-21,Caterpillar,przemysł,Brazil,16
+2026-11-21,Caterpillar,przemysł,Canada,4
+2026-11-21,Caterpillar,przemysł,Chile,6
+2026-11-21,Caterpillar,przemysł,China,154
+2026-11-21,Caterpillar,przemysł,Côte d'Ivoire,1
+2026-11-21,Caterpillar,przemysł,France,13
+2026-11-21,Caterpillar,przemysł,Germany,43
+2026-11-21,Caterpillar,przemysł,Hungary,8
+2026-11-21,Caterpillar,przemysł,India,128
+2026-11-21,Caterpillar,przemysł,Indonesia,6
+2026-11-21,Caterpillar,przemysł,Italy,2
+2026-11-21,Caterpillar,przemysł,Japan,14
+2026-11-21,Caterpillar,przemysł,Kazakhstan,1
+2026-11-21,Caterpillar,przemysł,Malaysia,2
+2026-11-21,Caterpillar,przemysł,Mexico,31
+2026-11-21,Caterpillar,przemysł,Netherlands,1
+2026-11-21,Caterpillar,przemysł,New Zealand,1
+2026-11-21,Caterpillar,przemysł,Peru,4
+2026-11-21,Caterpillar,przemysł,Poland,8
+2026-11-21,Caterpillar,przemysł,Saudi Arabia,1
+2026-11-21,Caterpillar,przemysł,Singapore,7
+2026-11-21,Caterpillar,przemysł,Slovakia,16
+2026-11-21,Caterpillar,przemysł,Spain,2
+2026-11-21,Caterpillar,przemysł,Switzerland,1
+2026-11-21,Caterpillar,przemysł,Thailand,18
+2026-11-21,Caterpillar,przemysł,United Arab Emirates,2
+2026-11-21,Caterpillar,przemysł,United Kingdom,26
+2026-11-21,Caterpillar,przemysł,United States of America,480
+2026-11-21,Caterpillar,przemysł,razem,1011
+2026-11-21,3M,przemysł,Argentina,2
+2026-11-21,3M,przemysł,Australia,2
+2026-11-21,3M,przemysł,Austria,2
+2026-11-21,3M,przemysł,Belgium,3
+2026-11-21,3M,przemysł,Brazil,17
+2026-11-21,3M,przemysł,Canada,17
+2026-11-21,3M,przemysł,China,38
+2026-11-21,3M,przemysł,Colombia,1
+2026-11-21,3M,przemysł,Costa Rica,2
+2026-11-21,3M,przemysł,Czechia,2
+2026-11-21,3M,przemysł,Denmark,2
+2026-11-21,3M,przemysł,France,8
+2026-11-21,3M,przemysł,Germany,14
+2026-11-21,3M,przemysł,Hungary,3
+2026-11-21,3M,przemysł,India,108
+2026-11-21,3M,przemysł,Indonesia,3
+2026-11-21,3M,przemysł,Ireland,1
+2026-11-21,3M,przemysł,Italy,5
+2026-11-21,3M,przemysł,Japan,16
+2026-11-21,3M,przemysł,"Korea, Republic of",7
+2026-11-21,3M,przemysł,Malaysia,7
+2026-11-21,3M,przemysł,Mexico,23
+2026-11-21,3M,przemysł,Netherlands,1
+2026-11-21,3M,przemysł,Panama,3
+2026-11-21,3M,przemysł,Peru,1
+2026-11-21,3M,przemysł,Philippines,111
+2026-11-21,3M,przemysł,Poland,20
+2026-11-21,3M,przemysł,Singapore,4
+2026-11-21,3M,przemysł,Slovakia,2
+2026-11-21,3M,przemysł,Spain,1
+2026-11-21,3M,przemysł,Sweden,8
+2026-11-21,3M,przemysł,Switzerland,2
+2026-11-21,3M,przemysł,Taiwan,8
+2026-11-21,3M,przemysł,Thailand,5
+2026-11-21,3M,przemysł,Türkiye,3
+2026-11-21,3M,przemysł,United Kingdom,12
+2026-11-21,3M,przemysł,United States of America,370
+2026-11-21,3M,przemysł,Vietnam,8
+2026-11-21,3M,przemysł,razem,811
+2026-11-21,Bosch,przemysł,AR,2
+2026-11-21,Bosch,przemysł,AT,31
+2026-11-21,Bosch,przemysł,AU,7
+2026-11-21,Bosch,przemysł,BE,10
+2026-11-21,Bosch,przemysł,BG,3
+2026-11-21,Bosch,przemysł,BR,101
+2026-11-21,Bosch,przemysł,CA,5
+2026-11-21,Bosch,przemysł,CH,21
+2026-11-21,Bosch,przemysł,CL,9
+2026-11-21,Bosch,przemysł,CN,295
+2026-11-21,Bosch,przemysł,CO,5
+2026-11-21,Bosch,przemysł,CZ,9
+2026-11-21,Bosch,przemysł,DE,627
+2026-11-21,Bosch,przemysł,DK,2
+2026-11-21,Bosch,przemysł,EE,1
+2026-11-21,Bosch,przemysł,EG,4
+2026-11-21,Bosch,przemysł,ES,19
+2026-11-21,Bosch,przemysł,FI,4
+2026-11-21,Bosch,przemysł,FR,17
+2026-11-21,Bosch,przemysł,GB,43
+2026-11-21,Bosch,przemysł,GR,3
+2026-11-21,Bosch,przemysł,HR,1
+2026-11-21,Bosch,przemysł,HU,159
+2026-11-21,Bosch,przemysł,ID,13
+2026-11-21,Bosch,przemysł,IN,475
+2026-11-21,Bosch,przemysł,IT,19
+2026-11-21,Bosch,przemysł,JP,43
+2026-11-21,Bosch,przemysł,KR,3
+2026-11-21,Bosch,przemysł,KZ,1
+2026-11-21,Bosch,przemysł,LI,3
+2026-11-21,Bosch,przemysł,LV,1
+2026-11-21,Bosch,przemysł,MX,135
+2026-11-21,Bosch,przemysł,MY,64
+2026-11-21,Bosch,przemysł,NL,15
+2026-11-21,Bosch,przemysł,NO,1
+2026-11-21,Bosch,przemysł,NZ,1
+2026-11-21,Bosch,przemysł,PE,1
+2026-11-21,Bosch,przemysł,PH,7
+2026-11-21,Bosch,przemysł,PL,49
+2026-11-21,Bosch,przemysł,PT,149
+2026-11-21,Bosch,przemysł,RO,76
+2026-11-21,Bosch,przemysł,RS,13
+2026-11-21,Bosch,przemysł,SE,25
+2026-11-21,Bosch,przemysł,SG,11
+2026-11-21,Bosch,przemysł,SI,9
+2026-11-21,Bosch,przemysł,SK,4
+2026-11-21,Bosch,przemysł,TH,40
+2026-11-21,Bosch,przemysł,TN,1
+2026-11-21,Bosch,przemysł,TR,31
+2026-11-21,Bosch,przemysł,TW,3
+2026-11-21,Bosch,przemysł,UA,2
+2026-11-21,Bosch,przemysł,US,275
+2026-11-21,Bosch,przemysł,VN,150
+2026-11-21,Bosch,przemysł,ZA,2
+2026-11-21,Palantir,zbrojenia,AE,1
+2026-11-21,Palantir,zbrojenia,AU,3
+2026-11-21,Palantir,zbrojenia,FR,2
+2026-11-21,Palantir,zbrojenia,GB,45
+2026-11-21,Palantir,zbrojenia,JP,3
+2026-11-21,Palantir,zbrojenia,KR,5
+2026-11-21,Palantir,zbrojenia,LT,1
+2026-11-21,Palantir,zbrojenia,PL,2
+2026-11-21,Palantir,zbrojenia,SG,5
+2026-11-21,Palantir,zbrojenia,US,241
+2026-11-21,Anduril,zbrojenia,Australia,68
+2026-11-21,Anduril,zbrojenia,Ireland,14
+2026-11-21,Anduril,zbrojenia,Japan,2
+2026-11-21,Anduril,zbrojenia,Netherlands,7
+2026-11-21,Anduril,zbrojenia,Poland,1
+2026-11-21,Anduril,zbrojenia,Remote,21
+2026-11-21,Anduril,zbrojenia,Republic of Korea,1
+2026-11-21,Anduril,zbrojenia,Taiwan,2
+2026-11-21,Anduril,zbrojenia,United Arab Emirates,8
+2026-11-21,Anduril,zbrojenia,United Kingdom,20
+2026-11-21,Anduril,zbrojenia,United States,2483
+2026-11-21,Anduril,zbrojenia,United States; Remote,4
+2026-11-21,Stripe,finanse,?,1
+2026-11-21,Stripe,finanse,AMER,2
+2026-11-21,Stripe,finanse,ATL,1
+2026-11-21,Stripe,finanse,Amsterdam,2
+2026-11-21,Stripe,finanse,Atlanta,2
+2026-11-21,Stripe,finanse,Auckland,1
+2026-11-21,Stripe,finanse,Australia,4
+2026-11-21,Stripe,finanse,Bangalore,11
+2026-11-21,Stripe,finanse,Barcelona,6
+2026-11-21,Stripe,finanse,Belgium,1
+2026-11-21,Stripe,finanse,Bengaluru,27
+2026-11-21,Stripe,finanse,Berlin,3
+2026-11-21,Stripe,finanse,Berlin and Munich,1
+2026-11-21,Stripe,finanse,Brussels,2
+2026-11-21,Stripe,finanse,Bucharest,4
+2026-11-21,Stripe,finanse,CA,18
+2026-11-21,Stripe,finanse,CA-Toronto; CA-Remote,1
+2026-11-21,Stripe,finanse,CDMX,1
+2026-11-21,Stripe,finanse,CHI,3
+2026-11-21,Stripe,finanse,California,2
+2026-11-21,Stripe,finanse,Canada,15
+2026-11-21,Stripe,finanse,Canada-Remote,1
+2026-11-21,Stripe,finanse,Chicago,21
+2026-11-21,Stripe,finanse,Chicago or Remote,1
+2026-11-21,Stripe,finanse,Chicago; Atlanta,1
+2026-11-21,Stripe,finanse,Dublin,63
+2026-11-21,Stripe,finanse,Dublin OR Paris,1
+2026-11-21,Stripe,finanse,Dublin or Germany (Berlin or Remote),1
+2026-11-21,Stripe,finanse,Dublin/London,1
+2026-11-21,Stripe,finanse,France,2
+2026-11-21,Stripe,finanse,GA,2
+2026-11-21,Stripe,finanse,Germany,6
+2026-11-21,Stripe,finanse,IL,7
+2026-11-21,Stripe,finanse,IN-Bengaluru,1
+2026-11-21,Stripe,finanse,Illinois,3
+2026-11-21,Stripe,finanse,India,4
+2026-11-21,Stripe,finanse,India),1
+2026-11-21,Stripe,finanse,Ireland,13
+2026-11-21,Stripe,finanse,Israel,3
+2026-11-21,Stripe,finanse,Japan,4
+2026-11-21,Stripe,finanse,LOCATION,7
+2026-11-21,Stripe,finanse,London,37
+2026-11-21,Stripe,finanse,London OR Dublin,3
+2026-11-21,Stripe,finanse,London OR Paris,1
+2026-11-21,Stripe,finanse,London or Dublin,1
+2026-11-21,Stripe,finanse,Luxembourg,3
+2026-11-21,Stripe,finanse,MX,2
+2026-11-21,Stripe,finanse,MX- Mexico City,1
+2026-11-21,Stripe,finanse,Madrid,2
+2026-11-21,Stripe,finanse,Malaysia,1
+2026-11-21,Stripe,finanse,Melbourne,1
+2026-11-21,Stripe,finanse,Mexico,8
+2026-11-21,Stripe,finanse,Mexico City,19
+2026-11-21,Stripe,finanse,N/A,25
+2026-11-21,Stripe,finanse,NY,10
+2026-11-21,Stripe,finanse,NY or Remote,1
+2026-11-21,Stripe,finanse,NYC,12
+2026-11-21,Stripe,finanse,NYC-Privy,4
+2026-11-21,Stripe,finanse,New York,21
+2026-11-21,Stripe,finanse,New York City,6
+2026-11-21,Stripe,finanse,New York City or Seattle,1
+2026-11-21,Stripe,finanse,New York Privy HQ,1
+2026-11-21,Stripe,finanse,New York; Seattle; San Francisco,1
+2026-11-21,Stripe,finanse,New Zealand,2
+2026-11-21,Stripe,finanse,Paris,3
+2026-11-21,Stripe,finanse,Poland - Remote OR Romania - Remote,1
+2026-11-21,Stripe,finanse,Poland OR Romania,3
+2026-11-21,Stripe,finanse,Remote,16
+2026-11-21,Stripe,finanse,Remote - US,2
+2026-11-21,Stripe,finanse,Remote US,5
+2026-11-21,Stripe,finanse,Remote in Canada,1
+2026-11-21,Stripe,finanse,Remote in the US,8
+2026-11-21,Stripe,finanse,Remote-US,4
+2026-11-21,Stripe,finanse,Remote/Hybrid,1
+2026-11-21,Stripe,finanse,Romania,1
+2026-11-21,Stripe,finanse,SEA,4
+2026-11-21,Stripe,finanse,SF,5
+2026-11-21,Stripe,finanse,San Francisco,27
+2026-11-21,Stripe,finanse,San Francisco Or New York,2
+2026-11-21,Stripe,finanse,San Francisco or Seattle,2
+2026-11-21,Stripe,finanse,San Francisco; Chicago,1
+2026-11-21,Stripe,finanse,San Francisco; New York,1
+2026-11-21,Stripe,finanse,San Francisco; New York City,1
+2026-11-21,Stripe,finanse,San Francisco; New York City; Seattle,1
+2026-11-21,Stripe,finanse,San Francisco; Seattle; Remote,1
+2026-11-21,Stripe,finanse,San Francsico,1
+2026-11-21,Stripe,finanse,Sao Paulo,2
+2026-11-21,Stripe,finanse,Seattle,19
+2026-11-21,Stripe,finanse,Seattle and Remote,1
+2026-11-21,Stripe,finanse,Seattle or San Francisco,2
+2026-11-21,Stripe,finanse,Seattle or San Francisco or Chicago or New York City or US-Remote,1
+2026-11-21,Stripe,finanse,Singapore,56
+2026-11-21,Stripe,finanse,South San Francisco,1
+2026-11-21,Stripe,finanse,South San Francisco HQ,2
+2026-11-21,Stripe,finanse,Spain,3
+2026-11-21,Stripe,finanse,Stockholm,1
+2026-11-21,Stripe,finanse,Sweden (Remote),1
+2026-11-21,Stripe,finanse,Sydney,7
+2026-11-21,Stripe,finanse,Sydney Or Melbourne,5
+2026-11-21,Stripe,finanse,Sydney or Melbourne,2
+2026-11-21,Stripe,finanse,TOR,1
+2026-11-21,Stripe,finanse,Taiwan,5
+2026-11-21,Stripe,finanse,Tokyo,10
+2026-11-21,Stripe,finanse,Tor,1
+2026-11-21,Stripe,finanse,Toro,5
+2026-11-21,Stripe,finanse,Toronto,30
+2026-11-21,Stripe,finanse,Toronto or Chicago,1
+2026-11-21,Stripe,finanse,UK,2
+2026-11-21,Stripe,finanse,UK-Remote,1
+2026-11-21,Stripe,finanse,US,19
+2026-11-21,Stripe,finanse,US - Hybrid,1
+2026-11-21,Stripe,finanse,US - Remote,5
+2026-11-21,Stripe,finanse,US / Canada,8
+2026-11-21,Stripe,finanse,US Hybrid,1
+2026-11-21,Stripe,finanse,US Remote,7
+2026-11-21,Stripe,finanse,US Remote; Canada,1
+2026-11-21,Stripe,finanse,US-Chicago,3
+2026-11-21,Stripe,finanse,US-Georgia or US-Remote,1
+2026-11-21,Stripe,finanse,US-NY,1
+2026-11-21,Stripe,finanse,US-NYC,3
+2026-11-21,Stripe,finanse,US-NYC; US-SF; US-Chicago; US-Atlanta; US-Seattle; US-Remote,1
+2026-11-21,Stripe,finanse,US-NYC; US-San Francisco; US-Seattle; US-Remote; US- Chicago; US-Atlanta; Canada-Toronto; Canada-Remote,1
+2026-11-21,Stripe,finanse,US-Remote,28
+2026-11-21,Stripe,finanse,US-Remote; US-Chicago; US-Atlanta; CA-Toronto; CA-Remote,2
+2026-11-21,Stripe,finanse,US-SEA,1
+2026-11-21,Stripe,finanse,US-SF,1
+2026-11-21,Stripe,finanse,US-SF-HQ,1
+2026-11-21,Stripe,finanse,US-San Francisco,3
+2026-11-21,Stripe,finanse,US-Seattle,2
+2026-11-21,Stripe,finanse,US-West Coast (Remote),1
+2026-11-21,Stripe,finanse,USA,2
+2026-11-21,Stripe,finanse,United Kingdom,2
+2026-11-21,Stripe,finanse,United Kingdom; Ireland,1
+2026-11-21,Stripe,finanse,United States,5
+2026-11-21,Stripe,finanse,WA,2
+2026-11-21,Stripe,finanse,Washington DC metro area,1
+2026-11-21,Stripe,finanse,Washington DC-metro area,1
+2026-11-21,Stripe,finanse,na,3
+2026-11-21,Stripe,finanse,nyc,1
+2026-11-21,Stripe,finanse,or Chicago,1
+2026-11-21,Stripe,finanse,or New York,1
+2026-11-21,Stripe,finanse,or Remote,2
+2026-11-21,Stripe,finanse,remote,1
+2026-11-21,Airbnb,turystyka,Alberta,2
+2026-11-21,Airbnb,turystyka,Australia,3
+2026-11-21,Airbnb,turystyka,Barcelona,1
+2026-11-21,Airbnb,turystyka,Brazil,9
+2026-11-21,Airbnb,turystyka,Brazil - Remote,1
+2026-11-21,Airbnb,turystyka,Brussels,1
+2026-11-21,Airbnb,turystyka,CA,10
+2026-11-21,Airbnb,turystyka,California,1
+2026-11-21,Airbnb,turystyka,Canada,9
+2026-11-21,Airbnb,turystyka,China,3
+2026-11-21,Airbnb,turystyka,France,13
+2026-11-21,Airbnb,turystyka,Germany,4
+2026-11-21,Airbnb,turystyka,India,12
+2026-11-21,Airbnb,turystyka,Ireland,5
+2026-11-21,Airbnb,turystyka,Italy,3
+2026-11-21,Airbnb,turystyka,Japan,6
+2026-11-21,Airbnb,turystyka,Korea,1
+2026-11-21,Airbnb,turystyka,Mexico,4
+2026-11-21,Airbnb,turystyka,Mexico City,1
+2026-11-21,Airbnb,turystyka,Netherlands,1
+2026-11-21,Airbnb,turystyka,Remote,2
+2026-11-21,Airbnb,turystyka,Remote - USA,7
+2026-11-21,Airbnb,turystyka,Remote - United States,2
+2026-11-21,Airbnb,turystyka,Remote- USA,1
+2026-11-21,Airbnb,turystyka,Remote-USA,2
+2026-11-21,Airbnb,turystyka,San Francisco,1
+2026-11-21,Airbnb,turystyka,Singapore,7
+2026-11-21,Airbnb,turystyka,South Korea,1
+2026-11-21,Airbnb,turystyka,Spain,6
+2026-11-21,Airbnb,turystyka,Thailand,2
+2026-11-21,Airbnb,turystyka,US - Remote,1
+2026-11-21,Airbnb,turystyka,USA,6
+2026-11-21,Airbnb,turystyka,United Kingdom,12
+2026-11-21,Airbnb,turystyka,United States,61
+2026-11-21,Airbnb,turystyka,United States - Remote,1
+2026-11-21,Coinbase,finanse,CA,4
+2026-11-21,Coinbase,finanse,Hybrid - Luxembourg,3
+2026-11-21,Coinbase,finanse,Hybrid - Singapore,1
+2026-11-21,Coinbase,finanse,Ireland,2
+2026-11-21,Coinbase,finanse,NY,18
+2026-11-21,Coinbase,finanse,Philippines,8
+2026-11-21,Coinbase,finanse,Remote - Abu Dhabi,1
+2026-11-21,Coinbase,finanse,Remote - Argentina,1
+2026-11-21,Coinbase,finanse,Remote - Australia,1
+2026-11-21,Coinbase,finanse,Remote - Brazil,3
+2026-11-21,Coinbase,finanse,Remote - Canada,9
+2026-11-21,Coinbase,finanse,Remote - India,9
+2026-11-21,Coinbase,finanse,Remote - Ireland,2
+2026-11-21,Coinbase,finanse,Remote - Israel,1
+2026-11-21,Coinbase,finanse,Remote - Luxembourg,2
+2026-11-21,Coinbase,finanse,Remote - Singapore,8
+2026-11-21,Coinbase,finanse,Remote - UAE,3
+2026-11-21,Coinbase,finanse,Remote - UK,11
+2026-11-21,Coinbase,finanse,Remote - USA,162
+2026-11-21,Coinbase,finanse,UK,4
